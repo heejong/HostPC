@@ -1,6 +1,4 @@
-
-
-/** @file ExampleStyle_George.c                          
+/** @file doxygenTemplate_v1.1.c                          
     @brief Briefly state the purpose of the file.  
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
@@ -68,10 +66,14 @@
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
 
+///////////////////////////////////////////////////////////////////////////////
 
+// personal comments unseen by Doxygen
+/*
+Doxygen cannot see me
+*/
 
-
-
+///////////////////////////////////////////////////////////////////////////////
 
 /** @brief A brief function description stating the purpose.
 	@param i a description of the input integer i
@@ -83,13 +85,15 @@
 	sections. Note the blank line placed between the Doxygen 
 	commands above and the detailed text to follow.
 */
-int example(int i, float f);
+int BriefExample(int i, float f);
 
-// personal comments unseen by Doxygen
-/*
-Doxygen cannot see me
-*/
-/*
+///////////////////////////////////////////////////////////////////////////////
+
+/** @brief A brief function description stating the purpose.
+	@param i a description of the input integer i
+	@param f a description of the input float f
+	@return a description of the function output
+
 ### HARDWARE/FIRMWARE ENVIRONMENT
 	Specify the Operation system     
     (Win or NIOS II), hardware type and version (PC or    
@@ -154,3 +158,4 @@ Doxygen cannot see me
 	 06/04/2013| George Netscher | gmnetscher@lbl.gov | 1.1  |doxygen formatting
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
+int ExtendedExample(int i, float f);
