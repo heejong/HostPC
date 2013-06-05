@@ -78,6 +78,18 @@
 	@param f a description of the input float f
 	@return a description of the function output
 
+	In-depth details go here. We will outline the format 
+	that the detailed description should take in the following 
+	sections. Note the blank line placed between the Doxygen 
+	commands above and the detailed text to follow.
+*/
+int example(int i, float f);
+
+// personal comments unseen by Doxygen
+/*
+Doxygen cannot see me
+*/
+/*
 ### HARDWARE/FIRMWARE ENVIRONMENT
 	Specify the Operation system     
     (Win or NIOS II), hardware type and version (PC or    
@@ -142,4 +154,3 @@
 	 06/04/2013| George Netscher | gmnetscher@lbl.gov | 1.1  |doxygen formatting
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int example(int i, float f);
