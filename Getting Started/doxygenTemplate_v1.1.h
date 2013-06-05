@@ -1,4 +1,4 @@
-/** @file doxygenTemplate_v1.1.c                          
+/** @file doxygenTemplate_v1.1.h                          
     @brief Briefly state the purpose of the file.  
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
