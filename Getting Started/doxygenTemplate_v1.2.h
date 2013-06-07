@@ -1,4 +1,5 @@
-/** @file doxygenTemplate_v1.1.h                          
+///////////////////////////////////////////////////////////////////////////////
+/** @file doxygenTemplate_v1.2.h                          
     @brief Briefly state the purpose of the file.  
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
@@ -65,7 +66,6 @@
 	 06/04/2013| George Netscher | gmnetscher@lbl.gov | 1.1  |doxygen formatting
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-
 ///////////////////////////////////////////////////////////////////////////////
 
 // personal comments unseen by Doxygen
@@ -74,7 +74,6 @@ Doxygen cannot see me
 */
 
 ///////////////////////////////////////////////////////////////////////////////
-
 /** @brief A brief function description stating the purpose.
 	@param i a description of the input integer i
 	@param f a description of the input float f
@@ -86,9 +85,9 @@ Doxygen cannot see me
 	commands above and the detailed text to follow.
 */
 int BriefExample(int i, float f);
-
 ///////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////
 /** @brief A brief function description stating the purpose.
 	@param i a description of the input integer i
 	@param f a description of the input float f
@@ -159,3 +158,4 @@ int BriefExample(int i, float f);
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
 int ExtendedExample(int i, float f);
+///////////////////////////////////////////////////////////////////////////////
