@@ -1,0 +1,188 @@
+[Workspace Header]
+Version = 911
+Pathname Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/OpenPET"
+Pathname Line0002 = ".cws"
+CVI Dir = "/c/program files/national instruments/cvi2009"
+CVI Shared Dir = "/C/Program Files/National Instruments/Shared/CVI"
+CVI Pub Local Dir Line0001 = "/C/Documents and Settings/All Users/Application Data/National Instruments/CVI200"
+CVI Pub Local Dir Line0002 = "9"
+CVI Pub Global Dir = "/C/Documents and Settings/All Users/Application Data/National Instruments/CVI"
+IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
+IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
+VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
+Number of Projects = 1
+Active Project = 1
+Project 0001 = "OpenPET.prj"
+Drag Bar Left = 211
+Window Top = 27
+Window Left = 957
+Window Bottom = 1042
+Window Right = 1915
+Maximized = False
+Maximized Children = True
+Max32 Number Of Errors = 20
+Track Include File Dependencies = True
+Prompt For Missing Includes = True
+Stop On First Error File = False
+Bring Up Err Win For Warnings = True
+Show Build Dialog = False
+Save Changes Before Running = "Always"
+Hide Windows = False
+Break At First Statement = False
+Sort Type = "File Name"
+Number of Opened Files = 4
+Window Confinement Region Enabled = True
+MainColumnWidth = 194
+FileDateColumnWidth = 70
+FileSizeColumnWidth = 70
+StatusColumnWidth = 70
+
+[Project Header 0001]
+Version = 911
+Don't Update DistKit = False
+Platform Code = 4
+Build Configuration = "Debug"
+Build Platform = "Intel 32-bit"
+Warn User If Debugging Release = 1
+Batch Build Release = False
+Batch Build Debug = False
+Force Rebuild = False
+
+[File 0001]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/OpenPET"
+Path Line0002 = ".c"
+File Type = "CSource"
+Disk Date = 3453818833
+In Projects = "1,"
+Window Top = 482
+Window Left = 246
+Window Z-Order = 3
+Source Window State = "1,72,72,72,8,30,8,0,0,82,0,0,0,0,0,25,33,0,50,23,349,699,1,0,"
+
+[File 0002]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/OpenPET"
+Path Line0002 = ".uir"
+File Type = "User Interface Resource"
+Disk Date = 3453816202
+In Projects = "1,"
+Window Top = 32
+Window Left = 6
+Window Height = 349
+Window Width = 699
+Window Z-Order = 4
+
+[File 0003]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TimeMode.uir"
+File Type = "User Interface Resource"
+Disk Date = 3453811723
+In Projects = "1,"
+Window Top = 62
+Window Left = 22
+Window Height = 349
+Window Width = 699
+
+[File 0004]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_EnergyMode.uir"
+File Type = "User Interface Resource"
+Disk Date = 3453811722
+In Projects = "1,"
+Window Top = 122
+Window Left = 54
+Window Height = 349
+Window Width = 699
+
+[File 0005]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TestMode1.uir"
+File Type = "User Interface Resource"
+Disk Date = 3453811722
+In Projects = "1,"
+Window Top = 182
+Window Left = 86
+Window Height = 349
+Window Width = 699
+
+[File 0006]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TestMode2.uir"
+File Type = "User Interface Resource"
+Disk Date = 3453821834
+In Projects = "1,"
+Window Top = 242
+Window Left = 118
+Window Height = 349
+Window Width = 699
+Window Z-Order = 2
+
+[File 0007]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_FloodMapMode.uir"
+File Type = "User Interface Resource"
+Disk Date = 3453811720
+In Projects = "1,"
+Window Top = 302
+Window Left = 150
+Window Height = 349
+Window Width = 699
+
+[File 0008]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_UserDefinedMode.uir"
+File Type = "User Interface Resource"
+Disk Date = 3453811720
+In Projects = "1,"
+Window Top = 362
+Window Left = 182
+Window Height = 349
+Window Width = 699
+
+[File 0009]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TestMode2.c"
+File Type = "CSource"
+Disk Date = 3453821873
+In Projects = "1,"
+Window Top = 242
+Window Left = 118
+Window Z-Order = 1
+Source Window State = "1,18,18,18,12,51,12,0,0,88,0,1,0,1,0,57,0,0,12,11,349,619,1,0,"
+
+[Build Options 0001]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Execution Trace = "Disabled"
+Profile = "Disabled"
+Debugging Level = "Standard"
+Break On Library Errors = True
+Break On First Chance Exceptions = False
+
+[Execution Target 0001]
+Execution Target Address = "Local desktop computer"
+Execution Target Port = 0
+Execution Target Type = 0
+
+[SCC Options 0001]
+Use global settings = True
+SCC Provider = ""
+SCC Project = ""
+Local Path = ""
+Auxiliary Path = ""
+Perform Same Action For .h File As For .uir File = "Ask"
+Perform Same Action For .cds File As For .prj File = "Ask"
+Username = ""
+Comment = ""
+Use Default Username = False
+Use Default Comment = False
+Suppress CVI Error Messages = False
+Always show confirmation dialog = True
+
+[DLL Debugging Support 0001]
+External Process Path = ""
+
+[Command Line Args 0001]
+Command Line Args = ""
+Working Directory = ""
+
