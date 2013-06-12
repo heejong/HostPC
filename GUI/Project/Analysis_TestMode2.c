@@ -1,3 +1,4 @@
+#include <ansi_c.h>
 #include <analysis.h>
 #include <userint.h>
 #include "Analysis_TestMode2.h"
@@ -7,15 +8,87 @@ extern int panelHandle_testmode2;
 int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 		int eventData1, int eventData2)
 {
-	double histogram_axis[11];
-	ssize_t histogram_array[11];
-	double array[] = {0,0,0,0,0,0,0,0,1,1,6};
+	double histogram_axis[] = {0,1,2,3,4,5,6,7,8,9,10};
+	unsigned long histogram_array[] = {0,0,0,0,0,0,0,0,0,0,0}; // length=11
+	FILE *fp;
+	int i, j, count=0;
+	char out[100];
+	unsigned short bit_error_count;
+	
+	unsigned int event_word, event_words[65536];  // may need to check 32-bit size
+	
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			Histogram (array, 11, 0.0, 11.0, histogram_array, histogram_axis, 11);
+			fp = fopen("ExampleBinOutput.bin","rb");
+			if(fp == NULL) {
+				MessagePopup("Error","Could not open file");
+				break;
+			}
+			
+			// performed buffered read to decrease processing time
+			while( !feof(fp) ) { // check EOF
+				fread (event_words, 4, 65536, fp); // read 4 bytes at a time into buffer of 2^16 32-bit words
+				if( ferror(fp) ) {
+					MessagePopup("Error","Read error");
+					break;
+				}
+				for(i=0; i<65536; i++) {
+					// 01010101010 for testmode2
+					bit_error_count = 0;
+					// loop unrolled for speed
+					if(event_words[i] & 0x0001) {
+						// should be 0
+						histogram_array[0]++;
+					}
+					if( !(event_words[i] & 0x0002 ) ) {
+						// should be 1
+						histogram_array[1]++;
+					}
+					if(event_words[i] & 0x0004) {
+						// should be 0
+						histogram_array[2]++;
+					}
+					if( !(event_words[i] & 0x0008 ) ) {
+						// should be 1
+						histogram_array[3]++;
+					}
+					if(event_words[i] & 0x0010) {
+						// should be 0
+						histogram_array[4]++;
+					}
+					if( !(event_words[i] & 0x0020 ) ) {
+						// should be 1
+						histogram_array[5]++;
+					}
+					if(event_words[i] & 0x0040) {
+						// should be 0
+						histogram_array[6]++;
+					}
+					if( !(event_words[i] & 0x0080 ) ) {
+						// should be 1
+						histogram_array[7]++;
+					}
+					if(event_words[i] & 0x0100) {
+						// should be 0
+						histogram_array[8]++;
+					}
+					if( !(event_words[i] & 0x0200 ) ) {
+						// should be 1
+						histogram_array[9]++;
+					}
+					if(event_words[i] & 0x0400) {
+						// should be 0
+						histogram_array[10]++;
+					}
+					
+				}
+				
+			}
+			SetCtrlAttribute (panelHandle_testmode2, TESTMODE2_HISTOGRAM, ATTR_DIMMED, 0);
 			PlotXY (panelHandle_testmode2, TESTMODE2_HISTOGRAM, histogram_axis, histogram_array, 11,
 					VAL_DOUBLE, VAL_SIZE_T, VAL_VERTICAL_BAR, VAL_EMPTY_SQUARE, VAL_SOLID, 1, VAL_RED);
+			
 			break;
 		case EVENT_LOST_FOCUS:
 
