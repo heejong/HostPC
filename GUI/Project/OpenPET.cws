@@ -19,7 +19,7 @@ Window Top = 30
 Window Left = 957
 Window Bottom = 1045
 Window Right = 1915
-Maximized = False
+Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
 Track Include File Dependencies = True
@@ -31,7 +31,7 @@ Save Changes Before Running = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 4
+Number of Opened Files = 8
 Window Confinement Region Enabled = True
 MainColumnWidth = 194
 FileDateColumnWidth = 70
@@ -51,48 +51,73 @@ Force Rebuild = False
 
 [File 0001]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/OpenPET"
-Path Line0002 = ".c"
-File Type = "CSource"
-Disk Date = 3453818833
-In Projects = "1,"
-Window Top = 482
-Window Left = 246
-Source Window State = "1,72,72,72,8,30,8,0,0,82,0,0,0,0,0,25,33,0,54,6,349,699,1,0,"
-
-[File 0002]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/OpenPET"
 Path Line0002 = ".uir"
 File Type = "User Interface Resource"
-Disk Date = 3453816202
+Disk Date = 3454073058
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
 Window Height = 349
 Window Width = 699
+Window Z-Order = 2
+
+[File 0002]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TestMode_MB.uir"
+File Type = "User Interface Resource"
+Disk Date = 3454076338
+In Projects = "1,"
+Window Top = 212
+Window Left = 102
+Window Height = 349
+Window Width = 619
 Window Z-Order = 4
 
 [File 0003]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
-Path Line0002 = "s_TestMode2.uir"
+Path Line0002 = "s_TestMode_DUC.uir"
 File Type = "User Interface Resource"
-Disk Date = 3453839337
+Disk Date = 3453839049
 In Projects = "1,"
-Window Top = 242
-Window Left = 118
+Window Top = 182
+Window Left = 86
 Window Height = 349
-Window Width = 699
+Window Width = 619
 
 [File 0004]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
-Path Line0002 = "s_TestMode2.c"
-File Type = "CSource"
-Disk Date = 3453836312
+Path Line0002 = "s_TestMode_DB.uir"
+File Type = "User Interface Resource"
+Disk Date = 3453839208
 In Projects = "1,"
-Window Top = 242
-Window Left = 118
-Source Window State = "1,87,87,87,0,41,41,0,0,72,0,2,0,2,0,25,35,0,19,48,349,619,1,0,"
+Window Top = 62
+Window Left = 22
+Window Height = 349
+Window Width = 619
 
 [File 0005]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/OpenPET"
+Path Line0002 = ".c"
+File Type = "CSource"
+Disk Date = 3454076956
+In Projects = "1,"
+Window Top = 482
+Window Left = 246
+Window Z-Order = 1
+Source Window State = "1,124,126,126,0,37,37,0,0,209,0,0,0,0,0,69,108,0,155,104,349,699,1,0,"
+
+[File 0006]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TestMode_MB.c"
+File Type = "CSource"
+Disk Date = 3454076429
+In Projects = "1,"
+Window Top = 32
+Window Left = 6
+Window Z-Order = 6
+Source Window State = "1,35,35,35,12,32,32,0,0,89,0,0,0,0,0,25,0,0,30,74,349,755,1,11,"
+
+[File 0007]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
 Path Line0002 = "s_EnergyMode.uir"
 File Type = "User Interface Resource"
@@ -103,7 +128,7 @@ Window Left = 54
 Window Height = 349
 Window Width = 699
 
-[File 0006]
+[File 0008]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
 Path Line0002 = "s_FloodMapMode.uir"
 File Type = "User Interface Resource"
@@ -114,7 +139,7 @@ Window Left = 150
 Window Height = 349
 Window Width = 699
 
-[File 0007]
+[File 0009]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
 Path Line0002 = "s_TestMode1.uir"
 File Type = "User Interface Resource"
@@ -125,7 +150,30 @@ Window Left = 86
 Window Height = 349
 Window Width = 699
 
-[File 0008]
+[File 0010]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TestMode2.c"
+File Type = "CSource"
+Disk Date = 3454074899
+In Projects = "1,"
+Window Top = 242
+Window Left = 118
+Window Z-Order = 7
+Source Window State = "1,127,139,139,0,0,3,0,0,72,0,71,0,2,0,25,71,0,126,1,349,619,1,13,"
+
+[File 0011]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
+Path Line0002 = "s_TestMode2.uir"
+File Type = "User Interface Resource"
+Disk Date = 3454076338
+In Projects = "1,"
+Window Top = 242
+Window Left = 118
+Window Height = 349
+Window Width = 699
+Window Z-Order = 3
+
+[File 0012]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
 Path Line0002 = "s_TimeMode.uir"
 File Type = "User Interface Resource"
@@ -136,7 +184,7 @@ Window Left = 22
 Window Height = 349
 Window Width = 699
 
-[File 0009]
+[File 0013]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
 Path Line0002 = "s_UserDefinedMode.uir"
 File Type = "User Interface Resource"
@@ -147,41 +195,27 @@ Window Left = 182
 Window Height = 349
 Window Width = 699
 
-[File 0010]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
-Path Line0002 = "s_TestMode_MB.uir"
-File Type = "User Interface Resource"
-Disk Date = 3453842523
+[File 0014]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/UI_Comm"
+Path Line0002 = "on.c"
+File Type = "CSource"
+Disk Date = 3454076338
 In Projects = "1,"
-Window Top = 212
-Window Left = 102
-Window Height = 349
-Window Width = 619
-Window Z-Order = 1
+Window Top = 422
+Window Left = 214
+Window Z-Order = 5
+Source Window State = "1,58,59,59,12,31,31,0,0,89,0,1,0,1,0,25,9,0,55,74,349,755,1,0,"
 
-[File 0011]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
-Path Line0002 = "s_TestMode_DUC.uir"
-File Type = "User Interface Resource"
-Disk Date = 3453839049
+[File 0015]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/UI_Comm"
+Path Line0002 = "on.h"
+File Type = "Include"
+Disk Date = 3454074384
 In Projects = "1,"
-Window Top = 182
-Window Left = 86
-Window Height = 349
-Window Width = 619
-Window Z-Order = 2
-
-[File 0012]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/Analysi"
-Path Line0002 = "s_TestMode_DB.uir"
-File Type = "User Interface Resource"
-Disk Date = 3453839208
-In Projects = "1,"
-Window Top = 62
-Window Left = 22
-Window Height = 349
-Window Width = 619
-Window Z-Order = 3
+Window Top = 452
+Window Left = 230
+Window Z-Order = 8
+Source Window State = "1,34,34,34,0,41,41,0,0,89,0,0,0,0,0,25,0,0,36,65,349,755,1,0,"
 
 [Build Options 0001]
 Generate Browse Info = True

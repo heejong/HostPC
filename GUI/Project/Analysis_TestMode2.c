@@ -3,6 +3,8 @@
 #include <userint.h>
 #include "Analysis_TestMode2.h"
 
+#include "UI_Common.h"
+
 extern int panelHandle_testmode2;
 
 int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
@@ -94,7 +96,7 @@ int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-			RemovePopup (0);
+			QuitUserInterface (0);
 			break;
 	}
 	return 0;
@@ -119,18 +121,6 @@ int CVICALLBACK SaveOutput (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 
-			break;
-	}
-	return 0;
-}
-
-int CVICALLBACK Okay (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			RemovePopup (0);
 			break;
 	}
 	return 0;

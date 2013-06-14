@@ -1,0 +1,5 @@
+# .gitignore
+# defines which files do not need to be tracked with git
+
+# GUI build files
+GUI/Project/cvibuild.OpenPET/
