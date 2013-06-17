@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  PANEL                            1
+#define  TIMEMODE                         1
 
 
      /* Menu Bars, Menus, and Menu Items: */
