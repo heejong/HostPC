@@ -19,17 +19,15 @@
 #define  EMODE_PICTURE_2                  3       /* control type: picture, callback function: (none) */
 #define  EMODE_SAVE_OUTPUT                4       /* control type: command, callback function: SaveOutput */
 #define  EMODE_SAVE_PLOT                  5       /* control type: command, callback function: SavePlot */
-#define  EMODE_COMMANDBUTTON              6       /* control type: command, callback function: Back */
-#define  EMODE_COMMANDBUTTON_2            7       /* control type: command, callback function: Main */
-#define  EMODE_COMMANDBUTTON_3            8       /* control type: command, callback function: Quit */
-#define  EMODE_SPLITTER                   9       /* control type: splitter, callback function: (none) */
-#define  EMODE_TEXTMSG_2                  10      /* control type: textMsg, callback function: (none) */
-#define  EMODE_NUMERIC                    11      /* control type: numeric, callback function: (none) */
-#define  EMODE_TEXTMSG                    12      /* control type: textMsg, callback function: (none) */
-#define  EMODE_ANALYSIS_METHOD            13      /* control type: ring, callback function: DetermineEnergyWindow */
-#define  EMODE_METHOD_AMOUNT              14      /* control type: numeric, callback function: (none) */
-#define  EMODE_NEW_WINDOW_BUTTON          15      /* control type: command, callback function: (none) */
-#define  EMODE_NUMERIC_3                  16      /* control type: numeric, callback function: (none) */
+#define  EMODE_COMMANDBUTTON_3            6       /* control type: command, callback function: Quit */
+#define  EMODE_COMMANDBUTTON              7       /* control type: command, callback function: Back */
+#define  EMODE_SPLITTER                   8       /* control type: splitter, callback function: (none) */
+#define  EMODE_COMMANDBUTTON_2            9       /* control type: command, callback function: Main */
+#define  EMODE_NUMERIC                    10      /* control type: numeric, callback function: (none) */
+#define  EMODE_ANALYSIS_METHOD            11      /* control type: ring, callback function: DetermineEnergyWindow */
+#define  EMODE_METHOD_AMOUNT              12      /* control type: numeric, callback function: (none) */
+#define  EMODE_NEW_WINDOW_BUTTON          13      /* control type: command, callback function: (none) */
+#define  EMODE_NUMERIC_3                  14      /* control type: numeric, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */

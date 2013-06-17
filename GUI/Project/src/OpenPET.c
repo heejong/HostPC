@@ -22,6 +22,9 @@
 #include "Analysis_TestMode_MB.h" 
 #include "Analysis_EnergyMode.h"
 #include "Analysis_EnergyMode_MB.h" 
+#include "Analysis_FloodMapMode.h"    
+#include "Analysis_FloodMapMode_MB.h"    
+#include "Analysis_FloodMapMode_DUC.h"    
 
 //==============================================================================
 // Constants
@@ -42,6 +45,10 @@ int panelHandle_testmode2;
 int panelHandle_testmode_mb;
 int panelHandle_emode;
 int panelHandle_emode_mb;
+int panelHandle_fmmode;
+int panelHandle_fmmode_mb;
+int panelHandle_fmmode_duc;
+
 extern int previous_panelHandle;
 
 //==============================================================================
@@ -59,6 +66,9 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_testmode_mb = LoadPanel (0, "Analysis_TestMode_MB.uir", TESTMODEMB));
 	errChk (panelHandle_emode_mb = LoadPanel (0, "Analysis_EnergyMode_MB.uir", EMODEMB));  
 	errChk (panelHandle_emode = LoadPanel (0, "Analysis_EnergyMode.uir", EMODE)); 
+	errChk (panelHandle_fmmode = LoadPanel (0, "Analysis_FloodMapMode.uir", FMMODE)); 
+	errChk (panelHandle_fmmode_mb = LoadPanel (0, "Analysis_FloodMapMode_MB.uir", FMMODEMB)); 
+	errChk (panelHandle_fmmode_duc = LoadPanel (0, "Analysis_FloodMapMode_DUC.uir", FMMODEDUC)); 
 	
     
     /* display the panel and run the user interface */
@@ -71,6 +81,10 @@ Error:
 	DiscardPanel (panelHandle_testmode2);
 	DiscardPanel (panelHandle_testmode_mb); 
 	DiscardPanel (panelHandle_emode); 
+	DiscardPanel (panelHandle_emode_mb);
+	DiscardPanel (panelHandle_fmmode);   
+	DiscardPanel (panelHandle_fmmode_mb); 
+	DiscardPanel (panelHandle_fmmode_duc); 
     return 0;
 }
 
@@ -219,9 +233,9 @@ int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			//DisplayPanel (panelHandle_testmode_mb);
-			//previous_panelHandle = panelHandle;
-			//HidePanel (panelHandle);
+			DisplayPanel (panelHandle_fmmode_mb);
+			previous_panelHandle = panelHandle;
+			HidePanel (panelHandle);
 			break;
 	}
 	return 0;

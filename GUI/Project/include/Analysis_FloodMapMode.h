@@ -14,7 +14,27 @@
 
      /* Panels and Controls: */
 
-#define  PANEL                            1
+#define  FMMODE                           1
+#define  FMMODE_TAB                       2       /* control type: tab, callback function: (none) */
+#define  FMMODE_PICTURE                   3       /* control type: picture, callback function: (none) */
+#define  FMMODE_SAVE_OUTPUT               4       /* control type: command, callback function: SaveOutput */
+#define  FMMODE_SAVE_PLOT                 5       /* control type: command, callback function: SavePlot */
+#define  FMMODE_COMMANDBUTTON_3           6       /* control type: command, callback function: Quit */
+#define  FMMODE_COMMANDBUTTON             7       /* control type: command, callback function: Back */
+#define  FMMODE_SPLITTER                  8       /* control type: splitter, callback function: (none) */
+#define  FMMODE_COMMANDBUTTON_2           9       /* control type: command, callback function: Main */
+
+     /* tab page panel controls */
+#define  TABPANEL_TEXTMSG                 2       /* control type: textMsg, callback function: (none) */
+#define  TABPANEL_TEXTMSG_3               3       /* control type: textMsg, callback function: (none) */
+#define  TABPANEL_TEXTMSG_2               4       /* control type: textMsg, callback function: (none) */
+#define  TABPANEL_PICTURE_2               5       /* control type: picture, callback function: (none) */
+
+     /* tab page panel controls */
+#define  TABPANEL_2_TEXTMSG               2       /* control type: textMsg, callback function: (none) */
+#define  TABPANEL_2_TEXTMSG_3             3       /* control type: textMsg, callback function: (none) */
+#define  TABPANEL_2_TEXTMSG_2             4       /* control type: textMsg, callback function: (none) */
+#define  TABPANEL_2_PICTURE_2             5       /* control type: picture, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -22,7 +42,13 @@
           /* (no menu bars in the resource file) */
 
 
-     /* (no callbacks specified in the resource file) */ 
+     /* Callback Prototypes: */
+
+int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK SavePlot(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
