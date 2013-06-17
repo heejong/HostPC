@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  EMODE                            1       /* callback function: InitializeEnergyMode */
+#define  EMODE                            1
 #define  EMODE_PICTURE                    2       /* control type: picture, callback function: (none) */
 #define  EMODE_PICTURE_2                  3       /* control type: picture, callback function: (none) */
 #define  EMODE_SAVE_OUTPUT                4       /* control type: command, callback function: SaveOutput */
@@ -26,9 +26,9 @@
 #define  EMODE_TEXTMSG_2                  10      /* control type: textMsg, callback function: (none) */
 #define  EMODE_NUMERIC                    11      /* control type: numeric, callback function: (none) */
 #define  EMODE_TEXTMSG                    12      /* control type: textMsg, callback function: (none) */
-#define  EMODE_RING_2                     13      /* control type: ring, callback function: (none) */
-#define  EMODE_NUMERIC_2                  14      /* control type: numeric, callback function: (none) */
-#define  EMODE_COMMANDBUTTON_4            15      /* control type: command, callback function: (none) */
+#define  EMODE_ANALYSIS_METHOD            13      /* control type: ring, callback function: DetermineEnergyWindow */
+#define  EMODE_METHOD_AMOUNT              14      /* control type: numeric, callback function: (none) */
+#define  EMODE_NEW_WINDOW_BUTTON          15      /* control type: command, callback function: (none) */
 #define  EMODE_NUMERIC_3                  16      /* control type: numeric, callback function: (none) */
 
 
@@ -40,7 +40,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK InitializeEnergyMode(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DetermineEnergyWindow(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

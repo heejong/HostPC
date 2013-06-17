@@ -19,7 +19,9 @@
 
 #include "UI_Common.h"
 #include "Analysis_TestMode2.h"
-#include "Analysis_TestMode_MB.h"  
+#include "Analysis_TestMode_MB.h" 
+#include "Analysis_EnergyMode.h"
+#include "Analysis_EnergyMode_MB.h" 
 
 //==============================================================================
 // Constants
@@ -38,6 +40,8 @@
 int panelHandle;
 int panelHandle_testmode2; 
 int panelHandle_testmode_mb;
+int panelHandle_emode;
+int panelHandle_emode_mb;
 extern int previous_panelHandle;
 
 //==============================================================================
@@ -53,6 +57,8 @@ int main (int argc, char *argv[])
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
 	errChk (panelHandle_testmode2 = LoadPanel (0, "Analysis_TestMode2.uir", TESTMODE2)); 
 	errChk (panelHandle_testmode_mb = LoadPanel (0, "Analysis_TestMode_MB.uir", TESTMODEMB));
+	errChk (panelHandle_emode_mb = LoadPanel (0, "Analysis_EnergyMode_MB.uir", EMODEMB));  
+	errChk (panelHandle_emode = LoadPanel (0, "Analysis_EnergyMode.uir", EMODE)); 
 	
     
     /* display the panel and run the user interface */
@@ -64,6 +70,7 @@ Error:
     DiscardPanel (panelHandle);
 	DiscardPanel (panelHandle_testmode2);
 	DiscardPanel (panelHandle_testmode_mb); 
+	DiscardPanel (panelHandle_emode); 
     return 0;
 }
 
@@ -168,10 +175,53 @@ int CVICALLBACK Go (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_COMMIT: 
+			// view status word to determine analysis type
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON, ATTR_VISIBLE, 1); 
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_2, ATTR_VISIBLE, 1);  
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_3, ATTR_VISIBLE, 1);  
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK DisplayEnergyMode (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			DisplayPanel (panelHandle_emode_mb);
+			previous_panelHandle = panelHandle;
+			HidePanel (panelHandle);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK DisplayTestMode (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_testmode_mb);
 			previous_panelHandle = panelHandle;
 			HidePanel (panelHandle);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			//DisplayPanel (panelHandle_testmode_mb);
+			//previous_panelHandle = panelHandle;
+			//HidePanel (panelHandle);
 			break;
 	}
 	return 0;

@@ -25,6 +25,11 @@
 #define  PANEL_QUIT                       9       /* control type: command, callback function: Quit */
 #define  PANEL_FILETEXT                   10      /* control type: string, callback function: (none) */
 #define  PANEL_LOAD                       11      /* control type: command, callback function: LoadDataFile */
+#define  PANEL_COMMANDBUTTON_5            12      /* control type: command, callback function: (none) */
+#define  PANEL_COMMANDBUTTON_4            13      /* control type: command, callback function: (none) */
+#define  PANEL_COMMANDBUTTON_3            14      /* control type: command, callback function: DisplayFloodMapMode */
+#define  PANEL_COMMANDBUTTON_2            15      /* control type: command, callback function: DisplayEnergyMode */
+#define  PANEL_COMMANDBUTTON              16      /* control type: command, callback function: DisplayTestMode */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -37,6 +42,9 @@
 int  CVICALLBACK AnalyzeExistingData(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Calibrate(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK CollectNewData(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayEnergyMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayFloodMapMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayTestMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Go(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LoadDataFile(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK panelCB(int panel, int event, void *callbackData, int eventData1, int eventData2);
