@@ -11,7 +11,7 @@ IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
-Number of Files = 25
+Number of Files = 27
 Target Type = "Executable"
 Flags = 16
 Copied From Locked InstrDrv Directory = False
@@ -267,8 +267,33 @@ Project Flags = 0
 Folder = "User Interface Files"
 
 [File 0021]
-File Type = "User Interface Resource"
+File Type = "CSource"
 Res Id = 21
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "src/Analysis_TimeMode_MB.c"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
+Path Line0002 = "lysis_TimeMode_MB.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+
+[File 0022]
+File Type = "User Interface Resource"
+Res Id = 22
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "ui/Analysis_TimeMode_MB.uir"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
+Path Line0002 = "ysis_TimeMode_MB.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+
+[File 0023]
+File Type = "User Interface Resource"
+Res Id = 23
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Analysis_UserDefinedMode.uir"
@@ -278,9 +303,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0022]
+[File 0024]
 File Type = "CSource"
-Res Id = 22
+Res Id = 24
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/OpenPET.c"
@@ -291,9 +316,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0023]
+[File 0025]
 File Type = "User Interface Resource"
-Res Id = 23
+Res Id = 25
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/OpenPET.uir"
@@ -303,9 +328,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0024]
+[File 0026]
 File Type = "CSource"
-Res Id = 24
+Res Id = 26
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/UI_Common.c"
@@ -316,9 +341,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0025]
+[File 0027]
 File Type = "Include"
-Res Id = 25
+Res Id = 27
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "include/UI_Common.h"

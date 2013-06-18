@@ -25,6 +25,8 @@
 #include "Analysis_FloodMapMode.h"    
 #include "Analysis_FloodMapMode_MB.h"    
 #include "Analysis_FloodMapMode_DUC.h"    
+#include "Analysis_TimeMode.h"    
+#include "Analysis_TimeMode_MB.h"   
 
 //==============================================================================
 // Constants
@@ -48,6 +50,8 @@ int panelHandle_emode_mb;
 int panelHandle_fmmode;
 int panelHandle_fmmode_mb;
 int panelHandle_fmmode_duc;
+int panelHandle_timemode; 
+int panelHandle_timemode_mb;
 
 extern int previous_panelHandle;
 
@@ -69,7 +73,8 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_fmmode = LoadPanel (0, "Analysis_FloodMapMode.uir", FMMODE)); 
 	errChk (panelHandle_fmmode_mb = LoadPanel (0, "Analysis_FloodMapMode_MB.uir", FMMODEMB)); 
 	errChk (panelHandle_fmmode_duc = LoadPanel (0, "Analysis_FloodMapMode_DUC.uir", FMMODEDUC)); 
-	
+	errChk (panelHandle_timemode = LoadPanel (0, "Analysis_TimeMode.uir", TIMEMODE)); 
+	errChk (panelHandle_timemode_mb = LoadPanel (0, "Analysis_TimeMode_MB.uir", TIMEMODEMB)); 	
     
     /* display the panel and run the user interface */
     errChk (DisplayPanel (panelHandle));
@@ -85,6 +90,8 @@ Error:
 	DiscardPanel (panelHandle_fmmode);   
 	DiscardPanel (panelHandle_fmmode_mb); 
 	DiscardPanel (panelHandle_fmmode_duc); 
+	DiscardPanel (panelHandle_timemode);   
+	DiscardPanel (panelHandle_timemode_mb); 
     return 0;
 }
 
@@ -194,6 +201,7 @@ int CVICALLBACK Go (int panel, int control, int event,
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON, ATTR_VISIBLE, 1); 
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_2, ATTR_VISIBLE, 1);  
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_3, ATTR_VISIBLE, 1);  
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_4, ATTR_VISIBLE, 1);
 			break;
 	}
 	return 0;
@@ -234,6 +242,20 @@ int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_fmmode_mb);
+			previous_panelHandle = panelHandle;
+			HidePanel (panelHandle);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK DisplayTimeMode (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			DisplayPanel (panelHandle_timemode_mb);
 			previous_panelHandle = panelHandle;
 			HidePanel (panelHandle);
 			break;

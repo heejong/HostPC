@@ -22,7 +22,7 @@ int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			fp = fopen("ExampleBinOutput.bin","rb");
+			fp = fopen("..\\ExampleBinOutput.bin","rb");
 			if(fp == NULL) {
 				MessagePopup("Error","Could not open file");
 				break;
