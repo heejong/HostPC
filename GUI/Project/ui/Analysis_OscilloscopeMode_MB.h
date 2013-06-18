@@ -44,7 +44,7 @@
 #define  OMODEMB_DECORATION_6             28      /* control type: deco, callback function: (none) */
 #define  OMODEMB_DECORATION_7             29      /* control type: deco, callback function: (none) */
 #define  OMODEMB_DECORATION_8             30      /* control type: deco, callback function: (none) */
-#define  OMODEMB_TREE                     31      /* control type: tree, callback function: (none) */
+#define  OMODEMB_TREE                     31      /* control type: tree, callback function: TreeControl */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -58,6 +58,7 @@ int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OscilloscopeModeMB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK TreeControl(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

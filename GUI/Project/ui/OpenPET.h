@@ -30,6 +30,7 @@
 #define  PANEL_COMMANDBUTTON_3            14      /* control type: command, callback function: DisplayFloodMapMode */
 #define  PANEL_COMMANDBUTTON_2            15      /* control type: command, callback function: DisplayEnergyMode */
 #define  PANEL_COMMANDBUTTON              16      /* control type: command, callback function: DisplayTestMode */
+#define  PANEL_COMMANDBUTTON_6            17      /* control type: command, callback function: DisplayUserMode */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -47,6 +48,7 @@ int  CVICALLBACK DisplayFloodMapMode(int panel, int control, int event, void *ca
 int  CVICALLBACK DisplayOscilloscopeMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayTestMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayTimeMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayUserMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Go(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LoadDataFile(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK panelCB(int panel, int event, void *callbackData, int eventData1, int eventData2);

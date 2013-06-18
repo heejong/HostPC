@@ -1,3 +1,4 @@
+#include "Analysis_OscilloscopeMode_MB.h"
 #include <ansi_c.h>
 #include "Analysis_TestMode_MB.h"
 #include "Analysis_TestMode2.h"
@@ -80,6 +81,20 @@ int CVICALLBACK Back (int panel, int control, int event,
 	return 0;
 }
 
+int CVICALLBACK TreeControl (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			// eventData2 contains specific item double-clicked on
+			// switch on eventData2 to provide panel change
+			break;
+	}
+	return 0;
+}
+
+
 // initalizes stack
 void StackInit(Stack *S)
 {
@@ -134,3 +149,4 @@ int StackPop(Stack *S)
 		return S->data[S->current_size];
 	}
 }
+

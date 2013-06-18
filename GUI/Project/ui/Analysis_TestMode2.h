@@ -19,10 +19,10 @@
 #define  TESTMODE2_HISTOGRAM              3       /* control type: graph, callback function: (none) */
 #define  TESTMODE2_SAVE_OUTPUT            4       /* control type: command, callback function: SaveOutput */
 #define  TESTMODE2_SAVE_PLOT              5       /* control type: command, callback function: SavePlot */
-#define  TESTMODE2_COMMANDBUTTON          6       /* control type: command, callback function: Back */
-#define  TESTMODE2_COMMANDBUTTON_2        7       /* control type: command, callback function: Main */
-#define  TESTMODE2_COMMANDBUTTON_3        8       /* control type: command, callback function: Quit */
-#define  TESTMODE2_SPLITTER               9       /* control type: splitter, callback function: (none) */
+#define  TESTMODE2_COMMANDBUTTON_12       6       /* control type: command, callback function: Quit */
+#define  TESTMODE2_COMMANDBUTTON_13       7       /* control type: command, callback function: Back */
+#define  TESTMODE2_SPLITTER_2             8       /* control type: splitter, callback function: (none) */
+#define  TESTMODE2_COMMANDBUTTON_14       9       /* control type: command, callback function: Main */
 
 
      /* Menu Bars, Menus, and Menu Items: */

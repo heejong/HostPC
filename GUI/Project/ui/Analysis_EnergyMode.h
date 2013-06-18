@@ -28,6 +28,7 @@
 #define  EMODE_METHOD_AMOUNT              12      /* control type: numeric, callback function: (none) */
 #define  EMODE_NEW_WINDOW_BUTTON          13      /* control type: command, callback function: (none) */
 #define  EMODE_NUMERIC_3                  14      /* control type: numeric, callback function: (none) */
+#define  EMODE_DECORATION                 15      /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */

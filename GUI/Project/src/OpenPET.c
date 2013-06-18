@@ -28,7 +28,9 @@
 #include "Analysis_TimeMode.h"    
 #include "Analysis_TimeMode_MB.h" 
 #include "Analysis_OscilloscopeMode.h"    
-#include "Analysis_OscilloscopeMode_MB.h"  
+#include "Analysis_OscilloscopeMode_MB.h" 
+#include "Analysis_UserDefinedMode.h"    
+#include "Analysis_UserDefinedMode_MB.h"
 
 //==============================================================================
 // Constants
@@ -56,6 +58,8 @@ int panelHandle_timemode;
 int panelHandle_timemode_mb;
 int panelHandle_omode; 
 int panelHandle_omode_mb;
+int panelHandle_usermode; 
+int panelHandle_usermode_mb;
 
 extern Stack panel_stack;
 
@@ -82,6 +86,8 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_timemode_mb = LoadPanel (0, "Analysis_TimeMode_MB.uir", TIMEMODEMB)); 	
 	errChk (panelHandle_omode = LoadPanel (0, "Analysis_OscilloscopeMode.uir", OMODE)); 
 	errChk (panelHandle_omode_mb = LoadPanel (0, "Analysis_OscilloscopeMode_MB.uir", OMODEMB)); 
+	errChk (panelHandle_usermode = LoadPanel (0, "Analysis_UserDefinedMode.uir", USERMODE)); 
+	errChk (panelHandle_usermode_mb = LoadPanel (0, "Analysis_UserDefinedMode_MB.uir", USERMODEMB)); 
     
     /* display the panel and run the user interface */
     errChk (DisplayPanel (panelHandle));
@@ -100,7 +106,9 @@ Error:
 	DiscardPanel (panelHandle_timemode);   
 	DiscardPanel (panelHandle_timemode_mb); 
 	DiscardPanel (panelHandle_omode);   
-	DiscardPanel (panelHandle_omode_mb); 
+	DiscardPanel (panelHandle_omode_mb);
+	DiscardPanel (panelHandle_usermode);   
+	DiscardPanel (panelHandle_usermode_mb); 
     return 0;
 }
 
@@ -212,6 +220,7 @@ int CVICALLBACK Go (int panel, int control, int event,
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_3, ATTR_VISIBLE, 1);  
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_4, ATTR_VISIBLE, 1);
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_5, ATTR_VISIBLE, 1);
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_6, ATTR_VISIBLE, 1); 
 			break;
 	}
 	return 0;
@@ -280,6 +289,20 @@ int CVICALLBACK DisplayOscilloscopeMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_omode_mb);
+			StackPush(&panel_stack, panelHandle);
+			HidePanel (panelHandle);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK DisplayUserMode (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			DisplayPanel (panelHandle_usermode_mb);
 			StackPush(&panel_stack, panelHandle);
 			HidePanel (panelHandle);
 			break;
