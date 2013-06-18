@@ -3,7 +3,7 @@
 #include "UI_Common.h"
 
 extern int panelHandle_emode;
-extern int previous_panelHandle;   // defined in UI_Common
+extern Stack panel_stack;   // defined in UI_Common
 
 int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
@@ -12,7 +12,7 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_emode);  
-			previous_panelHandle = panel;
+			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
 	}

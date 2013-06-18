@@ -1,4 +1,7 @@
 Known bugs that require attention by priority level
 
-Must be fixed:
-1) Cannot press back button twice in a row
+Require immediate attention:
+# Cannot press back button twice in a row
+--- fixed with stack 6/18/13 ---
+
+Do not require immediate attention:

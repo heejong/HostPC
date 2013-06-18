@@ -11,7 +11,7 @@ IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
-Number of Files = 27
+Number of Files = 30
 Target Type = "Executable"
 Flags = 16
 Copied From Locked InstrDrv Directory = False
@@ -173,9 +173,9 @@ File Type = "User Interface Resource"
 Res Id = 13
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "ui/Analysis_TestMode1.uir"
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
-Path Line0002 = "ysis_TestMode1.uir"
+Path Rel Path = "src/Analysis_OscilloscopeMode.uir"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
+Path Line0002 = "lysis_OscilloscopeMode.uir"
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -185,9 +185,9 @@ File Type = "CSource"
 Res Id = 14
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "src/Analysis_TestMode2.c"
+Path Rel Path = "src/Analysis_OscilloscopeMode_MB.c"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_TestMode2.c"
+Path Line0002 = "lysis_OscilloscopeMode_MB.c"
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -198,9 +198,9 @@ File Type = "User Interface Resource"
 Res Id = 15
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "ui/Analysis_TestMode2.uir"
+Path Rel Path = "ui/Analysis_OscilloscopeMode_MB.uir"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
-Path Line0002 = "ysis_TestMode2.uir"
+Path Line0002 = "ysis_OscilloscopeMode_MB.uir"
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -210,6 +210,43 @@ File Type = "User Interface Resource"
 Res Id = 16
 Path Is Rel = True
 Path Rel To = "Project"
+Path Rel Path = "ui/Analysis_TestMode1.uir"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
+Path Line0002 = "ysis_TestMode1.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+
+[File 0017]
+File Type = "CSource"
+Res Id = 17
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "src/Analysis_TestMode2.c"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
+Path Line0002 = "lysis_TestMode2.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+
+[File 0018]
+File Type = "User Interface Resource"
+Res Id = 18
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "ui/Analysis_TestMode2.uir"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
+Path Line0002 = "ysis_TestMode2.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+
+[File 0019]
+File Type = "User Interface Resource"
+Res Id = 19
+Path Is Rel = True
+Path Rel To = "Project"
 Path Rel Path = "ui/Analysis_TestMode_DB.uir"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_TestMode_DB.uir"
@@ -217,9 +254,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0017]
+[File 0020]
 File Type = "User Interface Resource"
-Res Id = 17
+Res Id = 20
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Analysis_TestMode_DUC.uir"
@@ -229,9 +266,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0018]
+[File 0021]
 File Type = "CSource"
-Res Id = 18
+Res Id = 21
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/Analysis_TestMode_MB.c"
@@ -242,9 +279,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0019]
+[File 0022]
 File Type = "User Interface Resource"
-Res Id = 19
+Res Id = 22
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Analysis_TestMode_MB.uir"
@@ -254,9 +291,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0020]
+[File 0023]
 File Type = "User Interface Resource"
-Res Id = 20
+Res Id = 23
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Analysis_TimeMode.uir"
@@ -266,9 +303,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0021]
+[File 0024]
 File Type = "CSource"
-Res Id = 21
+Res Id = 24
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/Analysis_TimeMode_MB.c"
@@ -279,9 +316,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0022]
+[File 0025]
 File Type = "User Interface Resource"
-Res Id = 22
+Res Id = 25
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Analysis_TimeMode_MB.uir"
@@ -291,9 +328,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0023]
+[File 0026]
 File Type = "User Interface Resource"
-Res Id = 23
+Res Id = 26
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Analysis_UserDefinedMode.uir"
@@ -303,9 +340,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0024]
+[File 0027]
 File Type = "CSource"
-Res Id = 24
+Res Id = 27
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/OpenPET.c"
@@ -316,9 +353,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0025]
+[File 0028]
 File Type = "User Interface Resource"
-Res Id = 25
+Res Id = 28
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/OpenPET.uir"
@@ -328,9 +365,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0026]
+[File 0029]
 File Type = "CSource"
-Res Id = 26
+Res Id = 29
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/UI_Common.c"
@@ -341,9 +378,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0027]
+[File 0030]
 File Type = "Include"
-Res Id = 27
+Res Id = 30
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "include/UI_Common.h"
@@ -390,6 +427,10 @@ Include Path 2 Is Rel = True
 Include Path 2 Rel To = "Project"
 Include Path 2 Rel Path = "include"
 Include Path 2 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/include"
+Include Path 3 Is Rel = True
+Include Path 3 Rel To = "Project"
+Include Path 3 Rel Path = "ui"
+Include Path 3 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui"
 
 [Create Executable]
 Executable File_Debug Is Rel = True

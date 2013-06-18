@@ -1,3 +1,4 @@
+#include <ansi_c.h>
 #include "Analysis_TestMode_MB.h"
 #include "Analysis_TestMode2.h"
 #include <userint.h>
@@ -32,7 +33,7 @@ extern int panelHandle;
 
 //==============================================================================
 // Global variables
-int previous_panelHandle;
+Stack panel_stack;
 
 //==============================================================================
 // Global functions
@@ -57,6 +58,9 @@ int CVICALLBACK Main (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle);
+			while(!StackEmpty(&panel_stack)) {
+				StackPop(&panel_stack);
+			}
 			HidePanel (panel);
 			break;
 	}
@@ -69,9 +73,64 @@ int CVICALLBACK Back (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			DisplayPanel (previous_panelHandle);
+			DisplayPanel (StackPop(&panel_stack));
 			HidePanel (panel);
 			break;
 	}
 	return 0;
+}
+
+// initalizes stack
+void StackInit(Stack *S)
+{
+    S->current_size = 0;
+}
+
+// returns top value on success and -1 on failure
+// does not change stack structure
+int StackPeek(Stack *S)
+{
+    if (S->current_size == 0) {
+		// stack empty
+		fprintf(stderr, "Error: empty stack found in call to Stack_Top()\n");
+        return -1;
+    } 
+
+    return S->data[S->current_size-1];
+}
+
+// retuns 1 if empty 0 if not
+int StackEmpty(Stack *S)
+{
+	if (S->current_size == 0) {
+		return 1;  // true
+    } else {
+		return 0;  // false
+	}
+}
+	
+
+// returns 0 on succcess and -1 on failure
+int StackPush(Stack *S, int d)
+{
+    if (S->current_size < STACK_MAXSIZE) {
+        S->data[S->current_size] = d;
+		S->current_size++;
+		return 0;
+	} else {
+        fprintf(stderr, "Error: exceeded stack range on attempt to push\n");
+		return -1;
+	}
+}
+
+// returns popped value on success and -1 on failure
+int StackPop(Stack *S)
+{
+    if (S->current_size == 0) {
+        fprintf(stderr, "Error: empty stack found on attempt to pop\n");
+		return -1;
+	} else {
+        S->current_size--;
+		return S->data[S->current_size];
+	}
 }

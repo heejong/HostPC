@@ -26,7 +26,9 @@
 #include "Analysis_FloodMapMode_MB.h"    
 #include "Analysis_FloodMapMode_DUC.h"    
 #include "Analysis_TimeMode.h"    
-#include "Analysis_TimeMode_MB.h"   
+#include "Analysis_TimeMode_MB.h" 
+#include "Analysis_OscilloscopeMode.h"    
+#include "Analysis_OscilloscopeMode_MB.h"  
 
 //==============================================================================
 // Constants
@@ -52,8 +54,10 @@ int panelHandle_fmmode_mb;
 int panelHandle_fmmode_duc;
 int panelHandle_timemode; 
 int panelHandle_timemode_mb;
+int panelHandle_omode; 
+int panelHandle_omode_mb;
 
-extern int previous_panelHandle;
+extern Stack panel_stack;
 
 //==============================================================================
 // Global functions
@@ -64,6 +68,7 @@ int main (int argc, char *argv[])
     int error = 0;
     
     /* initialize and load resources */
+	StackInit(&panel_stack);
     nullChk (InitCVIRTE (0, argv, 0));
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
 	errChk (panelHandle_testmode2 = LoadPanel (0, "Analysis_TestMode2.uir", TESTMODE2)); 
@@ -75,6 +80,8 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_fmmode_duc = LoadPanel (0, "Analysis_FloodMapMode_DUC.uir", FMMODEDUC)); 
 	errChk (panelHandle_timemode = LoadPanel (0, "Analysis_TimeMode.uir", TIMEMODE)); 
 	errChk (panelHandle_timemode_mb = LoadPanel (0, "Analysis_TimeMode_MB.uir", TIMEMODEMB)); 	
+	errChk (panelHandle_omode = LoadPanel (0, "Analysis_OscilloscopeMode.uir", OMODE)); 
+	errChk (panelHandle_omode_mb = LoadPanel (0, "Analysis_OscilloscopeMode_MB.uir", OMODEMB)); 
     
     /* display the panel and run the user interface */
     errChk (DisplayPanel (panelHandle));
@@ -92,6 +99,8 @@ Error:
 	DiscardPanel (panelHandle_fmmode_duc); 
 	DiscardPanel (panelHandle_timemode);   
 	DiscardPanel (panelHandle_timemode_mb); 
+	DiscardPanel (panelHandle_omode);   
+	DiscardPanel (panelHandle_omode_mb); 
     return 0;
 }
 
@@ -202,6 +211,7 @@ int CVICALLBACK Go (int panel, int control, int event,
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_2, ATTR_VISIBLE, 1);  
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_3, ATTR_VISIBLE, 1);  
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_4, ATTR_VISIBLE, 1);
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_5, ATTR_VISIBLE, 1);
 			break;
 	}
 	return 0;
@@ -214,7 +224,7 @@ int CVICALLBACK DisplayEnergyMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_emode_mb);
-			previous_panelHandle = panelHandle;
+			StackPush(&panel_stack, panelHandle);
 			HidePanel (panelHandle);
 			break;
 	}
@@ -228,7 +238,7 @@ int CVICALLBACK DisplayTestMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_testmode_mb);
-			previous_panelHandle = panelHandle;
+			StackPush(&panel_stack, panelHandle);
 			HidePanel (panelHandle);
 			break;
 	}
@@ -242,7 +252,7 @@ int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_fmmode_mb);
-			previous_panelHandle = panelHandle;
+			StackPush(&panel_stack, panelHandle);
 			HidePanel (panelHandle);
 			break;
 	}
@@ -256,7 +266,21 @@ int CVICALLBACK DisplayTimeMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_timemode_mb);
-			previous_panelHandle = panelHandle;
+			StackPush(&panel_stack, panelHandle);
+			HidePanel (panelHandle);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK DisplayOscilloscopeMode (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			DisplayPanel (panelHandle_omode_mb);
+			StackPush(&panel_stack, panelHandle);
 			HidePanel (panelHandle);
 			break;
 	}
