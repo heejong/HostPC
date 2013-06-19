@@ -21,8 +21,8 @@
 #define  TESTMODE2_SAVE_PLOT              5       /* control type: command, callback function: SavePlot */
 #define  TESTMODE2_COMMANDBUTTON_12       6       /* control type: command, callback function: Quit */
 #define  TESTMODE2_COMMANDBUTTON_13       7       /* control type: command, callback function: Back */
-#define  TESTMODE2_SPLITTER_2             8       /* control type: splitter, callback function: (none) */
-#define  TESTMODE2_COMMANDBUTTON_14       9       /* control type: command, callback function: Main */
+#define  TESTMODE2_COMMANDBUTTON_14       8       /* control type: command, callback function: Main */
+#define  TESTMODE2_DECORATION_9           9       /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */

@@ -21,8 +21,8 @@
 #define  TIMEMODE_SAVE_PLOT               5       /* control type: command, callback function: SavePlot */
 #define  TIMEMODE_COMMANDBUTTON_3         6       /* control type: command, callback function: Quit */
 #define  TIMEMODE_COMMANDBUTTON           7       /* control type: command, callback function: Back */
-#define  TIMEMODE_SPLITTER                8       /* control type: splitter, callback function: (none) */
-#define  TIMEMODE_COMMANDBUTTON_2         9       /* control type: command, callback function: Main */
+#define  TIMEMODE_COMMANDBUTTON_2         8       /* control type: command, callback function: Main */
+#define  TIMEMODE_DECORATION_9            9       /* control type: deco, callback function: (none) */
 
      /* tab page panel controls */
 #define  TABPANEL_PICTURE_4               2       /* control type: picture, callback function: (none) */

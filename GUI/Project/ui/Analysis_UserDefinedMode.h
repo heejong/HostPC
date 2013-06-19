@@ -20,8 +20,8 @@
 #define  USERMODE_SAVE_PLOT               4       /* control type: command, callback function: SavePlot */
 #define  USERMODE_COMMANDBUTTON_12        5       /* control type: command, callback function: Quit */
 #define  USERMODE_COMMANDBUTTON_13        6       /* control type: command, callback function: Back */
-#define  USERMODE_SPLITTER_2              7       /* control type: splitter, callback function: (none) */
-#define  USERMODE_COMMANDBUTTON_14        8       /* control type: command, callback function: Main */
+#define  USERMODE_COMMANDBUTTON_14        7       /* control type: command, callback function: Main */
+#define  USERMODE_DECORATION_9            8       /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */

@@ -35,7 +35,7 @@ extern int panelHandle;
 //==============================================================================
 // Global variables
 Stack panel_stack;
-
+PanelAppearance appearance; 
 //==============================================================================
 // Global functions
 
@@ -150,3 +150,19 @@ int StackPop(Stack *S)
 	}
 }
 
+void SavePanelAppearance(int panel, PanelAppearance *appearance)
+{
+	GetPanelAttribute (panel, ATTR_HEIGHT, &appearance->height);
+	GetPanelAttribute (panel, ATTR_WIDTH, &appearance->width);
+	GetPanelAttribute (panel, ATTR_TOP, &appearance->top);
+	GetPanelAttribute (panel, ATTR_LEFT, &appearance->left);
+}
+	
+
+void RecallPanelAppearance(int panel, PanelAppearance *appearance) 
+{
+	SetPanelAttribute (panel, ATTR_HEIGHT, appearance->height);
+	SetPanelAttribute (panel, ATTR_WIDTH, appearance->width);
+	SetPanelAttribute (panel, ATTR_TOP, appearance->top);
+	SetPanelAttribute (panel, ATTR_LEFT, appearance->left);
+}

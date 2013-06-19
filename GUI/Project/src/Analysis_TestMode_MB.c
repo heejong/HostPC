@@ -6,7 +6,7 @@
 extern int panelHandle_testmode2;
 extern int panelHandle_testmode_mb;
 extern Stack panel_stack;   // defined in UI_Common
-extern int panelHandle_emode;
+extern PanelAppearance appearance;
 
 int CVICALLBACK Init (int panel, int event, void *callbackData,
 		int eventData1, int eventData2)
@@ -35,6 +35,7 @@ int CVICALLBACK TestModeMB (int panel, int control, int event,
 			// switch on control for MB0...MB8
 			DisplayPanel (panelHandle_testmode2);
 			StackPush(&panel_stack, panel); 
+			SavePanelAppearance(panel, &appearance);
 			HidePanel (panel); 
 			break;
 	}

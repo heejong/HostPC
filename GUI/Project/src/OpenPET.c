@@ -62,6 +62,7 @@ int panelHandle_usermode;
 int panelHandle_usermode_mb;
 
 extern Stack panel_stack;
+extern PanelAppearance appearance; 
 
 //==============================================================================
 // Global functions

@@ -5,3 +5,6 @@ Require immediate attention:
 --- fixed with stack 6/18/13 ---
 
 Do not require immediate attention:
+# When changing panels, size and position are not preserved
+# Panels are only hidden, wastes memory that might be needed for reading large binary files
+### instead, use SavePanelState(), RecallPanelState(), and DiscardPanel()

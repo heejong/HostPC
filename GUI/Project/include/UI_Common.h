@@ -27,13 +27,25 @@
 //==============================================================================
 // Types
 
+// used to keep window in the same location when changing between panels
+typedef struct PanelAppearance {
+	// panel size
+	int height;
+	int width;
+	// panel position
+	int top;
+	int left;
+} PanelAppearance;
+
 // stack provides data structure with lowest implementation cost to give location along panel tree 
 // note this is not a general implementation - limited to int and predefined size
 // no need to deal with malloc and void* for this narrow use case
 typedef struct Stack {
-    int     data[STACK_MAXSIZE]; 
-    int     current_size;
+    // stack values
+	int data[STACK_MAXSIZE]; 
+    int current_size;
 } Stack;
+
 
 //==============================================================================
 // External variables
@@ -56,6 +68,9 @@ int StackPeek(Stack *S);
 int StackEmpty(Stack *S);
 int StackPush(Stack *S, int d);
 int StackPop(Stack *S);
+
+void SavePanelAppearance(int panel, PanelAppearance *appearance);
+void RecallPanelAppearance(int panel, PanelAppearance *appearance);
 
 
 #ifdef __cplusplus
