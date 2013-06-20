@@ -15,11 +15,11 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "OpenPET.prj"
 Drag Bar Left = 251
-Window Top = 30
-Window Left = 957
-Window Bottom = 1045
-Window Right = 1915
-Maximized = True
+Window Top = 60
+Window Left = 961
+Window Bottom = 1041
+Window Right = 1911
+Maximized = False
 Maximized Children = True
 Max32 Number Of Errors = 20
 Track Include File Dependencies = True
@@ -31,7 +31,7 @@ Save Changes Before Running = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 12
+Number of Opened Files = 15
 Window Confinement Region Enabled = True
 MainColumnWidth = 234
 FileDateColumnWidth = 70
@@ -57,14 +57,14 @@ Disk Date = 3454444170
 In Projects = "1,"
 Window Top = 62
 Window Left = 22
-Window Z-Order = 12
+Window Z-Order = 15
 Source Window State = "1,46,46,46,4,32,32,0,0,87,0,0,0,0,0,25,34,0,71,72,349,739,1,0,"
 
 [File 0002]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Open"
 Path Line0002 = "PET.uir"
 File Type = "User Interface Resource"
-Disk Date = 3454445021
+Disk Date = 3454606697
 In Projects = "1,"
 Window Top = 182
 Window Left = 86
@@ -80,7 +80,7 @@ Disk Date = 3454444170
 In Projects = "1,"
 Window Top = 362
 Window Left = 182
-Window Z-Order = 9
+Window Z-Order = 13
 Source Window State = "1,6,7,7,44,44,44,0,0,87,0,0,0,0,0,25,13,0,25,12,349,739,1,0,"
 
 [File 0004]
@@ -91,7 +91,7 @@ Disk Date = 3454444170
 In Projects = "1,"
 Window Top = 212
 Window Left = 102
-Window Z-Order = 10
+Window Z-Order = 14
 Source Window State = "1,8,8,8,0,31,31,0,0,87,0,0,0,0,0,25,0,0,10,0,349,739,1,0,"
 
 [File 0005]
@@ -102,7 +102,7 @@ Disk Date = 3454443503
 In Projects = "1,"
 Window Top = 152
 Window Left = 70
-Window Z-Order = 3
+Window Z-Order = 10
 Source Window State = "1,64,64,64,7,35,7,0,0,89,0,82,0,0,0,25,82,0,94,4,349,755,1,11,"
 
 [File 0006]
@@ -113,7 +113,7 @@ Disk Date = 3454444231
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
-Window Z-Order = 8
+Window Z-Order = 12
 Source Window State = "1,158,159,158,66,66,66,0,0,87,0,1,0,1,0,25,143,0,162,22,349,739,1,0,"
 
 [File 0007]
@@ -126,7 +126,7 @@ Window Top = 32
 Window Left = 6
 Window Height = 349
 Window Width = 739
-Window Z-Order = 6
+Window Z-Order = 3
 
 [File 0008]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
@@ -136,20 +136,20 @@ Disk Date = 3454444180
 In Projects = "1,"
 Window Top = 242
 Window Left = 118
-Window Z-Order = 11
+Window Z-Order = 5
 Source Window State = "1,13,13,13,38,42,38,0,0,87,0,0,0,0,0,25,0,0,16,40,349,739,1,0,"
 
 [File 0009]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
 Path Line0002 = "ection_SysConfig_MB.uir"
 File Type = "User Interface Resource"
-Disk Date = 3454445017
+Disk Date = 3454609421
 In Projects = "1,"
 Window Top = 152
 Window Left = 70
 Window Height = 349
 Window Width = 739
-Window Z-Order = 5
+Window Z-Order = 2
 
 [File 0010]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
@@ -161,19 +161,19 @@ Window Top = 32
 Window Left = 6
 Window Height = 349
 Window Width = 755
-Window Z-Order = 4
+Window Z-Order = 11
 
 [File 0011]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_OscilloscopeMode.uir"
 File Type = "User Interface Resource"
-Disk Date = 3454598062
+Disk Date = 3454598271
 In Projects = "1,"
 Window Top = 392
 Window Left = 198
 Window Height = 349
 Window Width = 739
-Window Z-Order = 1
+Window Z-Order = 8
 
 [File 0012]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
@@ -183,7 +183,7 @@ Disk Date = 3454598018
 In Projects = "1,"
 Window Top = 92
 Window Left = 38
-Window Z-Order = 2
+Window Z-Order = 9
 Source Window State = "1,17,17,17,12,28,28,0,0,87,0,0,0,0,0,25,0,0,29,28,349,739,1,0,"
 
 [File 0013]
@@ -371,12 +371,13 @@ Window Width = 739
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_TestMode_MB.uir"
 File Type = "User Interface Resource"
-Disk Date = 3454439271
+Disk Date = 3454608497
 In Projects = "1,"
 Window Top = 572
 Window Left = 294
 Window Height = 349
 Window Width = 739
+Window Z-Order = 6
 
 [File 0031]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
@@ -420,6 +421,29 @@ Window Top = 32
 Window Left = 6
 Window Height = 349
 Window Width = 739
+
+[File 0035]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Col"
+Path Line0002 = "lection_SysConfig_MB.c"
+File Type = "CSource"
+Disk Date = 3454609415
+In Projects = ""
+Window Top = 182
+Window Left = 86
+Window Z-Order = 4
+Source Window State = "1,0,0,0,0,0,0,0,0,87,0,0,0,0,0,25,0,0,33,29,349,739,1,0,"
+
+[File 0036]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
+Path Line0002 = "ection_WordLength.uir"
+File Type = "User Interface Resource"
+Disk Date = 3454609998
+In Projects = "1,"
+Window Top = 302
+Window Left = 150
+Window Height = 349
+Window Width = 739
+Window Z-Order = 1
 
 [Build Options 0001]
 Generate Browse Info = True

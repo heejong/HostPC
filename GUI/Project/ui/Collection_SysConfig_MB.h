@@ -15,36 +15,38 @@
      /* Panels and Controls: */
 
 #define  CONFIGMB                         1
-#define  CONFIGMB_STRING_24               2       /* control type: string, callback function: (none) */
-#define  CONFIGMB_STRING_22               3       /* control type: string, callback function: (none) */
-#define  CONFIGMB_STRING_20               4       /* control type: string, callback function: (none) */
-#define  CONFIGMB_STRING_18               5       /* control type: string, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_12        6       /* control type: command, callback function: Quit */
-#define  CONFIGMB_COMMANDBUTTON_13        7       /* control type: command, callback function: Back */
-#define  CONFIGMB_COMMANDBUTTON_14        8       /* control type: command, callback function: Main */
-#define  CONFIGMB_STRING_16               9       /* control type: string, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_11        10      /* control type: command, callback function: (none) */
-#define  CONFIGMB_STRING_14               11      /* control type: string, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_10        12      /* control type: command, callback function: (none) */
-#define  CONFIGMB_STRING_12               13      /* control type: string, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_9         14      /* control type: command, callback function: (none) */
-#define  CONFIGMB_STRING_11               15      /* control type: string, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_8         16      /* control type: command, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_7         17      /* control type: command, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_6         18      /* control type: command, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_5         19      /* control type: command, callback function: (none) */
-#define  CONFIGMB_TEXTMSG                 20      /* control type: textMsg, callback function: (none) */
-#define  CONFIGMB_COMMANDBUTTON_4         21      /* control type: command, callback function: UserModeMB */
-#define  CONFIGMB_DECORATION              22      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_2            23      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_3            24      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_4            25      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_5            26      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_6            27      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_7            28      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_8            29      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_TREE                    30      /* control type: tree, callback function: (none) */
-#define  CONFIGMB_DECORATION_9            31      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_COMMANDBUTTON_12        2       /* control type: command, callback function: Next */
+#define  CONFIGMB_COMMANDBUTTON_11        3       /* control type: command, callback function: (none) */
+#define  CONFIGMB_COMMANDBUTTON_10        4       /* control type: command, callback function: (none) */
+#define  CONFIGMB_COMMANDBUTTON_9         5       /* control type: command, callback function: (none) */
+#define  CONFIGMB_COMMANDBUTTON_8         6       /* control type: command, callback function: (none) */
+#define  CONFIGMB_FILETEXT                7       /* control type: string, callback function: (none) */
+#define  CONFIGMB_LOAD                    8       /* control type: command, callback function: LoadDataFile */
+#define  CONFIGMB_COMMANDBUTTON_7         9       /* control type: command, callback function: (none) */
+#define  CONFIGMB_COMMANDBUTTON_6         10      /* control type: command, callback function: (none) */
+#define  CONFIGMB_COMMANDBUTTON_5         11      /* control type: command, callback function: (none) */
+#define  CONFIGMB_TEXTMSG                 12      /* control type: textMsg, callback function: (none) */
+#define  CONFIGMB_COMMANDBUTTON_4         13      /* control type: command, callback function: SystemConfigMB */
+#define  CONFIGMB_DECORATION              14      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_DECORATION_2            15      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_DECORATION_3            16      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_DECORATION_4            17      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_DECORATION_5            18      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_DECORATION_6            19      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_DECORATION_7            20      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_DECORATION_8            21      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_TREE                    22      /* control type: tree, callback function: (none) */
+#define  CONFIGMB_DECORATION_9            23      /* control type: deco, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_10         24      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_9          25      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_8          26      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_7          27      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_6          28      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_5          29      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_4          30      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_3          31      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TEXTMSG_3               32      /* control type: textMsg, callback function: (none) */
+#define  CONFIGMB_RADIOBUTTON             33      /* control type: radioButton, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -54,10 +56,9 @@
 
      /* Callback Prototypes: */
 
-int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK UserModeMB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK LoadDataFile(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Next(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK SystemConfigMB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
