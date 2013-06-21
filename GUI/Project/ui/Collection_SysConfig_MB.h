@@ -21,7 +21,7 @@
 #define  CONFIGMB_COMMANDBUTTON_9         5       /* control type: command, callback function: (none) */
 #define  CONFIGMB_COMMANDBUTTON_8         6       /* control type: command, callback function: (none) */
 #define  CONFIGMB_FILETEXT                7       /* control type: string, callback function: (none) */
-#define  CONFIGMB_LOAD                    8       /* control type: command, callback function: LoadDataFile */
+#define  CONFIGMB_LOAD                    8       /* control type: command, callback function: (none) */
 #define  CONFIGMB_COMMANDBUTTON_7         9       /* control type: command, callback function: (none) */
 #define  CONFIGMB_COMMANDBUTTON_6         10      /* control type: command, callback function: (none) */
 #define  CONFIGMB_COMMANDBUTTON_5         11      /* control type: command, callback function: (none) */
@@ -56,7 +56,6 @@
 
      /* Callback Prototypes: */
 
-int  CVICALLBACK LoadDataFile(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Next(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SystemConfigMB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 

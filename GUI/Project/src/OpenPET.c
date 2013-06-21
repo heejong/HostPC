@@ -31,6 +31,8 @@
 #include "Analysis_OscilloscopeMode_MB.h" 
 #include "Analysis_UserDefinedMode.h"    
 #include "Analysis_UserDefinedMode_MB.h"
+#include "Collection_SysConfig_MB.h"
+#include "Collection_WordLength.h"   
 
 //==============================================================================
 // Constants
@@ -60,6 +62,8 @@ int panelHandle_omode;
 int panelHandle_omode_mb;
 int panelHandle_usermode; 
 int panelHandle_usermode_mb;
+int panelHandle_sysconfig_mb;
+int panelHandle_wordlength; 
 
 extern Stack panel_stack;
 extern PanelAppearance appearance; 
@@ -89,6 +93,8 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_omode_mb = LoadPanel (0, "Analysis_OscilloscopeMode_MB.uir", OMODEMB)); 
 	errChk (panelHandle_usermode = LoadPanel (0, "Analysis_UserDefinedMode.uir", USERMODE)); 
 	errChk (panelHandle_usermode_mb = LoadPanel (0, "Analysis_UserDefinedMode_MB.uir", USERMODEMB)); 
+	errChk (panelHandle_sysconfig_mb = LoadPanel (0, "Collection_SysConfig_MB.uir", CONFIGMB));
+	errChk (panelHandle_wordlength = LoadPanel (0, "Collection_WordLength.uir", WORDLENGTH));
     
     /* display the panel and run the user interface */
     errChk (DisplayPanel (panelHandle));
@@ -110,6 +116,8 @@ Error:
 	DiscardPanel (panelHandle_omode_mb);
 	DiscardPanel (panelHandle_usermode);   
 	DiscardPanel (panelHandle_usermode_mb); 
+	DiscardPanel (panelHandle_sysconfig_mb);
+	DiscardPanel (panelHandle_wordlength);
     return 0;
 }
 
@@ -168,6 +176,9 @@ int CVICALLBACK Setup (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			DisplayPanel (panelHandle_sysconfig_mb);
+			StackPush(&panel_stack, panelHandle);
+			HidePanel (panelHandle);
 			break;
 	}
 	return 0;
