@@ -11,7 +11,7 @@ IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
-Number of Files = 37
+Number of Files = 38
 Target Type = "Executable"
 Flags = 16
 Copied From Locked InstrDrv Directory = False
@@ -379,8 +379,20 @@ Project Flags = 0
 Folder = "Source Files"
 
 [File 0030]
-File Type = "CSource"
+File Type = "User Interface Resource"
 Res Id = 30
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "ui/Collection_Calibration.uir"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
+Path Line0002 = "ection_Calibration.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+
+[File 0031]
+File Type = "CSource"
+Res Id = 31
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/Collection_SysConfig_MB.c"
@@ -391,9 +403,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0031]
+[File 0032]
 File Type = "User Interface Resource"
-Res Id = 31
+Res Id = 32
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Collection_SysConfig_MB.uir"
@@ -403,9 +415,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0032]
+[File 0033]
 File Type = "CSource"
-Res Id = 32
+Res Id = 33
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/Collection_WordLength.c"
@@ -416,9 +428,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0033]
+[File 0034]
 File Type = "User Interface Resource"
-Res Id = 33
+Res Id = 34
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Collection_WordLength.uir"
@@ -428,9 +440,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0034]
+[File 0035]
 File Type = "CSource"
-Res Id = 34
+Res Id = 35
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/OpenPET.c"
@@ -441,9 +453,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0035]
+[File 0036]
 File Type = "User Interface Resource"
-Res Id = 35
+Res Id = 36
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/OpenPET.uir"
@@ -453,9 +465,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0036]
+[File 0037]
 File Type = "CSource"
-Res Id = 36
+Res Id = 37
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/UI_Common.c"
@@ -466,9 +478,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0037]
+[File 0038]
 File Type = "Include"
-Res Id = 37
+Res Id = 38
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "include/UI_Common.h"

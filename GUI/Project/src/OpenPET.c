@@ -33,6 +33,7 @@
 #include "Analysis_UserDefinedMode_MB.h"
 #include "Collection_SysConfig_MB.h"
 #include "Collection_WordLength.h"   
+#include "Collection_Calibration.h"    
 
 //==============================================================================
 // Constants
@@ -64,6 +65,7 @@ int panelHandle_usermode;
 int panelHandle_usermode_mb;
 int panelHandle_sysconfig_mb;
 int panelHandle_wordlength; 
+int panelHandle_calibration;
 
 extern Stack panel_stack;
 extern PanelAppearance appearance; 
@@ -95,6 +97,7 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_usermode_mb = LoadPanel (0, "Analysis_UserDefinedMode_MB.uir", USERMODEMB)); 
 	errChk (panelHandle_sysconfig_mb = LoadPanel (0, "Collection_SysConfig_MB.uir", CONFIGMB));
 	errChk (panelHandle_wordlength = LoadPanel (0, "Collection_WordLength.uir", WORDLENGTH));
+	errChk (panelHandle_calibration = LoadPanel (0, "Collection_Calibration.uir", CALIBRATE));
     
     /* display the panel and run the user interface */
     errChk (DisplayPanel (panelHandle));
@@ -118,6 +121,7 @@ Error:
 	DiscardPanel (panelHandle_usermode_mb); 
 	DiscardPanel (panelHandle_sysconfig_mb);
 	DiscardPanel (panelHandle_wordlength);
+	DiscardPanel (panelHandle_calibration);
     return 0;
 }
 
@@ -147,6 +151,13 @@ int CVICALLBACK CollectNewData (int panel, int control, int event,
 			SetCtrlAttribute (PANEL, PANEL_FILETEXT, ATTR_VISIBLE, 0); 
 			SetCtrlAttribute (PANEL, PANEL_LOAD, ATTR_VISIBLE, 0); 
 			SetCtrlAttribute (PANEL, PANEL_GO, ATTR_VISIBLE, 0);  
+			
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON, ATTR_VISIBLE, 0); 
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_2, ATTR_VISIBLE, 0);  
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_3, ATTR_VISIBLE, 0);  
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_4, ATTR_VISIBLE, 0);
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_5, ATTR_VISIBLE, 0);
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_6, ATTR_VISIBLE, 0);
 			break;
 	}
 	return 0;
@@ -190,7 +201,9 @@ int CVICALLBACK Calibrate (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-
+			DisplayPanel (panelHandle_calibration);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
 			break;
 	}
 	return 0;
@@ -245,8 +258,8 @@ int CVICALLBACK DisplayEnergyMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_emode_mb);
-			StackPush(&panel_stack, panelHandle);
-			HidePanel (panelHandle);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
 			break;
 	}
 	return 0;
@@ -259,8 +272,8 @@ int CVICALLBACK DisplayTestMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_testmode_mb);
-			StackPush(&panel_stack, panelHandle);
-			HidePanel (panelHandle);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
 			break;
 	}
 	return 0;
@@ -273,8 +286,8 @@ int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_fmmode_mb);
-			StackPush(&panel_stack, panelHandle);
-			HidePanel (panelHandle);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
 			break;
 	}
 	return 0;
@@ -287,8 +300,8 @@ int CVICALLBACK DisplayTimeMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_timemode_mb);
-			StackPush(&panel_stack, panelHandle);
-			HidePanel (panelHandle);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
 			break;
 	}
 	return 0;
@@ -301,8 +314,8 @@ int CVICALLBACK DisplayOscilloscopeMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_omode_mb);
-			StackPush(&panel_stack, panelHandle);
-			HidePanel (panelHandle);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
 			break;
 	}
 	return 0;
@@ -315,8 +328,8 @@ int CVICALLBACK DisplayUserMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_usermode_mb);
-			StackPush(&panel_stack, panelHandle);
-			HidePanel (panelHandle);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
 			break;
 	}
 	return 0;
