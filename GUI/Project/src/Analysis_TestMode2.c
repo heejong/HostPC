@@ -23,7 +23,7 @@ int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			RecallPanelAppearance(panel, &appearance);
+			//RecallPanelAppearance(panel, &appearance);
 			fp = fopen("..\\ExampleBinOutput.bin","rb");
 			if(fp == NULL) {
 				MessagePopup("Error","Could not open file");
