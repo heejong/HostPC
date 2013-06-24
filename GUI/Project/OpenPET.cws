@@ -15,10 +15,10 @@ Number of Projects = 1
 Active Project = 1
 Project 0001 = "OpenPET.prj"
 Drag Bar Left = 251
-Window Top = 407
-Window Left = 179
-Window Bottom = 925
-Window Right = 825
+Window Top = 390
+Window Left = 122
+Window Bottom = 908
+Window Right = 768
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -81,7 +81,7 @@ Window Top = 182
 Window Left = 86
 Window Height = 349
 Window Width = 739
-Window Z-Order = 6
+Window Z-Order = 8
 
 [File 0004]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
@@ -91,7 +91,7 @@ Disk Date = 3454699079
 In Projects = "1,"
 Window Top = 362
 Window Left = 182
-Window Z-Order = 4
+Window Z-Order = 6
 Source Window State = "1,6,7,7,44,44,44,0,0,87,0,0,0,0,0,25,13,0,30,32,349,739,1,0,"
 
 [File 0005]
@@ -102,7 +102,7 @@ Disk Date = 3454692555
 In Projects = "1,"
 Window Top = 212
 Window Left = 102
-Window Z-Order = 5
+Window Z-Order = 7
 Source Window State = "1,8,8,8,0,31,31,0,0,87,0,0,0,0,0,25,0,0,18,31,349,739,1,0,"
 
 [File 0006]
@@ -113,8 +113,8 @@ Disk Date = 3454708779
 In Projects = "1,"
 Window Top = 152
 Window Left = 70
-Window Z-Order = 2
-Source Window State = "1,201,202,201,32,32,32,0,0,89,0,82,0,0,0,25,174,0,205,12,349,755,1,11,"
+Window Z-Order = 1
+Source Window State = "1,201,202,201,32,32,32,0,0,124,0,82,0,0,0,65,91,0,129,62,349,755,1,11,"
 
 [File 0007]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/UI_"
@@ -160,7 +160,7 @@ Window Top = 152
 Window Left = 70
 Window Height = 349
 Window Width = 739
-Window Z-Order = 8
+Window Z-Order = 10
 
 [File 0011]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
@@ -207,7 +207,7 @@ Window Top = 449
 Window Left = 294
 Window Height = 349
 Window Width = 739
-Window Z-Order = 1
+Window Z-Order = 4
 
 [File 0015]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Col"
@@ -217,7 +217,7 @@ Disk Date = 3454618771
 In Projects = "1,"
 Window Top = 182
 Window Left = 86
-Window Z-Order = 12
+Window Z-Order = 14
 Source Window State = "1,14,16,16,12,31,31,0,3,87,0,0,0,0,0,25,0,0,14,12,349,739,1,0,"
 
 [File 0016]
@@ -240,7 +240,7 @@ Disk Date = 3454422975
 In Projects = "1,"
 Window Top = 92
 Window Left = 38
-Window Z-Order = 13
+Window Z-Order = 3
 Source Window State = "1,5,5,5,7,24,7,0,0,87,0,0,0,0,0,25,0,0,20,45,349,739,1,0,"
 
 [File 0018]
@@ -262,7 +262,7 @@ Disk Date = 3454333104
 In Projects = "1,"
 Window Top = 122
 Window Left = 54
-Window Z-Order = 14
+Window Z-Order = 2
 Source Window State = "1,15,20,20,12,14,14,0,0,87,0,0,0,0,0,25,0,0,21,20,349,739,1,0,"
 
 [File 0020]
@@ -286,7 +286,7 @@ Window Top = 152
 Window Left = 70
 Window Height = 349
 Window Width = 739
-Window Z-Order = 7
+Window Z-Order = 9
 
 [File 0022]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
@@ -309,7 +309,7 @@ Window Top = 449
 Window Left = 278
 Window Height = 349
 Window Width = 739
-Window Z-Order = 10
+Window Z-Order = 12
 
 [File 0024]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
@@ -321,7 +321,7 @@ Window Top = 152
 Window Left = 70
 Window Height = 349
 Window Width = 739
-Window Z-Order = 9
+Window Z-Order = 11
 
 [File 0025]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
@@ -331,7 +331,7 @@ Disk Date = 3454442841
 In Projects = "1,"
 Window Top = 152
 Window Left = 70
-Window Z-Order = 11
+Window Z-Order = 13
 Source Window State = "1,2,5,5,0,36,36,0,0,87,0,0,0,0,0,25,0,0,14,43,349,739,1,0,"
 
 [File 0026]
@@ -342,7 +342,7 @@ Disk Date = 3454696970
 In Projects = "1,"
 Window Top = 392
 Window Left = 198
-Window Z-Order = 3
+Window Z-Order = 5
 Source Window State = "1,2,7,7,0,10,10,0,0,87,0,0,0,0,0,25,0,0,13,34,349,739,1,0,"
 
 [File 0027]
