@@ -46,6 +46,25 @@ typedef struct Stack {
     int current_size;
 } Stack;
 
+typedef struct OpenPETTree {
+	// describes OpenPET hardware tree
+	short int MB;
+	short int DUC;
+	short int DB;
+} OpenPETTree;
+
+typedef struct Header {
+	char filename[50];
+	char usercomments[200];
+	double datetime; 
+	double duration;
+	char datatype[10];
+	double timewindow;
+	unsigned short int softwareversion;
+	unsigned short int firmwareversion;
+	// more can be added if necessary
+} Header;
+
 
 //==============================================================================
 // External variables
@@ -69,8 +88,13 @@ int StackEmpty(Stack *S);
 int StackPush(Stack *S, int d);
 int StackPop(Stack *S);
 
-void SavePanelAppearance(int panel, PanelAppearance *appearance);
-void RecallPanelAppearance(int panel, PanelAppearance *appearance);
+void OpenPETTreeInit(OpenPETTree *T);
+
+Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */);
+
+//void SaveXMLHeader(void);
+//void SavePanelAppearance(int panel, PanelAppearance *appearance);
+//void RecallPanelAppearance(int panel, PanelAppearance *appearance);
 
 
 #ifdef __cplusplus

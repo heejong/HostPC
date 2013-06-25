@@ -20,6 +20,8 @@
 #include "UI_Common.h"
 #include "Analysis_TestMode2.h"
 #include "Analysis_TestMode_MB.h" 
+#include "Analysis_TestMode_DUC.h"  
+#include "Analysis_TestMode_DB.h"  
 #include "Analysis_EnergyMode.h"
 #include "Analysis_EnergyMode_MB.h" 
 #include "Analysis_FloodMapMode.h"    
@@ -52,6 +54,8 @@
 int panelHandle;
 int panelHandle_testmode2; 
 int panelHandle_testmode_mb;
+int panelHandle_testmode_duc; 
+int panelHandle_testmode_db; 
 int panelHandle_emode;
 int panelHandle_emode_mb;
 int panelHandle_fmmode;
@@ -69,6 +73,7 @@ int panelHandle_calibration;
 
 extern Stack panel_stack;
 extern PanelAppearance appearance; 
+extern OpenPETTree current_location;
 
 //==============================================================================
 // Global functions
@@ -80,10 +85,14 @@ int main (int argc, char *argv[])
     
     /* initialize and load resources */
 	StackInit(&panel_stack);
+	OpenPETTreeInit(&current_location);
+	
     nullChk (InitCVIRTE (0, argv, 0));
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
 	errChk (panelHandle_testmode2 = LoadPanel (0, "Analysis_TestMode2.uir", TESTMODE2)); 
 	errChk (panelHandle_testmode_mb = LoadPanel (0, "Analysis_TestMode_MB.uir", TESTMODEMB));
+	errChk (panelHandle_testmode_duc = LoadPanel (0, "Analysis_TestMode_DUC.uir", TESTMODEDU)); 
+	errChk (panelHandle_testmode_db = LoadPanel (0, "Analysis_TestMode_DB.uir", TESTMODEDB)); 
 	errChk (panelHandle_emode_mb = LoadPanel (0, "Analysis_EnergyMode_MB.uir", EMODEMB));  
 	errChk (panelHandle_emode = LoadPanel (0, "Analysis_EnergyMode.uir", EMODE)); 
 	errChk (panelHandle_fmmode = LoadPanel (0, "Analysis_FloodMapMode.uir", FMMODE)); 
@@ -108,6 +117,8 @@ Error:
     DiscardPanel (panelHandle);
 	DiscardPanel (panelHandle_testmode2);
 	DiscardPanel (panelHandle_testmode_mb); 
+	DiscardPanel (panelHandle_testmode_duc);
+	DiscardPanel (panelHandle_testmode_db);
 	DiscardPanel (panelHandle_emode); 
 	DiscardPanel (panelHandle_emode_mb);
 	DiscardPanel (panelHandle_fmmode);   
@@ -236,6 +247,7 @@ int CVICALLBACK LoadDataFile (int panel, int control, int event,
 int CVICALLBACK Go (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
+	Header header;
 	switch (event)
 	{
 		case EVENT_COMMIT: 
@@ -246,6 +258,9 @@ int CVICALLBACK Go (int panel, int control, int event,
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_4, ATTR_VISIBLE, 1);
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_5, ATTR_VISIBLE, 1);
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_6, ATTR_VISIBLE, 1); 
+			
+			//header = CreateHeader("test.txt", "User comment.", 30.0, "single");
+			
 			break;
 	}
 	return 0;

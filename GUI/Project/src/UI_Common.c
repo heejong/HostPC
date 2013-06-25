@@ -1,3 +1,5 @@
+#include "Analysis_TestMode_DUC.h"
+#include "cvixml.h"
 #include "Analysis_OscilloscopeMode_MB.h"
 #include <ansi_c.h>
 #include "Analysis_TestMode_MB.h"
@@ -36,6 +38,7 @@ extern int panelHandle;
 // Global variables
 Stack panel_stack;
 PanelAppearance appearance; 
+OpenPETTree current_location;
 //==============================================================================
 // Global functions
 
@@ -99,6 +102,7 @@ int CVICALLBACK TreeControl (int panel, int control, int event,
 void StackInit(Stack *S)
 {
     S->current_size = 0;
+	return;
 }
 
 // returns top value on success and -1 on failure
@@ -148,6 +152,45 @@ int StackPop(Stack *S)
         S->current_size--;
 		return S->data[S->current_size];
 	}
+}  
+
+void OpenPETTreeInit(OpenPETTree *T) 
+{
+	// a value of -1 in any location specifies an undeclared value
+	T->MB=-1;
+	T->DUC=-1;
+	T->DB=-1;
+	return;
+}
+
+Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */) 
+{
+	Header H;
+	strcpy(H.filename,filename);
+	strcpy(H.usercomments,usercomments);
+	GetCurrentDateTime(&H.datetime);
+	H.duration = duration;
+	strcpy(H.datatype,datatype);
+	H.timewindow = .12;
+	H.softwareversion=11;
+	H.firmwareversion=12;
+	
+	return H;
+	
+}
+
+
+/*
+
+void SaveXMLHeader(void) 
+{
+	CVIXMLElement DateElement;
+	CVIXMLDocument xmlDoc;
+	// XML example http://api.wunderground.com/api/8629c52c6434d424/geolookup/conditions/forecast/q/TX/Dallas.xml
+	
+	CVIXMLNewDocument ("RootElement", &xmlDoc);
+	
+	CVIXMLSaveDocument (xmlDoc, 0, "Test.xml");
 }
 
 void SavePanelAppearance(int panel, PanelAppearance *appearance)
@@ -165,4 +208,31 @@ void RecallPanelAppearance(int panel, PanelAppearance *appearance)
 	SetPanelAttribute (panel, ATTR_WIDTH, appearance->width);
 	SetPanelAttribute (panel, ATTR_TOP, appearance->top);
 	SetPanelAttribute (panel, ATTR_LEFT, appearance->left);
+}
+
+*/
+
+int CVICALLBACK PanelTreeInit (int panel, int event, void *callbackData,
+		int eventData1, int eventData2)
+{
+	char title_string[20];
+	
+	switch (event)
+	{
+		case EVENT_GOT_FOCUS:
+			sprintf (title_string, "Test Mode -"); // need some way of determining if test mode panel, time mode panel, etc.
+			//strcat to add on MB0, etc.
+	
+			SetPanelAttribute (panel, ATTR_TITLE, title_string);
+	
+			// populate instrument tree
+			break;
+		case EVENT_LOST_FOCUS:
+			// maybe use to clean up memory
+			break;
+		case EVENT_CLOSE:
+
+			break;
+	}
+	return 0;
 }

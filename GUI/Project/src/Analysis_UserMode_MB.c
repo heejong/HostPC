@@ -14,7 +14,7 @@ int CVICALLBACK UserModeMB (int panel, int control, int event,
 		case EVENT_COMMIT:
 			DisplayPanel (panelHandle_usermode);
 			StackPush(&panel_stack, panel);
-			SavePanelAppearance(panel, &appearance);
+			//SavePanelAppearance(panel, &appearance);
 			HidePanel (panel); 
 			break;
 	}
