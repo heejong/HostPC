@@ -31,7 +31,7 @@ Save Changes Before Running = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 9
+Number of Opened Files = 10
 Window Confinement Region Enabled = True
 MainColumnWidth = 234
 FileDateColumnWidth = 70
@@ -50,17 +50,108 @@ Batch Build Debug = True
 Force Rebuild = False
 
 [File 0001]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
-Path Line0002 = "ection_SysConfig_MB.uir"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
+Path Line0002 = "ysis_TestMode_DB.uir"
 File Type = "User Interface Resource"
-Disk Date = 3455027140
+Disk Date = 3455111453
+In Projects = "1,"
+Window Top = 62
+Window Left = 22
+Window Height = 349
+Window Width = 739
+Window Z-Order = 3
+
+[File 0002]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
+Path Line0002 = "ysis_TestMode_DUC.uir"
+File Type = "User Interface Resource"
+Disk Date = 3455111453
+In Projects = "1,"
+Window Top = 32
+Window Left = 6
+Window Height = 349
+Window Width = 739
+Window Z-Order = 4
+
+[File 0003]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
+Path Line0002 = "lysis_TestMode_MB.c"
+File Type = "CSource"
+Disk Date = 3455038876
+In Projects = "1,"
+Window Top = 212
+Window Left = 102
+Window Z-Order = 7
+Source Window State = "1,8,8,8,0,39,39,0,0,87,0,0,0,1,0,25,0,0,16,49,349,739,1,11,"
+
+[File 0004]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
+Path Line0002 = "ysis_TestMode_MB.uir"
+File Type = "User Interface Resource"
+Disk Date = 3455111453
+In Projects = "1,"
+Window Top = 449
+Window Left = 294
+Window Height = 349
+Window Width = 739
+Window Z-Order = 5
+
+[File 0005]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ope"
+Path Line0002 = "nPET.c"
+File Type = "CSource"
+Disk Date = 3455110337
 In Projects = "1,"
 Window Top = 152
 Window Left = 70
-Window Height = 349
-Window Width = 739
+Window Z-Order = 6
+Source Window State = "1,349,349,349,43,46,43,0,0,89,0,82,0,0,0,25,311,0,349,52,349,755,1,11,"
 
-[File 0002]
+[File 0006]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/UI_"
+Path Line0002 = "Common.c"
+File Type = "CSource"
+Disk Date = 3455111502
+In Projects = "1,"
+Window Top = 32
+Window Left = 6
+Window Z-Order = 1
+Source Window State = "1,97,97,97,0,8,8,0,0,204,0,0,0,2,0,25,232,0,235,23,349,739,1,11,"
+
+[File 0007]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/include"
+Path Line0002 = "/UI_Common.h"
+File Type = "Include"
+Disk Date = 3455110055
+In Projects = "1,"
+Window Top = 62
+Window Left = 22
+Window Z-Order = 8
+Source Window State = "1,53,53,53,62,66,62,0,0,87,0,0,0,0,0,25,36,0,53,31,349,739,1,0,"
+
+[File 0008]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
+Path Line0002 = "lysis_TestMode_DUC.c"
+File Type = "CSource"
+Disk Date = 3455038977
+In Projects = "1,"
+Window Top = 572
+Window Left = 294
+Window Z-Order = 10
+Source Window State = "1,13,40,40,12,15,15,0,0,87,0,0,0,0,0,25,0,0,6,39,349,739,1,11,"
+
+[File 0009]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
+Path Line0002 = "lysis_TestMode_DB.c"
+File Type = "CSource"
+Disk Date = 3455038977
+In Projects = "1,"
+Window Top = 32
+Window Left = 6
+Window Z-Order = 9
+Source Window State = "1,13,15,15,12,30,30,0,0,87,0,0,0,0,0,25,4,0,4,23,349,739,1,0,"
+
+[File 0010]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_EnergyMode.c"
 File Type = "CSource"
@@ -68,53 +159,9 @@ Disk Date = 3454333104
 In Projects = "1,"
 Window Top = 122
 Window Left = 54
-Source Window State = "1,15,20,20,12,14,14,0,0,87,0,0,0,0,0,25,0,0,21,20,349,739,1,0,"
+Source Window State = "1,15,20,20,12,14,14,0,0,0,0,0,0,0,0,0,0,0,21,20,349,739,1,0,"
 
-[File 0003]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
-Path Line0002 = "ysis_TestMode2.uir"
-File Type = "User Interface Resource"
-Disk Date = 3454439271
-In Projects = "1,"
-Window Top = 449
-Window Left = 278
-Window Height = 349
-Window Width = 739
-
-[File 0004]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
-Path Line0002 = "ysis_TimeMode_MB.uir"
-File Type = "User Interface Resource"
-Disk Date = 3454439272
-In Projects = "1,"
-Window Top = 572
-Window Left = 294
-Window Height = 349
-Window Width = 739
-
-[File 0005]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
-Path Line0002 = "ection_Calibration.uir"
-File Type = "User Interface Resource"
-Disk Date = 3454698882
-In Projects = "1,"
-Window Top = 152
-Window Left = 70
-Window Height = 349
-Window Width = 739
-
-[File 0006]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
-Path Line0002 = "ection_Calibration_Specs.uir"
-File Type = "User Interface Resource"
-Disk Date = 3454697543
-In Projects = "1,"
-Window Top = 32
-Window Left = 6
-Window Height = 349
-Window Width = 739
-
-[File 0007]
+[File 0011]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_EnergyMode.uir"
 File Type = "User Interface Resource"
@@ -125,7 +172,7 @@ Window Left = 6
 Window Height = 349
 Window Width = 755
 
-[File 0008]
+[File 0012]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_EnergyMode_DB.uir"
 File Type = "User Interface Resource"
@@ -136,7 +183,7 @@ Window Left = 22
 Window Height = 349
 Window Width = 755
 
-[File 0009]
+[File 0013]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_EnergyMode_DUC.uir"
 File Type = "User Interface Resource"
@@ -147,7 +194,7 @@ Window Left = 134
 Window Height = 349
 Window Width = 739
 
-[File 0010]
+[File 0014]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_EnergyMode_MB.c"
 File Type = "CSource"
@@ -157,7 +204,7 @@ Window Top = 92
 Window Left = 38
 Source Window State = "1,5,5,5,7,24,7,0,0,0,0,0,0,0,0,0,0,0,20,45,349,739,1,0,"
 
-[File 0011]
+[File 0015]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_EnergyMode_MB.uir"
 File Type = "User Interface Resource"
@@ -168,7 +215,7 @@ Window Left = 38
 Window Height = 349
 Window Width = 755
 
-[File 0012]
+[File 0016]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_FloodMapMode.c"
 File Type = "CSource"
@@ -178,7 +225,7 @@ Window Top = 122
 Window Left = 54
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,21,349,739,1,0,"
 
-[File 0013]
+[File 0017]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_FloodMapMode.uir"
 File Type = "User Interface Resource"
@@ -189,7 +236,7 @@ Window Left = 86
 Window Height = 349
 Window Width = 755
 
-[File 0014]
+[File 0018]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_FloodMapMode_DUC.c"
 File Type = "CSource"
@@ -199,7 +246,7 @@ Window Top = 62
 Window Left = 22
 Source Window State = "1,4,4,4,11,31,11,0,0,0,0,0,0,0,0,0,0,0,20,39,349,739,1,0,"
 
-[File 0015]
+[File 0019]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_FloodMapMode_DUC.uir"
 File Type = "User Interface Resource"
@@ -210,7 +257,7 @@ Window Left = 214
 Window Height = 349
 Window Width = 739
 
-[File 0016]
+[File 0020]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_FloodMapMode_MB.c"
 File Type = "CSource"
@@ -220,7 +267,7 @@ Window Top = 332
 Window Left = 166
 Source Window State = "1,5,5,5,7,31,7,0,0,0,0,0,0,0,0,0,0,0,5,24,349,739,1,0,"
 
-[File 0017]
+[File 0021]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_FloodMapMode_MB.uir"
 File Type = "User Interface Resource"
@@ -231,7 +278,7 @@ Window Left = 230
 Window Height = 349
 Window Width = 739
 
-[File 0018]
+[File 0022]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_OscilloscopeMode.c"
 File Type = "CSource"
@@ -241,7 +288,7 @@ Window Top = 92
 Window Left = 38
 Source Window State = "1,17,17,17,12,28,28,0,0,0,0,0,0,0,0,0,0,0,29,28,349,739,1,0,"
 
-[File 0019]
+[File 0023]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_OscilloscopeMode.uir"
 File Type = "User Interface Resource"
@@ -252,7 +299,7 @@ Window Left = 198
 Window Height = 349
 Window Width = 739
 
-[File 0020]
+[File 0024]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_OscilloscopeMode_MB.c"
 File Type = "CSource"
@@ -262,7 +309,7 @@ Window Top = 449
 Window Left = 230
 Source Window State = "1,13,13,13,39,46,39,0,0,0,0,0,0,0,0,0,0,0,1,9,349,739,1,0,"
 
-[File 0021]
+[File 0025]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_OscilloscopeMode_MB.uir"
 File Type = "User Interface Resource"
@@ -273,7 +320,7 @@ Window Left = 166
 Window Height = 349
 Window Width = 739
 
-[File 0022]
+[File 0026]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_TestMode1.uir"
 File Type = "User Interface Resource"
@@ -284,7 +331,7 @@ Window Left = 86
 Window Height = 349
 Window Width = 739
 
-[File 0023]
+[File 0027]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_TestMode2.c"
 File Type = "CSource"
@@ -294,54 +341,19 @@ Window Top = 362
 Window Left = 182
 Source Window State = "1,6,7,7,44,44,44,0,0,0,0,0,0,0,0,0,13,0,30,32,349,739,1,0,"
 
-[File 0024]
+[File 0028]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
-Path Line0002 = "ysis_TestMode_DB.uir"
+Path Line0002 = "ysis_TestMode2.uir"
 File Type = "User Interface Resource"
-Disk Date = 3455039313
-In Projects = "1,"
-Window Top = 62
-Window Left = 22
-Window Height = 349
-Window Width = 739
-Window Z-Order = 5
-
-[File 0025]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
-Path Line0002 = "ysis_TestMode_DUC.uir"
-File Type = "User Interface Resource"
-Disk Date = 3455040215
-In Projects = "1,"
-Window Top = 32
-Window Left = 6
-Window Height = 349
-Window Width = 739
-Window Z-Order = 3
-
-[File 0026]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_TestMode_MB.c"
-File Type = "CSource"
-Disk Date = 3455038876
-In Projects = "1,"
-Window Top = 212
-Window Left = 102
-Window Z-Order = 4
-Source Window State = "1,8,8,8,0,39,39,0,3,87,0,0,0,1,0,25,6,0,8,0,349,739,1,11,"
-
-[File 0027]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
-Path Line0002 = "ysis_TestMode_MB.uir"
-File Type = "User Interface Resource"
-Disk Date = 3455040215
+Disk Date = 3454439271
 In Projects = "1,"
 Window Top = 449
-Window Left = 294
+Window Left = 278
 Window Height = 349
 Window Width = 739
 Window Z-Order = 2
 
-[File 0028]
+[File 0029]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_TimeMode.uir"
 File Type = "User Interface Resource"
@@ -352,7 +364,7 @@ Window Left = 70
 Window Height = 349
 Window Width = 739
 
-[File 0029]
+[File 0030]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_TimeMode_MB.c"
 File Type = "CSource"
@@ -362,7 +374,18 @@ Window Top = 152
 Window Left = 70
 Source Window State = "1,2,5,5,0,36,36,0,0,0,0,0,0,0,0,0,0,0,14,43,349,739,1,0,"
 
-[File 0030]
+[File 0031]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
+Path Line0002 = "ysis_TimeMode_MB.uir"
+File Type = "User Interface Resource"
+Disk Date = 3454439272
+In Projects = "1,"
+Window Top = 572
+Window Left = 294
+Window Height = 349
+Window Width = 739
+
+[File 0032]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_UserDefinedMode.uir"
 File Type = "User Interface Resource"
@@ -373,7 +396,7 @@ Window Left = 6
 Window Height = 349
 Window Width = 739
 
-[File 0031]
+[File 0033]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Anal"
 Path Line0002 = "ysis_UserDefinedMode_MB.uir"
 File Type = "User Interface Resource"
@@ -384,7 +407,7 @@ Window Left = 6
 Window Height = 349
 Window Width = 739
 
-[File 0032]
+[File 0034]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
 Path Line0002 = "lysis_UserMode_MB.c"
 File Type = "CSource"
@@ -394,7 +417,7 @@ Window Top = 242
 Window Left = 118
 Source Window State = "1,4,4,4,0,54,54,0,0,0,0,0,0,0,0,0,0,0,16,14,349,739,1,0,"
 
-[File 0033]
+[File 0035]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Col"
 Path Line0002 = "lection_Calibration.c"
 File Type = "CSource"
@@ -404,7 +427,29 @@ Window Top = 392
 Window Left = 198
 Source Window State = "1,2,7,7,0,10,10,0,0,0,0,0,0,0,0,0,0,0,13,34,349,739,1,0,"
 
-[File 0034]
+[File 0036]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
+Path Line0002 = "ection_Calibration.uir"
+File Type = "User Interface Resource"
+Disk Date = 3454698882
+In Projects = "1,"
+Window Top = 152
+Window Left = 70
+Window Height = 349
+Window Width = 739
+
+[File 0037]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
+Path Line0002 = "ection_Calibration_Specs.uir"
+File Type = "User Interface Resource"
+Disk Date = 3454697543
+In Projects = "1,"
+Window Top = 32
+Window Left = 6
+Window Height = 349
+Window Width = 739
+
+[File 0038]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Col"
 Path Line0002 = "lection_SysConfig_MB.c"
 File Type = "CSource"
@@ -414,7 +459,18 @@ Window Top = 182
 Window Left = 86
 Source Window State = "1,14,16,16,12,31,31,0,3,0,0,0,0,0,0,0,0,0,14,12,349,739,1,0,"
 
-[File 0035]
+[File 0039]
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
+Path Line0002 = "ection_SysConfig_MB.uir"
+File Type = "User Interface Resource"
+Disk Date = 3455027140
+In Projects = "1,"
+Window Top = 152
+Window Left = 70
+Window Height = 349
+Window Width = 739
+
+[File 0040]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Col"
 Path Line0002 = "lection_WordLength.c"
 File Type = "CSource"
@@ -424,7 +480,7 @@ Window Top = 32
 Window Left = 6
 Source Window State = "1,13,13,13,38,46,38,0,0,0,0,1,0,1,0,0,0,0,5,25,349,739,1,0,"
 
-[File 0036]
+[File 0041]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Coll"
 Path Line0002 = "ection_WordLength.uir"
 File Type = "User Interface Resource"
@@ -435,18 +491,7 @@ Window Left = 150
 Window Height = 349
 Window Width = 739
 
-[File 0037]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ope"
-Path Line0002 = "nPET.c"
-File Type = "CSource"
-Disk Date = 3455038604
-In Projects = "1,"
-Window Top = 152
-Window Left = 70
-Window Z-Order = 6
-Source Window State = "1,92,92,92,37,38,37,0,0,89,0,82,0,0,0,25,100,0,112,4,349,755,1,11,"
-
-[File 0038]
+[File 0042]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/ui/Open"
 Path Line0002 = "PET.uir"
 File Type = "User Interface Resource"
@@ -456,50 +501,6 @@ Window Top = 182
 Window Left = 86
 Window Height = 349
 Window Width = 739
-
-[File 0039]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/UI_"
-Path Line0002 = "Common.c"
-File Type = "CSource"
-Disk Date = 3455040445
-In Projects = "1,"
-Window Top = 32
-Window Left = 6
-Window Z-Order = 1
-Source Window State = "1,219,219,219,4,22,22,0,0,204,0,0,0,2,0,47,208,0,220,32,349,739,1,11,"
-
-[File 0040]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/include"
-Path Line0002 = "/UI_Common.h"
-File Type = "Include"
-Disk Date = 3455038667
-In Projects = "1,"
-Window Top = 62
-Window Left = 22
-Window Z-Order = 9
-Source Window State = "1,52,52,52,4,12,12,0,0,87,0,0,0,0,0,25,36,0,54,34,349,739,1,0,"
-
-[File 0041]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_TestMode_DUC.c"
-File Type = "CSource"
-Disk Date = 3455038977
-In Projects = "1,"
-Window Top = 572
-Window Left = 294
-Window Z-Order = 8
-Source Window State = "1,13,40,40,12,15,15,0,0,87,0,0,0,0,0,25,0,0,6,39,349,739,1,11,"
-
-[File 0042]
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_TestMode_DB.c"
-File Type = "CSource"
-Disk Date = 3455038977
-In Projects = "1,"
-Window Top = 32
-Window Left = 6
-Window Z-Order = 7
-Source Window State = "1,13,15,15,12,30,30,0,0,87,0,0,0,0,0,25,4,0,4,23,349,739,1,0,"
 
 [Build Options 0001]
 Generate Browse Info = True

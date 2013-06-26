@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  TESTMODEDB                       1
+#define  TESTMODEDB                       1       /* callback function: PanelTreeInit */
 #define  TESTMODEDB_DB7_EVENTS            2       /* control type: string, callback function: (none) */
 #define  TESTMODEDB_DB6_EVENTS            3       /* control type: string, callback function: (none) */
 #define  TESTMODEDB_DB5_EVENTS            4       /* control type: string, callback function: (none) */
@@ -65,6 +65,7 @@
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK TestModeDB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 

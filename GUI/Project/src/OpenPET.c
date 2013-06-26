@@ -272,6 +272,7 @@ int CVICALLBACK DisplayEnergyMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			strcpy(current_location.mode,"Energy Mode");
 			DisplayPanel (panelHandle_emode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
@@ -286,6 +287,7 @@ int CVICALLBACK DisplayTestMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			strcpy(current_location.mode,"Test Mode");
 			DisplayPanel (panelHandle_testmode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
@@ -300,6 +302,7 @@ int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			strcpy(current_location.mode,"Flood Map Mode"); 
 			DisplayPanel (panelHandle_fmmode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
@@ -314,6 +317,7 @@ int CVICALLBACK DisplayTimeMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			strcpy(current_location.mode,"Time Mode"); 
 			DisplayPanel (panelHandle_timemode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
@@ -328,6 +332,7 @@ int CVICALLBACK DisplayOscilloscopeMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			strcpy(current_location.mode,"Oscilloscope Mode"); 
 			DisplayPanel (panelHandle_omode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
@@ -342,6 +347,7 @@ int CVICALLBACK DisplayUserMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			strcpy(current_location.mode,"User Mode"); 
 			DisplayPanel (panelHandle_usermode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);

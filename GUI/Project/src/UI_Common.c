@@ -66,6 +66,12 @@ int CVICALLBACK Main (int panel, int control, int event,
 				StackPop(&panel_stack);
 			}
 			HidePanel (panel);
+			
+			// fix current location to specify no selections
+			current_location.MB = -1;
+			current_location.DUC = -1;
+			current_location.DB = -1;
+			strcpy(current_location.mode, "NULL");
 			break;
 	}
 	return 0;
@@ -79,6 +85,17 @@ int CVICALLBACK Back (int panel, int control, int event,
 		case EVENT_COMMIT:
 			DisplayPanel (StackPop(&panel_stack));
 			HidePanel (panel);
+			
+			// fix current location
+			if(current_location.DB != -1) 
+				current_location.DB = -1;
+			else if(current_location.DUC != -1)
+				current_location.DUC = -1;
+			else if(current_location.MB != -1)
+				current_location.MB = -1;
+			else
+				strcpy(current_location.mode, "NULL");
+			
 			break;
 	}
 	return 0;
@@ -160,6 +177,7 @@ void OpenPETTreeInit(OpenPETTree *T)
 	T->MB=-1;
 	T->DUC=-1;
 	T->DB=-1;
+	strcpy(T->mode,"NULL");
 	return;
 }
 
@@ -215,14 +233,30 @@ void RecallPanelAppearance(int panel, PanelAppearance *appearance)
 int CVICALLBACK PanelTreeInit (int panel, int event, void *callbackData,
 		int eventData1, int eventData2)
 {
-	char title_string[20];
+	char title_string[30];
+	char temp_string[10];
 	
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			sprintf (title_string, "Test Mode -"); // need some way of determining if test mode panel, time mode panel, etc.
+			sprintf (title_string, "%s ", current_location.mode); 
 			//strcat to add on MB0, etc.
-	
+			if(current_location.MB != -1) 
+			{
+				sprintf(temp_string, "- MB%d ", current_location.MB);
+				strcat(title_string, temp_string); 	
+			}
+			if(current_location.DUC != -1) 
+			{
+				sprintf(temp_string, "DUC%d ", current_location.DUC);
+				strcat(title_string, temp_string); 	
+			}
+			if(current_location.DB != -1)
+			{
+				sprintf(temp_string, "DB%d ", current_location.DB);
+				strcat(title_string, temp_string); 
+			}
+			
 			SetPanelAttribute (panel, ATTR_TITLE, title_string);
 	
 			// populate instrument tree
