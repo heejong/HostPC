@@ -93,6 +93,8 @@ void OpenPETTreeInit(OpenPETTree *T);
 
 Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */);
 
+int CheckButtonEventError(char control_name[]);
+
 //void SaveXMLHeader(void);
 //void SavePanelAppearance(int panel, PanelAppearance *appearance);
 //void RecallPanelAppearance(int panel, PanelAppearance *appearance);

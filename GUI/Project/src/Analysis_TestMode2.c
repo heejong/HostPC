@@ -7,6 +7,7 @@
 
 extern int panelHandle_testmode2;
 extern PanelAppearance appearance;
+extern OpenPETTree current_location; 
 
 int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 		int eventData1, int eventData2)
@@ -17,6 +18,7 @@ int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 	int i, j, count=0;
 	char out[100];
 	unsigned short bit_error_count;
+	char title_string[50];
 	
 	unsigned int event_word, event_words[65536];  // may need to check 32-bit size
 	
@@ -24,6 +26,9 @@ int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 	{
 		case EVENT_GOT_FOCUS:
 			//RecallPanelAppearance(panel, &appearance);
+			sprintf(title_string, "Test Mode 2 - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
+			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
+			
 			fp = fopen("..\\ExampleBinOutput.bin","rb");
 			if(fp == NULL) {
 				MessagePopup("Error","Could not open file");

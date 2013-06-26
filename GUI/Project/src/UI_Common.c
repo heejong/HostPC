@@ -38,7 +38,8 @@ extern int panelHandle;
 // Global variables
 Stack panel_stack;
 PanelAppearance appearance; 
-OpenPETTree current_location;
+OpenPETTree current_location; // used to show the currently specified location in the tree
+OpenPETTree sys_config;		  // used to show the full system tree
 //==============================================================================
 // Global functions
 
@@ -233,14 +234,17 @@ void RecallPanelAppearance(int panel, PanelAppearance *appearance)
 int CVICALLBACK PanelTreeInit (int panel, int event, void *callbackData,
 		int eventData1, int eventData2)
 {
+	char control_name[20];
+	int control_id, board_number;
 	char title_string[30];
 	char temp_string[10];
 	
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
+			
+			// specify title to show location in tree *****
 			sprintf (title_string, "%s ", current_location.mode); 
-			//strcat to add on MB0, etc.
 			if(current_location.MB != -1) 
 			{
 				sprintf(temp_string, "- MB%d ", current_location.MB);
@@ -259,14 +263,71 @@ int CVICALLBACK PanelTreeInit (int panel, int event, void *callbackData,
 			
 			SetPanelAttribute (panel, ATTR_TITLE, title_string);
 	
-			// populate instrument tree
+			// enable/disable buttons according to system configuration *****
+			
+			GetPanelAttribute (panel, ATTR_PANEL_FIRST_CTRL, &control_id);  // first control
+			// cycle through controls disabling those not needed
+			while(control_id != 0) 
+			{
+			
+				GetCtrlAttribute (panel, control_id, ATTR_CONSTANT_NAME, control_name);
+				
+				if(CheckButtonEventError(control_name))	   // BUTTON, EVENTS, ERRORS
+				{
+					board_number = ((unsigned short int) control_name[7])-48; // convert ASCII number to int
+					if(current_location.MB == -1)
+					{
+						// haven't chosen MB yet means on MB screen
+						if(board_number > sys_config.MB) 
+							SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+					}
+					else if(current_location.DUC == -1)
+					{
+						// already chosen MB means on DUC screen
+						if(board_number > sys_config.DUC) 
+							SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+					}
+					else if(current_location.DB == -1)
+					{
+						// already chosen MB & DUC means on DB screen
+						if(board_number > sys_config.DB) 
+							SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+					}
+					
+				}
+					
+				GetCtrlAttribute (panel, control_id, ATTR_NEXT_CTRL, &control_id);
+				
+			
+			}
+			
+			
+			// populate instrument tree *****
 			break;
 		case EVENT_LOST_FOCUS:
 			// maybe use to clean up memory
 			break;
 		case EVENT_CLOSE:
-
+			QuitUserInterface (0); 
 			break;
 	}
 	return 0;
+}
+
+int CheckButtonEventError(char control_name[]) 
+{
+	if(control_name[0] != 'B' && control_name[0] != 'E')
+		return 0;  // false
+	if(control_name[1] != 'U' && control_name[1] != 'V' && control_name[1] != 'R')
+		return 0;  // false
+	if(control_name[2] != 'T' && control_name[2] != 'E' && control_name[2] != 'R')
+		return 0;  // false
+	if(control_name[3] != 'T' && control_name[3] != 'N' && control_name[3] != 'O')
+		return 0;  // false
+	if(control_name[4] != 'O' && control_name[4] != 'T' && control_name[4] != 'R')
+		return 0;  // false
+	if(control_name[5] != 'N' && control_name[5] != 'S')
+		return 0;  // false
+	
+	return 1; // true
 }
