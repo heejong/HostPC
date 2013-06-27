@@ -285,7 +285,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		
 		/* to do
 		   	
-			2. collapse based on location
+			
 			3. allow for clicking to navigate
 		
 		*/
@@ -311,10 +311,12 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 						sprintf(item_label, "DB%d", k); 
 						InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label, 0, 0, num_items++);
 					}
-					SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
+					if(j != current_location.DUC)
+						SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
 					
 				}
-				SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
+				if(i != current_location.MB)
+					SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
 			}
 			
 		}

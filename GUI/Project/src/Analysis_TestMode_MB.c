@@ -51,3 +51,16 @@ int CVICALLBACK TestModeMB (int panel, int control, int event,
 	}
 	return 0;
 }
+
+int CVICALLBACK InstrumentTreeControl (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			// eventData2 contains item in tree 0-indexed from CUC
+			// 0=CUC; 1=MB0; 2=DUC0; 3=DB0; 4=DB1; ...
+			break;
+	}
+	return 0;
+}
