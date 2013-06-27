@@ -40,7 +40,7 @@ Stack panel_stack;
 PanelAppearance appearance; 
 OpenPETTree current_location; // used to show the currently specified location in the tree
 OpenPETTree sys_config;		  // used to show the full system tree
-int new_panel_flag=0;
+
 //==============================================================================
 // Global functions
 
@@ -232,8 +232,8 @@ void RecallPanelAppearance(int panel, PanelAppearance *appearance)
 
 */
 
-int CVICALLBACK PanelTreeInit (int panel, int event, void *callbackData,
-		int eventData1, int eventData2)
+int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData, 
+								int eventData1, int eventData2)
 {
 	char control_name[20];
 	int control_id, board_number;
@@ -242,119 +242,113 @@ int CVICALLBACK PanelTreeInit (int panel, int event, void *callbackData,
 	char item_label[5];
 	int idx_MB, idx_DUC, i, j, k;
 	int num_items=1;
-	
-	switch (event)
+
+	// initialize panel when it gets focus
+	if(event != EVENT_GOT_FOCUS)
+		return 0;
+
+	// only initialize panel once
+	GetPanelAttribute (panel, ATTR_TITLE, title_string);
+	if(strcmp(title_string,"") != 0)
+		return 0;
+		
+	// specify title to show location in tree *****
+	sprintf (title_string, "%s ", current_location.mode); 
+	if(current_location.MB != -1) 
 	{
-		case EVENT_GOT_FOCUS:
-			
-			if(new_panel_flag == 0)
-				break;
-			new_panel_flag=0;
-			
-			// specify title to show location in tree *****
-			sprintf (title_string, "%s ", current_location.mode); 
-			if(current_location.MB != -1) 
-			{
-				sprintf(temp_string, "- MB%d ", current_location.MB);
-				strcat(title_string, temp_string); 	
-			}
-			if(current_location.DUC != -1) 
-			{
-				sprintf(temp_string, "DUC%d ", current_location.DUC);
-				strcat(title_string, temp_string); 	
-			}
-			if(current_location.DB != -1)
-			{
-				sprintf(temp_string, "DB%d ", current_location.DB);
-				strcat(title_string, temp_string); 
-			}
-			
-			SetPanelAttribute (panel, ATTR_TITLE, title_string);
-	
-			// enable/disable buttons according to system configuration *****
-			
-			GetPanelAttribute (panel, ATTR_PANEL_FIRST_CTRL, &control_id);  // first control
-			// cycle through controls disabling those not needed
-			while(control_id != 0) 
-			{
-			
-				GetCtrlAttribute (panel, control_id, ATTR_CONSTANT_NAME, control_name);
-				
-				// populate instrument tree
-				
-				/* to do
-				   	1. only initialize panel once
-					2. collapse based on location
-					3. allow for clicking to navigate
-				
-				*/
-				
-				
-				if(strcmp(control_name, "TREE") == 0)
-				{
-					for(i=0; i<=sys_config.MB; i++)
-					{
-						//add MB as child
-						sprintf(item_label, "MB%d", i);
-						idx_MB = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label, 0, 0, num_items++);
-						
-						for(j=0; j<=sys_config.DUC; j++)
-						{
-							//add DUC as child
-							sprintf(item_label, "DUC%d", j); 
-							idx_DUC = InsertTreeItem (panel, control_id, VAL_CHILD, idx_MB, VAL_LAST, item_label, 0, 0, num_items++);
-							
-							for(k=0; k<=sys_config.DB; k++)
-							{
-								//add DB as child
-								sprintf(item_label, "DB%d", k); 
-								InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label, 0, 0, num_items++);
-							}
-							SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
-							
-						}
-						SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
-					}
-					
-				}
-				
-				
-				if(CheckButtonEventError(control_name))	   // BUTTON, EVENTS, ERRORS
-				{
-					board_number = ((unsigned short int) control_name[7])-48; // convert ASCII number to int
-					if(current_location.MB == -1)
-					{
-						// haven't chosen MB yet, so on MB screen
-						if(board_number > sys_config.MB) 
-							SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
-					}
-					else if(current_location.DUC == -1)
-					{
-						// already chosen MB, so on DUC screen
-						if(board_number > sys_config.DUC) 
-							SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
-					}
-					else if(current_location.DB == -1)
-					{
-						// already chosen MB & DUC, so on DB screen
-						if(board_number > sys_config.DB) 
-							SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
-					}
-					
-				}
-					
-				GetCtrlAttribute (panel, control_id, ATTR_NEXT_CTRL, &control_id);
-				
-			
-			}
-			
-			break;
-		case EVENT_LOST_FOCUS:
-			break;
-		case EVENT_CLOSE:
-			QuitUserInterface (0); 
-			break;
+		sprintf(temp_string, "- MB%d ", current_location.MB);
+		strcat(title_string, temp_string); 	
 	}
+	if(current_location.DUC != -1) 
+	{
+		sprintf(temp_string, "DUC%d ", current_location.DUC);
+		strcat(title_string, temp_string); 	
+	}
+	if(current_location.DB != -1)
+	{
+		sprintf(temp_string, "DB%d ", current_location.DB);
+		strcat(title_string, temp_string); 
+	}
+	
+	SetPanelAttribute (panel, ATTR_TITLE, title_string);
+
+	// enable/disable buttons according to system configuration *****
+	
+	GetPanelAttribute (panel, ATTR_PANEL_FIRST_CTRL, &control_id);  // first control
+	// cycle through controls disabling those not needed
+	while(control_id != 0) 
+	{
+	
+		GetCtrlAttribute (panel, control_id, ATTR_CONSTANT_NAME, control_name);
+		
+		// populate instrument tree
+		
+		/* to do
+		   	
+			2. collapse based on location
+			3. allow for clicking to navigate
+		
+		*/
+		
+		
+		if(strcmp(control_name, "TREE") == 0)
+		{
+			for(i=0; i<=sys_config.MB; i++)
+			{
+				//add MB as child
+				sprintf(item_label, "MB%d", i);
+				idx_MB = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label, 0, 0, num_items++);
+				
+				for(j=0; j<=sys_config.DUC; j++)
+				{
+					//add DUC as child
+					sprintf(item_label, "DUC%d", j); 
+					idx_DUC = InsertTreeItem (panel, control_id, VAL_CHILD, idx_MB, VAL_LAST, item_label, 0, 0, num_items++);
+					
+					for(k=0; k<=sys_config.DB; k++)
+					{
+						//add DB as child
+						sprintf(item_label, "DB%d", k); 
+						InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label, 0, 0, num_items++);
+					}
+					SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
+					
+				}
+				SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
+			}
+			
+		}
+		
+		
+		if(CheckButtonEventError(control_name))	   // BUTTON, EVENTS, ERRORS
+		{
+			board_number = ((unsigned short int) control_name[7])-48; // convert ASCII number to int
+			if(current_location.MB == -1)
+			{
+				// haven't chosen MB yet, so on MB screen
+				if(board_number > sys_config.MB) 
+					SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+			}
+			else if(current_location.DUC == -1)
+			{
+				// already chosen MB, so on DUC screen
+				if(board_number > sys_config.DUC) 
+					SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+			}
+			else if(current_location.DB == -1)
+			{
+				// already chosen MB & DUC, so on DB screen
+				if(board_number > sys_config.DB) 
+					SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+			}
+			
+		}
+			
+		GetCtrlAttribute (panel, control_id, ATTR_NEXT_CTRL, &control_id);
+		
+	
+	}
+	
 	return 0;
 }
 
