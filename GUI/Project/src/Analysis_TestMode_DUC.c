@@ -4,7 +4,8 @@
 
 extern int panelHandle_testmode_db; 
 extern Stack panel_stack;   // defined in UI_Common
-extern OpenPETTree current_location;   
+extern OpenPETTree current_location;  
+extern int new_panel_flag;
 
 int CVICALLBACK TestModeDUC (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
@@ -42,6 +43,7 @@ int CVICALLBACK TestModeDUC (int panel, int control, int event,
 			}
 			
 			DisplayPanel (panelHandle_testmode_db);
+			new_panel_flag=1;
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;

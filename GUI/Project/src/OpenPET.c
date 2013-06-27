@@ -75,6 +75,7 @@ extern Stack panel_stack;
 extern PanelAppearance appearance; 
 extern OpenPETTree current_location;
 extern OpenPETTree sys_config;
+extern int new_panel_flag;
 
 //==============================================================================
 // Global functions
@@ -294,6 +295,7 @@ int CVICALLBACK DisplayTestMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"Test Mode");
+			new_panel_flag = 1;
 			DisplayPanel (panelHandle_testmode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
