@@ -239,17 +239,37 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	int control_id, board_number;
 	char title_string[30];
 	char temp_string[10];
-	char item_label[5];
+	char item_label[15],item_label_MB[5], item_label_DUC[5], item_label_DB[5];
 	int idx_MB, idx_DUC, i, j, k;
 	int num_items=1;
+	int current_boards[3], idx=0;
+	int notInitializedFlag=0; // 1 if panel needs to be initialized
 
 	// initialize panel when it gets focus
 	if(event != EVENT_GOT_FOCUS)
 		return 0;
 
 	// only initialize panel once
+	// if title_string is blank 
+	// if title_string values don't match current location
+	
 	GetPanelAttribute (panel, ATTR_TITLE, title_string);
-	if(strcmp(title_string,"") != 0)
+	current_boards[0] = current_location.MB;
+	current_boards[1] = current_location.DUC;
+	current_boards[2] = current_location.DB;
+	
+	for(i=0; i<30; i++)
+	{
+		// walk through title string and pull out board numbers
+		if( isdigit(title_string[i]) )
+		{
+			if( current_boards[idx++] != (int)(title_string[i] - '0') )
+				notInitializedFlag = 1;
+		}
+	}
+	
+	
+	if(strcmp(title_string,"") != 0 && !notInitializedFlag)
 		return 0;
 		
 	// specify title to show location in tree *****
@@ -287,38 +307,64 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		   	
 			
 			3. allow for clicking to navigate
-		
+			4. only fill in once
 		*/
 		
 		
 		if(strcmp(control_name, "TREE") == 0)
 		{
-			for(i=0; i<=sys_config.MB; i++)
+			GetNumListItems (panel, control_id, &num_items);
+			if(num_items==1) 
 			{
-				//add MB as child
-				sprintf(item_label, "MB%d", i);
-				idx_MB = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label, 0, 0, num_items++);
-				
-				for(j=0; j<=sys_config.DUC; j++)
+				// need to create table
+				for(i=0; i<=sys_config.MB; i++)
 				{
-					//add DUC as child
-					sprintf(item_label, "DUC%d", j); 
-					idx_DUC = InsertTreeItem (panel, control_id, VAL_CHILD, idx_MB, VAL_LAST, item_label, 0, 0, num_items++);
-					
-					for(k=0; k<=sys_config.DB; k++)
+					//add MB as child
+					sprintf(item_label_MB, "MB%d", i);
+					strcpy(item_label, item_label_MB);	  // tag = MB0
+					idx_MB = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
+				
+					for(j=0; j<=sys_config.DUC; j++)	  // assumes same number of DUC into each MB
 					{
-						//add DB as child
-						sprintf(item_label, "DB%d", k); 
-						InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label, 0, 0, num_items++);
-					}
-					if(j != current_location.DUC)
-						SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
+						//add DUC as child
+						sprintf(item_label_DUC, "DUC%d", j);
+						strcat(item_label, item_label_DUC);   // tag = MB0DUC0
+						idx_DUC = InsertTreeItem (panel, control_id, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
 					
+						for(k=0; k<=sys_config.DB; k++)		 // assumes same number of DB into each DUC
+						{
+							//add DB as child
+							sprintf(item_label_DB, "DB%d", k); 
+							strcat(item_label, item_label_DB);   // tag = MB0DUC0DB0
+							InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
+							// need to clear string - problem with tag = MB0DUC0DB0DB1
+						}
+						if(j != current_location.DUC)
+							SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
+					
+					}
+					if(i != current_location.MB)
+						SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
 				}
-				if(i != current_location.MB)
-					SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
+			} 
+			else 
+			{
+				// table already created, just need to show correct location
+				for(i=1; i<num_items; i++)
+				{
+					// collapse all
+					SetTreeItemAttribute (panel, control_id, i, ATTR_COLLAPSED, 1);	
+				}
+					
+				// need to properly expand columns
+				// scroll through each item and compare item name??
+				// get a hold of item handle somehow, perhaps better insertion scheme
+				// GetTreeItermFrioTag()
+				GetTreeItemFromTag (panel, control_id, "MB0", &i);
+				k = i;
+				
+				
 			}
-			
 		}
 		
 		

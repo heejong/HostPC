@@ -5,6 +5,8 @@ Require immediate attention:
 --- fixed with stack 6/18/13 ---
 # Going back from single event modes to calibration screen pops up main menu
 --- fixed improper function callback 6/21/13 ---
+# expects balanced number of boards (i.e. to make 12, 6 DB into each DUC not 8 DB into one and 4 DB into the other)
+### check references to sys_config
 
 Do not require immediate attention:
 # When changing panels, size and position are not preserved
