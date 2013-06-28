@@ -98,6 +98,8 @@ int CVICALLBACK TestModeDBTree (int panel, int control, int event,
 				StackPush(&panel_stack, panelHandle_testmode_duc); 
 				StackPush(&panel_stack, panelHandle_testmode_db);
 				
+				HidePanel (panel);				
+				
 				if(strcmp(current_location.mode,"Test Mode 2") == 0)
 				{
 					DisplayPanel (panelHandle_testmode2);
@@ -108,29 +110,28 @@ int CVICALLBACK TestModeDBTree (int panel, int control, int event,
 					// DisplayPanel (panelHandle_testmode1);
 				}
 				
-				HidePanel (panel);
 			}
 			else if (new_location.DUC != -1)
 			{
+				HidePanel(panel);				
 				StackPush(&panel_stack, panelHandle_testmode_mb); 
 				StackPush(&panel_stack, panelHandle_testmode_duc); 
 				DisplayPanel(panelHandle_testmode_db);
-				HidePanel(panel);
 			}
 			else if (new_location.MB != -1)
 			{
+				HidePanel(panel);
 				StackPush(&panel_stack, panelHandle_testmode_mb); 
 				DisplayPanel(panelHandle_testmode_duc);
-				HidePanel(panel);
 			}
 			else if (new_location.MB == -1)
 			{
-				DisplayPanel(panelHandle_testmode_mb);
 				HidePanel(panel);
+				DisplayPanel(panelHandle_testmode_mb);
 			}
 			else {
+				HidePanel(panel); 
 				DisplayPanel(StackPop(&panel_stack));
-				HidePanel(panel);
 			}
 			
 			current_location.MB = new_location.MB;

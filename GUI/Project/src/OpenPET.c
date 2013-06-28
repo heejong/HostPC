@@ -31,6 +31,8 @@
 #include "Analysis_TimeMode_MB.h" 
 #include "Analysis_OscilloscopeMode.h"    
 #include "Analysis_OscilloscopeMode_MB.h" 
+#include "Analysis_OscilloscopeMode_DUC.h"
+#include "Analysis_OscilloscopeMode_DB.h"
 #include "Analysis_UserDefinedMode.h"    
 #include "Analysis_UserDefinedMode_MB.h"
 #include "Collection_SysConfig_MB.h"
@@ -58,15 +60,23 @@ int panelHandle_testmode_duc;
 int panelHandle_testmode_db; 
 int panelHandle_emode;
 int panelHandle_emode_mb;
+int panelHandle_emode_duc;
+int panelHandle_emode_db;
 int panelHandle_fmmode;
 int panelHandle_fmmode_mb;
 int panelHandle_fmmode_duc;
 int panelHandle_timemode; 
 int panelHandle_timemode_mb;
+int panelHandle_timemode_duc;
+int panelHandle_timemode_db;
 int panelHandle_omode; 
 int panelHandle_omode_mb;
+int panelHandle_omode_duc; 
+int panelHandle_omode_db; 
 int panelHandle_usermode; 
 int panelHandle_usermode_mb;
+int panelHandle_usermode_duc;
+int panelHandle_usermode_db;
 int panelHandle_sysconfig_mb;
 int panelHandle_wordlength; 
 int panelHandle_calibration;
@@ -108,6 +118,8 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_timemode_mb = LoadPanel (0, "Analysis_TimeMode_MB.uir", TIMEMODEMB)); 	
 	errChk (panelHandle_omode = LoadPanel (0, "Analysis_OscilloscopeMode.uir", OMODE)); 
 	errChk (panelHandle_omode_mb = LoadPanel (0, "Analysis_OscilloscopeMode_MB.uir", OMODEMB)); 
+	errChk (panelHandle_omode_duc = LoadPanel (0, "Analysis_OscilloscopeMode_DUC.uir", OMODEDU)); 
+	errChk (panelHandle_omode_db = LoadPanel (0, "Analysis_OscilloscopeMode_DB.uir", OMODEDB)); 
 	errChk (panelHandle_usermode = LoadPanel (0, "Analysis_UserDefinedMode.uir", USERMODE)); 
 	errChk (panelHandle_usermode_mb = LoadPanel (0, "Analysis_UserDefinedMode_MB.uir", USERMODEMB)); 
 	errChk (panelHandle_sysconfig_mb = LoadPanel (0, "Collection_SysConfig_MB.uir", CONFIGMB));
@@ -134,6 +146,8 @@ Error:
 	DiscardPanel (panelHandle_timemode_mb); 
 	DiscardPanel (panelHandle_omode);   
 	DiscardPanel (panelHandle_omode_mb);
+	DiscardPanel (panelHandle_omode_duc);
+	DiscardPanel (panelHandle_omode_db);
 	DiscardPanel (panelHandle_usermode);   
 	DiscardPanel (panelHandle_usermode_mb); 
 	DiscardPanel (panelHandle_sysconfig_mb);

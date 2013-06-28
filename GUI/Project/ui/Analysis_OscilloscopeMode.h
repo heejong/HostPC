@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  OMODE                            1
+#define  OMODE                            1       /* callback function: InitializeOscilloscopeMode */
 #define  OMODE_TAB                        2       /* control type: tab, callback function: (none) */
 #define  OMODE_PICTURE                    3       /* control type: picture, callback function: (none) */
 #define  OMODE_SAVE_OUTPUT                4       /* control type: command, callback function: SaveOutput */
@@ -49,6 +49,7 @@
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ClosePopup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK InitializeOscilloscopeMode(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
