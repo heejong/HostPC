@@ -82,10 +82,12 @@ int CVICALLBACK Main (int panel, int control, int event,
 int CVICALLBACK Back (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
+	int new_panel;
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			DisplayPanel (StackPop(&panel_stack));
+			new_panel = StackPop(&panel_stack);
+			DisplayPanel (new_panel);
 			HidePanel (panel);
 			
 			// fix current location
@@ -102,20 +104,6 @@ int CVICALLBACK Back (int panel, int control, int event,
 	}
 	return 0;
 }
-
-int CVICALLBACK TreeControl (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			// eventData2 contains specific item double-clicked on
-			// switch on eventData2 to provide panel change
-			break;
-	}
-	return 0;
-}
-
 
 // initalizes stack
 void StackInit(Stack *S)
@@ -302,15 +290,6 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		GetCtrlAttribute (panel, control_id, ATTR_CONSTANT_NAME, control_name);
 		
 		// populate instrument tree
-		
-		/* to do
-		   	
-			
-			3. allow for clicking to navigate
-			4. only fill in once
-		*/
-		
-		
 		if(strcmp(control_name, "TREE") == 0)
 		{
 			GetNumListItems (panel, control_id, &num_items);
@@ -423,6 +402,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 
 int CheckButtonEventError(char control_name[]) 
 {
+	// determines if control name is BUTTON*, EVENTS*, or ERRORS* indicating the control needs to be updated in real time
 	if(control_name[0] != 'B' && control_name[0] != 'E')
 		return 0;  // false
 	if(control_name[1] != 'U' && control_name[1] != 'V' && control_name[1] != 'R')
@@ -438,3 +418,79 @@ int CheckButtonEventError(char control_name[])
 	
 	return 1; // true
 }
+/*
+int CVICALLBACK InstrumentTreeControl (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	char item_tag[32];
+	OpenPETTree new_location;
+	int i, idx=0, current_boards[3]={-1,-1,-1};
+	
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			// eventData2 contains index of tree item double-clicked
+			GetTreeItemTag(panel, control, eventData2, item_tag);
+			
+			// update current_location so panel will initialize properly
+			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
+			strcpy(new_location.mode, current_location.mode);
+			
+			for(i=0; i<32; i++)
+			{
+				// walk through tag string and pull out board numbers
+				if( isdigit(item_tag[i]) )
+				{
+					current_boards[idx++] = (int)(item_tag[i] - '0');
+				}
+			}
+			new_location.MB = current_boards[0];
+			new_location.DUC = current_boards[1];
+			new_location.DB = current_boards[2];
+			
+			// determine proper panel to display
+			
+			// determine mode: Time Mode, Energy Mode, Test Mode, Flood Map Mode, User Mode 
+			if(strcmp(new_location.mode, "Time Mode") == 0)
+			{
+				// hide panel & show new panel
+			
+				// clear panel stack & update with proper panels for back button to work
+			}
+			else if(strcmp(new_location.mode, "Energy Mode") == 0)
+			{
+				// hide panel & show new panel
+			
+				// clear panel stack & update with proper panels for back button to work
+			}
+			else if(strcmp(new_location.mode, "Test Mode") == 0)
+			{
+				// hide panel & show new panel
+				
+			
+				// clear panel stack & update with proper panels for back button to work
+			}
+			else if(strcmp(new_location.mode, "Flood Map Mode") == 0)
+			{
+				// hide panel & show new panel
+			
+				// clear panel stack & update with proper panels for back button to work
+			}
+			else if(strcmp(new_location.mode, "User Mode") == 0)
+			{
+				// hide panel & show new panel
+			
+				// clear panel stack & update with proper panels for back button to work
+			} 
+			else 
+			{
+				// Error
+				QuitUserInterface (1);	
+			}
+			
+			break;
+	}
+	return 0;
+}
+*/

@@ -53,7 +53,7 @@
 #define  TESTMODEDU_DECORATION_6          37      /* control type: deco, callback function: (none) */
 #define  TESTMODEDU_DECORATION_7          38      /* control type: deco, callback function: (none) */
 #define  TESTMODEDU_DECORATION_8          39      /* control type: deco, callback function: (none) */
-#define  TESTMODEDU_TREE                  40      /* control type: tree, callback function: (none) */
+#define  TESTMODEDU_TREE                  40      /* control type: tree, callback function: TestModeDUCTree */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -68,6 +68,7 @@ int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int
 int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK TestModeDUC(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK TestModeDUCTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

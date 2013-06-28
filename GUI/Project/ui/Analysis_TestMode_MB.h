@@ -53,7 +53,7 @@
 #define  TESTMODEMB_DECORATION_5          37      /* control type: deco, callback function: (none) */
 #define  TESTMODEMB_DECORATION_6          38      /* control type: deco, callback function: (none) */
 #define  TESTMODEMB_DECORATION_7          39      /* control type: deco, callback function: (none) */
-#define  TESTMODEMB_TREE                  40      /* control type: tree, callback function: InstrumentTreeControl */
+#define  TESTMODEMB_TREE                  40      /* control type: tree, callback function: TestModeMBTree */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -64,11 +64,11 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK InstrumentTreeControl(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK TestModeMB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK TestModeMBTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

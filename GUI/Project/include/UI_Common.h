@@ -51,7 +51,7 @@ typedef struct OpenPETTree {
 	short int MB;
 	short int DUC;
 	short int DB;
-	char mode[20]; // Time Mode, Energy Mode, Test Mode, Flood Map Mode, User Mode
+	char mode[20]; // Time Mode, Energy Mode, Test Mode 1, Test Mode 2, Flood Map Mode, User Mode
 } OpenPETTree;
 
 typedef struct Header {

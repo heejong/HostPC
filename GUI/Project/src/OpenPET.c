@@ -293,7 +293,7 @@ int CVICALLBACK DisplayTestMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"Test Mode");
+			strcpy(current_location.mode,"Test Mode 2");
 			DisplayPanel (panelHandle_testmode_mb);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
