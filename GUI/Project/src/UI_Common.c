@@ -239,8 +239,8 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	int control_id, board_number;
 	char title_string[30];
 	char temp_string[10];
-	char item_label[15],item_label_MB[5], item_label_DUC[5], item_label_DB[5];
-	int idx_MB, idx_DUC, i, j, k;
+	char item_label_root[15], item_label[15],item_label_MB[5], item_label_DUC[5], item_label_DB[5];
+	int idx_MB, idx_DUC, idx_DB, i, j, k;
 	int num_items=1;
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
@@ -329,6 +329,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 						//add DUC as child
 						sprintf(item_label_DUC, "DUC%d", j);
 						strcat(item_label, item_label_DUC);   // tag = MB0DUC0
+						strcpy(item_label_root, item_label);
 						idx_DUC = InsertTreeItem (panel, control_id, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
 					
 						for(k=0; k<=sys_config.DB; k++)		 // assumes same number of DB into each DUC
@@ -336,13 +337,17 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 							//add DB as child
 							sprintf(item_label_DB, "DB%d", k); 
 							strcat(item_label, item_label_DB);   // tag = MB0DUC0DB0
-							InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
-							// need to clear string - problem with tag = MB0DUC0DB0DB1
+							idx_DB = InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
+							strcpy(item_label,item_label_root);   // tag = MB0DUC0
+							//if(k == current_location.DB)
+							//	 SetActiveTreeItem (panel, control_id, idx_DB, VAL_REPLACE_SELECTION_WITH_ITEM);
 						}
+						strcpy(item_label,item_label_MB);   // tag = MB0
 						if(j != current_location.DUC)
 							SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
 					
 					}
+					strcpy(item_label,"");   // tag = ""
 					if(i != current_location.MB)
 						SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
 				}
@@ -359,9 +364,25 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 				// need to properly expand columns
 				// scroll through each item and compare item name??
 				// get a hold of item handle somehow, perhaps better insertion scheme
-				// GetTreeItermFrioTag()
-				GetTreeItemFromTag (panel, control_id, "MB0", &i);
-				k = i;
+				// GetTreeItermFromTag()
+				if(current_location.MB != -1)
+				{
+					sprintf(item_label, "MB%d", current_location.MB);
+					GetTreeItemFromTag (panel, control_id, item_label, &idx_MB);
+					SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 0);	
+				} 
+				if(current_location.DUC != -1)
+				{
+					sprintf(item_label, "MB%dDUC%d", current_location.MB, current_location.DUC);
+					GetTreeItemFromTag (panel, control_id, item_label, &idx_DUC);
+					SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 0);	
+				} 
+				/*if(current_location.DB != -1)
+				{
+					sprintf(item_label, "MB%d", current_location.MB);
+					GetTreeItemFromTag (panel, control_id, item_label, idx_MB);
+					SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 0);	
+				}*/ 
 				
 				
 			}

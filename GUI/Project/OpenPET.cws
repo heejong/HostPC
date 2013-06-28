@@ -105,19 +105,18 @@ In Projects = "1,"
 Window Top = 152
 Window Left = 70
 Window Z-Order = 2
-Source Window State = "1,297,297,297,0,52,52,0,0,89,0,82,0,0,0,25,106,0,127,47,349,755,1,11,"
+Source Window State = "1,297,297,297,0,52,52,0,0,89,0,106,0,0,0,25,106,0,118,4,349,755,1,11,"
 
 [File 0006]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/UI_"
 Path Line0002 = "Common.c"
 File Type = "CSource"
-Disk Date = 3455223730
+Disk Date = 3455282970
 In Projects = "1,"
 Window Top = 32
 Window Left = 6
 Window Z-Order = 1
-Source Window State = "1,337,337,337,68,84,68,0,0,204,0,0,0,2,0,48,304,0,339,86,349,739,1,11,"
-Breakpoint 0001 = "364,0,enabled,"
+Source Window State = "1,386,387,387,37,37,37,0,3,204,0,0,0,2,0,69,339,0,386,37,349,739,1,11,"
 
 [File 0007]
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/include"
