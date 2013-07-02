@@ -1,6 +1,6 @@
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_EnergyMode_MB.h" 
+#include "Analysis_EnergyMode_DUC.h" 
 
 #include "UI_Common.h"
 
@@ -13,7 +13,7 @@ extern Stack panel_stack;   // defined in UI_Common
 extern OpenPETTree current_location;
 
 
-int CVICALLBACK EnergyModeMB (int panel, int control, int event,
+int CVICALLBACK EnergyModeDUC (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -22,33 +22,33 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 			// switch on control for MB0...MB7
 			switch (control)
 			{
-				case EMODEMB_BUTTON_0:
-					current_location.MB = 0;
+				case EMODEDU_BUTTON_0:
+					current_location.DUC = 0;
 					break;
-				case EMODEMB_BUTTON_1:
-					current_location.MB = 1;
+				case EMODEDU_BUTTON_1:
+					current_location.DUC = 1;
 					break;
-				case EMODEMB_BUTTON_2:
-					current_location.MB = 2;
+				case EMODEDU_BUTTON_2:
+					current_location.DUC = 2;
 					break;
-				case EMODEMB_BUTTON_3:
-					current_location.MB = 3;
+				case EMODEDU_BUTTON_3:
+					current_location.DUC = 3;
 					break;
-				case EMODEMB_BUTTON_4:
-					current_location.MB = 4;
+				case EMODEDU_BUTTON_4:
+					current_location.DUC = 4;
 					break;
-				case EMODEMB_BUTTON_5:
-					current_location.MB = 5;
+				case EMODEDU_BUTTON_5:
+					current_location.DUC = 5;
 					break;
-				case EMODEMB_BUTTON_6:
-					current_location.MB = 6;
+				case EMODEDU_BUTTON_6:
+					current_location.DUC = 6;
 					break;
-				case EMODEMB_BUTTON_7:
-					current_location.MB = 7;
+				case EMODEDU_BUTTON_7:
+					current_location.DUC = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_emode_duc);
+			DisplayPanel (panelHandle_emode_db);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -56,7 +56,7 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK EnergyModeMBTree (int panel, int control, int event,
+int CVICALLBACK EnergyModeDUCTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];

@@ -24,17 +24,23 @@
 #include "Analysis_TestMode_DB.h"  
 #include "Analysis_EnergyMode.h"
 #include "Analysis_EnergyMode_MB.h" 
+#include "Analysis_EnergyMode_DUC.h" 
+#include "Analysis_EnergyMode_DB.h" 
 #include "Analysis_FloodMapMode.h"    
 #include "Analysis_FloodMapMode_MB.h"    
 #include "Analysis_FloodMapMode_DUC.h"    
 #include "Analysis_TimeMode.h"    
 #include "Analysis_TimeMode_MB.h" 
+#include "Analysis_TimeMode_DUC.h"
+#include "Analysis_TimeMode_DB.h"
 #include "Analysis_OscilloscopeMode.h"    
 #include "Analysis_OscilloscopeMode_MB.h" 
 #include "Analysis_OscilloscopeMode_DUC.h"
 #include "Analysis_OscilloscopeMode_DB.h"
 #include "Analysis_UserDefinedMode.h"    
 #include "Analysis_UserDefinedMode_MB.h"
+#include "Analysis_UserDefinedMode_DUC.h"  
+#include "Analysis_UserDefinedMode_DB.h"  
 #include "Collection_SysConfig_MB.h"
 #include "Collection_WordLength.h"   
 #include "Collection_Calibration.h"    
@@ -109,19 +115,25 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_testmode_mb = LoadPanel (0, "Analysis_TestMode_MB.uir", TESTMODEMB));
 	errChk (panelHandle_testmode_duc = LoadPanel (0, "Analysis_TestMode_DUC.uir", TESTMODEDU)); 
 	errChk (panelHandle_testmode_db = LoadPanel (0, "Analysis_TestMode_DB.uir", TESTMODEDB)); 
-	errChk (panelHandle_emode_mb = LoadPanel (0, "Analysis_EnergyMode_MB.uir", EMODEMB));  
 	errChk (panelHandle_emode = LoadPanel (0, "Analysis_EnergyMode.uir", EMODE)); 
+	errChk (panelHandle_emode_mb = LoadPanel (0, "Analysis_EnergyMode_MB.uir", EMODEMB));  
+	errChk (panelHandle_emode_duc = LoadPanel (0, "Analysis_EnergyMode_DUC.uir", EMODEDU));  
+	errChk (panelHandle_emode_db = LoadPanel (0, "Analysis_EnergyMode_DB.uir", EMODEDB));  
 	errChk (panelHandle_fmmode = LoadPanel (0, "Analysis_FloodMapMode.uir", FMMODE)); 
 	errChk (panelHandle_fmmode_mb = LoadPanel (0, "Analysis_FloodMapMode_MB.uir", FMMODEMB)); 
-	errChk (panelHandle_fmmode_duc = LoadPanel (0, "Analysis_FloodMapMode_DUC.uir", FMMODEDUC)); 
+	errChk (panelHandle_fmmode_duc = LoadPanel (0, "Analysis_FloodMapMode_DUC.uir", FMMODEDU)); 
 	errChk (panelHandle_timemode = LoadPanel (0, "Analysis_TimeMode.uir", TIMEMODE)); 
 	errChk (panelHandle_timemode_mb = LoadPanel (0, "Analysis_TimeMode_MB.uir", TIMEMODEMB)); 	
+	errChk (panelHandle_timemode_duc = LoadPanel (0, "Analysis_TimeMode_DUC.uir", TIMEMODEDU));
+	errChk (panelHandle_timemode_db = LoadPanel (0, "Analysis_TimeMode_DB.uir", TIMEMODEDB));
 	errChk (panelHandle_omode = LoadPanel (0, "Analysis_OscilloscopeMode.uir", OMODE)); 
 	errChk (panelHandle_omode_mb = LoadPanel (0, "Analysis_OscilloscopeMode_MB.uir", OMODEMB)); 
 	errChk (panelHandle_omode_duc = LoadPanel (0, "Analysis_OscilloscopeMode_DUC.uir", OMODEDU)); 
 	errChk (panelHandle_omode_db = LoadPanel (0, "Analysis_OscilloscopeMode_DB.uir", OMODEDB)); 
 	errChk (panelHandle_usermode = LoadPanel (0, "Analysis_UserDefinedMode.uir", USERMODE)); 
 	errChk (panelHandle_usermode_mb = LoadPanel (0, "Analysis_UserDefinedMode_MB.uir", USERMODEMB)); 
+	errChk (panelHandle_usermode_duc = LoadPanel (0, "Analysis_UserDefinedMode_DUC.uir", USERMODEDU)); 
+	errChk (panelHandle_usermode_db = LoadPanel (0, "Analysis_UserDefinedMode_DB.uir", USERMODEDB)); 
 	errChk (panelHandle_sysconfig_mb = LoadPanel (0, "Collection_SysConfig_MB.uir", CONFIGMB));
 	errChk (panelHandle_wordlength = LoadPanel (0, "Collection_WordLength.uir", WORDLENGTH));
 	errChk (panelHandle_calibration = LoadPanel (0, "Collection_Calibration.uir", CALIBRATE));
@@ -139,17 +151,23 @@ Error:
 	DiscardPanel (panelHandle_testmode_db);
 	DiscardPanel (panelHandle_emode); 
 	DiscardPanel (panelHandle_emode_mb);
+	DiscardPanel (panelHandle_emode_duc); 
+	DiscardPanel (panelHandle_emode_db); 
 	DiscardPanel (panelHandle_fmmode);   
 	DiscardPanel (panelHandle_fmmode_mb); 
 	DiscardPanel (panelHandle_fmmode_duc); 
 	DiscardPanel (panelHandle_timemode);   
 	DiscardPanel (panelHandle_timemode_mb); 
+	DiscardPanel (panelHandle_timemode_duc);
+	DiscardPanel (panelHandle_timemode_db);
 	DiscardPanel (panelHandle_omode);   
 	DiscardPanel (panelHandle_omode_mb);
 	DiscardPanel (panelHandle_omode_duc);
 	DiscardPanel (panelHandle_omode_db);
 	DiscardPanel (panelHandle_usermode);   
 	DiscardPanel (panelHandle_usermode_mb); 
+	DiscardPanel (panelHandle_usermode_duc); 
+	DiscardPanel (panelHandle_usermode_db); 
 	DiscardPanel (panelHandle_sysconfig_mb);
 	DiscardPanel (panelHandle_wordlength);
 	DiscardPanel (panelHandle_calibration);

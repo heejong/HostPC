@@ -3,3 +3,6 @@
 
 # GUI build files
 GUI/Project/cvibuild.OpenPET/
+
+# Temporary files
+~$*

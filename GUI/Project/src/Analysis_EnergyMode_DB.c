@@ -1,6 +1,6 @@
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_EnergyMode_MB.h" 
+#include "Analysis_EnergyMode_DB.h" 
 
 #include "UI_Common.h"
 
@@ -13,7 +13,7 @@ extern Stack panel_stack;   // defined in UI_Common
 extern OpenPETTree current_location;
 
 
-int CVICALLBACK EnergyModeMB (int panel, int control, int event,
+int CVICALLBACK EnergyModeDB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -22,33 +22,33 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 			// switch on control for MB0...MB7
 			switch (control)
 			{
-				case EMODEMB_BUTTON_0:
-					current_location.MB = 0;
+				case EMODEDB_BUTTON_0:
+					current_location.DB = 0;
 					break;
-				case EMODEMB_BUTTON_1:
-					current_location.MB = 1;
+				case EMODEDB_BUTTON_1:
+					current_location.DB = 1;
 					break;
-				case EMODEMB_BUTTON_2:
-					current_location.MB = 2;
+				case EMODEDB_BUTTON_2:
+					current_location.DB = 2;
 					break;
-				case EMODEMB_BUTTON_3:
-					current_location.MB = 3;
+				case EMODEDB_BUTTON_3:
+					current_location.DB = 3;
 					break;
-				case EMODEMB_BUTTON_4:
-					current_location.MB = 4;
+				case EMODEDB_BUTTON_4:
+					current_location.DB = 4;
 					break;
-				case EMODEMB_BUTTON_5:
-					current_location.MB = 5;
+				case EMODEDB_BUTTON_5:
+					current_location.DB = 5;
 					break;
-				case EMODEMB_BUTTON_6:
-					current_location.MB = 6;
+				case EMODEDB_BUTTON_6:
+					current_location.DB = 6;
 					break;
-				case EMODEMB_BUTTON_7:
-					current_location.MB = 7;
+				case EMODEDB_BUTTON_7:
+					current_location.DB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_emode_duc);
+			DisplayPanel (panelHandle_emode);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -56,7 +56,7 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK EnergyModeMBTree (int panel, int control, int event,
+int CVICALLBACK EnergyModeDBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];

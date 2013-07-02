@@ -1,54 +1,54 @@
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_EnergyMode_MB.h" 
+#include "Analysis_UserDefinedMode_DB.h"
 
 #include "UI_Common.h"
 
 extern int panelHandle;
-extern int panelHandle_emode_mb; 
-extern int panelHandle_emode_duc; 
-extern int panelHandle_emode_db;
-extern int panelHandle_emode; 
+extern int panelHandle_usermode_mb; 
+extern int panelHandle_usermode_duc; 
+extern int panelHandle_usermode_db;
+extern int panelHandle_usermode; 
 extern Stack panel_stack;   // defined in UI_Common
 extern OpenPETTree current_location;
 
 
-int CVICALLBACK EnergyModeMB (int panel, int control, int event,
+int CVICALLBACK UserModeDB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			// switch on control for MB0...MB7
+			// switch on control for DB0...DB7
 			switch (control)
 			{
-				case EMODEMB_BUTTON_0:
-					current_location.MB = 0;
+				case USERMODEDB_BUTTON_0:
+					current_location.DB = 0;
 					break;
-				case EMODEMB_BUTTON_1:
-					current_location.MB = 1;
+				case USERMODEDB_BUTTON_1:
+					current_location.DB = 1;
 					break;
-				case EMODEMB_BUTTON_2:
-					current_location.MB = 2;
+				case USERMODEDB_BUTTON_2:
+					current_location.DB = 2;
 					break;
-				case EMODEMB_BUTTON_3:
-					current_location.MB = 3;
+				case USERMODEDB_BUTTON_3:
+					current_location.DB = 3;
 					break;
-				case EMODEMB_BUTTON_4:
-					current_location.MB = 4;
+				case USERMODEDB_BUTTON_4:
+					current_location.DB = 4;
 					break;
-				case EMODEMB_BUTTON_5:
-					current_location.MB = 5;
+				case USERMODEDB_BUTTON_5:
+					current_location.DB = 5;
 					break;
-				case EMODEMB_BUTTON_6:
-					current_location.MB = 6;
+				case USERMODEDB_BUTTON_6:
+					current_location.DB = 6;
 					break;
-				case EMODEMB_BUTTON_7:
-					current_location.MB = 7;
+				case USERMODEDB_BUTTON_7:
+					current_location.DB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_emode_duc);
+			DisplayPanel (panelHandle_usermode);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -56,7 +56,7 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK EnergyModeMBTree (int panel, int control, int event,
+int CVICALLBACK UserModeDBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -94,31 +94,31 @@ int CVICALLBACK EnergyModeMBTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				StackPush(&panel_stack, panelHandle_emode_db);
+				StackPush(&panel_stack, panelHandle_usermode_mb); 
+				StackPush(&panel_stack, panelHandle_usermode_duc); 
+				StackPush(&panel_stack, panelHandle_usermode_db);
 				
 				HidePanel (panel);				
-				DisplayPanel (panelHandle_emode);
+				DisplayPanel (panelHandle_usermode);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				DisplayPanel(panelHandle_emode_db);
+				StackPush(&panel_stack, panelHandle_usermode_mb); 
+				StackPush(&panel_stack, panelHandle_usermode_duc); 
+				DisplayPanel(panelHandle_usermode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				DisplayPanel(panelHandle_emode_duc);
+				StackPush(&panel_stack, panelHandle_usermode_mb); 
+				DisplayPanel(panelHandle_usermode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_emode_mb);
+				DisplayPanel(panelHandle_usermode_mb);
 			}
 			else {
 				HidePanel(panel); 
