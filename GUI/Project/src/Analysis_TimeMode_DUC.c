@@ -1,54 +1,54 @@
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_UserDefinedMode_MB.h"
+#include "Analysis_TimeMode_DUC.h"
 
 #include "UI_Common.h"
 
 extern int panelHandle;
-extern int panelHandle_usermode_mb; 
-extern int panelHandle_usermode_duc; 
-extern int panelHandle_usermode_db;
-extern int panelHandle_usermode; 
+extern int panelHandle_timemode_mb; 
+extern int panelHandle_timemode_duc; 
+extern int panelHandle_timemode_db;
+extern int panelHandle_timemode; 
 extern Stack panel_stack;   // defined in UI_Common
 extern OpenPETTree current_location;
 
 
-int CVICALLBACK UserModeMB (int panel, int control, int event,
+int CVICALLBACK TimeModeDUC (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			// switch on control for MB0...MB7
+			// switch on control for DUC0...DUC7
 			switch (control)
 			{
-				case USERMODEMB_BUTTON_0:
-					current_location.MB = 0;
+				case TIMEMODEDU_BUTTON_0:
+					current_location.DUC = 0;
 					break;
-				case USERMODEMB_BUTTON_1:
-					current_location.MB = 1;
+				case TIMEMODEDU_BUTTON_1:
+					current_location.DUC = 1;
 					break;
-				case USERMODEMB_BUTTON_2:
-					current_location.MB = 2;
+				case TIMEMODEDU_BUTTON_2:
+					current_location.DUC = 2;
 					break;
-				case USERMODEMB_BUTTON_3:
-					current_location.MB = 3;
+				case TIMEMODEDU_BUTTON_3:
+					current_location.DUC = 3;
 					break;
-				case USERMODEMB_BUTTON_4:
-					current_location.MB = 4;
+				case TIMEMODEDU_BUTTON_4:
+					current_location.DUC = 4;
 					break;
-				case USERMODEMB_BUTTON_5:
-					current_location.MB = 5;
+				case TIMEMODEDU_BUTTON_5:
+					current_location.DUC = 5;
 					break;
-				case USERMODEMB_BUTTON_6:
-					current_location.MB = 6;
+				case TIMEMODEDU_BUTTON_6:
+					current_location.DUC = 6;
 					break;
-				case USERMODEMB_BUTTON_7:
-					current_location.MB = 7;
+				case TIMEMODEDU_BUTTON_7:
+					current_location.DUC = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_usermode_duc);
+			DisplayPanel (panelHandle_timemode_db);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -56,7 +56,7 @@ int CVICALLBACK UserModeMB (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK UserModeMBTree (int panel, int control, int event,
+int CVICALLBACK TimeModeDUCTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -94,31 +94,31 @@ int CVICALLBACK UserModeMBTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_usermode_mb); 
-				StackPush(&panel_stack, panelHandle_usermode_duc); 
-				StackPush(&panel_stack, panelHandle_usermode_db);
+				StackPush(&panel_stack, panelHandle_timemode_mb); 
+				StackPush(&panel_stack, panelHandle_timemode_duc); 
+				StackPush(&panel_stack, panelHandle_timemode_db);
 				
 				HidePanel (panel);				
-				DisplayPanel (panelHandle_usermode);
+				DisplayPanel (panelHandle_timemode);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_usermode_mb); 
-				StackPush(&panel_stack, panelHandle_usermode_duc); 
-				DisplayPanel(panelHandle_usermode_db);
+				StackPush(&panel_stack, panelHandle_timemode_mb); 
+				StackPush(&panel_stack, panelHandle_timemode_duc); 
+				DisplayPanel(panelHandle_timemode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_usermode_mb); 
-				DisplayPanel(panelHandle_usermode_duc);
+				StackPush(&panel_stack, panelHandle_timemode_mb); 
+				DisplayPanel(panelHandle_timemode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_usermode_mb);
+				DisplayPanel(panelHandle_timemode_mb);
 			}
 			else {
 				HidePanel(panel); 
