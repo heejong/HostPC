@@ -1,3 +1,5 @@
 testing
 
 testing from computer using same router as my desktop
+
+deleted local repo, recloned, and testing from my desktop
