@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  TIMEMODE                         1
+#define  TIMEMODE                         1       /* callback function: InitializeTimeMode */
 #define  TIMEMODE_TAB                     2       /* control type: tab, callback function: (none) */
 #define  TIMEMODE_PICTURE                 3       /* control type: picture, callback function: (none) */
 #define  TIMEMODE_SAVE_OUTPUT             4       /* control type: command, callback function: SaveOutput */
@@ -41,6 +41,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK InitializeTimeMode(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

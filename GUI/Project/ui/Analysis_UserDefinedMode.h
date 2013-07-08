@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  USERMODE                         1
+#define  USERMODE                         1       /* callback function: InitializeUserMode */
 #define  USERMODE_HISTOGRAM               2       /* control type: graph, callback function: (none) */
 #define  USERMODE_SAVE_OUTPUT             3       /* control type: command, callback function: SaveOutput */
 #define  USERMODE_SAVE_PLOT               4       /* control type: command, callback function: SavePlot */
@@ -34,6 +34,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK InitializeUserMode(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
