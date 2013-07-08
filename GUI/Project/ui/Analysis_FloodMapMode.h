@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  FMMODE                           1
+#define  FMMODE                           1       /* callback function: InitializeFloodMapMode */
 #define  FMMODE_TAB                       2       /* control type: tab, callback function: (none) */
 #define  FMMODE_PICTURE                   3       /* control type: picture, callback function: (none) */
 #define  FMMODE_SAVE_OUTPUT               4       /* control type: command, callback function: SaveOutput */
@@ -48,6 +48,7 @@
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK FloodMapModeTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK InitializeFloodMapMode(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
