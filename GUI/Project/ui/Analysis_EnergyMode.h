@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  EMODE                            1
+#define  EMODE                            1       /* callback function: InitializeEnergyMode */
 #define  EMODE_SAVE_OUTPUT                2       /* control type: command, callback function: SaveOutput */
 #define  EMODE_SAVE_PLOT                  3       /* control type: command, callback function: SavePlot */
 #define  EMODE_COMMANDBUTTON_3            4       /* control type: command, callback function: Quit */
@@ -43,6 +43,7 @@
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DetermineEnergyWindow(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK EnergyModeTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK InitializeEnergyMode(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
