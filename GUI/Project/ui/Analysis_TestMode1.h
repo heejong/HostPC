@@ -17,9 +17,14 @@
 #define  TESTMODE1                        1       /* callback function: InitializeTestMode1 */
 #define  TESTMODE1_EXPECTED_VALUE         2       /* control type: string, callback function: (none) */
 #define  TESTMODE1_HISTOGRAM              3       /* control type: graph, callback function: (none) */
-#define  TESTMODE1_OKBUTTON               4       /* control type: command, callback function: Okay */
-#define  TESTMODE1_SAVE_OUTPUT            5       /* control type: command, callback function: SaveOutput */
-#define  TESTMODE1_SAVE_PLOT              6       /* control type: command, callback function: SavePlot */
+#define  TESTMODE1_SAVE_OUTPUT            4       /* control type: command, callback function: SaveOutput */
+#define  TESTMODE1_SAVE_PLOT              5       /* control type: command, callback function: SavePlot */
+#define  TESTMODE1_COMMANDBUTTON_12       6       /* control type: command, callback function: Quit */
+#define  TESTMODE1_COMMANDBUTTON_13       7       /* control type: command, callback function: Back */
+#define  TESTMODE1_COMMANDBUTTON_14       8       /* control type: command, callback function: Main */
+#define  TESTMODE1_DECORATION_9           9       /* control type: deco, callback function: (none) */
+#define  TESTMODE1_TREE                   10      /* control type: tree, callback function: TestMode1Tree */
+#define  TESTMODE1_DECORATION             11      /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -29,10 +34,13 @@
 
      /* Callback Prototypes: */
 
+int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK InitializeTestMode1(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Okay(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SavePlot(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK TestMode1Tree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

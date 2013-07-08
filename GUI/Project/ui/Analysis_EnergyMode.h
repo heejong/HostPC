@@ -29,7 +29,7 @@
 #define  EMODE_DECORATION_9               13      /* control type: deco, callback function: (none) */
 #define  EMODE_DECORATION                 14      /* control type: deco, callback function: (none) */
 #define  EMODE_PICTURE_2                  15      /* control type: picture, callback function: (none) */
-#define  EMODE_TREE                       16      /* control type: tree, callback function: EnergyModeMBTree */
+#define  EMODE_TREE                       16      /* control type: tree, callback function: EnergyModeTree */
 #define  EMODE_PICTURE                    17      /* control type: picture, callback function: (none) */
 
 
@@ -42,7 +42,7 @@
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DetermineEnergyWindow(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK EnergyModeMBTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK EnergyModeTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

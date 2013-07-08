@@ -23,7 +23,7 @@
 #define  FMMODE_COMMANDBUTTON             7       /* control type: command, callback function: Back */
 #define  FMMODE_COMMANDBUTTON_2           8       /* control type: command, callback function: Main */
 #define  FMMODE_DECORATION_9              9       /* control type: deco, callback function: (none) */
-#define  FMMODE_TREE                      10      /* control type: tree, callback function: EnergyModeMBTree */
+#define  FMMODE_TREE                      10      /* control type: tree, callback function: FloodMapModeTree */
 #define  FMMODE_DECORATION                11      /* control type: deco, callback function: (none) */
 
      /* tab page panel controls */
@@ -47,7 +47,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK EnergyModeMBTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK FloodMapModeTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

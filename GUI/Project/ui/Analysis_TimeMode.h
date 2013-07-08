@@ -24,7 +24,7 @@
 #define  TIMEMODE_COMMANDBUTTON_2         8       /* control type: command, callback function: Main */
 #define  TIMEMODE_DECORATION_9            9       /* control type: deco, callback function: (none) */
 #define  TIMEMODE_DECORATION              10      /* control type: deco, callback function: (none) */
-#define  TIMEMODE_TREE                    11      /* control type: tree, callback function: EnergyModeMBTree */
+#define  TIMEMODE_TREE                    11      /* control type: tree, callback function: TimeModeTree */
 
      /* tab page panel controls */
 #define  TABPANEL_PICTURE_4               2       /* control type: picture, callback function: (none) */
@@ -41,11 +41,11 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK EnergyModeMBTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SavePlot(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK TimeModeTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

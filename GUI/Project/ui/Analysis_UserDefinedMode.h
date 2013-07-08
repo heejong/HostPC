@@ -22,6 +22,8 @@
 #define  USERMODE_COMMANDBUTTON_13        6       /* control type: command, callback function: Back */
 #define  USERMODE_COMMANDBUTTON_14        7       /* control type: command, callback function: Main */
 #define  USERMODE_DECORATION_9            8       /* control type: deco, callback function: (none) */
+#define  USERMODE_TREE                    9       /* control type: tree, callback function: UserModeTree */
+#define  USERMODE_DECORATION              10      /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -36,6 +38,7 @@ int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SavePlot(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK UserModeTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
