@@ -109,7 +109,7 @@ int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callback
 
 			break;
 		case EVENT_CLOSE:
-
+			QuitUserInterface (0);
 			break;
 	}
 	return 0;

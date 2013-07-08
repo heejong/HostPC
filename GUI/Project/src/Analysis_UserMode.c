@@ -109,7 +109,7 @@ int CVICALLBACK InitializeUserMode (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-
+			QuitUserInterface (0);
 			break;
 	}
 	return 0;

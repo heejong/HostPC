@@ -28,7 +28,7 @@ int CVICALLBACK InitializeTestMode1 (int panel, int event, void *callbackData,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			sprintf(title_string, "Test Mode - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
+			sprintf(title_string, "Test Mode 1 - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
 			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
 		
 			// populate instrument tree
@@ -110,7 +110,7 @@ int CVICALLBACK InitializeTestMode1 (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-
+			QuitUserInterface (0);
 			break;
 	}
 	return 0;

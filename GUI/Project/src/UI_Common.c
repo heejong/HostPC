@@ -233,6 +233,9 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
 
+	if(event == EVENT_CLOSE)
+		QuitUserInterface (0);
+	
 	// initialize panel when it gets focus
 	if(event != EVENT_GOT_FOCUS)
 		return 0;
