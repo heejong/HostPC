@@ -6,3 +6,8 @@ GUI/Project/cvibuild.OpenPET/
 
 # Temporary files
 ~$*
+
+# Project Files
+OpenPET.cdb
+OpenPET.cws
+OpenPET.exe

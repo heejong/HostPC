@@ -4,6 +4,10 @@
 #include "UI_Common.h"
 #include "OpenPET.h"
 
+extern int panelHandle;
+extern int panelHandle_emode_mb; 
+extern int panelHandle_emode_duc; 
+extern int panelHandle_emode_db;
 extern int panelHandle_emode; 
 
 extern Stack panel_stack;   // defined in UI_Common
@@ -114,17 +118,15 @@ int CVICALLBACK InitializeEnergyMode (int panel, int event, void *callbackData,
 int CVICALLBACK EnergyModeTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
+	char item_tag[32];
+	OpenPETTree new_location;
+	int i, idx=0, current_boards[3]={-1,-1,-1};
+	
 	switch (event)
 	{
 		case EVENT_COMMIT:
 
-			break;
-	}
-	return 0;
-}
-
-/*
-// eventData2 contains index of tree item double-clicked
+			// eventData2 contains index of tree item double-clicked
 			GetTreeItemTag(panel, control, eventData2, item_tag);
 			
 			// update current_location so panel will initialize properly
@@ -186,9 +188,10 @@ int CVICALLBACK EnergyModeTree (int panel, int control, int event,
 			current_location.MB = new_location.MB;
 			current_location.DUC = new_location.DUC;
 			current_location.DB = new_location.DB;
-			
-*/			
-
+			break;
+	}
+	return 0;
+}
 
 int CVICALLBACK DetermineEnergyWindow (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
