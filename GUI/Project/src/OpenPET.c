@@ -18,6 +18,7 @@
 #include "toolbox.h"
 
 #include "UI_Common.h"
+#include "Analysis_TestMode1.h" 
 #include "Analysis_TestMode2.h"
 #include "Analysis_TestMode_MB.h" 
 #include "Analysis_TestMode_DUC.h"  
@@ -60,6 +61,7 @@
 //==============================================================================
 // Global variables
 int panelHandle;
+int panelHandle_testmode1;  
 int panelHandle_testmode2; 
 int panelHandle_testmode_mb;
 int panelHandle_testmode_duc; 
@@ -111,6 +113,7 @@ int main (int argc, char *argv[])
 	
     nullChk (InitCVIRTE (0, argv, 0));
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
+	errChk (panelHandle_testmode1 = LoadPanel (0, "Analysis_TestMode1.uir", TESTMODE1));   
 	errChk (panelHandle_testmode2 = LoadPanel (0, "Analysis_TestMode2.uir", TESTMODE2)); 
 	errChk (panelHandle_testmode_mb = LoadPanel (0, "Analysis_TestMode_MB.uir", TESTMODEMB));
 	errChk (panelHandle_testmode_duc = LoadPanel (0, "Analysis_TestMode_DUC.uir", TESTMODEDU)); 
@@ -145,6 +148,7 @@ int main (int argc, char *argv[])
 Error:
     /* clean up */
     DiscardPanel (panelHandle);
+	DiscardPanel (panelHandle_testmode1); 
 	DiscardPanel (panelHandle_testmode2);
 	DiscardPanel (panelHandle_testmode_mb); 
 	DiscardPanel (panelHandle_testmode_duc);
@@ -207,6 +211,7 @@ int CVICALLBACK CollectNewData (int panel, int control, int event,
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_4, ATTR_VISIBLE, 0);
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_5, ATTR_VISIBLE, 0);
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_6, ATTR_VISIBLE, 0);
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_7, ATTR_VISIBLE, 0);
 			break;
 	}
 	return 0;
@@ -296,6 +301,7 @@ int CVICALLBACK Go (int panel, int control, int event,
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_4, ATTR_VISIBLE, 1);
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_5, ATTR_VISIBLE, 1);
 			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_6, ATTR_VISIBLE, 1); 
+			SetCtrlAttribute (PANEL, PANEL_COMMANDBUTTON_7, ATTR_VISIBLE, 1);  
 			
 			//header = CreateHeader("test.txt", "User comment.", 30.0, "single");
 			
@@ -319,7 +325,22 @@ int CVICALLBACK DisplayEnergyMode (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK DisplayTestMode (int panel, int control, int event,
+int CVICALLBACK DisplayTestMode1 (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			strcpy(current_location.mode,"Test Mode 1");
+			DisplayPanel (panelHandle_testmode_mb);
+			StackPush(&panel_stack, panel);
+			HidePanel (panel);
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK DisplayTestMode2 (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)

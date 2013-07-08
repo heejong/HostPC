@@ -572,9 +572,9 @@ File Type = "CSource"
 Res Id = 45
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "src/Analysis_UserMode_DB.c"
+Path Rel Path = "src/Analysis_UserMode.c"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_UserMode_DB.c"
+Path Line0002 = "lysis_UserMode.c"
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -585,9 +585,9 @@ File Type = "CSource"
 Res Id = 46
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "src/Analysis_UserMode_DUC.c"
+Path Rel Path = "src/Analysis_UserMode_DB.c"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_UserMode_DUC.c"
+Path Line0002 = "lysis_UserMode_DB.c"
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -598,9 +598,9 @@ File Type = "CSource"
 Res Id = 47
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "src/Analysis_UserMode_MB.c"
+Path Rel Path = "src/Analysis_UserMode_DUC.c"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_UserMode_MB.c"
+Path Line0002 = "lysis_UserMode_DUC.c"
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -611,6 +611,19 @@ File Type = "CSource"
 Res Id = 48
 Path Is Rel = True
 Path Rel To = "Project"
+Path Rel Path = "src/Analysis_UserMode_MB.c"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
+Path Line0002 = "lysis_UserMode_MB.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+
+[File 0049]
+File Type = "CSource"
+Res Id = 49
+Path Is Rel = True
+Path Rel To = "Project"
 Path Rel Path = "src/Collection_Calibration.c"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Col"
 Path Line0002 = "lection_Calibration.c"
@@ -619,9 +632,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0049]
+[File 0050]
 File Type = "User Interface Resource"
-Res Id = 49
+Res Id = 50
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Collection_Calibration.uir"
@@ -631,9 +644,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0050]
+[File 0051]
 File Type = "User Interface Resource"
-Res Id = 50
+Res Id = 51
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Collection_Calibration_Specs.uir"
@@ -643,9 +656,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0051]
+[File 0052]
 File Type = "CSource"
-Res Id = 51
+Res Id = 52
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/Collection_SysConfig_MB.c"
@@ -656,9 +669,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0052]
+[File 0053]
 File Type = "User Interface Resource"
-Res Id = 52
+Res Id = 53
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Collection_SysConfig_MB.uir"
@@ -668,9 +681,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0053]
+[File 0054]
 File Type = "CSource"
-Res Id = 53
+Res Id = 54
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/Collection_WordLength.c"
@@ -681,9 +694,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0054]
+[File 0055]
 File Type = "User Interface Resource"
-Res Id = 54
+Res Id = 55
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/Collection_WordLength.uir"
@@ -693,9 +706,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0055]
+[File 0056]
 File Type = "CSource"
-Res Id = 55
+Res Id = 56
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/OpenPET.c"
@@ -706,9 +719,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0056]
+[File 0057]
 File Type = "User Interface Resource"
-Res Id = 56
+Res Id = 57
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "ui/OpenPET.uir"
@@ -718,9 +731,9 @@ Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
 
-[File 0057]
+[File 0058]
 File Type = "CSource"
-Res Id = 57
+Res Id = 58
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "src/UI_Common.c"
@@ -731,9 +744,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0058]
+[File 0059]
 File Type = "Include"
-Res Id = 58
+Res Id = 59
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "include/UI_Common.h"
@@ -742,19 +755,6 @@ Path Line0002 = "/UI_Common.h"
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
-
-[File 0059]
-File Type = "CSource"
-Res Id = 59
-Path Is Rel = True
-Path Rel To = "Project"
-Path Rel Path = "src/Analysis_UserMode.c"
-Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Ana"
-Path Line0002 = "lysis_UserMode.c"
-Exclude = False
-Compile Into Object File = False
-Project Flags = 0
-Folder = "Not In A Folder"
 
 [Folders]
 Instrument Files Folder Not Added Yet = True

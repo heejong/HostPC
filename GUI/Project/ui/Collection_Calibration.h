@@ -30,26 +30,27 @@
 #define  CALIBRATE_COMMANDBUTTON_4        14      /* control type: command, callback function: DisplayTimeMode */
 #define  CALIBRATE_COMMANDBUTTON_3        15      /* control type: command, callback function: DisplayFloodMapMode */
 #define  CALIBRATE_COMMANDBUTTON_2        16      /* control type: command, callback function: DisplayEnergyMode */
-#define  CALIBRATE_COMMANDBUTTON          17      /* control type: command, callback function: DisplayTestMode */
-#define  CALIBRATE_COMMANDBUTTON_6        18      /* control type: command, callback function: DisplayUserMode */
-#define  CALIBRATE_DECORATION_14          19      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_DECORATION_13          20      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_DECORATION_16          21      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_DECORATION_15          22      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_DECORATION_12          23      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_DECORATION_3           24      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_TEXTMSG_5              25      /* control type: textMsg, callback function: (none) */
-#define  CALIBRATE_TEXTMSG_4              26      /* control type: textMsg, callback function: (none) */
-#define  CALIBRATE_DECORATION_10          27      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_TEXTMSG_6              28      /* control type: textMsg, callback function: (none) */
-#define  CALIBRATE_TEXTMSG_7              29      /* control type: textMsg, callback function: (none) */
-#define  CALIBRATE_TEXTMSG_8              30      /* control type: textMsg, callback function: (none) */
-#define  CALIBRATE_TEXTMSG_9              31      /* control type: textMsg, callback function: (none) */
-#define  CALIBRATE_DECORATION_11          32      /* control type: deco, callback function: (none) */
-#define  CALIBRATE_MINUTES_NUMERIC        33      /* control type: numeric, callback function: (none) */
-#define  CALIBRATE_EVENTS_NUMERIC         34      /* control type: numeric, callback function: (none) */
-#define  CALIBRATE_TOGGLEBUTTON_2         35      /* control type: textButton, callback function: CalibrateInEvents */
-#define  CALIBRATE_TOGGLEBUTTON           36      /* control type: textButton, callback function: CalibrateInMinutes */
+#define  CALIBRATE_COMMANDBUTTON_16       17      /* control type: command, callback function: DisplayTestMode2 */
+#define  CALIBRATE_COMMANDBUTTON          18      /* control type: command, callback function: DisplayTestMode1 */
+#define  CALIBRATE_COMMANDBUTTON_6        19      /* control type: command, callback function: DisplayUserMode */
+#define  CALIBRATE_DECORATION_14          20      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_DECORATION_13          21      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_DECORATION_16          22      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_DECORATION_15          23      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_DECORATION_12          24      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_DECORATION_3           25      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_TEXTMSG_5              26      /* control type: textMsg, callback function: (none) */
+#define  CALIBRATE_TEXTMSG_4              27      /* control type: textMsg, callback function: (none) */
+#define  CALIBRATE_DECORATION_10          28      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_TEXTMSG_6              29      /* control type: textMsg, callback function: (none) */
+#define  CALIBRATE_TEXTMSG_7              30      /* control type: textMsg, callback function: (none) */
+#define  CALIBRATE_TEXTMSG_8              31      /* control type: textMsg, callback function: (none) */
+#define  CALIBRATE_TEXTMSG_9              32      /* control type: textMsg, callback function: (none) */
+#define  CALIBRATE_DECORATION_11          33      /* control type: deco, callback function: (none) */
+#define  CALIBRATE_MINUTES_NUMERIC        34      /* control type: numeric, callback function: (none) */
+#define  CALIBRATE_EVENTS_NUMERIC         35      /* control type: numeric, callback function: (none) */
+#define  CALIBRATE_TOGGLEBUTTON_2         36      /* control type: textButton, callback function: CalibrateInEvents */
+#define  CALIBRATE_TOGGLEBUTTON           37      /* control type: textButton, callback function: CalibrateInMinutes */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -65,7 +66,8 @@ int  CVICALLBACK CalibrateInMinutes(int panel, int control, int event, void *cal
 int  CVICALLBACK DisplayEnergyMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayFloodMapMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayOscilloscopeMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK DisplayTestMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayTestMode1(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayTestMode2(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayTimeMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayUserMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

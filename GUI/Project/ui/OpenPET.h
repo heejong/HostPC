@@ -28,9 +28,10 @@
 #define  PANEL_COMMANDBUTTON_4            12      /* control type: command, callback function: DisplayTimeMode */
 #define  PANEL_COMMANDBUTTON_3            13      /* control type: command, callback function: DisplayFloodMapMode */
 #define  PANEL_COMMANDBUTTON_2            14      /* control type: command, callback function: DisplayEnergyMode */
-#define  PANEL_COMMANDBUTTON              15      /* control type: command, callback function: DisplayTestMode */
-#define  PANEL_COMMANDBUTTON_6            16      /* control type: command, callback function: DisplayUserMode */
-#define  PANEL_DECORATION_9               17      /* control type: deco, callback function: (none) */
+#define  PANEL_COMMANDBUTTON_7            15      /* control type: command, callback function: DisplayTestMode2 */
+#define  PANEL_COMMANDBUTTON              16      /* control type: command, callback function: DisplayTestMode1 */
+#define  PANEL_COMMANDBUTTON_6            17      /* control type: command, callback function: DisplayUserMode */
+#define  PANEL_DECORATION_9               18      /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -46,7 +47,8 @@ int  CVICALLBACK CollectNewData(int panel, int control, int event, void *callbac
 int  CVICALLBACK DisplayEnergyMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayFloodMapMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayOscilloscopeMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK DisplayTestMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayTestMode1(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DisplayTestMode2(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayTimeMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DisplayUserMode(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Go(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
