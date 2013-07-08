@@ -1,7 +1,7 @@
 #include <userint.h>
-#include "Analysis_FloodMapMode.h"
+#include "Analysis_UserDefinedMode.h"
 
-int CVICALLBACK FloodMapModeTree (int panel, int control, int event,
+int CVICALLBACK UserModeTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)

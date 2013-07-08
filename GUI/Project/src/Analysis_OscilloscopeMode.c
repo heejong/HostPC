@@ -56,3 +56,16 @@ int CVICALLBACK ClosePopup (int panel, int control, int event,
 	}
 	return 0;
 }
+
+
+int CVICALLBACK OscilloscopeModeTree (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			break;
+	}
+	return 0;
+}
