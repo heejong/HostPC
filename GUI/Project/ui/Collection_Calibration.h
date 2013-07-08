@@ -49,8 +49,8 @@
 #define  CALIBRATE_DECORATION_11          33      /* control type: deco, callback function: (none) */
 #define  CALIBRATE_MINUTES_NUMERIC        34      /* control type: numeric, callback function: (none) */
 #define  CALIBRATE_EVENTS_NUMERIC         35      /* control type: numeric, callback function: (none) */
-#define  CALIBRATE_TOGGLEBUTTON_2         36      /* control type: textButton, callback function: CalibrateInEvents */
-#define  CALIBRATE_TOGGLEBUTTON           37      /* control type: textButton, callback function: CalibrateInMinutes */
+#define  CALIBRATE_EVENTS_BUTTON          36      /* control type: textButton, callback function: CalibrateInEvents */
+#define  CALIBRATE_MINUTES_BUTTON         37      /* control type: textButton, callback function: CalibrateInMinutes */
 
 
      /* Menu Bars, Menus, and Menu Items: */
