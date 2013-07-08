@@ -14,7 +14,7 @@
 
      /* Panels and Controls: */
 
-#define  TESTMODE1                        1
+#define  TESTMODE1                        1       /* callback function: InitializeTestMode1 */
 #define  TESTMODE1_EXPECTED_VALUE         2       /* control type: string, callback function: (none) */
 #define  TESTMODE1_HISTOGRAM              3       /* control type: graph, callback function: (none) */
 #define  TESTMODE1_SAVE_OUTPUT            4       /* control type: command, callback function: SaveOutput */
@@ -35,6 +35,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK InitializeTestMode1(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SaveOutput(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
