@@ -231,6 +231,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
 
+	// enable windows red x to terminate program
 	if(event == EVENT_CLOSE)
 		QuitUserInterface (0);
 	
@@ -239,7 +240,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		return 0;
 
 	// only initialize panel once
-	// if title_string is blank 
+	// if title_string is blank, or
 	// if title_string values don't match current location
 	
 	GetPanelAttribute (panel, ATTR_TITLE, title_string);
@@ -261,7 +262,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	if(strcmp(title_string,"") != 0 && !notInitializedFlag)
 		return 0;
 		
-	// specify title to show location in tree *****
+	/**************** specify title to show location in tree ******************/
 	sprintf (title_string, "%s ", current_location.mode); 
 	if(current_location.MB != -1) 
 	{
@@ -281,16 +282,14 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	
 	SetPanelAttribute (panel, ATTR_TITLE, title_string);
 
-	// enable/disable buttons according to system configuration *****
-	
+	/************* cycle through each control and initialize as needed ***************/
 	GetPanelAttribute (panel, ATTR_PANEL_FIRST_CTRL, &control_id);  // first control
-	// cycle through controls disabling those not needed
 	while(control_id != 0) 
 	{
 	
 		GetCtrlAttribute (panel, control_id, ATTR_CONSTANT_NAME, control_name);
 		
-		// populate instrument tree
+		/********************** initialze tree control *************************/
 		if(strcmp(control_name, "TREE") == 0)
 		{
 			GetNumListItems (panel, control_id, &num_items);
@@ -334,17 +333,13 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 			} 
 			else 
 			{
-				// table already created, just need to show correct location
+				// tree already created, just need to show correct location
 				for(i=1; i<num_items; i++)
 				{
 					// collapse all
 					SetTreeItemAttribute (panel, control_id, i, ATTR_COLLAPSED, 1);	
 				}
 					
-				// need to properly expand columns
-				// scroll through each item and compare item name??
-				// get a hold of item handle somehow, perhaps better insertion scheme
-				// GetTreeItermFromTag()
 				if(current_location.MB != -1)
 				{
 					sprintf(item_label, "MB%d", current_location.MB);
@@ -368,7 +363,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 			}
 		}
 		
-		
+		/********** enable/disable buttons according to system configuration ************/
 		if(CheckButtonEventError(control_name))	   // BUTTON, EVENTS, ERRORS
 		{
 			board_number = ((unsigned short int) control_name[7])-48; // convert ASCII number to int
