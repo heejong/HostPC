@@ -10,6 +10,9 @@ Require immediate attention:
 
 Do not require immediate attention:
 # When changing panels, size and position are not preserved
+
 # Panels are only hidden, wastes memory that might be needed for reading large binary files
 ### instead, use SavePanelState(), RecallPanelState(), and DiscardPanel()
 ### or, load panels as children from parent panel rather than loading all as parent panels
+
+# Consider multi-threading analysis to improve performance

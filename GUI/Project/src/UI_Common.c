@@ -118,7 +118,7 @@ int StackPeek(Stack *S)
 {
     if (S->current_size == 0) {
 		// stack empty
-		fprintf(stderr, "Error: empty stack found in call to Stack_Top()\n");
+		fprintf(stderr, "Error: empty stack found in call to Stack_Peek()\n");
         return -1;
     } 
 
@@ -421,79 +421,5 @@ int CheckButtonEventError(char control_name[])
 	
 	return 1; // true
 }
-/*
-int CVICALLBACK InstrumentTreeControl (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	char item_tag[32];
-	OpenPETTree new_location;
-	int i, idx=0, current_boards[3]={-1,-1,-1};
-	
-	
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			// eventData2 contains index of tree item double-clicked
-			GetTreeItemTag(panel, control, eventData2, item_tag);
-			
-			// update current_location so panel will initialize properly
-			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
-			strcpy(new_location.mode, current_location.mode);
-			
-			for(i=0; i<32; i++)
-			{
-				// walk through tag string and pull out board numbers
-				if( isdigit(item_tag[i]) )
-				{
-					current_boards[idx++] = (int)(item_tag[i] - '0');
-				}
-			}
-			new_location.MB = current_boards[0];
-			new_location.DUC = current_boards[1];
-			new_location.DB = current_boards[2];
-			
-			// determine proper panel to display
-			
-			// determine mode: Time Mode, Energy Mode, Test Mode, Flood Map Mode, User Mode 
-			if(strcmp(new_location.mode, "Time Mode") == 0)
-			{
-				// hide panel & show new panel
-			
-				// clear panel stack & update with proper panels for back button to work
-			}
-			else if(strcmp(new_location.mode, "Energy Mode") == 0)
-			{
-				// hide panel & show new panel
-			
-				// clear panel stack & update with proper panels for back button to work
-			}
-			else if(strcmp(new_location.mode, "Test Mode") == 0)
-			{
-				// hide panel & show new panel
-				
-			
-				// clear panel stack & update with proper panels for back button to work
-			}
-			else if(strcmp(new_location.mode, "Flood Map Mode") == 0)
-			{
-				// hide panel & show new panel
-			
-				// clear panel stack & update with proper panels for back button to work
-			}
-			else if(strcmp(new_location.mode, "User Mode") == 0)
-			{
-				// hide panel & show new panel
-			
-				// clear panel stack & update with proper panels for back button to work
-			} 
-			else 
-			{
-				// Error
-				QuitUserInterface (1);	
-			}
-			
-			break;
-	}
-	return 0;
-}
-*/
+
+// Tree control defined seperately for each panel

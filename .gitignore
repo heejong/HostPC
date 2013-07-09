@@ -11,3 +11,6 @@ GUI/Project/cvibuild.OpenPET/
 OpenPET.cdb
 OpenPET.cws
 OpenPET.exe
+
+# Doxygen files
+GUI/Documentation
