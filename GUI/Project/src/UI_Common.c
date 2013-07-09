@@ -1,9 +1,5 @@
-#include "Analysis_TestMode_DUC.h"
-#include "cvixml.h"
-#include "Analysis_OscilloscopeMode_MB.h"
+//#include "cvixml.h"
 #include <ansi_c.h>
-#include "Analysis_TestMode_MB.h"
-#include "Analysis_TestMode2.h"
 #include <userint.h>
 //==============================================================================
 //
@@ -37,7 +33,7 @@ extern int panelHandle;
 //==============================================================================
 // Global variables
 Stack panel_stack;
-PanelAppearance appearance; 
+//PanelAppearance appearance; 
 OpenPETTree current_location; // used to show the currently specified location in the tree
 OpenPETTree sys_config;		  // used to show the full system tree
 
@@ -137,10 +133,10 @@ int StackEmpty(Stack *S)
 	
 
 // returns 0 on succcess and -1 on failure
-int StackPush(Stack *S, int d)
+int StackPush(Stack *S, int panel)
 {
     if (S->current_size < STACK_MAXSIZE) {
-        S->data[S->current_size] = d;
+        S->data[S->current_size] = panel;
 		S->current_size++;
 		return 0;
 	} else {
@@ -171,7 +167,8 @@ void OpenPETTreeInit(OpenPETTree *T)
 	return;
 }
 
-Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */) 
+/*
+Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[], double timewindow, unsigned short int sofwareversion, unsigned short int firmware version ) 
 {
 	Header H;
 	strcpy(H.filename,filename);
@@ -186,6 +183,7 @@ Header CreateHeader(char filename[], char usercomments[], double duration, char 
 	return H;
 	
 }
+*/
 
 
 /*

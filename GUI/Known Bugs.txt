@@ -1,6 +1,6 @@
 Known bugs that require attention by priority level
 
-Require immediate attention:
+REQUIRE IMMEDIATE ATTENTION:
 # Cannot press back button twice in a row
 --- fixed with stack 6/18/13 ---
 # Going back from single event modes to calibration screen pops up main menu
@@ -8,11 +8,18 @@ Require immediate attention:
 # expects balanced number of boards (i.e. to make 12, 6 DB into each DUC not 8 DB into one and 4 DB into the other)
 ### check references to sys_config
 
-Do not require immediate attention:
+# in some modes (definitely test mode 1), double clicking on tree control DB location from MB panel hides all panels
+
+
+DO NOT REQUIRE IMMEDIATE ATTENTION:
 # When changing panels, size and position are not preserved
+### PanelAppearance struct created on first attempt
 
 # Panels are only hidden, wastes memory that might be needed for reading large binary files
 ### instead, use SavePanelState(), RecallPanelState(), and DiscardPanel()
 ### or, load panels as children from parent panel rather than loading all as parent panels
 
 # Consider multi-threading analysis to improve performance
+
+# No header file created
+### Header struct created to store pertinent information

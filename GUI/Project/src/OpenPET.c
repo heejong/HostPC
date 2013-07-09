@@ -90,7 +90,7 @@ int panelHandle_wordlength;
 int panelHandle_calibration;
 
 extern Stack panel_stack;
-extern PanelAppearance appearance; 
+//extern PanelAppearance appearance; 
 extern OpenPETTree current_location;
 extern OpenPETTree sys_config;
 
@@ -290,7 +290,7 @@ int CVICALLBACK LoadDataFile (int panel, int control, int event,
 int CVICALLBACK Go (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	Header header;
+	//Header header;
 	switch (event)
 	{
 		case EVENT_COMMIT: 
