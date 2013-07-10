@@ -8,6 +8,17 @@
 //
 //==============================================================================
 
+/** @mainpage
+
+@section intro Introduction
+This page documents the code used for the OpenPET project sponsored by the Moses Laboratory at the
+Lawrence Berkeley National Laboratory.
+
+@section starting Getting Started
+The complete documentation for each file and each function is given under the files tab. 
+
+*/
+
 //==============================================================================
 // Include files
 
