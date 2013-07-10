@@ -9,7 +9,7 @@ extern int panelHandle_testmode_mb;
 extern int panelHandle_testmode_duc; 
 extern int panelHandle_testmode_db;
 extern int panelHandle_testmode2; 
-//extern int panelHandle_testmode1; 
+extern int panelHandle_testmode1; 
 extern Stack panel_stack;   // defined in UI_Common
 extern OpenPETTree current_location;
 
@@ -107,8 +107,7 @@ int CVICALLBACK TestModeMBTree (int panel, int control, int event,
 				}
 				else 
 				{	
-					// StackPush(&panel_stack, panelHandle_testmode1); 
-					// DisplayPanel (panelHandle_testmode1);
+					DisplayPanel (panelHandle_testmode1);
 				}
 				
 			}
