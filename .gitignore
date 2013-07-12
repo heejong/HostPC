@@ -13,4 +13,4 @@ OpenPET.cws
 OpenPET.exe
 
 # Doxygen files
-GUI/Documentation
+GUI/Documentation/

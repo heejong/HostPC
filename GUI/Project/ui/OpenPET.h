@@ -20,18 +20,19 @@
 #define  PANEL_RUN                        4       /* control type: command, callback function: Run */
 #define  PANEL_CALIBRATE                  5       /* control type: command, callback function: Calibrate */
 #define  PANEL_GO                         6       /* control type: command, callback function: Go */
-#define  PANEL_SETUP                      7       /* control type: command, callback function: Setup */
-#define  PANEL_QUIT                       8       /* control type: command, callback function: Quit */
-#define  PANEL_FILETEXT                   9       /* control type: string, callback function: (none) */
-#define  PANEL_LOAD                       10      /* control type: command, callback function: LoadDataFile */
-#define  PANEL_COMMANDBUTTON_5            11      /* control type: command, callback function: DisplayOscilloscopeMode */
-#define  PANEL_COMMANDBUTTON_4            12      /* control type: command, callback function: DisplayTimeMode */
-#define  PANEL_COMMANDBUTTON_3            13      /* control type: command, callback function: DisplayFloodMapMode */
-#define  PANEL_COMMANDBUTTON_2            14      /* control type: command, callback function: DisplayEnergyMode */
-#define  PANEL_COMMANDBUTTON_7            15      /* control type: command, callback function: DisplayTestMode2 */
-#define  PANEL_COMMANDBUTTON              16      /* control type: command, callback function: DisplayTestMode1 */
-#define  PANEL_COMMANDBUTTON_6            17      /* control type: command, callback function: DisplayUserMode */
-#define  PANEL_DECORATION_9               18      /* control type: deco, callback function: (none) */
+#define  PANEL_TEXTMSG_11                 7       /* control type: textMsg, callback function: (none) */
+#define  PANEL_SETUP                      8       /* control type: command, callback function: Setup */
+#define  PANEL_QUIT                       9       /* control type: command, callback function: Quit */
+#define  PANEL_FILETEXT                   10      /* control type: string, callback function: (none) */
+#define  PANEL_LOAD                       11      /* control type: command, callback function: LoadDataFile */
+#define  PANEL_COMMANDBUTTON_5            12      /* control type: command, callback function: DisplayOscilloscopeMode */
+#define  PANEL_COMMANDBUTTON_4            13      /* control type: command, callback function: DisplayTimeMode */
+#define  PANEL_COMMANDBUTTON_3            14      /* control type: command, callback function: DisplayFloodMapMode */
+#define  PANEL_COMMANDBUTTON_2            15      /* control type: command, callback function: DisplayEnergyMode */
+#define  PANEL_COMMANDBUTTON_7            16      /* control type: command, callback function: DisplayTestMode2 */
+#define  PANEL_COMMANDBUTTON              17      /* control type: command, callback function: DisplayTestMode1 */
+#define  PANEL_COMMANDBUTTON_6            18      /* control type: command, callback function: DisplayUserMode */
+#define  PANEL_DECORATION_9               19      /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
