@@ -22,9 +22,10 @@
 #define  OMODE_COMMANDBUTTON_3            6       /* control type: command, callback function: Quit */
 #define  OMODE_COMMANDBUTTON              7       /* control type: command, callback function: Back */
 #define  OMODE_COMMANDBUTTON_2            8       /* control type: command, callback function: Main */
-#define  OMODE_DECORATION_10              9       /* control type: deco, callback function: (none) */
-#define  OMODE_DECORATION_9               10      /* control type: deco, callback function: (none) */
-#define  OMODE_COMMANDBUTTON_4            11      /* control type: command, callback function: ShowEnergySpectrum */
+#define  OMODE_DECORATION_9               9       /* control type: deco, callback function: (none) */
+#define  OMODE_COMMANDBUTTON_4            10      /* control type: command, callback function: ShowEnergySpectrum */
+#define  OMODE_TREE                       11      /* control type: tree, callback function: EnergyModeMBTree */
+#define  OMODE_DECORATION                 12      /* control type: deco, callback function: (none) */
 
 #define  OMODE_ENGY                       2
 #define  OMODE_ENGY_PICTURE_2             2       /* control type: picture, callback function: (none) */
@@ -49,6 +50,7 @@
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ClosePopup(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK EnergyModeMBTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK InitializeOscilloscopeMode(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

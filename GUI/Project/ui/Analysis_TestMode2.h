@@ -23,6 +23,8 @@
 #define  TESTMODE2_COMMANDBUTTON_13       7       /* control type: command, callback function: Back */
 #define  TESTMODE2_COMMANDBUTTON_14       8       /* control type: command, callback function: Main */
 #define  TESTMODE2_DECORATION_9           9       /* control type: deco, callback function: (none) */
+#define  TESTMODE2_TREE                   10      /* control type: tree, callback function: EnergyModeMBTree */
+#define  TESTMODE2_DECORATION             11      /* control type: deco, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -34,6 +36,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK EnergyModeMBTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK InitializeTestMode2(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Main(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Quit(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
