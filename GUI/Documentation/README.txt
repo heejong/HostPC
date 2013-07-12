@@ -1,0 +1,1 @@
+Unzip html.zip and double-click index.html to view the current version of the documentation.
