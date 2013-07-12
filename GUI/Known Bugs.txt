@@ -10,6 +10,8 @@ REQUIRE IMMEDIATE ATTENTION:
 
 # in some modes (definitely test mode 1), double clicking on tree control DB location from MB panel hides all panels
 --- fixed missing call from test mode MB & DUC 7/10/13 ---
+# In system calibration, clicking on tree control makes it so back button returns to main screen not calibration screen
+
 
 DO NOT REQUIRE IMMEDIATE ATTENTION:
 # When changing panels, size and position are not preserved
