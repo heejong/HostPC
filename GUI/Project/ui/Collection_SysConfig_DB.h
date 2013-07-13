@@ -47,14 +47,14 @@
 #define  CONFIGMB_DECORATION_8            31      /* control type: deco, callback function: (none) */
 #define  CONFIGMB_TREE                    32      /* control type: tree, callback function: (none) */
 #define  CONFIGMB_DECORATION_9            33      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_6          34      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_7          35      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_5          36      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_4          37      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_3          38      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_2          39      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_1          40      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_0          41      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_10         34      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_9          35      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_8          36      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_7          37      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_6          38      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_5          39      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_4          40      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TOGGLEBUTTON_3          41      /* control type: textButton, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
