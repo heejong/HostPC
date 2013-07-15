@@ -1,3 +1,5 @@
+To download any document from Github, click on the document and then click either "View Raw" or "Download original".
+
 How to start OpenPET Host PC development
 
 1) Host PC development is done primarily in ANSI C through LabWindows. 

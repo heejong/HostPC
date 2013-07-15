@@ -14,6 +14,10 @@ int CVICALLBACK SaveSetup (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
+			// save system configuration by pulling checked items from tree control
+			
+			
+			// display next panel
 			DisplayPanel (panelHandle_calibration);
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
