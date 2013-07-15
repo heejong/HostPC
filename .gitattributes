@@ -1,2 +1,0 @@
-# Tell git how to handle word documents
-*.docx diff=word
