@@ -1,3 +1,6 @@
+/*********** THIS CODE WAS COPIED FROM THE ORIGINAL MB FILE *************/
+/****************** TEMPORARILY SAVED IN THIS FILE **********************/
+
 #include <ansi_c.h>
 #include <userint.h>
 #include "Collection_SysConfig_MB.h"

@@ -14,37 +14,37 @@
 
      /* Panels and Controls: */
 
-#define  CONFIGMB                         1
-#define  CONFIGMB_BUTTON_7                2       /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_COMMANDBUTTON_13        3       /* control type: command, callback function: Quit */
-#define  CONFIGMB_COMMANDBUTTON_14        4       /* control type: command, callback function: Back */
-#define  CONFIGMB_COMMANDBUTTON_15        5       /* control type: command, callback function: Main */
-#define  CONFIGMB_BUTTON_6                6       /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_BUTTON_5                7       /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_BUTTON_4                8       /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_BUTTON_3                9       /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_BUTTON_2                10      /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_BUTTON_1                11      /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_TEXTMSG                 12      /* control type: textMsg, callback function: (none) */
-#define  CONFIGMB_BUTTON_0                13      /* control type: command, callback function: SysConfigDUC */
-#define  CONFIGMB_DECORATION              14      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_2            15      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_3            16      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_4            17      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_5            18      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_6            19      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_7            20      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_DECORATION_8            21      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_TREE                    22      /* control type: tree, callback function: (none) */
-#define  CONFIGMB_DECORATION_9            23      /* control type: deco, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_6          24      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_7          25      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_5          26      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_4          27      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_3          28      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_2          29      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_1          30      /* control type: textButton, callback function: (none) */
-#define  CONFIGMB_TOGGLEBUTTON_0          31      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU                         1
+#define  CONFIGDU_BUTTON_7                2       /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_COMMANDBUTTON_13        3       /* control type: command, callback function: Quit */
+#define  CONFIGDU_COMMANDBUTTON_14        4       /* control type: command, callback function: Back */
+#define  CONFIGDU_COMMANDBUTTON_15        5       /* control type: command, callback function: Main */
+#define  CONFIGDU_BUTTON_6                6       /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_BUTTON_5                7       /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_BUTTON_4                8       /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_BUTTON_3                9       /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_BUTTON_2                10      /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_BUTTON_1                11      /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_TEXTMSG                 12      /* control type: textMsg, callback function: (none) */
+#define  CONFIGDU_BUTTON_0                13      /* control type: command, callback function: SysConfigDUC */
+#define  CONFIGDU_DECORATION              14      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_DECORATION_2            15      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_DECORATION_3            16      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_DECORATION_4            17      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_DECORATION_5            18      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_DECORATION_6            19      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_DECORATION_7            20      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_DECORATION_8            21      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_TREE                    22      /* control type: tree, callback function: (none) */
+#define  CONFIGDU_DECORATION_9            23      /* control type: deco, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_6          24      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_7          25      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_5          26      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_4          27      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_3          28      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_2          29      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_1          30      /* control type: textButton, callback function: (none) */
+#define  CONFIGDU_TOGGLEBUTTON_0          31      /* control type: textButton, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */

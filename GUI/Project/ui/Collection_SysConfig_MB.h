@@ -55,6 +55,7 @@
 #define  CONFIGMB_TOGGLEBUTTON_2          39      /* control type: textButton, callback function: (none) */
 #define  CONFIGMB_TOGGLEBUTTON_1          40      /* control type: textButton, callback function: (none) */
 #define  CONFIGMB_TOGGLEBUTTON_0          41      /* control type: textButton, callback function: (none) */
+#define  CONFIGMB_TEXTMSG_2               42      /* control type: textMsg, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */

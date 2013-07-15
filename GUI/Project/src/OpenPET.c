@@ -113,7 +113,7 @@ The complete documentation for each file and each function is given under the fi
 #include "Analysis_UserDefinedMode_MB.h"
 #include "Analysis_UserDefinedMode_DUC.h"  
 #include "Analysis_UserDefinedMode_DB.h"  
-#include "Collection_SysConfig_MB.h"
+#include "Collection_SysConfig.h"
 #include "Collection_Calibration.h"    
 
 //==============================================================================
@@ -155,7 +155,7 @@ int panelHandle_usermode_mb;  		/**< user mode MB panel handle */
 int panelHandle_usermode_duc; 		/**< user mode DUC panel handle */
 int panelHandle_usermode_db;		/**< user mode DB panel handle */
 int panelHandle_usermode; 			/**< user mode analysis screen panel handle */
-int panelHandle_sysconfig_mb;
+int panelHandle_sysconfig;
 int panelHandle_calibration;
 
 extern Stack panel_stack;
@@ -230,7 +230,7 @@ int main (int argc, char *argv[])
 	errChk (panelHandle_usermode_mb = LoadPanel (0, "Analysis_UserDefinedMode_MB.uir", USERMODEMB)); 
 	errChk (panelHandle_usermode_duc = LoadPanel (0, "Analysis_UserDefinedMode_DUC.uir", USERMODEDU)); 
 	errChk (panelHandle_usermode_db = LoadPanel (0, "Analysis_UserDefinedMode_DB.uir", USERMODEDB)); 
-	errChk (panelHandle_sysconfig_mb = LoadPanel (0, "Collection_SysConfig_MB.uir", CONFIGMB));
+	errChk (panelHandle_sysconfig = LoadPanel (0, "Collection_SysConfig.uir", SYSCONFIG));
 	errChk (panelHandle_calibration = LoadPanel (0, "Collection_Calibration.uir", CALIBRATE));
     
     /* display the panel and run the user interface */
@@ -264,7 +264,7 @@ Error:
 	DiscardPanel (panelHandle_usermode_mb); 
 	DiscardPanel (panelHandle_usermode_duc); 
 	DiscardPanel (panelHandle_usermode_db); 
-	DiscardPanel (panelHandle_sysconfig_mb);
+	DiscardPanel (panelHandle_sysconfig);
 	DiscardPanel (panelHandle_calibration);
     return 0;
 }
@@ -435,7 +435,7 @@ int CVICALLBACK Setup (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			DisplayPanel (panelHandle_sysconfig_mb);
+			DisplayPanel (panelHandle_sysconfig);
 			StackPush(&panel_stack, panelHandle);
 			HidePanel (panelHandle);
 			break;
