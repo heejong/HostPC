@@ -74,6 +74,8 @@ int CVICALLBACK InitializeSysConfig (int panel, int event, void *callbackData,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
+			SetActiveCtrl(panel, SYSCONFIG_SAVE);
+			
 			// populate instrument tree
 			GetNumListItems (panel, SYSCONFIG_TREE, &num_items);
 			if(num_items==1) 
