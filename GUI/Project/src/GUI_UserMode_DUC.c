@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_FloodMapMode_DUC.c                          
-    @brief This file provides the functions needed for the flood map mode DUC screen.
+/** @file GUI_UserMode_DUC.c                          
+    @brief This file provides the functions needed for the user mode DUC screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,13 +11,14 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_FloodMapMode_DUC.h" - provides connection to "Analysis_FloodMapMode.uir"
+	- "GUI_UserDefinedMode_DUC.h" - provides connection to "GUI_UserDefinedMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode - "OpenPET.c" 
+	- extern int @ref panelHandle_usermode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_usermode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_usermode_db - "OpenPET.c"
+	- extern int @ref panelHandle_usermode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	
@@ -29,7 +30,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_FloodMapMode_DUC.h" must be added to the include path.
+	To call functions and structures in this file "GUI_UserDefinedMode_DUC.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -50,14 +51,15 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_FloodMapMode_DUC.h" 
+#include "GUI_UserDefinedMode_DUC.h" 
 #include "UI_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */
-extern int panelHandle_fmmode_mb;  		/**< flood map mode MB panel handle */
-extern int panelHandle_fmmode_duc; 	 	/**< flood map mode DUC panel handle */
-extern int panelHandle_fmmode; 			/**< flood map mode analysis screen panel handle */
+extern int panelHandle_usermode_mb;  	/**< user mode MB panel handle */
+extern int panelHandle_usermode_duc; 	/**< user mode DUC panel handle */
+extern int panelHandle_usermode_db;		/**< user mode DB panel handle */
+extern int panelHandle_usermode; 		/**< user mode analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -74,9 +76,10 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode - "OpenPET.c" 
+	- extern int @ref panelHandle_usermode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_usermode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_usermode_db - "OpenPET.c"
+	- extern int @ref panelHandle_usermode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -95,7 +98,7 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK FloodMapModeDUC (int panel, int control, int event,
+int CVICALLBACK UserModeDUC (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -104,33 +107,33 @@ int CVICALLBACK FloodMapModeDUC (int panel, int control, int event,
 			// switch on control for DUC0...DUC7
 			switch (control)
 			{
-				case FMMODEDU_BUTTON_0:
+				case USERMODEDU_BUTTON_0:
 					current_location.DUC = 0;
 					break;
-				case FMMODEDU_BUTTON_1:
+				case USERMODEDU_BUTTON_1:
 					current_location.DUC = 1;
 					break;
-				case FMMODEDU_BUTTON_2:
+				case USERMODEDU_BUTTON_2:
 					current_location.DUC = 2;
 					break;
-				case FMMODEDU_BUTTON_3:
+				case USERMODEDU_BUTTON_3:
 					current_location.DUC = 3;
 					break;
-				case FMMODEDU_BUTTON_4:
+				case USERMODEDU_BUTTON_4:
 					current_location.DUC = 4;
 					break;
-				case FMMODEDU_BUTTON_5:
+				case USERMODEDU_BUTTON_5:
 					current_location.DUC = 5;
 					break;
-				case FMMODEDU_BUTTON_6:
+				case USERMODEDU_BUTTON_6:
 					current_location.DUC = 6;
 					break;
-				case FMMODEDU_BUTTON_7:
+				case USERMODEDU_BUTTON_7:
 					current_location.DUC = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_fmmode);
+			DisplayPanel (panelHandle_usermode_db);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -149,9 +152,10 @@ int CVICALLBACK FloodMapModeDUC (int panel, int control, int event,
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_fmmode - "OpenPET.c" 
+	- extern int @ref panelHandle_usermode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_usermode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_usermode_db - "OpenPET.c"
+	- extern int @ref panelHandle_usermode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -171,7 +175,7 @@ int CVICALLBACK FloodMapModeDUC (int panel, int control, int event,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK FloodMapModeDUCTree (int panel, int control, int event,
+int CVICALLBACK UserModeDUCTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -207,23 +211,33 @@ int CVICALLBACK FloodMapModeDUCTree (int panel, int control, int event,
 			}
 			
 			// determine proper panel to display
-			if (new_location.DUC != -1)
+			if(new_location.DB != -1) 
+			{
+				StackPush(&panel_stack, panelHandle_usermode_mb); 
+				StackPush(&panel_stack, panelHandle_usermode_duc); 
+				StackPush(&panel_stack, panelHandle_usermode_db);
+				
+				HidePanel (panel);				
+				DisplayPanel (panelHandle_usermode);
+				
+			}
+			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_fmmode_mb); 
-				StackPush(&panel_stack, panelHandle_fmmode_duc); 
-				DisplayPanel(panelHandle_fmmode);
+				StackPush(&panel_stack, panelHandle_usermode_mb); 
+				StackPush(&panel_stack, panelHandle_usermode_duc); 
+				DisplayPanel(panelHandle_usermode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_fmmode_mb); 
-				DisplayPanel(panelHandle_fmmode_duc);
+				StackPush(&panel_stack, panelHandle_usermode_mb); 
+				DisplayPanel(panelHandle_usermode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_fmmode_mb);
+				DisplayPanel(panelHandle_usermode_mb);
 			}
 			else {
 				HidePanel(panel); 

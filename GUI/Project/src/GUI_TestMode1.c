@@ -1,5 +1,5 @@
 //==============================================================================
-/** @file Analysis_TestMode1.c                          
+/** @file GUI_TestMode1.c                          
     @brief This file provides the functions needed for the test mode 1 final analysis screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
@@ -11,7 +11,7 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_TestMode1.h" - provides connection to "Analysis_TestMode1.uir"
+	- "GUI_TestMode1.h" - provides connection to "GUI_TestMode1.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
@@ -31,7 +31,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_TestMode1.h" must be added to the include path.
+	To call functions and structures in this file "GUI_TestMode1.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -52,7 +52,7 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_TestMode1.h"
+#include "GUI_TestMode1.h"
 #include "UI_Common.h"
 
 // defined in OpenPET

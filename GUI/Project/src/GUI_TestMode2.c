@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_TimeMode.c                          
-    @brief This file provides the functions needed for the time mode final analysis screen.
+/** @file GUI_TestMode2.c                          
+    @brief This file provides the functions needed for the test mode 2 final analysis screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,14 +11,14 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_TimeMode.h" - provides connection to "Analysis_TimeMode.uir"
+	- "GUI_TestMode1.h" - provides connection to "GUI_TestMode2.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_timemode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_timemode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_timemode_db - "OpenPET.c"
-	- extern int @ref panelHandle_timemode - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
+	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	- extern OpenPETTree @ref sys_config - "UI_Common.c"   
@@ -31,7 +31,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_TimeMode.h" must be added to the include path.
+	To call functions and structures in this file "GUI_TestMode2.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -52,15 +52,15 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_TimeMode.h"
+#include "GUI_TestMode2.h"
 #include "UI_Common.h"
 
 // defined in OpenPET
-extern int panelHandle;						/**< main screen panel handle */
-extern int panelHandle_timemode_mb;  		/**< time mode MB panel handle */
-extern int panelHandle_timemode_duc; 	 	/**< time mode DUC panel handle */
-extern int panelHandle_timemode_db;			/**< time mode DB panel handle */
-extern int panelHandle_timemode; 			/**< time mode analysis screen panel handle */
+extern int panelHandle;					/**< main screen panel handle */
+extern int panelHandle_testmode_mb; 	/**< test mode MB panel handle */
+extern int panelHandle_testmode_duc; 	/**< test mode DUC panel handle */
+extern int panelHandle_testmode_db;		/**< test mode DB panel handle */
+extern int panelHandle_testmode2; 		/**< test mode 2 analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -98,7 +98,7 @@ extern OpenPETTree sys_config;  		/**< hardward system configuration */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK InitializeTimeMode (int panel, int event, void *callbackData,
+int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 		int eventData1, int eventData2)
 {
 	char title_string[50];
@@ -107,15 +107,23 @@ int CVICALLBACK InitializeTimeMode (int panel, int event, void *callbackData,
 	int idx_MB, idx_DUC, idx_DB, i, j, k;
 	int num_items=1;
 	int current_boards[3], idx=0;
-	int notInitializedFlag=0; // 1 if panel needs to be initialized
+	
+	double histogram_axis[] = {0,1,2,3,4,5,6,7,8,9,10};
+	unsigned long histogram_array[] = {0,0,0,0,0,0,0,0,0,0,0}; // length=11
+	FILE *fp;
+	int count=0;
+	char out[100];
+	unsigned short bit_error_count;
+	
+	unsigned int event_word, event_words[65536];  // may need to check 32-bit size
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			sprintf(title_string, "Time Mode - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
+			sprintf(title_string, "Test Mode 2 - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
 			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
 		
 			// populate instrument tree
-			GetNumListItems (panel, TIMEMODE_TREE, &num_items);
+			GetNumListItems (panel, TESTMODE2_TREE, &num_items);
 			if(num_items==1) 
 			{
 				// need to create table
@@ -124,7 +132,7 @@ int CVICALLBACK InitializeTimeMode (int panel, int event, void *callbackData,
 					//add MB as child
 					sprintf(item_label_MB, "MB%d", i);
 					strcpy(item_label, item_label_MB);	  // tag = MB0
-					idx_MB = InsertTreeItem (panel, TIMEMODE_TREE, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
+					idx_MB = InsertTreeItem (panel, TESTMODE2_TREE, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
 		
 					for(j=0; j<=sys_config.DUC; j++)	  // assumes same number of DUC into each MB
 					{
@@ -132,26 +140,26 @@ int CVICALLBACK InitializeTimeMode (int panel, int event, void *callbackData,
 						sprintf(item_label_DUC, "DUC%d", j);
 						strcat(item_label, item_label_DUC);   // tag = MB0DUC0
 						strcpy(item_label_root, item_label);
-						idx_DUC = InsertTreeItem (panel, TIMEMODE_TREE, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
+						idx_DUC = InsertTreeItem (panel, TESTMODE2_TREE, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
 			
 						for(k=0; k<=sys_config.DB; k++)		 // assumes same number of DB into each DUC
 						{
 							//add DB as child
 							sprintf(item_label_DB, "DB%d", k); 
 							strcat(item_label, item_label_DB);   // tag = MB0DUC0DB0
-							idx_DB = InsertTreeItem (panel, TIMEMODE_TREE, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
+							idx_DB = InsertTreeItem (panel, TESTMODE2_TREE, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
 							strcpy(item_label,item_label_root);   // tag = MB0DUC0
 							if(k == current_location.DB)
-								SetTreeItemAttribute (panel, TIMEMODE_TREE, idx_DB, ATTR_SELECTED, 1);
+								SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DB, ATTR_SELECTED, 1);
 						}
 						strcpy(item_label,item_label_MB);   // tag = MB0
 						if(j != current_location.DUC)
-							SetTreeItemAttribute (panel, TIMEMODE_TREE, idx_DUC, ATTR_COLLAPSED, 1);
+							SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DUC, ATTR_COLLAPSED, 1);
 			
 					}
 					strcpy(item_label,"");   // tag = ""
 					if(i != current_location.MB)
-						SetTreeItemAttribute (panel, TIMEMODE_TREE, idx_MB, ATTR_COLLAPSED, 1);
+						SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_MB, ATTR_COLLAPSED, 1);
 				}
 			} 
 			else 
@@ -160,30 +168,106 @@ int CVICALLBACK InitializeTimeMode (int panel, int event, void *callbackData,
 				for(i=1; i<num_items; i++)
 				{
 					// collapse all
-					SetTreeItemAttribute (panel, TIMEMODE_TREE, i, ATTR_COLLAPSED, 1);	
+					SetTreeItemAttribute (panel, TESTMODE2_TREE, i, ATTR_COLLAPSED, 1);	
 				}
-
+			
+				// need to properly expand columns
+				// scroll through each item and compare item name??
+				// get a hold of item handle somehow, perhaps better insertion scheme
+				// GetTreeItermFromTag()
 				if(current_location.MB != -1)
 				{
 					sprintf(item_label, "MB%d", current_location.MB);
-					GetTreeItemFromTag (panel, TIMEMODE_TREE, item_label, &idx_MB);
-					SetTreeItemAttribute (panel, TIMEMODE_TREE, idx_MB, ATTR_COLLAPSED, 0);	
+					GetTreeItemFromTag (panel, TESTMODE2_TREE, item_label, &idx_MB);
+					SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_MB, ATTR_COLLAPSED, 0);	
 				} 
 				if(current_location.DUC != -1)
 				{
 					sprintf(item_label, "MB%dDUC%d", current_location.MB, current_location.DUC);
-					GetTreeItemFromTag (panel, TIMEMODE_TREE, item_label, &idx_DUC);
-					SetTreeItemAttribute (panel, TIMEMODE_TREE, idx_DUC, ATTR_COLLAPSED, 0);	
+					GetTreeItemFromTag (panel, TESTMODE2_TREE, item_label, &idx_DUC);
+					SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DUC, ATTR_COLLAPSED, 0);	
 				} 
 				if(current_location.DB != -1)
 				{
 					sprintf(item_label, "MB%dDUC%dDB%d", current_location.MB, current_location.DUC, current_location.DB);
-					GetTreeItemFromTag (panel, TIMEMODE_TREE, item_label, &idx_DB);
-					SetTreeItemAttribute (panel, TIMEMODE_TREE, idx_DB, ATTR_SELECTED, 1);
+					GetTreeItemFromTag (panel, TESTMODE2_TREE, item_label, &idx_DB);
+					SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DB, ATTR_SELECTED, 1);
 				} 
 			}
 			
-			//SetActiveCtrl(panel, TIMEMODE_TREE);
+			//SetActiveCtrl(panel, TESTMODE2_TREE);
+			
+			/************* load histogram  *****************/
+			fp = fopen("..\\ExampleBinOutput.bin","rb");
+			if(fp == NULL) {
+				MessagePopup("Error","Could not open file");
+				break;
+			}
+			
+			// performed buffered read to decrease processing time
+			while( !feof(fp) ) { // check EOF
+				fread (event_words, 4, 65536, fp); // read 4 bytes at a time into buffer of 2^16 32-bit words
+				if( ferror(fp) ) {
+					MessagePopup("Error","Read error");
+					break;
+				}
+				for(i=0; i<65536; i++) {
+					// 01010101010 for testmode2
+					bit_error_count = 0;
+					// loop unrolled for speed
+					if(event_words[i] & 0x0001) {
+						// should be 0
+						histogram_array[0]++;
+					}
+					if( !(event_words[i] & 0x0002 ) ) {
+						// should be 1
+						histogram_array[1]++;
+					}
+					if(event_words[i] & 0x0004) {
+						// should be 0
+						histogram_array[2]++;
+					}
+					if( !(event_words[i] & 0x0008 ) ) {
+						// should be 1
+						histogram_array[3]++;
+					}
+					if(event_words[i] & 0x0010) {
+						// should be 0
+						histogram_array[4]++;
+					}
+					if( !(event_words[i] & 0x0020 ) ) {
+						// should be 1
+						histogram_array[5]++;
+					}
+					if(event_words[i] & 0x0040) {
+						// should be 0
+						histogram_array[6]++;
+					}
+					if( !(event_words[i] & 0x0080 ) ) {
+						// should be 1
+						histogram_array[7]++;
+					}
+					if(event_words[i] & 0x0100) {
+						// should be 0
+						histogram_array[8]++;
+					}
+					if( !(event_words[i] & 0x0200 ) ) {
+						// should be 1
+						histogram_array[9]++;
+					}
+					if(event_words[i] & 0x0400) {
+						// should be 0
+						histogram_array[10]++;
+					}
+					
+				}
+				
+			}
+			SetCtrlAttribute (panelHandle_testmode2, TESTMODE2_HISTOGRAM, ATTR_DIMMED, 0);
+			PlotXY (panelHandle_testmode2, TESTMODE2_HISTOGRAM, histogram_axis, histogram_array, 11,
+					VAL_DOUBLE, VAL_SIZE_T, VAL_VERTICAL_BAR, VAL_EMPTY_SQUARE, VAL_SOLID, 1, VAL_RED);
+			
+			
 			break;
 		case EVENT_LOST_FOCUS:
 
@@ -206,10 +290,10 @@ int CVICALLBACK InitializeTimeMode (int panel, int event, void *callbackData,
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_timemode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_timemode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_timemode_db - "OpenPET.c"
-	- extern int @ref panelHandle_timemode - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
+	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -229,7 +313,7 @@ int CVICALLBACK InitializeTimeMode (int panel, int event, void *callbackData,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK TimeModeTree (int panel, int control, int event,
+int CVICALLBACK TestMode2Tree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -268,31 +352,31 @@ int CVICALLBACK TimeModeTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_timemode_mb); 
-				StackPush(&panel_stack, panelHandle_timemode_duc); 
-				StackPush(&panel_stack, panelHandle_timemode_db);
+				StackPush(&panel_stack, panelHandle_testmode_mb); 
+				StackPush(&panel_stack, panelHandle_testmode_duc); 
+				StackPush(&panel_stack, panelHandle_testmode_db);
 				
 				HidePanel (panel);				
-				DisplayPanel (panelHandle_timemode);
+				DisplayPanel (panelHandle_testmode2);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_timemode_mb); 
-				StackPush(&panel_stack, panelHandle_timemode_duc); 
-				DisplayPanel(panelHandle_timemode_db);
+				StackPush(&panel_stack, panelHandle_testmode_mb); 
+				StackPush(&panel_stack, panelHandle_testmode_duc); 
+				DisplayPanel(panelHandle_testmode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_timemode_mb); 
-				DisplayPanel(panelHandle_timemode_duc);
+				StackPush(&panel_stack, panelHandle_testmode_mb); 
+				DisplayPanel(panelHandle_testmode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_timemode_mb);
+				DisplayPanel(panelHandle_testmode_mb);
 			}
 			else {
 				HidePanel(panel); 
@@ -307,4 +391,26 @@ int CVICALLBACK TimeModeTree (int panel, int control, int event,
 	return 0;
 }
 
+int CVICALLBACK SavePlot (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
 
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK SaveOutput (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			break;
+	}
+	return 0;
+}

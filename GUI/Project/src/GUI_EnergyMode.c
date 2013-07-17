@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_OscilloscopeMode.c                          
-    @brief This file provides the functions needed for the oscilloscope mode final analysis screen.
+/** @file GUI_EnergyMode.c                          
+    @brief This file provides the functions needed for the energy mode final analysis screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,14 +11,14 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_OscilloscopeMode.h" - provides connection to "Analysis_OscilloscopeMode.uir"
+	- "GUI_EnergyMode.h" - provides connection to "GUI_EnergyMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_omode_db - "OpenPET.c"
-	- extern int @ref panelHandle_omode - "OpenPET.c" 
+	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_emode_db - "OpenPET.c"
+	- extern int @ref panelHandle_emode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	- extern OpenPETTree @ref sys_config - "UI_Common.c"   
@@ -31,7 +31,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_OscilloscopeMode.h" must be added to the include path.
+	To call functions and structures in this file "GUI_EnergyMode.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -52,15 +52,15 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_OscilloscopeMode.h"
+#include "GUI_EnergyMode.h"
 #include "UI_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */
-extern int panelHandle_omode_mb;  		/**< oscilloscope mode MB panel handle */
-extern int panelHandle_omode_duc; 	 	/**< oscilloscope mode DUC panel handle */
-extern int panelHandle_omode_db;		/**< oscilloscope mode DB panel handle */
-extern int panelHandle_omode; 			/**< oscilloscope mode analysis screen panel handle */
+extern int panelHandle_emode_mb;  		/**< energy mode MB panel handle */
+extern int panelHandle_emode_duc; 	 	/**< energy mode DUC panel handle */
+extern int panelHandle_emode_db;		/**< energy mode DB panel handle */
+extern int panelHandle_emode; 			/**< energy mode analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -98,7 +98,7 @@ extern OpenPETTree sys_config;  		/**< hardward system configuration */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callbackData,
+int CVICALLBACK InitializeEnergyMode (int panel, int event, void *callbackData,
 		int eventData1, int eventData2)
 {
 	char title_string[50];
@@ -107,15 +107,14 @@ int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callback
 	int idx_MB, idx_DUC, idx_DB, i, j, k;
 	int num_items=1;
 	int current_boards[3], idx=0;
-	int notInitializedFlag=0; // 1 if panel needs to be initialized
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			sprintf(title_string, "Oscilloscope Mode - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
+			sprintf(title_string, "Energy Mode - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
 			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
 		
 			// populate instrument tree
-			GetNumListItems (panel, OMODE_TREE, &num_items);
+			GetNumListItems (panel, EMODE_TREE, &num_items);
 			if(num_items==1) 
 			{
 				// need to create table
@@ -124,7 +123,7 @@ int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callback
 					//add MB as child
 					sprintf(item_label_MB, "MB%d", i);
 					strcpy(item_label, item_label_MB);	  // tag = MB0
-					idx_MB = InsertTreeItem (panel, OMODE_TREE, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
+					idx_MB = InsertTreeItem (panel, EMODE_TREE, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
 		
 					for(j=0; j<=sys_config.DUC; j++)	  // assumes same number of DUC into each MB
 					{
@@ -132,26 +131,26 @@ int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callback
 						sprintf(item_label_DUC, "DUC%d", j);
 						strcat(item_label, item_label_DUC);   // tag = MB0DUC0
 						strcpy(item_label_root, item_label);
-						idx_DUC = InsertTreeItem (panel, OMODE_TREE, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
+						idx_DUC = InsertTreeItem (panel, EMODE_TREE, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
 			
 						for(k=0; k<=sys_config.DB; k++)		 // assumes same number of DB into each DUC
 						{
 							//add DB as child
 							sprintf(item_label_DB, "DB%d", k); 
 							strcat(item_label, item_label_DB);   // tag = MB0DUC0DB0
-							idx_DB = InsertTreeItem (panel, OMODE_TREE, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
+							idx_DB = InsertTreeItem (panel, EMODE_TREE, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
 							strcpy(item_label,item_label_root);   // tag = MB0DUC0
 							if(k == current_location.DB)
-								SetTreeItemAttribute (panel, OMODE_TREE, idx_DB, ATTR_SELECTED, 1);
+								SetTreeItemAttribute (panel, EMODE_TREE, idx_DB, ATTR_SELECTED, 1);
 						}
 						strcpy(item_label,item_label_MB);   // tag = MB0
 						if(j != current_location.DUC)
-							SetTreeItemAttribute (panel, OMODE_TREE, idx_DUC, ATTR_COLLAPSED, 1);
+							SetTreeItemAttribute (panel, EMODE_TREE, idx_DUC, ATTR_COLLAPSED, 1);
 			
 					}
 					strcpy(item_label,"");   // tag = ""
 					if(i != current_location.MB)
-						SetTreeItemAttribute (panel, OMODE_TREE, idx_MB, ATTR_COLLAPSED, 1);
+						SetTreeItemAttribute (panel, EMODE_TREE, idx_MB, ATTR_COLLAPSED, 1);
 				}
 			} 
 			else 
@@ -160,34 +159,30 @@ int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callback
 				for(i=1; i<num_items; i++)
 				{
 					// collapse all
-					SetTreeItemAttribute (panel, OMODE_TREE, i, ATTR_COLLAPSED, 1);	
+					SetTreeItemAttribute (panel, EMODE_TREE, i, ATTR_COLLAPSED, 1);	
 				}
-			
-				// need to properly expand columns
-				// scroll through each item and compare item name??
-				// get a hold of item handle somehow, perhaps better insertion scheme
-				// GetTreeItermFromTag()
+
 				if(current_location.MB != -1)
 				{
 					sprintf(item_label, "MB%d", current_location.MB);
-					GetTreeItemFromTag (panel, OMODE_TREE, item_label, &idx_MB);
-					SetTreeItemAttribute (panel, OMODE_TREE, idx_MB, ATTR_COLLAPSED, 0);	
+					GetTreeItemFromTag (panel, EMODE_TREE, item_label, &idx_MB);
+					SetTreeItemAttribute (panel, EMODE_TREE, idx_MB, ATTR_COLLAPSED, 0);	
 				} 
 				if(current_location.DUC != -1)
 				{
 					sprintf(item_label, "MB%dDUC%d", current_location.MB, current_location.DUC);
-					GetTreeItemFromTag (panel, OMODE_TREE, item_label, &idx_DUC);
-					SetTreeItemAttribute (panel, OMODE_TREE, idx_DUC, ATTR_COLLAPSED, 0);	
+					GetTreeItemFromTag (panel, EMODE_TREE, item_label, &idx_DUC);
+					SetTreeItemAttribute (panel, EMODE_TREE, idx_DUC, ATTR_COLLAPSED, 0);	
 				} 
 				if(current_location.DB != -1)
 				{
 					sprintf(item_label, "MB%dDUC%dDB%d", current_location.MB, current_location.DUC, current_location.DB);
-					GetTreeItemFromTag (panel, OMODE_TREE, item_label, &idx_DB);
-					SetTreeItemAttribute (panel, OMODE_TREE, idx_DB, ATTR_SELECTED, 1);
+					GetTreeItemFromTag (panel, EMODE_TREE, item_label, &idx_DB);
+					SetTreeItemAttribute (panel, EMODE_TREE, idx_DB, ATTR_SELECTED, 1);
 				} 
 			}
 			
-			//SetActiveCtrl(panel, OMODE_TREE);
+			//SetActiveCtrl(panel, EMODE_TREE);
 			break;
 		case EVENT_LOST_FOCUS:
 
@@ -210,10 +205,10 @@ int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callback
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_omode_db - "OpenPET.c"
-	- extern int @ref panelHandle_omode - "OpenPET.c" 
+	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_emode_db - "OpenPET.c"
+	- extern int @ref panelHandle_emode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -233,7 +228,7 @@ int CVICALLBACK InitializeOscilloscopeMode (int panel, int event, void *callback
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK OscilloscopeModeTree (int panel, int control, int event,
+int CVICALLBACK EnergyModeTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -272,31 +267,31 @@ int CVICALLBACK OscilloscopeModeTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_omode_mb); 
-				StackPush(&panel_stack, panelHandle_omode_duc); 
-				StackPush(&panel_stack, panelHandle_omode_db);
+				StackPush(&panel_stack, panelHandle_emode_mb); 
+				StackPush(&panel_stack, panelHandle_emode_duc); 
+				StackPush(&panel_stack, panelHandle_emode_db);
 				
 				HidePanel (panel);				
-				DisplayPanel (panelHandle_omode);
+				DisplayPanel (panelHandle_emode);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_omode_mb); 
-				StackPush(&panel_stack, panelHandle_omode_duc); 
-				DisplayPanel(panelHandle_omode_db);
+				StackPush(&panel_stack, panelHandle_emode_mb); 
+				StackPush(&panel_stack, panelHandle_emode_duc); 
+				DisplayPanel(panelHandle_emode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_omode_mb); 
-				DisplayPanel(panelHandle_omode_duc);
+				StackPush(&panel_stack, panelHandle_emode_mb); 
+				DisplayPanel(panelHandle_emode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_omode_mb);
+				DisplayPanel(panelHandle_emode_mb);
 			}
 			else {
 				HidePanel(panel); 
@@ -311,31 +306,42 @@ int CVICALLBACK OscilloscopeModeTree (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK ShowEnergySpectrum (int panel, int control, int event,
+/** @brief This function gives the energy window ring control functionality
+	@param panel the panel handle of the panel on which the button is used
+	@param control the control on which the event is generated
+	@param event the type of event generated (i.e. left-click causes EVENT_COMMIT)
+	@param *callbackData stores the data returned to the UI handled internally by LabWindows
+	@param eventData1 stores ancillary information such as the mouse x-position within the panel
+	@param eventData2 stores ancillary information such as the mouse y-position within the panel
+	@return 1 or 0 specifies whether or not the event should be swallowed. 0 is default-no and 1 is yes-swallow.
+
+### ABNORMAL TERMINATION CONDITIONS, ERROR AND WARNING MESSAGES
+	Errors may be generated by CVI/LabWindows. The LabWindows documentation is available online 
+	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
+	
+###	ALGORITHM
+	Display only relevant information.
+	
+###	DEVELOPMENT HISTORY
+       Date    |  Author         |  Email Address     | Ver. |Description Of Change  
+	   --------|-----------------|--------------------|------|---------------------
+	 08/09/2013| George Netscher | gmnetscher@lbl.gov | 1.0  |conclusion of summer work
+	 
+### Copyright (c) 2013 by LBNL. All Rights Reserved.
+*/
+int CVICALLBACK DetermineEnergyWindow (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
-	int panelHandle_energyPopup;
+	int ring_index;
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			panelHandle_energyPopup = LoadPanel (0, "Analysis_OscilloscopeMode.uir", OMODE_ENGY);
-			InstallPopup (panelHandle_energyPopup);
-
-			break;
-		case EVENT_CLOSE:
-			RemovePopup(1);
-			break;
-	}
-	return 0;
-}
-
-int CVICALLBACK ClosePopup (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			RemovePopup(1); 
+			GetCtrlIndex (panelHandle_emode, EMODE_ANALYSIS_METHOD, &ring_index);
+			if(ring_index == 0) {
+				SetCtrlAttribute (panel, EMODE_METHOD_AMOUNT, ATTR_VISIBLE, 1);
+			} else {
+				SetCtrlAttribute (panel, EMODE_METHOD_AMOUNT, ATTR_VISIBLE, 0);
+			}
 			break;
 	}
 	return 0;

@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_EnergyMode_DB.c                          
-    @brief This file provides the functions needed for the energy mode DB screen.
+/** @file GUI_TimeMode_DB.c                          
+    @brief This file provides the functions needed for the time mode DB screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,14 +11,14 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_EnergyMode_DB.h" - provides connection to "Analysis_EnergyMode.uir"
+	- "GUI_TimeMode_DB.h" - provides connection to "GUI_TimeMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_timemode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_timemode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_timemode_db - "OpenPET.c"
+	- extern int @ref panelHandle_timemode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	
@@ -30,7 +30,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_EnergyMode_DB.h" must be added to the include path.
+	To call functions and structures in this file "GUI_TimeMode_DB.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -51,15 +51,15 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_EnergyMode_DB.h" 
+#include "GUI_TimeMode_DB.h" 
 #include "UI_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */
-extern int panelHandle_emode_mb;  		/**< energy mode MB panel handle */
-extern int panelHandle_emode_duc; 	 	/**< energy mode DUC panel handle */
-extern int panelHandle_emode_db;		/**< energy mode DB panel handle */
-extern int panelHandle_emode; 			/**< energy mode analysis screen panel handle */
+extern int panelHandle_timemode_mb;  	/**< time mode MB panel handle */
+extern int panelHandle_timemode_duc; 	/**< time mode DUC panel handle */
+extern int panelHandle_timemode_db;		/**< time mode DB panel handle */
+extern int panelHandle_timemode; 		/**< time mode analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -76,10 +76,10 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_timemode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_timemode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_timemode_db - "OpenPET.c"
+	- extern int @ref panelHandle_timemode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -98,42 +98,42 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK EnergyModeDB (int panel, int control, int event,
+int CVICALLBACK TimeModeDB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			// switch on control for MB0...MB7
+			// switch on control for DB0...DB7
 			switch (control)
 			{
-				case EMODEDB_BUTTON_0:
+				case TIMEMODEDB_BUTTON_0:
 					current_location.DB = 0;
 					break;
-				case EMODEDB_BUTTON_1:
+				case TIMEMODEDB_BUTTON_1:
 					current_location.DB = 1;
 					break;
-				case EMODEDB_BUTTON_2:
+				case TIMEMODEDB_BUTTON_2:
 					current_location.DB = 2;
 					break;
-				case EMODEDB_BUTTON_3:
+				case TIMEMODEDB_BUTTON_3:
 					current_location.DB = 3;
 					break;
-				case EMODEDB_BUTTON_4:
+				case TIMEMODEDB_BUTTON_4:
 					current_location.DB = 4;
 					break;
-				case EMODEDB_BUTTON_5:
+				case TIMEMODEDB_BUTTON_5:
 					current_location.DB = 5;
 					break;
-				case EMODEDB_BUTTON_6:
+				case TIMEMODEDB_BUTTON_6:
 					current_location.DB = 6;
 					break;
-				case EMODEDB_BUTTON_7:
+				case TIMEMODEDB_BUTTON_7:
 					current_location.DB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_emode);
+			DisplayPanel (panelHandle_timemode);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -152,10 +152,10 @@ int CVICALLBACK EnergyModeDB (int panel, int control, int event,
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_timemode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_timemode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_timemode_db - "OpenPET.c"
+	- extern int @ref panelHandle_timemode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -175,7 +175,7 @@ int CVICALLBACK EnergyModeDB (int panel, int control, int event,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK EnergyModeDBTree (int panel, int control, int event,
+int CVICALLBACK TimeModeDBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -213,31 +213,31 @@ int CVICALLBACK EnergyModeDBTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				StackPush(&panel_stack, panelHandle_emode_db);
+				StackPush(&panel_stack, panelHandle_timemode_mb); 
+				StackPush(&panel_stack, panelHandle_timemode_duc); 
+				StackPush(&panel_stack, panelHandle_timemode_db);
 				
 				HidePanel (panel);				
-				DisplayPanel (panelHandle_emode);
+				DisplayPanel (panelHandle_timemode);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				DisplayPanel(panelHandle_emode_db);
+				StackPush(&panel_stack, panelHandle_timemode_mb); 
+				StackPush(&panel_stack, panelHandle_timemode_duc); 
+				DisplayPanel(panelHandle_timemode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				DisplayPanel(panelHandle_emode_duc);
+				StackPush(&panel_stack, panelHandle_timemode_mb); 
+				DisplayPanel(panelHandle_timemode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_emode_mb);
+				DisplayPanel(panelHandle_timemode_mb);
 			}
 			else {
 				HidePanel(panel); 

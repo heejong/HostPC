@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_UserMode_DUC.c                          
-    @brief This file provides the functions needed for the user mode DUC screen.
+/** @file GUI_UserMode_MB.c                          
+    @brief This file provides the functions needed for the user mode MB screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,7 +11,7 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_UserDefinedMode_DUC.h" - provides connection to "Analysis_UserDefinedMode.uir"
+	- "GUI_UserDefinedMode_MB.h" - provides connection to "GUI_UserDefinedMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
@@ -30,7 +30,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_UserDefinedMode_DUC.h" must be added to the include path.
+	To call functions and structures in this file "GUI_UserDefinedMode_MB.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -51,7 +51,7 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_UserDefinedMode_DUC.h" 
+#include "GUI_UserDefinedMode_MB.h" 
 #include "UI_Common.h"
 
 // defined in OpenPET
@@ -98,42 +98,42 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK UserModeDUC (int panel, int control, int event,
+int CVICALLBACK UserModeMB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			// switch on control for DUC0...DUC7
+			// switch on control for MB0...MB7
 			switch (control)
 			{
-				case USERMODEDU_BUTTON_0:
-					current_location.DUC = 0;
+				case USERMODEMB_BUTTON_0:
+					current_location.MB = 0;
 					break;
-				case USERMODEDU_BUTTON_1:
-					current_location.DUC = 1;
+				case USERMODEMB_BUTTON_1:
+					current_location.MB = 1;
 					break;
-				case USERMODEDU_BUTTON_2:
-					current_location.DUC = 2;
+				case USERMODEMB_BUTTON_2:
+					current_location.MB = 2;
 					break;
-				case USERMODEDU_BUTTON_3:
-					current_location.DUC = 3;
+				case USERMODEMB_BUTTON_3:
+					current_location.MB = 3;
 					break;
-				case USERMODEDU_BUTTON_4:
-					current_location.DUC = 4;
+				case USERMODEMB_BUTTON_4:
+					current_location.MB = 4;
 					break;
-				case USERMODEDU_BUTTON_5:
-					current_location.DUC = 5;
+				case USERMODEMB_BUTTON_5:
+					current_location.MB = 5;
 					break;
-				case USERMODEDU_BUTTON_6:
-					current_location.DUC = 6;
+				case USERMODEMB_BUTTON_6:
+					current_location.MB = 6;
 					break;
-				case USERMODEDU_BUTTON_7:
-					current_location.DUC = 7;
+				case USERMODEMB_BUTTON_7:
+					current_location.MB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_usermode_db);
+			DisplayPanel (panelHandle_usermode_duc);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -175,7 +175,7 @@ int CVICALLBACK UserModeDUC (int panel, int control, int event,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK UserModeDUCTree (int panel, int control, int event,
+int CVICALLBACK UserModeMBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];

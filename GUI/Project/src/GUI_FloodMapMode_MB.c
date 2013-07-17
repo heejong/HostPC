@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_EnergyMode_DUC.c                          
-    @brief This file provides the functions needed for the energy mode DUC screen.
+/** @file GUI_FloodMapMode_MB.c                          
+    @brief This file provides the functions needed for the flood map mode MB screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,14 +11,13 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_EnergyMode_DUC.h" - provides connection to "Analysis_EnergyMode.uir"
+	- "GUI_FloodMapMode_MB.h" - provides connection to "GUI_FloodMapMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_fmmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_fmmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_fmmode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	
@@ -30,7 +29,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_EnergyMode_DUC.h" must be added to the include path.
+	To call functions and structures in this file "GUI_FloodMapMode_MB.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -51,15 +50,14 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_EnergyMode_DUC.h" 
+#include "GUI_FloodMapMode_MB.h" 
 #include "UI_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */
-extern int panelHandle_emode_mb;  		/**< energy mode MB panel handle */
-extern int panelHandle_emode_duc; 	 	/**< energy mode DUC panel handle */
-extern int panelHandle_emode_db;		/**< energy mode DB panel handle */
-extern int panelHandle_emode; 			/**< energy mode analysis screen panel handle */
+extern int panelHandle_fmmode_mb;  		/**< flood map mode MB panel handle */
+extern int panelHandle_fmmode_duc; 	 	/**< flood map mode DUC panel handle */
+extern int panelHandle_fmmode; 			/**< flood map mode analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -76,10 +74,9 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_fmmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_fmmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_fmmode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -98,7 +95,7 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK EnergyModeDUC (int panel, int control, int event,
+int CVICALLBACK FloodMapModeMB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -107,33 +104,33 @@ int CVICALLBACK EnergyModeDUC (int panel, int control, int event,
 			// switch on control for MB0...MB7
 			switch (control)
 			{
-				case EMODEDU_BUTTON_0:
-					current_location.DUC = 0;
+				case FMMODEMB_BUTTON_0:
+					current_location.MB = 0;
 					break;
-				case EMODEDU_BUTTON_1:
-					current_location.DUC = 1;
+				case FMMODEMB_BUTTON_1:
+					current_location.MB = 1;
 					break;
-				case EMODEDU_BUTTON_2:
-					current_location.DUC = 2;
+				case FMMODEMB_BUTTON_2:
+					current_location.MB = 2;
 					break;
-				case EMODEDU_BUTTON_3:
-					current_location.DUC = 3;
+				case FMMODEMB_BUTTON_3:
+					current_location.MB = 3;
 					break;
-				case EMODEDU_BUTTON_4:
-					current_location.DUC = 4;
+				case FMMODEMB_BUTTON_4:
+					current_location.MB = 4;
 					break;
-				case EMODEDU_BUTTON_5:
-					current_location.DUC = 5;
+				case FMMODEMB_BUTTON_5:
+					current_location.MB = 5;
 					break;
-				case EMODEDU_BUTTON_6:
-					current_location.DUC = 6;
+				case FMMODEMB_BUTTON_6:
+					current_location.MB = 6;
 					break;
-				case EMODEDU_BUTTON_7:
-					current_location.DUC = 7;
+				case FMMODEMB_BUTTON_7:
+					current_location.MB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_emode_db);
+			DisplayPanel (panelHandle_fmmode_duc);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -152,10 +149,9 @@ int CVICALLBACK EnergyModeDUC (int panel, int control, int event,
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_fmmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_fmmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_fmmode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -175,7 +171,7 @@ int CVICALLBACK EnergyModeDUC (int panel, int control, int event,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK EnergyModeDUCTree (int panel, int control, int event,
+int CVICALLBACK FloodMapModeMBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -211,33 +207,23 @@ int CVICALLBACK EnergyModeDUCTree (int panel, int control, int event,
 			}
 			
 			// determine proper panel to display
-			if(new_location.DB != -1) 
-			{
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				StackPush(&panel_stack, panelHandle_emode_db);
-				
-				HidePanel (panel);				
-				DisplayPanel (panelHandle_emode);
-				
-			}
-			else if (new_location.DUC != -1)
+			if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				DisplayPanel(panelHandle_emode_db);
+				StackPush(&panel_stack, panelHandle_fmmode_mb); 
+				StackPush(&panel_stack, panelHandle_fmmode_duc); 
+				DisplayPanel(panelHandle_fmmode);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				DisplayPanel(panelHandle_emode_duc);
+				StackPush(&panel_stack, panelHandle_fmmode_mb); 
+				DisplayPanel(panelHandle_fmmode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_emode_mb);
+				DisplayPanel(panelHandle_fmmode_mb);
 			}
 			else {
 				HidePanel(panel); 

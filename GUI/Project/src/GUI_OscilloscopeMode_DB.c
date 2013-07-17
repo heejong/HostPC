@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_EnergyMode_MB.c                          
-    @brief This file provides the functions needed for the energy mode MB screen.
+/** @file GUI_OscilloscopeMode_DB.c                          
+    @brief This file provides the functions needed for the oscilloscope mode DB screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,14 +11,14 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_EnergyMode_MB.h" - provides connection to "Analysis_EnergyMode.uir"
+	- "GUI_OscilloscopeMode_DB.h" - provides connection to "GUI_OscilloscopeMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_omode_db - "OpenPET.c"
+	- extern int @ref panelHandle_omode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	
@@ -30,7 +30,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_EnergyMode_MB.h" must be added to the include path.
+	To call functions and structures in this file "GUI_OscilloscopeMode_DB.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -51,15 +51,15 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_EnergyMode_MB.h" 
+#include "GUI_OscilloscopeMode_DB.h" 
 #include "UI_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */
-extern int panelHandle_emode_mb;  		/**< energy mode MB panel handle */
-extern int panelHandle_emode_duc; 	 	/**< energy mode DUC panel handle */
-extern int panelHandle_emode_db;		/**< energy mode DB panel handle */
-extern int panelHandle_emode; 			/**< energy mode analysis screen panel handle */
+extern int panelHandle_omode_mb;  		/**< oscilloscope mode MB panel handle */
+extern int panelHandle_omode_duc; 	 	/**< oscilloscope mode DUC panel handle */
+extern int panelHandle_omode_db;		/**< oscilloscope mode DB panel handle */
+extern int panelHandle_omode; 			/**< oscilloscope mode analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -76,10 +76,10 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_omode_db - "OpenPET.c"
+	- extern int @ref panelHandle_omode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -98,7 +98,7 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK EnergyModeMB (int panel, int control, int event,
+int CVICALLBACK OscilloscopeModeDB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -107,33 +107,33 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 			// switch on control for MB0...MB7
 			switch (control)
 			{
-				case EMODEMB_BUTTON_0:
-					current_location.MB = 0;
+				case OMODEDB_BUTTON_0:
+					current_location.DB = 0;
 					break;
-				case EMODEMB_BUTTON_1:
-					current_location.MB = 1;
+				case OMODEDB_BUTTON_1:
+					current_location.DB = 1;
 					break;
-				case EMODEMB_BUTTON_2:
-					current_location.MB = 2;
+				case OMODEDB_BUTTON_2:
+					current_location.DB = 2;
 					break;
-				case EMODEMB_BUTTON_3:
-					current_location.MB = 3;
+				case OMODEDB_BUTTON_3:
+					current_location.DB = 3;
 					break;
-				case EMODEMB_BUTTON_4:
-					current_location.MB = 4;
+				case OMODEDB_BUTTON_4:
+					current_location.DB = 4;
 					break;
-				case EMODEMB_BUTTON_5:
-					current_location.MB = 5;
+				case OMODEDB_BUTTON_5:
+					current_location.DB = 5;
 					break;
-				case EMODEMB_BUTTON_6:
-					current_location.MB = 6;
+				case OMODEDB_BUTTON_6:
+					current_location.DB = 6;
 					break;
-				case EMODEMB_BUTTON_7:
-					current_location.MB = 7;
+				case OMODEDB_BUTTON_7:
+					current_location.DB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_emode_duc);
+			DisplayPanel (panelHandle_omode);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -152,10 +152,10 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_emode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_emode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_emode_db - "OpenPET.c"
-	- extern int @ref panelHandle_emode - "OpenPET.c" 
+	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_omode_db - "OpenPET.c"
+	- extern int @ref panelHandle_omode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -175,7 +175,7 @@ int CVICALLBACK EnergyModeMB (int panel, int control, int event,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK EnergyModeMBTree (int panel, int control, int event,
+int CVICALLBACK OscilloscopeModeDBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -213,31 +213,31 @@ int CVICALLBACK EnergyModeMBTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				StackPush(&panel_stack, panelHandle_emode_db);
+				StackPush(&panel_stack, panelHandle_omode_mb); 
+				StackPush(&panel_stack, panelHandle_omode_duc); 
+				StackPush(&panel_stack, panelHandle_omode_db);
 				
 				HidePanel (panel);				
-				DisplayPanel (panelHandle_emode);
+				DisplayPanel (panelHandle_omode);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				StackPush(&panel_stack, panelHandle_emode_duc); 
-				DisplayPanel(panelHandle_emode_db);
+				StackPush(&panel_stack, panelHandle_omode_mb); 
+				StackPush(&panel_stack, panelHandle_omode_duc); 
+				DisplayPanel(panelHandle_omode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_emode_mb); 
-				DisplayPanel(panelHandle_emode_duc);
+				StackPush(&panel_stack, panelHandle_omode_mb); 
+				DisplayPanel(panelHandle_omode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_emode_mb);
+				DisplayPanel(panelHandle_omode_mb);
 			}
 			else {
 				HidePanel(panel); 

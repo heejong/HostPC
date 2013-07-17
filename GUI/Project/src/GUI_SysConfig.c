@@ -1,6 +1,6 @@
 #include <ansi_c.h>
 #include <userint.h>
-#include "Collection_SysConfig.h"
+#include "GUI_SysConfig.h"
 #include "UI_Common.h"
 
 extern int panelHandle_calibration;

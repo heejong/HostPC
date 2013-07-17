@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_UserMode_DB.c                          
-    @brief This file provides the functions needed for the user mode DB screen.
+/** @file GUI_TestMode_DB.c                          
+    @brief This file provides the functions needed for the test mode DB screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,14 +11,15 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_UserDefinedMode_DB.h" - provides connection to "Analysis_UserDefinedMode.uir"
+	- "GUI_TestMode_DB.h" - provides connection to "GUI_TestMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_db - "OpenPET.c"
-	- extern int @ref panelHandle_usermode - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
+	- extern int @ref panelHandle_testmode1 - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	
@@ -30,7 +31,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_UserDefinedMode_DB.h" must be added to the include path.
+	To call functions and structures in this file "GUI_TestMode_DB.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -51,15 +52,16 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_UserDefinedMode_DB.h" 
+#include "GUI_TestMode_DB.h" 
 #include "UI_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */
-extern int panelHandle_usermode_mb;  	/**< user mode MB panel handle */
-extern int panelHandle_usermode_duc; 	/**< user mode DUC panel handle */
-extern int panelHandle_usermode_db;		/**< user mode DB panel handle */
-extern int panelHandle_usermode; 		/**< user mode analysis screen panel handle */
+extern int panelHandle_testmode_mb; 	/**< test mode MB panel handle */
+extern int panelHandle_testmode_duc; 	/**< test mode DUC panel handle */
+extern int panelHandle_testmode_db;		/**< test mode DB panel handle */
+extern int panelHandle_testmode1; 		/**< test mode 1 analysis screen panel handle */
+extern int panelHandle_testmode2; 		/**< test mode 2 analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -76,10 +78,11 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_db - "OpenPET.c"
-	- extern int @ref panelHandle_usermode - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
+	- extern int @ref panelHandle_testmode1 - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -98,7 +101,7 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK UserModeDB (int panel, int control, int event,
+int CVICALLBACK TestModeDB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -107,35 +110,44 @@ int CVICALLBACK UserModeDB (int panel, int control, int event,
 			// switch on control for DB0...DB7
 			switch (control)
 			{
-				case USERMODEDB_BUTTON_0:
+				case TESTMODEDB_DB0_BUTTON:
 					current_location.DB = 0;
 					break;
-				case USERMODEDB_BUTTON_1:
+				case TESTMODEDB_DB1_BUTTON:
 					current_location.DB = 1;
 					break;
-				case USERMODEDB_BUTTON_2:
+				case TESTMODEDB_DB2_BUTTON:
 					current_location.DB = 2;
 					break;
-				case USERMODEDB_BUTTON_3:
+				case TESTMODEDB_DB3_BUTTON:
 					current_location.DB = 3;
 					break;
-				case USERMODEDB_BUTTON_4:
+				case TESTMODEDB_DB4_BUTTON:
 					current_location.DB = 4;
 					break;
-				case USERMODEDB_BUTTON_5:
+				case TESTMODEDB_DB5_BUTTON:
 					current_location.DB = 5;
 					break;
-				case USERMODEDB_BUTTON_6:
+				case TESTMODEDB_DB6_BUTTON:
 					current_location.DB = 6;
 					break;
-				case USERMODEDB_BUTTON_7:
+				case TESTMODEDB_DB7_BUTTON:
 					current_location.DB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_usermode);
+			HidePanel (panel);				
+				
+			if(strcmp(current_location.mode,"Test Mode 2") == 0)
+			{
+				DisplayPanel (panelHandle_testmode2);
+			}
+			else 
+			{	
+				DisplayPanel (panelHandle_testmode1);
+			}
+			
 			StackPush(&panel_stack, panel); 
-			HidePanel (panel);
 			break;
 	}
 	return 0;
@@ -152,10 +164,11 @@ int CVICALLBACK UserModeDB (int panel, int control, int event,
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_usermode_db - "OpenPET.c"
-	- extern int @ref panelHandle_usermode - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
+	- extern int @ref panelHandle_testmode1 - "OpenPET.c" 
+	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -175,7 +188,7 @@ int CVICALLBACK UserModeDB (int panel, int control, int event,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK UserModeDBTree (int panel, int control, int event,
+int CVICALLBACK TestModeDBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -213,31 +226,39 @@ int CVICALLBACK UserModeDBTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_usermode_mb); 
-				StackPush(&panel_stack, panelHandle_usermode_duc); 
-				StackPush(&panel_stack, panelHandle_usermode_db);
+				StackPush(&panel_stack, panelHandle_testmode_mb); 
+				StackPush(&panel_stack, panelHandle_testmode_duc); 
+				StackPush(&panel_stack, panelHandle_testmode_db);
 				
 				HidePanel (panel);				
-				DisplayPanel (panelHandle_usermode);
+				
+				if(strcmp(current_location.mode,"Test Mode 2") == 0)
+				{
+					DisplayPanel (panelHandle_testmode2);
+				}
+				else 
+				{	
+					DisplayPanel (panelHandle_testmode1);
+				}
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_usermode_mb); 
-				StackPush(&panel_stack, panelHandle_usermode_duc); 
-				DisplayPanel(panelHandle_usermode_db);
+				StackPush(&panel_stack, panelHandle_testmode_mb); 
+				StackPush(&panel_stack, panelHandle_testmode_duc); 
+				DisplayPanel(panelHandle_testmode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_usermode_mb); 
-				DisplayPanel(panelHandle_usermode_duc);
+				StackPush(&panel_stack, panelHandle_testmode_mb); 
+				DisplayPanel(panelHandle_testmode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_usermode_mb);
+				DisplayPanel(panelHandle_testmode_mb);
 			}
 			else {
 				HidePanel(panel); 

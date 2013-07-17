@@ -13,30 +13,30 @@
 	- "toolbox.h" - NI library providing support functions
 	- "UI_Common.h" - UI utility structures and functions
 	- "OpenPET.h" - header file linking this .c file to "OpenPET.uir"
-	- "Analysis_TestMode1.h" - test mode 1 analysis  
-	- "Analysis_TestMode2.h" - test mode 2 analysis 
-	- "Analysis_TestMode_MB.h" - test mode MB navigation
-	- "Analysis_TestMode_DUC.h" - test mode DUC navigation  
-	- "Analysis_TestMode_DB.h" - test mode DB navigation  
-	- "Analysis_EnergyMode.h" - energy mode analysis
-	- "Analysis_EnergyMode_MB.h" - energy mode MB navigation  
-	- "Analysis_EnergyMode_DUC.h" - energy mode DUC navigation  
-	- "Analysis_EnergyMode_DB.h" - energy mode DB navigation  
-	- "Analysis_FloodMapMode.h" - flood map mode analysis     
-	- "Analysis_FloodMapMode_MB.h" - flood map mode MB navigation    
-	- "Analysis_FloodMapMode_DUC.h" - flood map mode DUC navigation    
-	- "Analysis_TimeMode.h" - time mode analysis   
-	- "Analysis_TimeMode_MB.h" - time mode MB navigation 
-	- "Analysis_TimeMode_DUC.h" - time mode DUC navigation 
-	- "Analysis_TimeMode_DB.h" - time mode DB navigation 
-	- "Analysis_OscilloscopeMode.h" - oscilloscope mode analysis
-	- "Analysis_OscilloscopeMode_MB.h" - oscilloscope mode MB navigation  
-	- "Analysis_OscilloscopeMode_DUC.h" - oscilloscope mode DUC navigation 
-	- "Analysis_OscilloscopeMode_DB.h" - oscilloscope mode DB navigation 
-	- "Analysis_UserDefinedMode.h" - user mode analysis      
-	- "Analysis_UserDefinedMode_MB.h" - user mode MB navigation  
-	- "Analysis_UserDefinedMode_DUC.h" - user mode DUC navigation    
-	- "Analysis_UserDefinedMode_DB.h" - user mode DB navigation  
+	- "GUI_TestMode1.h" - test mode 1 analysis  
+	- "GUI_TestMode2.h" - test mode 2 analysis 
+	- "GUI_TestMode_MB.h" - test mode MB navigation
+	- "GUI_TestMode_DUC.h" - test mode DUC navigation  
+	- "GUI_TestMode_DB.h" - test mode DB navigation  
+	- "GUI_EnergyMode.h" - energy mode analysis
+	- "GUI_EnergyMode_MB.h" - energy mode MB navigation  
+	- "GUI_EnergyMode_DUC.h" - energy mode DUC navigation  
+	- "GUI_EnergyMode_DB.h" - energy mode DB navigation  
+	- "GUI_FloodMapMode.h" - flood map mode analysis     
+	- "GUI_FloodMapMode_MB.h" - flood map mode MB navigation    
+	- "GUI_FloodMapMode_DUC.h" - flood map mode DUC navigation    
+	- "GUI_TimeMode.h" - time mode analysis   
+	- "GUI_TimeMode_MB.h" - time mode MB navigation 
+	- "GUI_TimeMode_DUC.h" - time mode DUC navigation 
+	- "GUI_TimeMode_DB.h" - time mode DB navigation 
+	- "GUI_OscilloscopeMode.h" - oscilloscope mode analysis
+	- "GUI_OscilloscopeMode_MB.h" - oscilloscope mode MB navigation  
+	- "GUI_OscilloscopeMode_DUC.h" - oscilloscope mode DUC navigation 
+	- "GUI_OscilloscopeMode_DB.h" - oscilloscope mode DB navigation 
+	- "GUI_UserDefinedMode.h" - user mode analysis      
+	- "GUI_UserDefinedMode_MB.h" - user mode MB navigation  
+	- "GUI_UserDefinedMode_DUC.h" - user mode DUC navigation    
+	- "GUI_UserDefinedMode_DB.h" - user mode DB navigation  
 	
 ### EXTERNAL VARIABLES
     none    
@@ -89,32 +89,32 @@ The complete documentation for each file and each function is given under the fi
 #include "toolbox.h"
 
 #include "UI_Common.h"
-#include "Analysis_TestMode1.h" 
-#include "Analysis_TestMode2.h"
-#include "Analysis_TestMode_MB.h" 
-#include "Analysis_TestMode_DUC.h"  
-#include "Analysis_TestMode_DB.h"  
-#include "Analysis_EnergyMode.h"
-#include "Analysis_EnergyMode_MB.h" 
-#include "Analysis_EnergyMode_DUC.h" 
-#include "Analysis_EnergyMode_DB.h" 
-#include "Analysis_FloodMapMode.h"    
-#include "Analysis_FloodMapMode_MB.h"    
-#include "Analysis_FloodMapMode_DUC.h"    
-#include "Analysis_TimeMode.h"    
-#include "Analysis_TimeMode_MB.h" 
-#include "Analysis_TimeMode_DUC.h"
-#include "Analysis_TimeMode_DB.h"
-#include "Analysis_OscilloscopeMode.h"    
-#include "Analysis_OscilloscopeMode_MB.h" 
-#include "Analysis_OscilloscopeMode_DUC.h"
-#include "Analysis_OscilloscopeMode_DB.h"
-#include "Analysis_UserDefinedMode.h"    
-#include "Analysis_UserDefinedMode_MB.h"
-#include "Analysis_UserDefinedMode_DUC.h"  
-#include "Analysis_UserDefinedMode_DB.h"  
-#include "Collection_SysConfig.h"
-#include "Collection_Calibration.h"    
+#include "GUI_TestMode1.h" 
+#include "GUI_TestMode2.h"
+#include "GUI_TestMode_MB.h" 
+#include "GUI_TestMode_DUC.h"  
+#include "GUI_TestMode_DB.h"  
+#include "GUI_EnergyMode.h"
+#include "GUI_EnergyMode_MB.h" 
+#include "GUI_EnergyMode_DUC.h" 
+#include "GUI_EnergyMode_DB.h" 
+#include "GUI_FloodMapMode.h"    
+#include "GUI_FloodMapMode_MB.h"    
+#include "GUI_FloodMapMode_DUC.h"    
+#include "GUI_TimeMode.h"    
+#include "GUI_TimeMode_MB.h" 
+#include "GUI_TimeMode_DUC.h"
+#include "GUI_TimeMode_DB.h"
+#include "GUI_OscilloscopeMode.h"    
+#include "GUI_OscilloscopeMode_MB.h" 
+#include "GUI_OscilloscopeMode_DUC.h"
+#include "GUI_OscilloscopeMode_DB.h"
+#include "GUI_UserDefinedMode.h"    
+#include "GUI_UserDefinedMode_MB.h"
+#include "GUI_UserDefinedMode_DUC.h"  
+#include "GUI_UserDefinedMode_DB.h"  
+#include "GUI_SysConfig.h"
+#include "GUI_Calibration.h"    
 
 //==============================================================================
 // Constants
@@ -206,32 +206,32 @@ int main (int argc, char *argv[])
 	
     nullChk (InitCVIRTE (0, argv, 0));
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
-	errChk (panelHandle_testmode1 = LoadPanel (0, "Analysis_TestMode1.uir", TESTMODE1));   
-	errChk (panelHandle_testmode2 = LoadPanel (0, "Analysis_TestMode2.uir", TESTMODE2)); 
-	errChk (panelHandle_testmode_mb = LoadPanel (0, "Analysis_TestMode_MB.uir", TESTMODEMB));
-	errChk (panelHandle_testmode_duc = LoadPanel (0, "Analysis_TestMode_DUC.uir", TESTMODEDU)); 
-	errChk (panelHandle_testmode_db = LoadPanel (0, "Analysis_TestMode_DB.uir", TESTMODEDB)); 
-	errChk (panelHandle_emode = LoadPanel (0, "Analysis_EnergyMode.uir", EMODE)); 
-	errChk (panelHandle_emode_mb = LoadPanel (0, "Analysis_EnergyMode_MB.uir", EMODEMB));  
-	errChk (panelHandle_emode_duc = LoadPanel (0, "Analysis_EnergyMode_DUC.uir", EMODEDU));  
-	errChk (panelHandle_emode_db = LoadPanel (0, "Analysis_EnergyMode_DB.uir", EMODEDB));  
-	errChk (panelHandle_fmmode = LoadPanel (0, "Analysis_FloodMapMode.uir", FMMODE)); 
-	errChk (panelHandle_fmmode_mb = LoadPanel (0, "Analysis_FloodMapMode_MB.uir", FMMODEMB)); 
-	errChk (panelHandle_fmmode_duc = LoadPanel (0, "Analysis_FloodMapMode_DUC.uir", FMMODEDU)); 
-	errChk (panelHandle_timemode = LoadPanel (0, "Analysis_TimeMode.uir", TIMEMODE)); 
-	errChk (panelHandle_timemode_mb = LoadPanel (0, "Analysis_TimeMode_MB.uir", TIMEMODEMB)); 	
-	errChk (panelHandle_timemode_duc = LoadPanel (0, "Analysis_TimeMode_DUC.uir", TIMEMODEDU));
-	errChk (panelHandle_timemode_db = LoadPanel (0, "Analysis_TimeMode_DB.uir", TIMEMODEDB));
-	errChk (panelHandle_omode = LoadPanel (0, "Analysis_OscilloscopeMode.uir", OMODE)); 
-	errChk (panelHandle_omode_mb = LoadPanel (0, "Analysis_OscilloscopeMode_MB.uir", OMODEMB)); 
-	errChk (panelHandle_omode_duc = LoadPanel (0, "Analysis_OscilloscopeMode_DUC.uir", OMODEDU)); 
-	errChk (panelHandle_omode_db = LoadPanel (0, "Analysis_OscilloscopeMode_DB.uir", OMODEDB)); 
-	errChk (panelHandle_usermode = LoadPanel (0, "Analysis_UserDefinedMode.uir", USERMODE)); 
-	errChk (panelHandle_usermode_mb = LoadPanel (0, "Analysis_UserDefinedMode_MB.uir", USERMODEMB)); 
-	errChk (panelHandle_usermode_duc = LoadPanel (0, "Analysis_UserDefinedMode_DUC.uir", USERMODEDU)); 
-	errChk (panelHandle_usermode_db = LoadPanel (0, "Analysis_UserDefinedMode_DB.uir", USERMODEDB)); 
-	errChk (panelHandle_sysconfig = LoadPanel (0, "Collection_SysConfig.uir", SYSCONFIG));
-	errChk (panelHandle_calibration = LoadPanel (0, "Collection_Calibration.uir", CALIBRATE));
+	errChk (panelHandle_testmode1 = LoadPanel (0, "GUI_TestMode1.uir", TESTMODE1));   
+	errChk (panelHandle_testmode2 = LoadPanel (0, "GUI_TestMode2.uir", TESTMODE2)); 
+	errChk (panelHandle_testmode_mb = LoadPanel (0, "GUI_TestMode_MB.uir", TESTMODEMB));
+	errChk (panelHandle_testmode_duc = LoadPanel (0, "GUI_TestMode_DUC.uir", TESTMODEDU)); 
+	errChk (panelHandle_testmode_db = LoadPanel (0, "GUI_TestMode_DB.uir", TESTMODEDB)); 
+	errChk (panelHandle_emode = LoadPanel (0, "GUI_EnergyMode.uir", EMODE)); 
+	errChk (panelHandle_emode_mb = LoadPanel (0, "GUI_EnergyMode_MB.uir", EMODEMB));  
+	errChk (panelHandle_emode_duc = LoadPanel (0, "GUI_EnergyMode_DUC.uir", EMODEDU));  
+	errChk (panelHandle_emode_db = LoadPanel (0, "GUI_EnergyMode_DB.uir", EMODEDB));  
+	errChk (panelHandle_fmmode = LoadPanel (0, "GUI_FloodMapMode.uir", FMMODE)); 
+	errChk (panelHandle_fmmode_mb = LoadPanel (0, "GUI_FloodMapMode_MB.uir", FMMODEMB)); 
+	errChk (panelHandle_fmmode_duc = LoadPanel (0, "GUI_FloodMapMode_DUC.uir", FMMODEDU)); 
+	errChk (panelHandle_timemode = LoadPanel (0, "GUI_TimeMode.uir", TIMEMODE)); 
+	errChk (panelHandle_timemode_mb = LoadPanel (0, "GUI_TimeMode_MB.uir", TIMEMODEMB)); 	
+	errChk (panelHandle_timemode_duc = LoadPanel (0, "GUI_TimeMode_DUC.uir", TIMEMODEDU));
+	errChk (panelHandle_timemode_db = LoadPanel (0, "GUI_TimeMode_DB.uir", TIMEMODEDB));
+	errChk (panelHandle_omode = LoadPanel (0, "GUI_OscilloscopeMode.uir", OMODE)); 
+	errChk (panelHandle_omode_mb = LoadPanel (0, "GUI_OscilloscopeMode_MB.uir", OMODEMB)); 
+	errChk (panelHandle_omode_duc = LoadPanel (0, "GUI_OscilloscopeMode_DUC.uir", OMODEDU)); 
+	errChk (panelHandle_omode_db = LoadPanel (0, "GUI_OscilloscopeMode_DB.uir", OMODEDB)); 
+	errChk (panelHandle_usermode = LoadPanel (0, "GUI_UserDefinedMode.uir", USERMODE)); 
+	errChk (panelHandle_usermode_mb = LoadPanel (0, "GUI_UserDefinedMode_MB.uir", USERMODEMB)); 
+	errChk (panelHandle_usermode_duc = LoadPanel (0, "GUI_UserDefinedMode_DUC.uir", USERMODEDU)); 
+	errChk (panelHandle_usermode_db = LoadPanel (0, "GUI_UserDefinedMode_DB.uir", USERMODEDB)); 
+	errChk (panelHandle_sysconfig = LoadPanel (0, "GUI_SysConfig.uir", SYSCONFIG));
+	errChk (panelHandle_calibration = LoadPanel (0, "GUI_Calibration.uir", CALIBRATE));
     
     /* display the panel and run the user interface */
     errChk (DisplayPanel (panelHandle));

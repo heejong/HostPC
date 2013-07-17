@@ -1,6 +1,6 @@
 //==============================================================================
-/** @file Analysis_TestMode_DUC.c                          
-    @brief This file provides the functions needed for the test mode DUC screen.
+/** @file GUI_OscilloscopeMode_MB.c                          
+    @brief This file provides the functions needed for the oscilloscope mode MB screen.
 
 ### HARDWARE/FIRMWARE ENVIRONMENT
       OS    |    HW type     |    HW ver.   |          FW ver.  
@@ -11,15 +11,14 @@
     - <ansi_c.h> - NI library packaging together several common C libraries
 	- <userint.h> - the NI user interface library 
 	- "UI_Common.h" - UI utility structures and functions
-	- "Analysis_TestMode_DUC.h" - provides connection to "Analysis_TestMode.uir"
+	- "GUI_OscilloscopeMode_MB.h" - provides connection to "GUI_OscilloscopeMode.uir"
 	
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
-	- extern int @ref panelHandle_testmode1 - "OpenPET.c" 
-	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
+	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_omode_db - "OpenPET.c"
+	- extern int @ref panelHandle_omode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 	
@@ -31,7 +30,7 @@
 	at <a href="linkURL"> http://zone.ni.com/reference/en-XX/help/370051V-01/ </a>.
 	
 ### ASSUMPTIONS, CONSTRAINTS, RESTRICTIONS
-	To call functions and structures in this file "Analysis_TestMode_DUC.h" must be added to the include path.
+	To call functions and structures in this file "GUI_OscilloscopeMode_MB.h" must be added to the include path.
 	Assumptions for each variable and function are listed individually.	
 	
 ### NOTES
@@ -52,16 +51,15 @@
 
 #include <ansi_c.h>
 #include <userint.h>
-#include "Analysis_TestMode_DUC.h" 
+#include "GUI_OscilloscopeMode_MB.h" 
 #include "UI_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */
-extern int panelHandle_testmode_mb; 	/**< test mode MB panel handle */
-extern int panelHandle_testmode_duc; 	/**< test mode DUC panel handle */
-extern int panelHandle_testmode_db;		/**< test mode DB panel handle */
-extern int panelHandle_testmode1; 		/**< test mode 1 analysis screen panel handle */
-extern int panelHandle_testmode2; 		/**< test mode 2 analysis screen panel handle */
+extern int panelHandle_omode_mb;  		/**< oscilloscope mode MB panel handle */
+extern int panelHandle_omode_duc; 	 	/**< oscilloscope mode DUC panel handle */
+extern int panelHandle_omode_db;		/**< oscilloscope mode DB panel handle */
+extern int panelHandle_omode; 			/**< oscilloscope mode analysis screen panel handle */
 
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
@@ -78,11 +76,10 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
-	- extern int @ref panelHandle_testmode1 - "OpenPET.c" 
-	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
+	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_omode_db - "OpenPET.c"
+	- extern int @ref panelHandle_omode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -101,42 +98,42 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK TestModeDUC (int panel, int control, int event,
+int CVICALLBACK OscilloscopeModeMB (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			// switch on control for DUC0...DUC7 
+			// switch on control for MB0...MB7
 			switch (control)
 			{
-				case TESTMODEDU_DUC0_BUTTON:
-					current_location.DUC = 0;
+				case OMODEMB_BUTTON_0:
+					current_location.MB = 0;
 					break;
-				case TESTMODEDU_DUC1_BUTTON:
-					current_location.DUC = 1;
+				case OMODEMB_BUTTON_1:
+					current_location.MB = 1;
 					break;
-				case TESTMODEDU_DUC2_BUTTON:
-					current_location.DUC = 2;
+				case OMODEMB_BUTTON_2:
+					current_location.MB = 2;
 					break;
-				case TESTMODEDU_DUC3_BUTTON:
-					current_location.DUC = 3;
+				case OMODEMB_BUTTON_3:
+					current_location.MB = 3;
 					break;
-				case TESTMODEDU_DUC4_BUTTON:
-					current_location.DUC = 4;
+				case OMODEMB_BUTTON_4:
+					current_location.MB = 4;
 					break;
-				case TESTMODEDU_DUC5_BUTTON:
-					current_location.DUC = 5;
+				case OMODEMB_BUTTON_5:
+					current_location.MB = 5;
 					break;
-				case TESTMODEDU_DUC6_BUTTON:
-					current_location.DUC = 6;
+				case OMODEMB_BUTTON_6:
+					current_location.MB = 6;
 					break;
-				case TESTMODEDU_DUC7_BUTTON:
-					current_location.DUC = 7;
+				case OMODEMB_BUTTON_7:
+					current_location.MB = 7;
 					break;
 			}
 			
-			DisplayPanel (panelHandle_testmode_db);
+			DisplayPanel (panelHandle_omode_duc);
 			StackPush(&panel_stack, panel); 
 			HidePanel (panel);
 			break;
@@ -155,11 +152,10 @@ int CVICALLBACK TestModeDUC (int panel, int control, int event,
 
 ### EXTERNAL VARIABLES
     - extern int @ref panelHandle - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_mb - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_duc - "OpenPET.c"
-	- extern int @ref panelHandle_testmode_db - "OpenPET.c"
-	- extern int @ref panelHandle_testmode1 - "OpenPET.c" 
-	- extern int @ref panelHandle_testmode2 - "OpenPET.c" 
+	- extern int @ref panelHandle_omode_mb - "OpenPET.c"
+	- extern int @ref panelHandle_omode_duc - "OpenPET.c"
+	- extern int @ref panelHandle_omode_db - "OpenPET.c"
+	- extern int @ref panelHandle_omode - "OpenPET.c" 
 	- extern Stack @ref panel_stack - "UI_Common.c"
 	- extern OpenPETTree @ref current_location - "UI_Common.c"
 
@@ -179,7 +175,7 @@ int CVICALLBACK TestModeDUC (int panel, int control, int event,
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int CVICALLBACK TestModeDUCTree (int panel, int control, int event,
+int CVICALLBACK OscilloscopeModeMBTree (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)
 {
 	char item_tag[32];
@@ -217,39 +213,31 @@ int CVICALLBACK TestModeDUCTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_testmode_mb); 
-				StackPush(&panel_stack, panelHandle_testmode_duc); 
-				StackPush(&panel_stack, panelHandle_testmode_db);
+				StackPush(&panel_stack, panelHandle_omode_mb); 
+				StackPush(&panel_stack, panelHandle_omode_duc); 
+				StackPush(&panel_stack, panelHandle_omode_db);
 				
 				HidePanel (panel);				
-				
-				if(strcmp(current_location.mode,"Test Mode 2") == 0)
-				{
-					DisplayPanel (panelHandle_testmode2);
-				}
-				else 
-				{	
-					DisplayPanel (panelHandle_testmode1);
-				}
+				DisplayPanel (panelHandle_omode);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
 				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_testmode_mb); 
-				StackPush(&panel_stack, panelHandle_testmode_duc); 
-				DisplayPanel(panelHandle_testmode_db);
+				StackPush(&panel_stack, panelHandle_omode_mb); 
+				StackPush(&panel_stack, panelHandle_omode_duc); 
+				DisplayPanel(panelHandle_omode_db);
 			}
 			else if (new_location.MB != -1)
 			{
 				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_testmode_mb); 
-				DisplayPanel(panelHandle_testmode_duc);
+				StackPush(&panel_stack, panelHandle_omode_mb); 
+				DisplayPanel(panelHandle_omode_duc);
 			}
 			else if (new_location.MB == -1)
 			{
 				HidePanel(panel);
-				DisplayPanel(panelHandle_testmode_mb);
+				DisplayPanel(panelHandle_omode_mb);
 			}
 			else {
 				HidePanel(panel); 
