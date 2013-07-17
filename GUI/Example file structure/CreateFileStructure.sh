@@ -6,9 +6,8 @@ then
 	exit 0
 fi
 
-
-# clean up previous attempt
-rm -rf "REPORT_data_07172013"
+# clean up previous file structure
+rm -rf "REPORT_data_07162013"
 
 
 # Specify summary text strings
@@ -52,16 +51,10 @@ TEST1TEXT="1234	1431	1232	897	982	897	1233	923	423	324	1421"
 
 TEST2TEXT="1432	892	314	1234	983	234	897	982	1234	1242	1321"
 
-OSCILLOSCOPETEXT=
-
-ENERGYTEXT=
-
-TIMETEXT=
-
 
 # create main folder
-mkdir "REPORT_data_07172013"
-cd "REPORT_data_07172013"
+mkdir "REPORT_data_07162013"
+cd "REPORT_data_07162013"
 
 # write Summary text
 echo "$MBSUMMARYTEXT" > Summary.txt
@@ -107,6 +100,9 @@ do
 			elif  [[ $1 == "user" ]] 
 			then 
 				cp ../../../../FakeData/UserMode.txt ./
+			else
+				echo 'Invalid mode argument: "oscilloscope", "test1", "test2", "time", "energy", "floodmap", "user"'
+				exit 0
 			fi 
 			cd ..
 	
