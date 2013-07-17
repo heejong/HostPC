@@ -345,6 +345,8 @@ int StackPop(Stack *S);
 */
 void OpenPETTreeInit(OpenPETTree *T);
 
+int AnalyzeListModeData( FILE *input_file );
+
 /** @brief This function initializes each of the panels used to navigate the hardware tree. It is called
            automatically by each tree panel.
 	@param panel the panel handle of the panel on which the button is used

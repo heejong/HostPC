@@ -3,11 +3,18 @@
 This folder provides an example file structure for OpenPET data. The OpenPET firmware will generate
 the data_*.dat and data_*.hdr files. The Host PC is responsible for taking the list mode data 
 contained within the binary data_*.dat file and translating it into a REPORT_data_*.dat file structure.
-A list mode analysis function will need to be written in order to read this list mode data and generate 
-a file structure similar to the one shown here. The function should take a file pointer to a
-data_*.dat as its input and generate the file structure described in this document as its output. 
 It can read the corresponding data_*.hdr file to determine the type of data and required report 
 structure to be generated.
+
+A list mode analysis function will need to be written in order to read this list mode data and generate 
+a file structure similar to the one shown here. The function should take a file pointer to a
+data_*.dat as its input and generate the file structure described in this document. It should generate
+an integer output representing success or failure. Following the LabWindows standard, 0 represents
+success, -1 represents failure, and other integers are available to define warnings/errors as needed. 
+
+Please, use this exact function prototype
+
+	int AnalyzeListModeData( FILE *input_file );
 
 
 --- HOW TO GENERATE EXAMPLE REPORT STRUCTURES ---
