@@ -16,3 +16,22 @@ Please note that all file names and folder names must be repeated verbatim in th
 function. The GUI will search this file tree to properly display data. If file names and folder names do 
 not match, it will not perform properly.
 
+The data files at the bottom of the REPORT tree must contain only numeric data.
+All numeric data must be separated by tabs ('\t').
+1D arrays are given in one row. 2D arrays are given in a row-by-row basis with each row describing
+a discrete unit (i.e. one row per crystal). Rows must end in a new line character ('\n');
+The structure for each is as follows:
+	- Test Mode 1 & 2
+		+ 1 file per DB
+		+ each file contains a 1D array in 1 row
+		+ the values in the 1D array correspond to the number of bit errors in that bit position
+			- for example, if 1000 11-bit test words are sent and bit 3 is detected incorrectly 200 times
+			  while all other bits are detected correctly
+			- 0	0	0	200	0	0	0	0	0	0	0
+	- Energy Mode
+		+ 4 or 8 files per DB (1 file per block, 1 block per 4 channels, 16 or 32 channels per DB)
+		+ each file contains a 2D array describing block energy data with 1 row per crystal
+			- for example, a block of 16 x 16 crystals will provide an array of 256 rows
+	- Flood Map Mode
+		+ 4 or 8 files per DB (1 file per block, 1 block per 4 channels, 16 or 32 channels per DB)
+		+ each file contains a 2D array describing block flood map
