@@ -92,24 +92,17 @@ do
 			then
 				echo "$TEST2TEXT" > TestMode2.txt
 			elif [[ $1 == "oscilloscope" ]] 
-			then 
-				echo "$OSCILLOSCOPETEXT" > TestMode2.txt
+			then 				
+				cp ../../../../FakeData/OscilloscopeMode_*.txt ./
 			elif  [[ $1 == "time" ]] 
 			then 
-				echo "$TIMETEXT" > TestMode2.txt
+				cp ../../../../FakeData/TimeMode_*.txt ./
 			elif  [[ $1 == "energy" ]] 
 			then 
-				echo "$ENERGYTEXT" > TestMode2.txt
+				cp ../../../../FakeData/EnergyMode_*.txt ./
 			elif  [[ $1 == "floodmap" ]] 
 			then 
-				cp ../../../../FakeData/FloodMap_Block1.txt ./
-				cp ../../../../FakeData/FloodMap_Block2.txt ./
-				cp ../../../../FakeData/FloodMap_Block3.txt ./
-				cp ../../../../FakeData/FloodMap_Block4.txt ./
-				cp ../../../../FakeData/FloodMap_Block5.txt ./
-				cp ../../../../FakeData/FloodMap_Block6.txt ./
-				cp ../../../../FakeData/FloodMap_Block7.txt ./
-				cp ../../../../FakeData/FloodMap_Block8.txt ./
+				cp ../../../../FakeData/FloodMapMode_*.txt ./
 
 			elif  [[ $1 == "user" ]] 
 			then 
