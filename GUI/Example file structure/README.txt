@@ -1,7 +1,7 @@
-This folder provides an example file structure for OpenPET data. The OpenPET firmware will generate
-the data_*.dat and data_*.hdr files. The Host PC is responsible for taking the list mode data 
 --- INTRODUCTION ---
 
+This folder provides an example file structure for OpenPET data. The OpenPET firmware will generate
+the data_*.dat and data_*.hdr files. The Host PC is responsible for taking the list mode data 
 contained within the binary data_*.dat file and translating it into a REPORT_data_*.dat file structure.
 A list mode analysis function will need to be written in order to read this list mode data and generate 
 a file structure similar to the one shown here.
