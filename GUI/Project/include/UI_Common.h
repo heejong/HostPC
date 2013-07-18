@@ -105,14 +105,17 @@ typedef struct OpenPETTree {
 	MB stores the current Multiplexer Board
 	*/
 	short int MB;
+	
 	/**
 	DUC stores the current Detector Unit Controller
 	*/
 	short int DUC;
+	
 	/**
 	DB stores the current Detector Board
 	*/
 	short int DB;
+	
 	/**
 	mode stores the current analysis mode as a string literal limited to {"Time Mode", "Energy Mode",
 	"Test Mode 1", "Test Mode 2", "Flood Map Mode", "User Mode"}.
@@ -120,16 +123,37 @@ typedef struct OpenPETTree {
 	char mode[20]; 
 } OpenPETTree;
 
+/** @brief OpenPETSysConfig structure stores the complete hardware system configuration in lookup tables.
+
+This data structure stores the boards that are attached to the OpenPET system. OpenPET can be set up as
+a small-sized system with only detector boards attached (DB), as a medium-sized system with DB attached to
+detector unit controllers (DUC), or as a large-sized system with DUC attached to multiplexer boards (MB).
+The setup type is stored as a string in the variable 'system'. Three lookup tables are provided (one for
+each type of setup) to store which boards are connected. Only one lookup table at a time will be used
+based on the specified setup type.
+*/
 typedef struct OpenPETSysConfig {
-// store each possible system configuration as lookup table
-// 1 means a board is present; 0 means not present
+	/**
+	Small[] is a lookup table for the small-sized system configuration
+	1 means a board is present; 0 means not present; -1 means present but disabled by user
+	*/
 	short int Small[DB_MAX];
 	
+	/**
+	Medium[][] is a lookup table for the medium-sized system configuration
+	1 means a board is present; 0 means not present; -1 means present but disabled by user
+	*/
 	short int Medium[DUC_MAX][DB_MAX];
 	
+	/**
+	Large[][][] is a lookup table for the large-sized system configuration
+	1 means a board is present; 0 means not present; -1 means present but disabled by user
+	*/
 	short int Large[MB_MAX][DUC_MAX][DB_MAX];
 
-	// "Large", "Medium", "Small", and if not initialized then "NULL" 
+	/**
+	system stores the current setup type as a string literal limited to {"Large", "Medium", "Small"}.
+	*/  
 	char system[10];
 } OpenPETSysConfig;
 
