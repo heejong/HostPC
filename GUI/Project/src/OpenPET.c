@@ -162,6 +162,7 @@ extern Stack panel_stack;
 //extern PanelAppearance appearance; 
 extern OpenPETTree current_location;
 extern OpenPETTree sys_config;
+extern OpenPETSysConfig sys_config1;
 
 //==============================================================================
 // Global functions
@@ -198,7 +199,7 @@ int main (int argc, char *argv[])
     /* initialize and load resources */
 	StackInit(&panel_stack);
 	OpenPETTreeInit(&current_location);
-	//OpenPETTreeInit(&sys_config);
+	OpenPETSysConfigRead(&sys_config1);
 	sys_config.MB = 1;
 	sys_config.DUC = 7;  // example setup used for test
 	sys_config.DB = 7;

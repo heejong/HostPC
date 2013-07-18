@@ -79,7 +79,8 @@ extern int panelHandle;
 Stack panel_stack;
 //PanelAppearance appearance; 
 OpenPETTree current_location; // used to show the currently specified location in the tree
-OpenPETTree sys_config;		  // used to show the full system tree
+OpenPETTree sys_config;
+OpenPETSysConfig sys_config1;		  // used to show the full system tree
 
 //==============================================================================
 // Global functions
@@ -210,6 +211,60 @@ void OpenPETTreeInit(OpenPETTree *T)
 	strcpy(T->mode,"NULL");
 	return;
 }
+
+int OpenPETSysConfigRead(OpenPETSysConfig *config /*, *data_stream */) 
+{
+	// this function will need to be rewritten to read from the USB data stream
+	// once that data format has been specified
+	// should first determine if Small, Medium, or Large setup
+	// then, fill in appropriate look up table
+	// return 0 if successful and -1 if it fails to open the stream, etc.
+	
+	// for now, simply read in dummy values
+	int i, j, k, set_value=1;
+	int MB_desired=2, DUC_desired=8, DB_desired=8;
+	strcpy(config->system,"Large");
+	
+	if( strcmp(config->system,"Large") == 0 )
+	{
+		for(i=0; i<MB_MAX; i++) 
+		{
+			if(i>=MB_desired)
+				set_value=0;
+			for(j=0; j<DUC_MAX; j++)
+			{
+				for(k=0; k<DB_MAX; k++)
+				{
+					config->Large[i][j][k]=set_value;	
+				}
+			}
+		}
+	}
+	
+	if( strcmp(config->system,"Medium") == 0 )
+	{
+		for(j=0; j<DUC_MAX; j++)
+		{
+			for(k=0; k<DB_MAX; k++)
+			{
+				config->Medium[j][k]=set_value;	
+			}
+		}
+	}
+	
+	if( strcmp(config->system,"Small") == 0 )
+	{
+		for(k=0; k<DB_MAX; k++)
+		{
+			config->Small[k]=set_value;	
+		}
+	}
+	
+	return 0;
+	
+	
+}
+
 
 /*
 Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[], double timewindow, unsigned short int sofwareversion, unsigned short int firmware version ) 
