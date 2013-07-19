@@ -65,7 +65,7 @@ extern int panelHandle_emode; 			/**< energy mode analysis screen panel handle *
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
 extern OpenPETTree current_location;	/**< current location in panel tree */
-extern OpenPETSysConfig sys_config;  		/**< hardward system configuration */
+extern OpenPETTree sys_config;  		/**< hardward system configuration */
 
 /** @brief This function initializes the panel
 	@param panel the panel handle of the panel on which the button is used

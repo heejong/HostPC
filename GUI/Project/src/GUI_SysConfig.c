@@ -6,7 +6,7 @@
 extern int panelHandle_calibration;
 extern Stack panel_stack;   // defined in UI_Common  
 extern OpenPETTree current_location;
-extern OpenPETSysConfig sys_config;  
+extern OpenPETTree sys_config;  
 
 int CVICALLBACK SaveSetup (int panel, int control, int event,
 		void *callbackData, int eventData1, int eventData2)

@@ -80,7 +80,7 @@ Stack panel_stack;
 //PanelAppearance appearance; 
 OpenPETTree current_location; // used to show the currently specified location in the tree
 OpenPETTree sys_config;
-OpenPETSysConfig sys_config1;		  // used to show the full system tree
+OpenPETSystemNode *sys_config1;		  // used to show the full system tree
 
 //==============================================================================
 // Global functions
@@ -212,7 +212,7 @@ void OpenPETTreeInit(OpenPETTree *T)
 	return;
 }
 
-int OpenPETSysConfigRead(OpenPETSysConfig *config /*, *data_stream */) 
+int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */) 
 {
 	// this function will need to be rewritten to read from the USB data stream
 	// once that data format has been specified
@@ -221,48 +221,46 @@ int OpenPETSysConfigRead(OpenPETSysConfig *config /*, *data_stream */)
 	// return 0 if successful and -1 if it fails to open the stream, etc.
 	
 	// for now, simply read in dummy values
-	int i, j, k, set_value=1;
-	int MB_desired=2, DUC_desired=8, DB_desired=8;
-	strcpy(config->system,"Large");
-	
-	if( strcmp(config->system,"Large") == 0 )
-	{
-		for(i=0; i<MB_MAX; i++) 
-		{
-			if(i>=MB_desired)
-				set_value=0;
-			for(j=0; j<DUC_MAX; j++)
-			{
-				for(k=0; k<DB_MAX; k++)
-				{
-					config->Large[i][j][k]=set_value;	
-				}
-			}
-		}
-	}
-	
-	if( strcmp(config->system,"Medium") == 0 )
-	{
-		for(j=0; j<DUC_MAX; j++)
-		{
-			for(k=0; k<DB_MAX; k++)
-			{
-				config->Medium[j][k]=set_value;	
-			}
-		}
-	}
-	
-	if( strcmp(config->system,"Small") == 0 )
-	{
-		for(k=0; k<DB_MAX; k++)
-		{
-			config->Small[k]=set_value;	
-		}
-	}
+	OffspringProfile profile;
+	unsigned short int MB_status[8] = {1,1,0,0,0,0,0,0};
+	unsigned short int ones[8] = {1,1,1,1,1,1,1,1};
+	unsigned short int type_address[16] = {0};
+
+	memcpy(profile.status, MB_status, sizeof(profile.status));
+	memcpy(profile.enable, ones, sizeof(ones));
+	memcpy(profile.type_address, type_address, sizeof(type_address));
+	profile.type_address[0]=0;
+	profile.type_address[1]=0;
+	profile.type_address[2]=0;
+	profile.type_address[3]=0;
+		
+	sys_config1 = CreateSystemNode(profile);
+	//config->profile->
 	
 	return 0;
 	
 	
+}
+
+OpenPETSystemNode* CreateSystemNode(OffspringProfile profile) 
+{
+	OpenPETSystemNode *new_node = (OpenPETSystemNode*) malloc(sizeof(OpenPETSystemNode));
+	if(new_node == NULL)
+	{
+		fprintf(stderr, "Error: Unable to allocate memory for OpenPETSystemNode in CreateSystemNode()\n");
+		exit(1);
+	}
+	new_node->profile = profile;
+	new_node->B0 = NULL;
+	new_node->B1 = NULL;
+	new_node->B2 = NULL;
+	new_node->B3 = NULL;
+	new_node->B4 = NULL;
+	new_node->B5 = NULL;
+	new_node->B6 = NULL;
+	new_node->B7 = NULL;
+	
+	return new_node;
 }
 
 

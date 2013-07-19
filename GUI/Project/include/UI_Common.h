@@ -130,7 +130,10 @@ a small-sized system with only detector boards attached (DB), as a medium-sized 
 detector unit controllers (DUC), or as a large-sized system with DUC attached to multiplexer boards (MB).
 The setup type is stored as a string in the variable 'system'. Three lookup tables are provided (one for
 each type of setup) to store which boards are connected. Only one lookup table at a time will be used
-based on the specified setup type.
+based on the specified setup type. Three different lookup tables have been specified in order to properly
+distinguish between a system with 1 DB connected directly from a system with 1 DB connected to 1 DUC from a
+system with 1 DB connected to 1 DUC connected to 1 MB. These would all occupy the first row of a single 
+lookup table in exactly the same way.
 */
 typedef struct OpenPETSysConfig {
 	/**
@@ -156,6 +159,28 @@ typedef struct OpenPETSysConfig {
 	*/  
 	char system[10];
 } OpenPETSysConfig;
+
+
+typedef struct OffspringProfile {
+	unsigned short int status[8];
+	unsigned short int enable[8];
+	unsigned short int type_address[16];	
+} OffspringProfile;
+
+typedef struct OpenPETSystemNode {
+	
+	struct OffspringProfile profile;
+	
+	struct OpenPETSystemNode *B0;
+	struct OpenPETSystemNode *B1;
+	struct OpenPETSystemNode *B2;
+	struct OpenPETSystemNode *B3;
+	struct OpenPETSystemNode *B4;
+	struct OpenPETSystemNode *B5;
+	struct OpenPETSystemNode *B6;
+	struct OpenPETSystemNode *B7;
+	
+} OpenPETSystemNode;
 
 
 // used to keep window in the same location when changing between panels
@@ -411,7 +436,7 @@ void OpenPETTreeInit(OpenPETTree *T);
 	 
 ### Copyright (c) 2013 by LBNL. All Rights Reserved.
 */
-int OpenPETSysConfigRead(OpenPETSysConfig *config /*, *data_stream */);
+int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */);
 
 /** @brief This function initializes each of the panels used to navigate the hardware tree. It is called
            automatically by each tree panel.
@@ -469,6 +494,7 @@ int CheckButtonEventError(char control_name[]);
 //void RecallPanelAppearance(int panel, PanelAppearance *appearance);
 //Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */);
 
+OpenPETSystemNode* CreateSystemNode(OffspringProfile profile);
 
 #ifdef __cplusplus
     }

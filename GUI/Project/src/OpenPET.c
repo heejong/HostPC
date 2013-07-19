@@ -161,7 +161,8 @@ int panelHandle_calibration;
 extern Stack panel_stack;
 //extern PanelAppearance appearance; 
 extern OpenPETTree current_location;
-extern OpenPETSysConfig sys_config;
+extern OpenPETTree sys_config;
+extern OpenPETSystemNode *sys_config1; 
 
 //==============================================================================
 // Global functions
@@ -198,7 +199,7 @@ int main (int argc, char *argv[])
     /* initialize and load resources */
 	StackInit(&panel_stack);
 	OpenPETTreeInit(&current_location);
-	OpenPETSysConfigRead(&sys_config);
+	OpenPETSystemRead(sys_config1);
 
     nullChk (InitCVIRTE (0, argv, 0));
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
