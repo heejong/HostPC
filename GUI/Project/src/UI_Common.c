@@ -222,9 +222,11 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */)
 	
 	// for now, simply read in dummy values
 	OffspringProfile profile;
+	OpenPETSystemNode *MB, *DUC, *DB;	
 	unsigned short int MB_status[8] = {1,1,0,0,0,0,0,0};
 	unsigned short int ones[8] = {1,1,1,1,1,1,1,1};
 	unsigned short int type_address[16] = {0};
+	int i, j, k;
 
 	memcpy(profile.status, MB_status, sizeof(profile.status));
 	memcpy(profile.enable, ones, sizeof(ones));
@@ -234,8 +236,23 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */)
 	profile.type_address[2]=0;
 	profile.type_address[3]=0;
 		
-	sys_config1 = CreateSystemNode(profile);
-	//config->profile->
+	//add nodes
+	sys_config1 = InsertSystemNode(sys_config1, 0, profile);
+	for(i=0; i<2; i++)
+	{
+		MB = InsertSystemNode(sys_config1, i, profile);
+		for(j=0; j<7; j++)
+		{
+			// in real function, should read each DUC profile
+			DUC = InsertSystemNode(MB, j, profile);
+			for(k=0; k<7; k++)
+			{
+				// in real function, should read each DB profile
+				DB = InsertSystemNode(DUC, k, profile);	
+			}
+		}
+	}
+	
 	
 	return 0;
 	
@@ -261,6 +278,70 @@ OpenPETSystemNode* CreateSystemNode(OffspringProfile profile)
 	new_node->B7 = NULL;
 	
 	return new_node;
+}
+
+
+OpenPETSystemNode* InsertSystemNode( OpenPETSystemNode *root, unsigned short int position, OffspringProfile profile)
+{
+	if(root == NULL) 
+	{
+		root = CreateSystemNode(profile);
+		return root;
+	}
+	else 
+	{
+		switch(position)
+		{
+			case 0:
+				root->B0 = CreateSystemNode(profile);
+				return root->B0;
+			case 1:
+				root->B1 = CreateSystemNode(profile);
+				return root->B1;
+			case 2:
+				root->B2 = CreateSystemNode(profile);
+				return root->B2;
+			case 3:
+				root->B3 = CreateSystemNode(profile);
+				return root->B3;
+			case 4:
+				root->B4 = CreateSystemNode(profile);
+				return root->B4;
+			case 5:
+				root->B5 = CreateSystemNode(profile);
+				return root->B5;
+			case 6:
+				root->B6 = CreateSystemNode(profile);
+				return root->B6;
+			case 7:
+				root->B7 = CreateSystemNode(profile);
+				return root->B7;
+			default:
+				fprintf(stderr, "Error: System nodes must be placed in position [0-7]. Illegal placement input to InsertSystemNode()");
+				exit(1);
+		}
+	}
+	
+	return root;
+		
+}
+
+void DisposeAllSystemNodes(OpenPETSystemNode *root) 
+{
+	// clean up all memory by recursively removing all system nodes
+	if(root != NULL)
+	{
+		DisposeAllSystemNodes( root->B0 );		
+		DisposeAllSystemNodes( root->B1 );
+		DisposeAllSystemNodes( root->B2 );
+		DisposeAllSystemNodes( root->B3 );
+		DisposeAllSystemNodes( root->B4 );
+		DisposeAllSystemNodes( root->B5 );
+		DisposeAllSystemNodes( root->B6 );
+		DisposeAllSystemNodes( root->B7 );
+		
+		free( root );
+	}
 }
 
 

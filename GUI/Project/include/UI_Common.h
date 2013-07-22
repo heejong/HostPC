@@ -496,6 +496,10 @@ int CheckButtonEventError(char control_name[]);
 
 OpenPETSystemNode* CreateSystemNode(OffspringProfile profile);
 
+OpenPETSystemNode* InsertSystemNode( OpenPETSystemNode *parent, unsigned short int position, OffspringProfile profile);
+
+void DisposeAllSystemNodes(OpenPETSystemNode *root);
+
 #ifdef __cplusplus
     }
 #endif
