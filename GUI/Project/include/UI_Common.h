@@ -160,15 +160,21 @@ typedef struct OpenPETSysConfig {
 	char system[10];
 } OpenPETSysConfig;
 
+typedef struct NodeConfiguration {
+	unsigned short int type_address[16];  // node type and absolute address	
+	float firmware_version;		          // firmware version number
+	float software_version;				  // software version number
+	unsigned short int node_integrity;    // node integrity (1 functioning; 0 malfunctioning)
+} NodeConfiguration;
 
 typedef struct OffspringProfile {
-	unsigned short int status[8];
-	unsigned short int enable[8];
-	unsigned short int type_address[16];	
+	unsigned short int status[8];            // offspring connection status
+	unsigned short int enable[8];		     // offspring enable/disable status
+	unsigned short int type_address/*[8]*/[16];  // offspring node types and absolute addresses
 } OffspringProfile;
 
 typedef struct OpenPETSystemNode {
-	
+	//struct NodeConfiguration node_config; 
 	struct OffspringProfile profile;
 	
 	struct OpenPETSystemNode *B0;

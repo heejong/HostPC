@@ -222,11 +222,14 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */)
 	
 	// for now, simply read in dummy values
 	OffspringProfile profile;
+	NodeConfiguration node_config;
 	OpenPETSystemNode *MB, *DUC, *DB;	
 	unsigned short int MB_status[8] = {1,1,0,0,0,0,0,0};
 	unsigned short int ones[8] = {1,1,1,1,1,1,1,1};
 	unsigned short int type_address[16] = {0};
 	int i, j, k;
+	
+	
 
 	memcpy(profile.status, MB_status, sizeof(profile.status));
 	memcpy(profile.enable, ones, sizeof(ones));
@@ -240,14 +243,27 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */)
 	sys_config1 = InsertSystemNode(sys_config1, 0, profile);
 	for(i=0; i<2; i++)
 	{
+		// in real function, should read in MB profile
+		profile.type_address[0]=0;
+		profile.type_address[1]=0;
+		profile.type_address[2]=0;
+		profile.type_address[3]=1;
 		MB = InsertSystemNode(sys_config1, i, profile);
 		for(j=0; j<7; j++)
 		{
 			// in real function, should read each DUC profile
+			profile.type_address[0]=0;
+			profile.type_address[1]=0;
+			profile.type_address[2]=1;
+			profile.type_address[3]=0;
 			DUC = InsertSystemNode(MB, j, profile);
 			for(k=0; k<7; k++)
 			{
 				// in real function, should read each DB profile
+				profile.type_address[0]=0;
+				profile.type_address[1]=0;
+				profile.type_address[2]=1;
+				profile.type_address[3]=1;
 				DB = InsertSystemNode(DUC, k, profile);	
 			}
 		}
