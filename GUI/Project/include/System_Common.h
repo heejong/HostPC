@@ -22,10 +22,14 @@
 
 //==============================================================================
 // Constants
+#define DESCRIPTION_LIMIT 32
 
 //==============================================================================
 // Types
 typedef struct NodeConfiguration {
+	// to make firmware easier, these are all bit-level data structures
+	// for example type address stores 16 bits. the first 4 are board type and next 12 are address
+	// version number is an int because floats are difficult in VHDL
 	unsigned short int type_address;						// node type and absolute address	
 	unsigned short int firmware_version_number; 			// hardware version number
 	char hardware_version_description[DESCRIPTION_LIMIT];   // description of hardware version (i.e. for test)
@@ -37,9 +41,9 @@ typedef struct NodeConfiguration {
 } NodeConfiguration;
 
 typedef struct OffspringProfile {
-	unsigned char status;            // offspring connection status
-	unsigned char enable;		     // offspring enable/disable status
-	unsigned short int type_address[8];  // offspring node types and absolute addresses
+	unsigned char status;            // offspring connection status - 8 bits: 1 for each child
+	unsigned char enable;		     // offspring enable/disable status - 8 bits: 1 for each child
+	unsigned short int type_address[8];  // offspring node types and absolute addresses - 8 elements of 16 bits
 } OffspringProfile;
 
 typedef struct OpenPETSystemNode {
