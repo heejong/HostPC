@@ -11,7 +11,7 @@ IVI Standard Root Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework Dir = "/C/Program Files/IVI Foundation/VISA/winnt"
 IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
-Number of Files = 57
+Number of Files = 59
 Target Type = "Executable"
 Flags = 1040
 Copied From Locked InstrDrv Directory = False
@@ -711,6 +711,19 @@ File Type = "CSource"
 Res Id = 56
 Path Is Rel = True
 Path Rel To = "Project"
+Path Rel Path = "src/System_Common.c"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/Sys"
+Path Line0002 = "tem_Common.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+
+[File 0057]
+File Type = "CSource"
+Res Id = 57
+Path Is Rel = True
+Path Rel To = "Project"
 Path Rel Path = "src/UI_Common.c"
 Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/src/UI_"
 Path Line0002 = "Common.c"
@@ -719,9 +732,9 @@ Compile Into Object File = False
 Project Flags = 0
 Folder = "Source Files"
 
-[File 0057]
+[File 0058]
 File Type = "Include"
-Res Id = 57
+Res Id = 58
 Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "include/UI_Common.h"
@@ -730,6 +743,18 @@ Path Line0002 = "/UI_Common.h"
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
+
+[File 0059]
+File Type = "Include"
+Res Id = 59
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "include/System_Common.h"
+Path Line0001 = "/c/Documents and Settings/OpenPET/My Documents/GitHub/HostPC/GUI/Project/include"
+Path Line0002 = "/System_Common.h"
+Exclude = False
+Project Flags = 0
+Folder = "Not In A Folder"
 
 [Folders]
 Instrument Files Folder Not Added Yet = True

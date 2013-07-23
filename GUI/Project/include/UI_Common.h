@@ -123,72 +123,6 @@ typedef struct OpenPETTree {
 	char mode[20]; 
 } OpenPETTree;
 
-/** @brief OpenPETSysConfig structure stores the complete hardware system configuration in lookup tables.
-
-This data structure stores the boards that are attached to the OpenPET system. OpenPET can be set up as
-a small-sized system with only detector boards attached (DB), as a medium-sized system with DB attached to
-detector unit controllers (DUC), or as a large-sized system with DUC attached to multiplexer boards (MB).
-The setup type is stored as a string in the variable 'system'. Three lookup tables are provided (one for
-each type of setup) to store which boards are connected. Only one lookup table at a time will be used
-based on the specified setup type. Three different lookup tables have been specified in order to properly
-distinguish between a system with 1 DB connected directly from a system with 1 DB connected to 1 DUC from a
-system with 1 DB connected to 1 DUC connected to 1 MB. These would all occupy the first row of a single 
-lookup table in exactly the same way.
-*/
-typedef struct OpenPETSysConfig {
-	/**
-	Small[] is a lookup table for the small-sized system configuration
-	1 means a board is present; 0 means not present; -1 means present but disabled by user
-	*/
-	short int Small[DB_MAX];
-	
-	/**
-	Medium[][] is a lookup table for the medium-sized system configuration
-	1 means a board is present; 0 means not present; -1 means present but disabled by user
-	*/
-	short int Medium[DUC_MAX][DB_MAX];
-	
-	/**
-	Large[][][] is a lookup table for the large-sized system configuration
-	1 means a board is present; 0 means not present; -1 means present but disabled by user
-	*/
-	short int Large[MB_MAX][DUC_MAX][DB_MAX];
-
-	/**
-	system stores the current setup type as a string literal limited to {"Large", "Medium", "Small"}.
-	*/  
-	char system[10];
-} OpenPETSysConfig;
-
-typedef struct NodeConfiguration {
-	unsigned short int type_address[16];  // node type and absolute address	
-	float firmware_version;		          // firmware version number
-	float software_version;				  // software version number
-	unsigned short int node_integrity;    // node integrity (1 functioning; 0 malfunctioning)
-} NodeConfiguration;
-
-typedef struct OffspringProfile {
-	unsigned short int status[8];            // offspring connection status
-	unsigned short int enable[8];		     // offspring enable/disable status
-	unsigned short int type_address/*[8]*/[16];  // offspring node types and absolute addresses
-} OffspringProfile;
-
-typedef struct OpenPETSystemNode {
-	//struct NodeConfiguration node_config; 
-	struct OffspringProfile profile;
-	
-	struct OpenPETSystemNode *B0;
-	struct OpenPETSystemNode *B1;
-	struct OpenPETSystemNode *B2;
-	struct OpenPETSystemNode *B3;
-	struct OpenPETSystemNode *B4;
-	struct OpenPETSystemNode *B5;
-	struct OpenPETSystemNode *B6;
-	struct OpenPETSystemNode *B7;
-	
-} OpenPETSystemNode;
-
-
 // used to keep window in the same location when changing between panels
 /*		
 typedef struct PanelAppearance {
@@ -500,11 +434,6 @@ int CheckButtonEventError(char control_name[]);
 //void RecallPanelAppearance(int panel, PanelAppearance *appearance);
 //Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */);
 
-OpenPETSystemNode* CreateSystemNode(OffspringProfile profile);
-
-OpenPETSystemNode* InsertSystemNode( OpenPETSystemNode *parent, unsigned short int position, OffspringProfile profile);
-
-void DisposeAllSystemNodes(OpenPETSystemNode *root);
 
 #ifdef __cplusplus
     }

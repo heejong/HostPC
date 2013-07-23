@@ -17,3 +17,6 @@ GUI/Documentation/
 
 # Example REPORT file structure
 GUI/data_07162013/
+
+# LabWindows temporary files
+*~cvi*
