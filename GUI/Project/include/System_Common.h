@@ -26,6 +26,31 @@
 
 //==============================================================================
 // Types
+
+typedef struct Node {
+	struct NodeProfile profile;
+	
+	struct Node *B0;
+	struct Node *B1;
+	struct Node *B2;
+	struct Node *B3;
+	struct Node *B4;
+	struct Node *B5;
+	struct Node *B6;
+	struct Node *B7;
+	
+} OpenPETSystemNode;
+
+typedef struct NodeProfile {
+	struct NodeDescriptor node_config; 
+	struct OffspringDescriptor offspring_profile;
+	// struct HardwareDescriptor1;    i.e. ADC
+	// struct ApplicationSpecificDescriptor;  i.e. Energy Window
+	// struct UserDescriptor1;
+	
+	
+}
+
 typedef struct NodeConfiguration {
 	// to make firmware easier, these are all bit-level data structures
 	// for example type address stores 16 bits. the first 4 are board type and next 12 are address
@@ -46,20 +71,6 @@ typedef struct OffspringProfile {
 	unsigned short int type_address[8];  // offspring node types and absolute addresses - 8 elements of 16 bits
 } OffspringProfile;
 
-typedef struct OpenPETSystemNode {
-	struct NodeConfiguration node_config; 
-	struct OffspringProfile offspring_profile;
-	
-	struct OpenPETSystemNode *B0;
-	struct OpenPETSystemNode *B1;
-	struct OpenPETSystemNode *B2;
-	struct OpenPETSystemNode *B3;
-	struct OpenPETSystemNode *B4;
-	struct OpenPETSystemNode *B5;
-	struct OpenPETSystemNode *B6;
-	struct OpenPETSystemNode *B7;
-	
-} OpenPETSystemNode;
 		
 //==============================================================================
 // External variables
