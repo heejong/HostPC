@@ -54,6 +54,7 @@
 #include <userint.h>
 #include "GUI_EnergyMode.h"
 #include "UI_Common.h"
+#include "System_Common.h"
 
 // defined in OpenPET
 extern int panelHandle;					/**< main screen panel handle */

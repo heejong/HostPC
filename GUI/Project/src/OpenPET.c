@@ -89,6 +89,8 @@ The complete documentation for each file and each function is given under the fi
 #include "toolbox.h"
 
 #include "UI_Common.h"
+#include "System_Common.h"
+
 #include "GUI_TestMode1.h" 
 #include "GUI_TestMode2.h"
 #include "GUI_TestMode_MB.h" 
@@ -199,7 +201,12 @@ int main (int argc, char *argv[])
     /* initialize and load resources */
 	StackInit(&panel_stack);
 	OpenPETTreeInit(&current_location);
+	sys_config.MB=1;
+	sys_config.DUC=7;
+	sys_config.DB=7;
+	
 	OpenPETSystemRead(sys_config1);
+	
 
     nullChk (InitCVIRTE (0, argv, 0));
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
