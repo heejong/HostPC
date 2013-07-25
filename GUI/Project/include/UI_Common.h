@@ -64,7 +64,7 @@
 //==============================================================================
 // Include files
 
-//#include "cvidef.h"
+#include "System_Common.h"  // needed for OpenPETSystemNode type
 
 //==============================================================================
 // Constants
@@ -407,6 +407,8 @@ int CheckButtonEventError(char control_name[]);
 //Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */);
 
 void FillTreeControl(int panel, int control_id);
+
+int SystemSize(OpenPETSystemNode *root_node);
 
 #ifdef __cplusplus
     }

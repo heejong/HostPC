@@ -160,6 +160,8 @@ int panelHandle_usermode; 			/**< user mode analysis screen panel handle */
 int panelHandle_sysconfig;
 int panelHandle_calibration;
 
+int system_size=0;  // 1 is large, 2 is medium, 3 is small, -1 is error;
+
 extern Stack panel_stack;
 //extern PanelAppearance appearance; 
 extern OpenPETTree current_location;
@@ -206,6 +208,7 @@ int main (int argc, char *argv[])
 	sys_config.DB=7;
 	
 	OpenPETSystemCreateExample(sys_config1);
+	system_size = SystemSize(sys_config1);
 	
 
     nullChk (InitCVIRTE (0, argv, 0));

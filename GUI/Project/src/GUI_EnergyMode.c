@@ -116,6 +116,8 @@ int CVICALLBACK InitializeEnergyMode (int panel, int event, void *callbackData,
 			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
 		
 			// populate instrument tree
+			//FillTreeControl( panel, EMODE_TREE);
+			
 			GetNumListItems (panel, EMODE_TREE, &num_items);
 			if(num_items==1) 
 			{
@@ -183,6 +185,7 @@ int CVICALLBACK InitializeEnergyMode (int panel, int event, void *callbackData,
 					SetTreeItemAttribute (panel, EMODE_TREE, idx_DB, ATTR_SELECTED, 1);
 				} 
 			}
+			
 			
 			//SetActiveCtrl(panel, EMODE_TREE);
 			break;

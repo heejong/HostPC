@@ -401,13 +401,16 @@ void FillTreeControl(int panel, int control_id)
 	int CUC_children, MB_children, DUC_children;
 	unsigned short int MB_bit_mask=0, DUC_bit_mask=0,DB_bit_mask=0;  
 	char item_label_root[15], item_label[15],item_label_MB[5], item_label_DUC[5], item_label_DB[5];
-	OpenPETSystemNode *MB_node, *DUC_node, *DB_node, *current_node;
+	OpenPETSystemNode *MB_node, *DUC_node, *DB_node;
+	unsigned short int type_address;
 	
 	
 	GetNumListItems(panel, control_id, &num_items);
 	if(num_items == 1) 
 	{
 		// need to create table
+		
+		
 		
 		// bit-wise AND boards connected and boards enabled to determine boards to display
 		CUC_children = sys_config1->profile.offspring_descriptor.status & sys_config1->profile.offspring_descriptor.enable; 
@@ -497,14 +500,51 @@ void FillTreeControl(int panel, int control_id)
 			GetTreeItemFromTag (panel, control_id, item_label, &idx_DUC);
 			SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 0);	
 		} 
-		/*if(current_location.DB != -1)
+		if(current_location.DB != -1)
 		{
-			sprintf(item_label, "MB%d", current_location.MB);
-			GetTreeItemFromTag (panel, control_id, item_label, idx_MB);
-			SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 0);	
-		}*/ 
+			sprintf(item_label, "MB%dDUC%dDB%d", current_location.MB, current_location.DUC, current_location.DB);
+			GetTreeItemFromTag (panel, control_id, item_label, &idx_DB);
+			SetTreeItemAttribute (panel, control_id, idx_DB, ATTR_SELECTED, 1);
+		} 
 		
 		
 	}
 	return;	
 }
+
+int SystemSize(OpenPETSystemNode *root_node)
+{
+	// return 1 for large, 2 for medium, 3 for small
+	// return -1 for error
+	unsigned short int bit_mask=0x0080, type_address;
+	int CUC_children, i;
+
+	// determine where child nodes are connected
+	CUC_children = sys_config1->profile.offspring_descriptor.status & sys_config1->profile.offspring_descriptor.enable;
+	
+	for(i=0; i<8; i++)
+	{
+		if(CUC_children & bit_mask)
+		{
+			type_address = root_node->profile.offspring_descriptor.type_address[i]; // first connected child
+			if(type_address & 0x1000)   // 0001 = MB
+				return 1;               // must be large system	
+			if(type_address & 0x2000)   // 0010 = DUC
+				return 2;				// must be medium system
+			if(type_address & 0x3000)   // 0011 = DB
+	   			return 3;				// must be small system
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system configuration in SystemSize()");	
+				return -1;
+			}
+				
+		}
+		bit_mask = bit_mask >> 1; 	
+	}
+
+	fprintf(stderr, "Error: Could not determine system configuration in SystemSize()");	
+	return -1;
+		
+}
+
