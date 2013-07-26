@@ -17,11 +17,9 @@ DO NOT REQUIRE IMMEDIATE ATTENTION:
 # When changing panels, size and position are not preserved
 ### PanelAppearance struct created on first attempt
 
-# Panels are only hidden, wastes memory that might be needed for reading large binary files
-### instead, use SavePanelState(), RecallPanelState(), and DiscardPanel()
-### or, load panels as children from parent panel rather than loading all as parent panels
-
 # Consider multi-threading analysis to improve performance
 
 # No header file created
 ### Header struct created to store pertinent information
+
+# Sometimes tree control does not expand to reflect current location
