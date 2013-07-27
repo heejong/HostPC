@@ -103,7 +103,7 @@ int CVICALLBACK InitializeTestMode1 (int panel, int event, void *callbackData,
 {
 	char title_string[50];
 	
-	char item_label_root[15], item_label[15],item_label_MB[5], item_label_DUC[5], item_label_DB[5];
+	char item_label_root[15], item_label[15],item_label_MB[5], item_label_DUC[5], item_label_DB[5], temp_string[10];
 	int idx_MB, idx_DUC, idx_DB, i, j, k;
 	int num_items=1;
 	int current_boards[3], idx=0;
@@ -111,7 +111,22 @@ int CVICALLBACK InitializeTestMode1 (int panel, int event, void *callbackData,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			sprintf(title_string, "Test Mode 1 - MB%d DUC%d DB%d", current_location.MB, current_location.DUC, current_location.DB);
+			sprintf (title_string, "%s ", current_location.mode); 
+			if(current_location.MB != -1) 
+			{
+				sprintf(temp_string, "- MB%d ", current_location.MB);
+				strcat(title_string, temp_string); 	
+			}
+			if(current_location.DUC != -1) 
+			{
+				sprintf(temp_string, "DUC%d ", current_location.DUC);
+				strcat(title_string, temp_string); 	
+			}
+			if(current_location.DB != -1)
+			{
+				sprintf(temp_string, "DB%d ", current_location.DB);
+				strcat(title_string, temp_string); 
+			}
 			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
 		
 			// populate instrument tree
