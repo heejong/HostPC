@@ -207,7 +207,7 @@ int main (int argc, char *argv[])
 	sys_config.DUC=7;
 	sys_config.DB=7;
 	
-	OpenPETSystemCreateExample(sys_config1, 3);
+	OpenPETSystemCreateExample(sys_config1, 2);
 	system_size = SystemSize(sys_config1);
 	
 
@@ -642,7 +642,17 @@ int CVICALLBACK DisplayEnergyMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"Energy Mode");
-			DisplayPanel (panelHandle_emode_mb);
+			if(system_size == 1)
+				DisplayPanel (panelHandle_emode_mb);
+			else if(system_size == 2)
+				DisplayPanel (panelHandle_emode_duc);
+			else if(system_size == 3)
+				DisplayPanel (panelHandle_emode_db);
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system size in main screen");
+				exit(1);
+			}
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
@@ -680,7 +690,17 @@ int CVICALLBACK DisplayTestMode1 (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"Test Mode 1");
-			DisplayPanel (panelHandle_testmode_mb);
+			if(system_size == 1)
+				DisplayPanel (panelHandle_testmode_mb);
+			else if(system_size == 2)
+				DisplayPanel (panelHandle_testmode_duc);
+			else if(system_size == 3)
+				DisplayPanel (panelHandle_testmode_db);
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system size in main screen");
+				exit(1);
+			}
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
@@ -718,7 +738,17 @@ int CVICALLBACK DisplayTestMode2 (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"Test Mode 2");
-			DisplayPanel (panelHandle_testmode_mb);
+			if(system_size == 1)
+				DisplayPanel (panelHandle_testmode_mb);
+			else if(system_size == 2)
+				DisplayPanel (panelHandle_testmode_duc);
+			else if(system_size == 3)
+				DisplayPanel (panelHandle_testmode_db);
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system size in main screen");
+				exit(1);
+			}
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
@@ -756,7 +786,17 @@ int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"Flood Map Mode"); 
-			DisplayPanel (panelHandle_fmmode_mb);
+			if(system_size == 1)
+				DisplayPanel (panelHandle_fmmode_mb);
+			else if(system_size == 2)
+				DisplayPanel (panelHandle_fmmode_duc);
+			else if(system_size == 3)
+				DisplayPanel (panelHandle_fmmode);
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system size in main screen");
+				exit(1);
+			}
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
@@ -794,7 +834,17 @@ int CVICALLBACK DisplayTimeMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"Time Mode"); 
-			DisplayPanel (panelHandle_timemode_mb);
+			if(system_size == 1)
+				DisplayPanel (panelHandle_timemode_mb);
+			else if(system_size == 2)
+				DisplayPanel (panelHandle_timemode_duc);
+			else if(system_size == 3)
+				DisplayPanel (panelHandle_timemode_db);
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system size in main screen");
+				exit(1);
+			}
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
@@ -832,7 +882,17 @@ int CVICALLBACK DisplayOscilloscopeMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"Oscilloscope Mode"); 
-			DisplayPanel (panelHandle_omode_mb);
+			if(system_size == 1)
+				DisplayPanel (panelHandle_omode_mb);
+			else if(system_size == 2)
+				DisplayPanel (panelHandle_omode_duc);
+			else if(system_size == 3)
+				DisplayPanel (panelHandle_omode_db);
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system size in main screen");
+				exit(1);
+			}
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
@@ -870,7 +930,17 @@ int CVICALLBACK DisplayUserMode (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			strcpy(current_location.mode,"User Mode"); 
-			DisplayPanel (panelHandle_usermode_mb);
+			if(system_size == 1)
+				DisplayPanel (panelHandle_usermode_mb);
+			else if(system_size == 2)
+				DisplayPanel (panelHandle_usermode_duc);
+			else if(system_size == 3)
+				DisplayPanel (panelHandle_usermode_db);
+			else
+			{
+				fprintf(stderr, "Error: Could not determine system size in main screen");
+				exit(1);
+			}
 			StackPush(&panel_stack, panel);
 			HidePanel (panel);
 			break;
