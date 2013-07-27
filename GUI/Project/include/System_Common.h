@@ -111,7 +111,7 @@ int OpenPETSystemNodeWrite(FILE *output, OpenPETSystemNode *node);
 
 void InitNodeProfileToExampleValues(NodeProfile *profile);
 
-void OpenPETSystemCreateExample(OpenPETSystemNode *root_node);
+void OpenPETSystemCreateExample(OpenPETSystemNode *root_node, int size);
 
 #ifdef __cplusplus
     }

@@ -94,20 +94,28 @@ void InitNodeProfileToExampleValues(NodeProfile *profile)
 	return;
 }
 
-void OpenPETSystemCreateExample(OpenPETSystemNode *root_node) 
+void OpenPETSystemCreateExample(OpenPETSystemNode *root_node, int size) 
 {
-	// This function is used just to generate an example tree data structure.
-	// From this function the example system configuration file can be created,
-	// but when the final GUI is complete, this function will not be necessary
+	// This function is used to generate an example tree data structure
+	// it should be used to create the test suite required to test the functionality of the GUI
+	// if size==1 then large, if size==2 then medium, if size==3 then small
+
+	// local variables
+	int i, j, k;
 	
 	// node structures
 	NodeProfile CUC_profile, MB_profile, DUC_profile, DB_profile;
 	OpenPETSystemNode *MB, *DUC, *DB;
 	
 	// type address arrays
-	unsigned short int CUC_offspring_type_address[8] = {0x1000, 0x1000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+	// CUC - always connected to 4 children but may be of different type
+	unsigned short int large_CUC_offspring_type_address[8] = {0x1000, 0x1000, 0x1000, 0x1000, 0x0000, 0x0000, 0x0000, 0x0000};
+	unsigned short int medium_CUC_offspring_type_address[8] = {0x2000, 0x2000, 0x2000, 0x2000, 0x0000, 0x0000, 0x0000, 0x0000};
+	unsigned short int small_CUC_offspring_type_address[8] = {0x3000, 0x3000, 0x3000, 0x3000, 0x0000, 0x0000, 0x0000, 0x0000};
+	// MB - always 8 DUC children
 	unsigned short int MB_offspring_type_address[8] = {0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000}; 
-	unsigned short int DUC_offspring_type_address[8] = {0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000};  
+	// DUC - always 8 DB children 
+	unsigned short int DUC_offspring_type_address[8] = {0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000};
 
 	// fill in node descriptors 
 	// for type address, just fill in absolute address with zeros but mark first 4 bits with type
@@ -122,37 +130,75 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node)
 	
 	// fill in offspring descriptors
 	CUC_profile.offspring_descriptor.status = 0xF0;   // 1111 0000 = 4 boards attached
-	CUC_profile.offspring_descriptor.enable = 0xF0;   // used for MB
-	memcpy(CUC_profile.offspring_descriptor.type_address, CUC_offspring_type_address, sizeof(CUC_offspring_type_address));
+	CUC_profile.offspring_descriptor.enable = 0xF0;   
 	MB_profile.offspring_descriptor.status = 0xFF;    // 1111 1111 = 8 boards attached
-	MB_profile.offspring_descriptor.enable = 0xFF;    // used for DUC
-	memcpy(MB_profile.offspring_descriptor.type_address, MB_offspring_type_address, sizeof(MB_offspring_type_address));
+	MB_profile.offspring_descriptor.enable = 0xFF;    
 	DUC_profile.offspring_descriptor.status = 0xFF;   // 1111 1111 = 8 boards attached
-	DUC_profile.offspring_descriptor.enable = 0xFF;   // used for DB
-	memcpy(DUC_profile.offspring_descriptor.type_address, DUC_offspring_type_address, sizeof(DUC_offspring_type_address));  	
+	DUC_profile.offspring_descriptor.enable = 0xFF;   
 	DB_profile.offspring_descriptor.status = 0x00;    // 0000 0000 = 0 boards attached
 	DB_profile.offspring_descriptor.enable = 0x00;    // no boards attached to DB
 	
-	// local variables
-	int i, j, k;
-
-	//add nodes
-	sys_config1 = InsertSystemNode(sys_config1, 0, CUC_profile);
-	
-	for(i=0; i<4; i++)
+	if(size==1)
 	{
-		// in real function, should read in MB profile
-		MB = InsertSystemNode(sys_config1, i, MB_profile);
-		for(j=0; j<7; j++)
+		// large size
+		memcpy(CUC_profile.offspring_descriptor.type_address, large_CUC_offspring_type_address, sizeof(large_CUC_offspring_type_address));
+		memcpy(MB_profile.offspring_descriptor.type_address, MB_offspring_type_address, sizeof(MB_offspring_type_address));
+		memcpy(DUC_profile.offspring_descriptor.type_address, DUC_offspring_type_address, sizeof(DUC_offspring_type_address));  	
+	
+		//add nodes
+		sys_config1 = InsertSystemNode(sys_config1, 0, CUC_profile);
+	
+		for(i=0; i<4; i++)
+		{
+			// in real function, should read in MB profile
+			MB = InsertSystemNode(sys_config1, i, MB_profile);
+			for(j=0; j<7; j++)
+			{
+				// in real function, should read each DUC profile
+				DUC = InsertSystemNode(MB, j, DUC_profile);
+				for(k=0; k<7; k++)
+				{
+					// in real function, should read each DB profile
+					DB = InsertSystemNode(DUC, k, DB_profile);	
+				}
+			}
+		}
+	
+	}
+	else if(size==2)
+	{
+		// medium size
+		memcpy(CUC_profile.offspring_descriptor.type_address, medium_CUC_offspring_type_address, sizeof(large_CUC_offspring_type_address));
+		memcpy(DUC_profile.offspring_descriptor.type_address, DUC_offspring_type_address, sizeof(DUC_offspring_type_address));  	
+	
+		//add nodes
+		sys_config1 = InsertSystemNode(sys_config1, 0, CUC_profile);
+	
+		for(i=0; i<4; i++)
 		{
 			// in real function, should read each DUC profile
-			DUC = InsertSystemNode(MB, j, DUC_profile);
+			DUC = InsertSystemNode(sys_config1, i, DUC_profile);
 			for(k=0; k<7; k++)
 			{
 				// in real function, should read each DB profile
 				DB = InsertSystemNode(DUC, k, DB_profile);	
 			}
 		}
+	}
+	else if(size==3)
+	{
+		// small size
+		memcpy(CUC_profile.offspring_descriptor.type_address, small_CUC_offspring_type_address, sizeof(large_CUC_offspring_type_address));
+	
+		//add nodes
+		sys_config1 = InsertSystemNode(sys_config1, 0, CUC_profile);
+	
+		for(i=0; i<4; i++)
+		{
+			// in real function, should read each DB profile
+			DB = InsertSystemNode(sys_config1, i, DB_profile);	
+		}
+		
 	}
 	
 	

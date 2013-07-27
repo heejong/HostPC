@@ -408,235 +408,157 @@ void FillTreeControl(int panel, int control_id)
 	
 	GetNumListItems(panel, control_id, &num_items);
 	
-	//if(system_size == 1) // large system
-	//{
+	if(num_items == 1) 
+	{
+		// need to create table
 	
-		if(num_items == 1) 
+		// will handle small size, medium size, large size based on bottom level containing offspring_descriptor.status = 0 (nothing connected to bottom row)
+		// the only thing that needs to be changed are the tags used to insert
+
+		// bit-wise AND boards connected and boards enabled to determine boards to display
+		CUC_children = sys_config1->profile.offspring_descriptor.status & sys_config1->profile.offspring_descriptor.enable; 
+		bit_mask_level1 = 0x0080;  // 1000 0000
+
+		for(i=0; i<8; i++)   
 		{
-			// need to create table
-			
-			// will handle small size, medium size, large size based on bottom level containing offspring_descriptor.status = 0 (nothing connected to bottom row)
-			// the only thing that needs to be changed are the tags used to insert
-		
-			// bit-wise AND boards connected and boards enabled to determine boards to display
-			CUC_children = sys_config1->profile.offspring_descriptor.status & sys_config1->profile.offspring_descriptor.enable; 
-			bit_mask_level1 = 0x0080;  // 1000 0000
-		
-			for(i=0; i<8; i++)   
+			if(CUC_children & bit_mask_level1) // enters if statement for any nonzero value - will enter for 1000 0000 AND 0000 0001
 			{
-				if(CUC_children & bit_mask_level1) // enters if statement for any nonzero value - will enter for 1000 0000 AND 0000 0001
-				{
-					// insert correct item with correct tag based on system size
-					if(system_size == 1)
-					{
-						// large system -> add MB as a child
-						sprintf(item_label_level1, "MB%d", i);
-						strcpy(item_label, item_label_level1);	  // i.e. tag = MB0
-						idx_level1 = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_level1, item_label, 0, num_items++);
-					}
-					else if(system_size == 2)
-					{
-						// medium system -> add DUC as a child
-						sprintf(item_label_level1, "DUC%d", i);
-						strcpy(item_label, item_label_level1);	  // i.e. tag = DUC0
-						idx_level1 = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_level1, item_label, 0, num_items++);	
-					} 
-					else if(system_size == 3)
-					{
-						// small system -> add DB as a child
-						sprintf(item_label_level1, "DB%d", i);
-						strcpy(item_label, item_label_level1);	  // i.e. tag = DB0
-						idx_level1 = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_level1, item_label, 0, num_items++);			
-					}
-					else 
-					{
-						fprintf(stderr, "Error: Could not determine system size in FillTreeControl()"); 
-						exit(1);
-					}
-						
-					// prepare this level1 node to add level2 children
-					node_level1 = sys_config1->child_nodes[i];
-					children_level1 = node_level1->profile.offspring_descriptor.status & node_level1->profile.offspring_descriptor.enable; 
-					bit_mask_level2 = 0x0080;  // 1000 0000
-				
-					for(j=0; j<8; j++)	  
-					{
-						if(children_level1 & bit_mask_level2) 
-						{
-							// insert correct item with correct tag based on system size
-						 	if(system_size == 1)
-							{
-								// large system -> add DUC as child
-								sprintf(item_label_level2, "DUC%d", j);
-								strcat(item_label, item_label_level2);   // i.e. tag = MB0DUC0
-								strcpy(item_label_root, item_label);
-								idx_level2 = InsertTreeItem (panel, control_id, VAL_CHILD, idx_level1, VAL_LAST, item_label_level2, item_label, 0, num_items++);
-							}
-							else if(system_size == 2)
-							{
-								// medium system -> add DB as child
-								sprintf(item_label_level2, "DB%d", j);
-								strcat(item_label, item_label_level2);   // i.e. tag = DUC0DB0
-								strcpy(item_label_root, item_label);
-								idx_level2 = InsertTreeItem (panel, control_id, VAL_CHILD, idx_level1, VAL_LAST, item_label_level2, item_label, 0, num_items++);
-							}
-							else if(system_size == 3)
-							{
-								fprintf(stderr, "Error: Should not have found attempt to add boards to level2 of small system in FillTreeControl()");
-								exit(1);
-							}
-							else
-							{
-								fprintf(stderr, "Error: Could not determine system size in FillTreeControl()"); 
-								exit(1);
-							}
-							
-							// prepare this DUC node to add DB children
-							node_level2 = node_level1->child_nodes[i];
-							children_level2 = node_level2->profile.offspring_descriptor.status & node_level2->profile.offspring_descriptor.enable; 
-							bit_mask_level3 = 0x0080;  // 1000 0000
-				
-							for(k=0; k<8; k++)		 
-							{
-								if(children_level2 & bit_mask_level3)
-								{
-									if(system_size != 1) 
-									{
-										fprintf(stderr, "Error: Invalid attempt to add to level3 when not in large system");
-										exit(1);
-									}
-									//add DB as child
-									sprintf(item_label_level3, "DB%d", k); 
-									strcat(item_label, item_label_level3);   // i.e. tag = MB0DUC0DB0
-									idx_level3 = InsertTreeItem (panel, control_id, VAL_CHILD, idx_level2, VAL_LAST, item_label_level3, item_label, 0, num_items++);
-									strcpy(item_label,item_label_root);   // tag = MB0DUC0
-								}
-							
-								// shift bit mask
-								bit_mask_level3 = bit_mask_level3 >> 1; 
-							}
-						}
-					
-						strcpy(item_label,item_label_level1);   // tag = MB0   (reset tag)
-						if(system_size == 1) 
-						{
-							if(j != current_location.DUC)
-								SetTreeItemAttribute (panel, control_id, idx_level2, ATTR_COLLAPSED, 1);
-						} 
-						
-					
-						// shift bit mask
-						bit_mask_level2 = bit_mask_level2 >> 1; 
-					}
-				
-				}
-			
-				strcpy(item_label,"");   // tag = ""   (reset tag)
+				// insert correct item with correct tag based on system size
 				if(system_size == 1)
 				{
-					if(i != current_location.MB)
-						SetTreeItemAttribute (panel, control_id, idx_level1, ATTR_COLLAPSED, 1);
+					// large system -> add MB as a child
+					sprintf(item_label_level1, "MB%d", i);
+					strcpy(item_label, item_label_level1);	  // i.e. tag = MB0
+					idx_level1 = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_level1, item_label, 0, num_items++);
 				}
 				else if(system_size == 2)
 				{
-					if(i != current_location.DUC)
-						SetTreeItemAttribute (panel, control_id, idx_level1, ATTR_COLLAPSED, 1);		
+					// medium system -> add DUC as a child
+					sprintf(item_label_level1, "DUC%d", i);
+					strcpy(item_label, item_label_level1);	  // i.e. tag = DUC0
+					idx_level1 = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_level1, item_label, 0, num_items++);	
+				} 
+				else if(system_size == 3)
+				{
+					// small system -> add DB as a child
+					sprintf(item_label_level1, "DB%d", i);
+					strcpy(item_label, item_label_level1);	  // i.e. tag = DB0
+					idx_level1 = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_level1, item_label, 0, num_items++);			
+				}
+				else 
+				{
+					fprintf(stderr, "Error: Could not determine system size in FillTreeControl()"); 
+					exit(1);
 				}
 				
-				// shift bit mask
-				bit_mask_level1 = bit_mask_level1 >> 1;   // 1000 0000 -> 0100 0000 -> ... -> 0000 0001 -> 0000 0000   
-			}
-		}
-		else 
-		{
-			// tree already created, just need to show correct location
-			for(i=1; i<num_items; i++)
-			{
-				// collapse all
-				SetTreeItemAttribute (panel, control_id, i, ATTR_COLLAPSED, 1);	
-			}
-			
-			if(current_location.MB != -1)
-			{
-				sprintf(item_label, "MB%d", current_location.MB);
-				GetTreeItemFromTag (panel, control_id, item_label, &idx_level1);
-				SetTreeItemAttribute (panel, control_id, idx_level1, ATTR_COLLAPSED, 0);	
-			} 
-			if(current_location.DUC != -1)
-			{
-				sprintf(item_label, "MB%dDUC%d", current_location.MB, current_location.DUC);
-				GetTreeItemFromTag (panel, control_id, item_label, &idx_level2);
-				SetTreeItemAttribute (panel, control_id, idx_level2, ATTR_COLLAPSED, 0);	
-			} 
-			if(current_location.DB != -1)
-			{
-				sprintf(item_label, "MB%dDUC%dDB%d", current_location.MB, current_location.DUC, current_location.DB);
-				GetTreeItemFromTag (panel, control_id, item_label, &idx_level3);
-				SetTreeItemAttribute (panel, control_id, idx_level3, ATTR_SELECTED, 1);
-			} 
+				// prepare this level1 node to add level2 children
+				node_level1 = sys_config1->child_nodes[i];
+				children_level1 = node_level1->profile.offspring_descriptor.status & node_level1->profile.offspring_descriptor.enable; 
+				bit_mask_level2 = 0x0080;  // 1000 0000
 		
-		
-		}
-	/*
-	}
-	else if(system_size == 2)  // medium-sized system
-	{
-		if(num_items == 1) 
-		{
-			// need to create table
-		
-			// bit-wise AND boards connected and boards enabled to determine boards to display
-			CUC_children = sys_config1->profile.offspring_descriptor.status & sys_config1->profile.offspring_descriptor.enable; 
-
-			bit_mask_level2 = 0x0080;  // 1000 0000
-		
-			for(j=0; j<8; j++)	  
-			{
-				if(CUC_children & bit_mask_level2) 
+				for(j=0; j<8; j++)	  
 				{
-				 	//add DUC as child
-					sprintf(item_label_level2, "DUC%d", j);  // tag = DUC0 
-					strcpy(item_label, item_label_level2);
-					idx_level2 = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_level2, item_label, 0, num_items++);
-				
-					// prepare this DUC node to add DB children
-					node_level2 = sys_config1->child_nodes[i];
-					children_level2 = node_level2->profile.offspring_descriptor.status & node_level2->profile.offspring_descriptor.enable; 
-					bit_mask_level3 = 0x0080;  // 1000 0000
-		
-					for(k=0; k<8; k++)		 
+					if(children_level1 & bit_mask_level2) 
 					{
-						if(children_level2 & bit_mask_level3)
+						// insert correct item with correct tag based on system size
+					 	if(system_size == 1)
 						{
-							//add DB as child
-							sprintf(item_label_level3, "DB%d", k); 
-							strcat(item_label, item_label_level3);   // tag = MB0DUC0DB0
-							idx_level3 = InsertTreeItem (panel, control_id, VAL_CHILD, idx_level2, VAL_LAST, item_label_level3, item_label, 0, num_items++);
-							strcpy(item_label,item_label_root);   // tag = MB0DUC0
+							// large system -> add DUC as child
+							sprintf(item_label_level2, "DUC%d", j);
+							strcat(item_label, item_label_level2);   // i.e. tag = MB0DUC0
+							strcpy(item_label_root, item_label);
+							idx_level2 = InsertTreeItem (panel, control_id, VAL_CHILD, idx_level1, VAL_LAST, item_label_level2, item_label, 0, num_items++);
+						}
+						else if(system_size == 2)
+						{
+							// medium system -> add DB as child
+							sprintf(item_label_level2, "DB%d", j);
+							strcat(item_label, item_label_level2);   // i.e. tag = DUC0DB0
+							strcpy(item_label_root, item_label);
+							idx_level2 = InsertTreeItem (panel, control_id, VAL_CHILD, idx_level1, VAL_LAST, item_label_level2, item_label, 0, num_items++);
+						}
+						else if(system_size == 3)
+						{
+							fprintf(stderr, "Error: Should not have found attempt to add boards to level2 of small system in FillTreeControl()");
+							exit(1);
+						}
+						else
+						{
+							fprintf(stderr, "Error: Could not determine system size in FillTreeControl()"); 
+							exit(1);
 						}
 					
-						// shift bit mask
-						bit_mask_level3 = bit_mask_level3 >> 1; 
+						// prepare this DUC node to add DB children
+						node_level2 = node_level1->child_nodes[i];
+						children_level2 = node_level2->profile.offspring_descriptor.status & node_level2->profile.offspring_descriptor.enable; 
+						bit_mask_level3 = 0x0080;  // 1000 0000
+		
+						for(k=0; k<8; k++)		 
+						{
+							if(children_level2 & bit_mask_level3)
+							{
+								if(system_size != 1) 
+								{
+									fprintf(stderr, "Error: Invalid attempt to add to level3 when not in large system");
+									exit(1);
+								}
+								//add DB as child
+								sprintf(item_label_level3, "DB%d", k); 
+								strcat(item_label, item_label_level3);   // i.e. tag = MB0DUC0DB0
+								idx_level3 = InsertTreeItem (panel, control_id, VAL_CHILD, idx_level2, VAL_LAST, item_label_level3, item_label, 0, num_items++);
+								strcpy(item_label,item_label_root);   // tag = MB0DUC0
+							}
+					
+							// shift bit mask
+							bit_mask_level3 = bit_mask_level3 >> 1; 
+						}
 					}
+			
+					strcpy(item_label,item_label_level1);   // tag = MB0   (reset tag)
+					if(system_size == 1) 
+					{
+						if(j != current_location.DUC)
+							SetTreeItemAttribute (panel, control_id, idx_level2, ATTR_COLLAPSED, 1);
+					} 
+				
+			
+					// shift bit mask
+					bit_mask_level2 = bit_mask_level2 >> 1; 
 				}
-			
-				strcpy(item_label,item_label_level1);   // tag = MB0   (reset tag)
-				if(j != current_location.DUC)
-					SetTreeItemAttribute (panel, control_id, idx_level2, ATTR_COLLAPSED, 1);
-			
-				// shift bit mask
-				bit_mask_level2 = bit_mask_level2 >> 1; 
+		
 			}
-		}
-		else 
-		{
-			// tree already created, just need to show correct location
-			for(i=1; i<num_items; i++)
+	
+			strcpy(item_label,"");   // tag = ""   (reset tag)
+			if(system_size == 1)
 			{
-				// collapse all
-				SetTreeItemAttribute (panel, control_id, i, ATTR_COLLAPSED, 1);	
+				if(i != current_location.MB)
+					SetTreeItemAttribute (panel, control_id, idx_level1, ATTR_COLLAPSED, 1);
 			}
-			
+			else if(system_size == 2)
+			{
+				if(i != current_location.DUC)
+					SetTreeItemAttribute (panel, control_id, idx_level1, ATTR_COLLAPSED, 1);		
+			}
+		
+			// shift bit mask
+			bit_mask_level1 = bit_mask_level1 >> 1;   // 1000 0000 -> 0100 0000 -> ... -> 0000 0001 -> 0000 0000   
+		}
+	}
+	else 
+	{
+		// tree already created, just need to show correct location
+		
+		// first collapse all
+		for(i=1; i<num_items; i++)
+		{
+			// collapse all
+			SetTreeItemAttribute (panel, control_id, i, ATTR_COLLAPSED, 1);	
+		}
+		
+		// now, display appropriate branch
+		if(system_size == 1)
+		{
+			// large size
 			if(current_location.MB != -1)
 			{
 				sprintf(item_label, "MB%d", current_location.MB);
@@ -655,20 +577,40 @@ void FillTreeControl(int panel, int control_id)
 				GetTreeItemFromTag (panel, control_id, item_label, &idx_level3);
 				SetTreeItemAttribute (panel, control_id, idx_level3, ATTR_SELECTED, 1);
 			} 
-		
-		
+		}
+		else if(system_size == 2)
+		{
+			// medium size
+			if(current_location.DUC != -1)
+			{
+				sprintf(item_label, "DUC%d", current_location.DUC);
+				GetTreeItemFromTag (panel, control_id, item_label, &idx_level1);
+				SetTreeItemAttribute (panel, control_id, idx_level1, ATTR_COLLAPSED, 0);	
+			} 
+			if(current_location.DB != -1)
+			{
+				sprintf(item_label, "DUC%dDB%d", current_location.DUC, current_location.DB);
+				GetTreeItemFromTag (panel, control_id, item_label, &idx_level2);
+				SetTreeItemAttribute (panel, control_id, idx_level2, ATTR_SELECTED, 1);
+			}
+		}
+		else if(system_size == 3)
+		{
+			// small size
+			if(current_location.DB != -1)
+			{
+				sprintf(item_label, "DB%d", current_location.DB);
+				GetTreeItemFromTag (panel, control_id, item_label, &idx_level1);
+				SetTreeItemAttribute (panel, control_id, idx_level1, ATTR_SELECTED, 1);
+			}	
+		}
+		else 
+		{
+			fprintf(stderr, "System size could not be determined when re-expanding tree in FillTreeControl()");
+			exit(1);
 		}
 	}
-	else if(system_size == 3)
-	{
-		
-		
-	}
-	else
-	{
-		fprintf(stderr, "Error: Could not determine system size in FillTreeControl()");
-	}
-	*/
+
 	return;	
 }
 
@@ -687,11 +629,11 @@ int SystemSize(OpenPETSystemNode *root_node)
 		if(CUC_children & bit_mask)
 		{
 			type_address = root_node->profile.offspring_descriptor.type_address[i]; // first connected child
-			if(type_address & 0x1000)   // 0001 = MB
+			if(type_address == 0x1000)   // 0001 = MB
 				return 1;               // must be large system	
-			if(type_address & 0x2000)   // 0010 = DUC
+			if(type_address == 0x2000)   // 0010 = DUC
 				return 2;				// must be medium system
-			if(type_address & 0x3000)   // 0011 = DB
+			if(type_address == 0x3000)   // 0011 = DB
 	   			return 3;				// must be small system
 			else
 			{
