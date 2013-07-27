@@ -291,3 +291,31 @@ void DisposeAllSystemNodes(OpenPETSystemNode *root_node)
 }
 
 
+int IsChildConnected(OpenPETSystemNode *parent, int location)
+{
+	// check if board connected to this node at a given location (0-7)
+	// returns 1 if true, 0 if false, -1 on error
+	unsigned short int children, bit_mask = 0x0080;  // 1000 0000
+	int i;
+	
+	// location stores board value 0-7
+	if(location < 0 || location > 7)
+	{
+		fprintf(stderr, "Invalid child location input to IsChildConnected()");
+		return -1;
+	}
+	
+	// shift bit mask
+	bit_mask = bit_mask >> location; 
+	// select enabled children
+	children = parent->profile.offspring_descriptor.status & parent->profile.offspring_descriptor.enable; 
+
+
+	if(children & bit_mask)
+	{
+		return 1;
+	}
+
+	return 0;	
+
+}

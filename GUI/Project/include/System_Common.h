@@ -113,6 +113,8 @@ void InitNodeProfileToExampleValues(NodeProfile *profile);
 
 void OpenPETSystemCreateExample(OpenPETSystemNode *root_node, int size);
 
+int IsChildConnected(OpenPETSystemNode *parent, int location);
+
 #ifdef __cplusplus
     }
 #endif

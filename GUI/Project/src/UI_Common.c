@@ -348,23 +348,55 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		if(CheckButtonEventError(control_name))	   // BUTTON, EVENTS, ERRORS
 		{
 			board_number = ((unsigned short int) control_name[7])-48; // convert ASCII number to int
-			if(current_location.MB == -1)
+			
+			if(system_size == 1)
 			{
-				// haven't chosen MB yet, so on MB screen
-				if(board_number > sys_config.MB) 
-					SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				//large system
+				if(current_location.MB == -1)
+				{
+					// haven't chosen MB yet, so on MB screen
+					if( !IsChildConnected( sys_config1, board_number ) )
+					{
+						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+					}
+				}
+				else if(current_location.DUC == -1)
+				{
+					// already chosen MB, so on DUC screen
+					if(board_number > sys_config.DUC) 
+						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				}
+				else if(current_location.DB == -1)
+				{
+					// already chosen MB & DUC, so on DB screen
+					if(board_number > sys_config.DB) 
+						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				}
 			}
-			else if(current_location.DUC == -1)
+			else if(system_size == 2)
 			{
-				// already chosen MB, so on DUC screen
-				if(board_number > sys_config.DUC) 
-					SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				// medium system
+				if(current_location.DUC == -1)
+				{
+					// on DUC screen
+					if(board_number > sys_config.DUC) 
+						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				}
+				else if(current_location.DB == -1)
+				{
+					// already chosen DUC, so on DB screen
+					if(board_number > sys_config.DB) 
+						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				}
 			}
-			else if(current_location.DB == -1)
+			else if(system_size == 3)
 			{
-				// already chosen MB & DUC, so on DB screen
-				if(board_number > sys_config.DB) 
-					SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				if(current_location.DB == -1)
+				{
+					// already chosen DUC, so on DB screen
+					if(board_number > sys_config.DB) 
+						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
+				}		
 			}
 			
 		}
