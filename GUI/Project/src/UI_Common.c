@@ -279,6 +279,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	int num_items=1;
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
+	OpenPETSystemNode *current_node;
 
 	// enable windows red x to terminate program
 	if(event == EVENT_CLOSE)
@@ -351,50 +352,52 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 			
 			if(system_size == 1)
 			{
-				//large system
+				//large system -> root to MB
 				if(current_location.MB == -1)
 				{
 					// haven't chosen MB yet, so on MB screen
 					if( !IsChildConnected( sys_config1, board_number ) )
-					{
 						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
-					}
 				}
 				else if(current_location.DUC == -1)
 				{
 					// already chosen MB, so on DUC screen
-					if(board_number > sys_config.DUC) 
+					current_node = sys_config1->child_nodes[current_location.MB];
+					if( !IsChildConnected( current_node, board_number) )
 						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
 				}
 				else if(current_location.DB == -1)
 				{
 					// already chosen MB & DUC, so on DB screen
-					if(board_number > sys_config.DB) 
+					current_node = sys_config1->child_nodes[current_location.MB]->child_nodes[current_location.DUC];
+					if( !IsChildConnected( current_node, board_number) )
 						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
 				}
 			}
 			else if(system_size == 2)
 			{
-				// medium system
+				// medium system -> root to DUC
 				if(current_location.DUC == -1)
 				{
 					// on DUC screen
-					if(board_number > sys_config.DUC) 
+					if( !IsChildConnected( sys_config1, board_number) )
 						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
 				}
 				else if(current_location.DB == -1)
 				{
 					// already chosen DUC, so on DB screen
-					if(board_number > sys_config.DB) 
+					current_node = sys_config1->child_nodes[current_location.DUC];
+					if( !IsChildConnected( current_node, board_number) )
 						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
 				}
 			}
 			else if(system_size == 3)
 			{
+				// small system -> root to DB
 				if(current_location.DB == -1)
 				{
-					// already chosen DUC, so on DB screen
-					if(board_number > sys_config.DB) 
+					// on DB screen
+					if( !IsChildConnected( sys_config1, board_number) )
 						SetCtrlAttribute (panel, control_id, ATTR_DIMMED, 1); // dim
 				}		
 			}
