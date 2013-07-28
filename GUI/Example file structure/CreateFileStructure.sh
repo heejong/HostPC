@@ -17,7 +17,9 @@ MBSUMMARYTEXT="# This file contains the summary information necessary for the GU
 ! EVENTS (MB)
 0: 123412
 1: 151342
-T: 274754"
+2: 134112
+3: 112344
+T: 521210"
 
 DUCSUMMARYTEXT="# This file contains the summary information necessary for the GUI to 
 # display the DUC navigation screen (EVENTS and/or ERRORS)
@@ -60,7 +62,7 @@ cd "REPORT_data_07162013"
 echo "$MBSUMMARYTEXT" > Summary.txt
 
 # create and fill in folder structure
-for i in 0 1
+for i in 0 1 2 3 
 do
 	MBfoldername=MB$i
 	mkdir $MBfoldername
