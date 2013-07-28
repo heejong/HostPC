@@ -66,6 +66,7 @@ extern int panelHandle_testmode2; 		/**< test mode 2 analysis screen panel handl
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
 extern OpenPETTree current_location;	/**< current location in panel tree */
+extern int system_size;
 
 /** @brief This function gives the button functionality
 	@param panel the panel handle of the panel on which the button is used
@@ -110,28 +111,28 @@ int CVICALLBACK TestModeDB (int panel, int control, int event,
 			// switch on control for DB0...DB7
 			switch (control)
 			{
-				case TESTMODEDB_DB0_BUTTON:
+				case TESTMODEDB_BUTTON_0:
 					current_location.DB = 0;
 					break;
-				case TESTMODEDB_DB1_BUTTON:
+				case TESTMODEDB_BUTTON_1:
 					current_location.DB = 1;
 					break;
-				case TESTMODEDB_DB2_BUTTON:
+				case TESTMODEDB_BUTTON_2:
 					current_location.DB = 2;
 					break;
-				case TESTMODEDB_DB3_BUTTON:
+				case TESTMODEDB_BUTTON_3:
 					current_location.DB = 3;
 					break;
-				case TESTMODEDB_DB4_BUTTON:
+				case TESTMODEDB_BUTTON_4:
 					current_location.DB = 4;
 					break;
-				case TESTMODEDB_DB5_BUTTON:
+				case TESTMODEDB_BUTTON_5:
 					current_location.DB = 5;
 					break;
-				case TESTMODEDB_DB6_BUTTON:
+				case TESTMODEDB_BUTTON_6:
 					current_location.DB = 6;
 					break;
-				case TESTMODEDB_DB7_BUTTON:
+				case TESTMODEDB_BUTTON_7:
 					current_location.DB = 7;
 					break;
 			}
@@ -193,7 +194,7 @@ int CVICALLBACK TestModeDBTree (int panel, int control, int event,
 {
 	char item_tag[32];
 	OpenPETTree new_location;
-	int i, idx=0, current_boards[3]={-1,-1,-1};
+	int i, idx, current_boards[3]={-1,-1,-1};
 	
 	switch (event)
 	{
@@ -205,6 +206,15 @@ int CVICALLBACK TestModeDBTree (int panel, int control, int event,
 			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
 			strcpy(new_location.mode, current_location.mode);
 			
+			if(system_size == 1)
+				// large system -> fill in MB, DUC, and DB board locations
+				idx = 0;
+			else if(system_size == 2)
+				// medium system -> fill in DUC and DB board locations
+				idx = 1;
+			else if(system_size == 3)
+				// small system -> only fill in DB board location
+				idx = 2;
 			for(i=0; i<32; i++)
 			{
 				// walk through tag string and pull out board numbers
@@ -226,43 +236,50 @@ int CVICALLBACK TestModeDBTree (int panel, int control, int event,
 			// determine proper panel to display
 			if(new_location.DB != -1) 
 			{
-				StackPush(&panel_stack, panelHandle_testmode_mb); 
-				StackPush(&panel_stack, panelHandle_testmode_duc); 
+				if(system_size == 1)
+					// large size
+					StackPush(&panel_stack, panelHandle_testmode_mb); 
+				if(system_size == 1 || system_size == 2)
+					// large or medium size
+					StackPush(&panel_stack, panelHandle_testmode_duc);
+				
 				StackPush(&panel_stack, panelHandle_testmode_db);
 				
-				HidePanel (panel);				
-				
-				if(strcmp(current_location.mode,"Test Mode 2") == 0)
-				{
-					DisplayPanel (panelHandle_testmode2);
-				}
-				else 
-				{	
+				HidePanel (panel);	
+				if(strcmp(new_location.mode,"Test Mode 1") == 0)
 					DisplayPanel (panelHandle_testmode1);
-				}
+				else
+					DisplayPanel (panelHandle_testmode2);
 				
 			}
 			else if (new_location.DUC != -1)
 			{
-				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_testmode_mb); 
-				StackPush(&panel_stack, panelHandle_testmode_duc); 
+				// in small size, this will never be reached because DUC always equals -1
+				if(system_size == 1)
+					// large size
+					StackPush(&panel_stack, panelHandle_testmode_mb); 
+				if(system_size == 1 || system_size == 2)
+					// large or medium size
+					StackPush(&panel_stack, panelHandle_testmode_duc); 
+				
+				HidePanel(panel);
 				DisplayPanel(panelHandle_testmode_db);
 			}
 			else if (new_location.MB != -1)
 			{
-				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_testmode_mb); 
+				// in small or medium size, this will never be reached because MB always equals -1
+				if(system_size == 1)
+					// large size
+					StackPush(&panel_stack, panelHandle_testmode_mb);
+				
+				HidePanel(panel);  
 				DisplayPanel(panelHandle_testmode_duc);
 			}
-			else if (new_location.MB == -1)
+			else 
 			{
+				// only large system should reach here
 				HidePanel(panel);
 				DisplayPanel(panelHandle_testmode_mb);
-			}
-			else {
-				HidePanel(panel); 
-				DisplayPanel(StackPop(&panel_stack));
 			}
 			
 			current_location.MB = new_location.MB;
