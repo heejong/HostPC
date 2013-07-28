@@ -62,6 +62,7 @@ extern int panelHandle_fmmode; 			/**< flood map mode analysis screen panel hand
 // defined in UI_Common
 extern Stack panel_stack;   			/**< stack containing previous panels */	
 extern OpenPETTree current_location;	/**< current location in panel tree */
+extern int system_size;
 
 /** @brief This function gives the button functionality
 	@param panel the panel handle of the panel on which the button is used
@@ -176,7 +177,7 @@ int CVICALLBACK FloodMapModeDUCTree (int panel, int control, int event,
 {
 	char item_tag[32];
 	OpenPETTree new_location;
-	int i, idx=0, current_boards[3]={-1,-1,-1};
+	int i, idx, current_boards[3]={-1,-1,-1};
 	
 	switch (event)
 	{
@@ -188,6 +189,15 @@ int CVICALLBACK FloodMapModeDUCTree (int panel, int control, int event,
 			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
 			strcpy(new_location.mode, current_location.mode);
 			
+			if(system_size == 1)
+				// large system -> fill in MB, DUC, and DB board locations
+				idx = 0;
+			else if(system_size == 2)
+				// medium system -> fill in DUC and DB board locations
+				idx = 1;
+			else if(system_size == 3)
+				// small system -> only fill in DB board location
+				idx = 2;
 			for(i=0; i<32; i++)
 			{
 				// walk through tag string and pull out board numbers
@@ -206,28 +216,35 @@ int CVICALLBACK FloodMapModeDUCTree (int panel, int control, int event,
 				StackPop(&panel_stack);	
 			}
 			
-			// determine proper panel to display
+			// determine proper panel to displa
 			if (new_location.DUC != -1)
 			{
-				HidePanel(panel);				
-				StackPush(&panel_stack, panelHandle_fmmode_mb); 
-				StackPush(&panel_stack, panelHandle_fmmode_duc); 
+				// in small size, this will never be reached because DUC always equals -1
+				if(system_size == 1)
+					// large size
+					StackPush(&panel_stack, panelHandle_fmmode_mb); 
+				if(system_size == 1 || system_size == 2)
+					// large or medium size
+					StackPush(&panel_stack, panelHandle_fmmode_duc); 
+				
+				HidePanel(panel);
 				DisplayPanel(panelHandle_fmmode);
 			}
 			else if (new_location.MB != -1)
 			{
-				HidePanel(panel);
-				StackPush(&panel_stack, panelHandle_fmmode_mb); 
+				// in small or medium size, this will never be reached because MB always equals -1
+				if(system_size == 1)
+					// large size
+					StackPush(&panel_stack, panelHandle_fmmode_mb);
+				
+				HidePanel(panel);  
 				DisplayPanel(panelHandle_fmmode_duc);
 			}
-			else if (new_location.MB == -1)
+			else 
 			{
+				// only large system should reach here
 				HidePanel(panel);
 				DisplayPanel(panelHandle_fmmode_mb);
-			}
-			else {
-				HidePanel(panel); 
-				DisplayPanel(StackPop(&panel_stack));
 			}
 			
 			current_location.MB = new_location.MB;

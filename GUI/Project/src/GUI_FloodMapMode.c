@@ -120,11 +120,6 @@ int CVICALLBACK InitializeFloodMapMode (int panel, int event, void *callbackData
 				sprintf(temp_string, "DUC%d ", current_location.DUC);
 				strcat(title_string, temp_string); 	
 			}
-			if(current_location.DB != -1)
-			{
-				sprintf(temp_string, "DB%d ", current_location.DB);
-				strcat(title_string, temp_string); 
-			}
 			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
 		
 			// populate instrument tree
