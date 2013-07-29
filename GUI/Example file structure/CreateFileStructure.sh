@@ -21,6 +21,16 @@ MBSUMMARYTEXT="# This file contains the summary information necessary for the GU
 3: 112344
 T: 521210"
 
+MBSUMMARYERRORS="
+
+! ERRORS (MB)
+0: 8342
+1: 6131
+2: 3421
+3: 7356
+T: 25250"
+
+
 DUCSUMMARYTEXT="# This file contains the summary information necessary for the GUI to 
 # display the DUC navigation screen (EVENTS and/or ERRORS)
 
@@ -34,6 +44,19 @@ DUCSUMMARYTEXT="# This file contains the summary information necessary for the G
 6: 143155
 7: 324123
 T: 1791855"
+
+DUCSUMMARYERRORS="
+
+! ERRORS (MB)
+0: 342
+1: 131
+2: 421
+3: 356
+4: 143
+5: 123
+6: 421
+7: 354
+T: 2291"
 
 DBSUMMARYTEXT="# This file contains the summary information necessary for the GUI to 
 # display the DB navigation screen (EVENTS and/or ERRORS)
@@ -49,31 +72,89 @@ DBSUMMARYTEXT="# This file contains the summary information necessary for the GU
 7: 24123
 T: 246977"
 
-TEST1TEXT="1234	1431	1232	897	982	897	1233	923	423	324	1421"
+DBSUMMARYERRORS="
 
-TEST2TEXT="1432	892	314	1234	983	234	897	982	1234	1242	1321"
+! ERRORS (MB)
+0: 42
+1: 31
+2: 21
+3: 56
+4: 43
+5: 23
+6: 21
+7: 54
+T: 291"
+
+TEST1TEXT="4	1	2	7	2	7	3	3	3	4	1"
+
+TEST2TEXT="2	2	4	2	3	4	7	2	2	2	3"
 
 
 # create main folder
 mkdir "REPORT_data_07162013"
 cd "REPORT_data_07162013"
 
-# write Summary text
-echo "$MBSUMMARYTEXT" > Summary.txt
+# determine Summary text
+if [[ $1 == "test1" ]]
+then
+	SUMMARYTEXT="Summary_TestMode1.txt"
+elif [[ $1 == "test2" ]]
+then
+	SUMMARYTEXT="Summary_TestMode2.txt"
+elif [[ $1 == "oscilloscope" ]] 
+then 					
+	SUMMARYTEXT="Summary_OscilloscopeMode.txt"
+elif  [[ $1 == "time" ]] 
+then 	
+	SUMMARYTEXT="Summary_TimeMode.txt"
+elif  [[ $1 == "energy" ]] 
+then 
+	SUMMARYTEXT="Summary_EnergyMode.txt"
+elif  [[ $1 == "floodmap" ]] 
+then 
+	SUMMARYTEXT="Summary_FloodMapMode.txt"
+elif  [[ $1 == "user" ]] 
+then 
+	SUMMARYTEXT="Summary_UserMode.txt"
+else
+	echo 'Invalid mode argument: "oscilloscope", "test1", "test2", "time", "energy", "floodmap", "user"'
+	exit 0
+fi 
 
+# write summary text
+if [[ $1 == "test1" || $1 == "test2" ]]
+then
+	# add errors onto end
+	echo "$MBSUMMARYTEXT""$MBSUMMARYERRORS" > "$SUMMARYTEXT"
+else
+	echo "$MBSUMMARYTEXT" > "$SUMMARYTEXT"
+fi
+	
 # create and fill in folder structure
 for i in 0 1 2 3 
 do
 	MBfoldername=MB$i
 	mkdir $MBfoldername
 	cd $MBfoldername
-	echo "$DUCSUMMARYTEXT" > Summary.txt
+	if [[ $1 == "test1" || $1 == "test2" ]]
+	then
+		# add errors onto end
+		echo "$DUCSUMMARYTEXT""$DUCSUMMARYERRORS" > "$SUMMARYTEXT"
+	else
+		echo "$DUCSUMMARYTEXT" > "$SUMMARYTEXT"
+	fi
 	for j in 0 1 2 3 4 5 6 7	
 	do
 		DUCfoldername=DUC$j
 		mkdir $DUCfoldername
 		cd $DUCfoldername
-		echo "$DBSUMMARYTEXT" > Summary.txt
+		if [[ $1 == "test1" || $1 == "test2" ]]
+		then
+			# add errors onto end
+			echo "$DBSUMMARYTEXT""$DBSUMMARYERRORS" > "$SUMMARYTEXT"
+		else
+			echo "$DBSUMMARYTEXT" > "$SUMMARYTEXT"
+		fi
 		for k in 0 1 2 3 4 5 6 7
 		do
 			DBfoldername=DB$k

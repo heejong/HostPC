@@ -1,9 +1,0 @@
-# This file contains the summary information necessary for the GUI to 
-# display the MB navigation screen (EVENTS and/or ERRORS)
-
-! EVENTS (MB)
-0: 123412
-1: 151342
-2: 134112
-3: 112344
-T: 521210
