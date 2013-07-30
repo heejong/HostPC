@@ -21,7 +21,7 @@
 #define  EMODE_COMMANDBUTTON              5       /* control type: command, callback function: Back */
 #define  EMODE_COMMANDBUTTON_2            6       /* control type: command, callback function: Main */
 #define  EMODE_NUMERIC_4                  7       /* control type: numeric, callback function: (none) */
-#define  EMODE_NUMERIC                    8       /* control type: numeric, callback function: (none) */
+#define  EMODE_NUMERIC                    8       /* control type: numeric, callback function: ChangeCrystalNumber */
 #define  EMODE_ANALYSIS_METHOD            9       /* control type: ring, callback function: DetermineEnergyWindow */
 #define  EMODE_METHOD_AMOUNT              10      /* control type: numeric, callback function: (none) */
 #define  EMODE_NEW_WINDOW_BUTTON          11      /* control type: command, callback function: (none) */
@@ -41,6 +41,7 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK ChangeCrystalNumber(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DetermineEnergyWindow(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK EnergyModeTree(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK InitializeEnergyMode(int panel, int event, void *callbackData, int eventData1, int eventData2);

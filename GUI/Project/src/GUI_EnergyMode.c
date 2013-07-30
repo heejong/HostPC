@@ -69,6 +69,8 @@ extern OpenPETTree current_location;	/**< current location in panel tree */
 extern OpenPETTree sys_config;  		/**< hardward system configuration */
 extern OpenPETSystemNode *sysconfig1;
 
+int energy_array[256][256]; 
+
 /** @brief This function initializes the panel
 	@param panel the panel handle of the panel on which the button is used
 	@param event the type of event generated (i.e. left-click causes EVENT_COMMIT)
@@ -162,8 +164,7 @@ int CVICALLBACK InitializeEnergyMode (int panel, int event, void *callbackData,
 			
 	/********************************/
 			
-			FILE *fp;
-	int energy_array[256][256];
+	FILE *fp;
 	int temp_array[256];
 	int i, j, line_position;
 	char line_buffer[1500];
@@ -386,3 +387,23 @@ int CVICALLBACK DetermineEnergyWindow (int panel, int control, int event,
 }
 
 
+int CVICALLBACK ChangeCrystalNumber (int panel, int control, int event,
+		void *callbackData, int eventData1, int eventData2)
+{
+	unsigned short int crystal_number;
+	int i; 
+	int temp_array[256];
+	
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			GetCtrlVal(panel, control, &crystal_number);
+			for(i=0; i<256; i++)
+				temp_array[i]=energy_array[crystal_number][i];
+
+			PlotY (panel, EMODE_ENERGYSPECTRUM, temp_array, 256, VAL_INTEGER, VAL_FAT_LINE, VAL_EMPTY_SQUARE, VAL_SOLID, 1, VAL_BLACK);
+			
+			break;
+	}
+	return 0;
+}
