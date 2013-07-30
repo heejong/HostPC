@@ -273,14 +273,14 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	char control_name[20];
 	int control_id, board_number;
 	char title_string[30];
-	char temp_string[10];
+	char temp_string[10], display_buffer[20];
 	char item_label_root[15], item_label[15],item_label_level1[5], item_label_level2[5], item_label_level3[5];
 	int idx_level1, idx_level2, idx_level3, i, j, k;
 	int num_items=1;
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
 	OpenPETSystemNode *current_node;
-	int summary_events[9];
+	int summary_events[9], events_number, errors_number;
 
 	// enable windows red x to terminate program
 	if(event == EVENT_CLOSE)
@@ -312,7 +312,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	
 	if(strcmp(title_string,"") != 0 && !notInitializedFlag)
 		return 0;
-		
+	
 	/**************** specify title to show location in tree ******************/
 	switch(current_location.mode)
 	{
@@ -356,6 +356,15 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	
 	SetPanelAttribute (panel, ATTR_TITLE, title_string);
 
+	/***************** read in summary information ******************************/
+	if(current_location.mode == TEST1 || current_location.mode == TEST2)
+	{
+		// only need to read ERRORS in test modes 1 and 2
+		// ReadSummaryEventsAndErrors("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
+	}
+	else
+		ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
+	
 	/************* cycle through each control and initialize as needed ***************/
 	GetPanelAttribute (panel, ATTR_PANEL_FIRST_CTRL, &control_id);  // first control
 	while(control_id != 0) 
@@ -363,14 +372,28 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	
 		GetCtrlAttribute (panel, control_id, ATTR_CONSTANT_NAME, control_name);
 		
-		/********************** initialze tree control *************************/
+		// initialze tree control 
 		if(strcmp(control_name, "TREE") == 0)
 		{
 			FillTreeControl(panel, control_id);
 		}
 		
-		/********** enable/disable buttons according to system configuration ************/
-		if(CheckButtonEventError(control_name))	   // BUTTON, EVENTS, ERRORS
+		// fill in summary information
+		if( IsEvent(control_name) )
+		{
+			// determine which EVENTS control it is and update with correct information
+			sscanf(control_name, "EVENTS_%d", &events_number); 
+			sprintf(display_buffer, "%d", summary_events[events_number]);  // int to string
+			SetCtrlAttribute (panel, control_id, ATTR_CTRL_VAL, display_buffer);
+		}
+		if( IsError(control_name) ) 
+		{
+			
+		}
+		
+		
+		// enable/disable buttons according to system configuration 
+		if( IsButton(control_name) || IsError(control_name) || IsEvent(control_name) )	   // BUTTON, EVENTS, ERRORS
 		{
 			board_number = ((unsigned short int) control_name[7])-48; // convert ASCII number to int
 			
@@ -433,27 +456,67 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	
 	}
 	
-	// read in summary information
-	ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
-	
-	
 	return 0;
 }
 
-int CheckButtonEventError(char control_name[]) 
+int IsButton(char control_name[]) 
 {
-	// determines if control name is BUTTON*, EVENTS*, or ERRORS* indicating the control needs to be updated in real time
-	if(control_name[0] != 'B' && control_name[0] != 'E')
+	// determines if control name is BUTTON* indicating the control needs to be updated in real time
+	// 1 if is button; 0 if not
+	// can't use strcmp because no regular expressions
+	if(control_name[0] != 'B')
 		return 0;  // false
-	if(control_name[1] != 'U' && control_name[1] != 'V' && control_name[1] != 'R')
+	if(control_name[1] != 'U')
 		return 0;  // false
-	if(control_name[2] != 'T' && control_name[2] != 'E' && control_name[2] != 'R')
+	if(control_name[2] != 'T')
 		return 0;  // false
-	if(control_name[3] != 'T' && control_name[3] != 'N' && control_name[3] != 'O')
+	if(control_name[3] != 'T')
 		return 0;  // false
-	if(control_name[4] != 'O' && control_name[4] != 'T' && control_name[4] != 'R')
+	if(control_name[4] != 'O')
 		return 0;  // false
-	if(control_name[5] != 'N' && control_name[5] != 'S')
+	if(control_name[5] != 'N')
+		return 0;  // false
+	
+	return 1; // true
+}
+
+int IsEvent(char control_name[]) 
+{
+	// determines if control name is EVENT* indicating the control needs to be updated in real time
+	// 1 if is event; 0 if not
+	// can't use strcmp because no regular expressions
+	if(control_name[0] != 'E')
+		return 0;  // false
+	if(control_name[1] != 'V')
+		return 0;  // false
+	if(control_name[2] != 'E')
+		return 0;  // false
+	if(control_name[3] != 'N')
+		return 0;  // false
+	if(control_name[4] != 'T')
+		return 0;  // false
+	if(control_name[5] != 'S')
+		return 0;  // false
+	
+	return 1; // true
+}
+
+int IsError(char control_name[]) 
+{
+	// determines if control name is ERROR* indicating the control needs to be updated in real time
+	// 1 if is error; 0 if not
+	// can't use strcmp because no regular expressions
+	if(control_name[0] != 'E')
+		return 0;  // false
+	if(control_name[1] != 'R')
+		return 0;  // false
+	if(control_name[2] != 'R')
+		return 0;  // false
+	if(control_name[3] != 'O')
+		return 0;  // false
+	if(control_name[4] != 'R')
+		return 0;  // false
+	if(control_name[5] != 'S')
 		return 0;  // false
 	
 	return 1; // true
@@ -741,15 +804,15 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 	char current_filepath[260];  // longest allowable filepath in Windows is 260 characters
 	char temp_string[10], buffer[100], board;
 	int test1, test2, c, event, i, board_value;
-	
+
+	// initialization
 	strcpy(current_filepath,listmodedata_filepath);
-	// clear events array	
 	for(i=0; i<9; i++)
 	{
 		events[i]=0;	
 	}
 	
-	// determine correct data to return
+	// determine correct file path
 	if(system_size == 1)
 	{
 		//large system -> root to MB
@@ -811,6 +874,8 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 				case USER:
 					strcat(current_filepath, "Summary_UserMode.txt"); 
 					break;
+				default:
+					return -1;
 			}
 		}	
 		else if(current_location.DB == -1)
@@ -841,6 +906,8 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 				case USER:
 					strcat(current_filepath, "Summary_UserMode.txt"); 
 					break;
+				default:
+					return -1;
 			}
 		}
 	}
@@ -873,6 +940,8 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 				case USER:
 					strcat(current_filepath, "Summary_UserMode.txt"); 
 					break;
+				default:
+					return -1;
 			}
 		}
 		else if(current_location.DB == -1)
@@ -903,6 +972,8 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 				case USER:
 					strcat(current_filepath, "Summary_UserMode.txt"); 
 					break;
+				default:
+					return -1;
 			}
 		}
 	}
@@ -934,10 +1005,13 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 				case USER:
 					strcat(current_filepath, "Summary_UserMode.txt"); 
 					break;
+				default:
+					return -1;
 			}
 		}		
 	}
 	
+	// perform actual file read
 	file_pointer = fopen(current_filepath,"r");
 	// scan until end of file
 	while( (c = fgetc(file_pointer)) != EOF ) 
