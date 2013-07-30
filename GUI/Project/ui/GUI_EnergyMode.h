@@ -28,9 +28,9 @@
 #define  EMODE_NUMERIC_3                  12      /* control type: numeric, callback function: (none) */
 #define  EMODE_DECORATION_9               13      /* control type: deco, callback function: (none) */
 #define  EMODE_DECORATION                 14      /* control type: deco, callback function: (none) */
-#define  EMODE_PICTURE_2                  15      /* control type: picture, callback function: (none) */
-#define  EMODE_TREE                       16      /* control type: tree, callback function: EnergyModeTree */
-#define  EMODE_PICTURE                    17      /* control type: picture, callback function: (none) */
+#define  EMODE_TREE                       15      /* control type: tree, callback function: EnergyModeTree */
+#define  EMODE_PICTURE                    16      /* control type: picture, callback function: (none) */
+#define  EMODE_ENERGYSPECTRUM             17      /* control type: graph, callback function: (none) */
 
 
      /* Menu Bars, Menus, and Menu Items: */

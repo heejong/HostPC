@@ -157,6 +157,50 @@ int CVICALLBACK InitializeEnergyMode (int panel, int event, void *callbackData,
 			FillTreeControl( panel, EMODE_TREE);
 			
 			//SetActiveCtrl(panel, EMODE_TREE);
+			
+			//QuickDisplay();
+			
+	/********************************/
+			
+			FILE *fp;
+	int energy_array[256][256];
+	int temp_array[256];
+	int i, j, line_position;
+	char line_buffer[1500];
+	int items;
+	char seperators[] = " \t";
+	char* token;
+	int var;
+	
+	fp = fopen("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\MB0\\DUC0\\DB0\\EnergyMode_Block0.txt","r");
+	
+	i=0;
+	while(fgets(line_buffer,1500,fp) != NULL)
+	{	
+		j=0;
+		token = strtok (line_buffer, seperators);
+		while (token != NULL)
+		{
+		    sscanf (token, "%d", &var);
+		    energy_array[i][j++] = var;
+
+		    token = strtok (NULL, seperators);
+		}
+		i++;
+	
+	}
+	
+	fclose(fp);
+	
+	for(i=0; i<256; i++)
+		temp_array[i]=energy_array[0][i];
+
+	
+	PlotY (panel, EMODE_ENERGYSPECTRUM, temp_array, 256, VAL_INTEGER, VAL_THIN_LINE, VAL_EMPTY_SQUARE,
+		   VAL_SOLID, 1, VAL_RED);
+	
+	/****************************/
+			
 			break;
 		case EVENT_LOST_FOCUS:
 
@@ -320,3 +364,5 @@ int CVICALLBACK DetermineEnergyWindow (int panel, int control, int event,
 	}
 	return 0;
 }
+
+

@@ -209,7 +209,6 @@ int main (int argc, char *argv[])
 	
 	OpenPETSystemCreateExample(sys_config1, 1);
 	system_size = SystemSize(sys_config1);
-	
 
     nullChk (InitCVIRTE (0, argv, 0));
     errChk (panelHandle = LoadPanel (0, "OpenPET.uir", PANEL));
@@ -246,6 +245,7 @@ int main (int argc, char *argv[])
 
 Error:
     /* clean up */
+	DisposeAllSystemNodes(sys_config1);
     DiscardPanel (panelHandle);
 	DiscardPanel (panelHandle_testmode1); 
 	DiscardPanel (panelHandle_testmode2);

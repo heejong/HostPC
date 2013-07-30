@@ -458,6 +458,8 @@ int ReadSummaryEventsAndErrors(char *listmodedata_filepath, int events[9], int e
 
 void DetermineFolderPath(char target_filepath[260], const char *root_filepath);
 
+void QuickDisplay(void);
+
 #ifdef __cplusplus
     }
 #endif
