@@ -196,8 +196,28 @@ int CVICALLBACK InitializeEnergyMode (int panel, int event, void *callbackData,
 		temp_array[i]=energy_array[0][i];
 
 	
-	PlotY (panel, EMODE_ENERGYSPECTRUM, temp_array, 256, VAL_INTEGER, VAL_THIN_LINE, VAL_EMPTY_SQUARE,
-		   VAL_SOLID, 1, VAL_RED);
+	PlotY (panel, EMODE_ENERGYSPECTRUM, temp_array, 256, VAL_INTEGER, VAL_FAT_LINE, VAL_EMPTY_SQUARE, VAL_SOLID, 1, VAL_BLACK);
+	
+	
+	ColorMapEntry colors[4];
+
+	colors[0].color = VAL_WHITE;
+	colors[0].dataValue.valInt = 2000;
+
+	colors[1].color = VAL_LT_GRAY;
+
+	colors[1].dataValue.valInt = 1000;
+
+	colors[2].color = VAL_DK_GRAY;
+
+	colors[2].dataValue.valInt = 500;
+
+	colors[3].color = VAL_BLACK;
+
+	colors[3].dataValue.valInt = 0;
+	
+	PlotIntensity (panel, EMODE_ENERGYMAP, energy_array, 256, 255, VAL_INTEGER, colors, VAL_WHITE, 4, 1, 0);
+	
 	
 	/****************************/
 			
