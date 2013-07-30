@@ -2,7 +2,7 @@
 
 if [[ "$#" != "1" ]]
 then
-	echo 'enter 1 mode argument: "oscilloscope", "test1", "test2", "time", "energy", "floodmap", "user"'
+	echo 'enter 1 mode argument: "oscilloscope", "test1", "test2", "time", "energy", "floodmap", "user", "all"'
 	exit 0
 fi
 
@@ -116,9 +116,6 @@ then
 elif  [[ $1 == "user" ]] 
 then 
 	SUMMARYTEXT="Summary_UserMode.txt"
-else
-	echo 'Invalid mode argument: "oscilloscope", "test1", "test2", "time", "energy", "floodmap", "user"'
-	exit 0
 fi 
 
 # write summary text
@@ -126,6 +123,15 @@ if [[ $1 == "test1" || $1 == "test2" ]]
 then
 	# add errors onto end
 	echo "$MBSUMMARYTEXT""$MBSUMMARYERRORS" > "$SUMMARYTEXT"
+elif [[ $1 == "all" ]]
+then
+	echo "$MBSUMMARYTEXT" > Summary_UserMode.txt 
+	echo "$MBSUMMARYTEXT" > Summary_TimeMode.txt
+	echo "$MBSUMMARYTEXT" > Summary_EnergyMode.txt
+	echo "$MBSUMMARYTEXT" > Summary_FloodMapMode.txt
+	echo "$MBSUMMARYTEXT" > Summary_OscilloscopeMode.txt
+	echo "$MBSUMMARYTEXT""$MBSUMMARYERRORS" > Summary_TestMode1.txt
+	echo "$MBSUMMARYTEXT""$MBSUMMARYERRORS" > Summary_TestMode2.txt
 else
 	echo "$MBSUMMARYTEXT" > "$SUMMARYTEXT"
 fi
@@ -136,10 +142,20 @@ do
 	MBfoldername=MB$i
 	mkdir $MBfoldername
 	cd $MBfoldername
+	# write summary text
 	if [[ $1 == "test1" || $1 == "test2" ]]
 	then
 		# add errors onto end
 		echo "$DUCSUMMARYTEXT""$DUCSUMMARYERRORS" > "$SUMMARYTEXT"
+	elif [[ $1 == "all" ]]
+	then
+		echo "$DUCSUMMARYTEXT" > Summary_UserMode.txt 
+		echo "$DUCSUMMARYTEXT" > Summary_TimeMode.txt
+		echo "$DUCSUMMARYTEXT" > Summary_EnergyMode.txt
+		echo "$DUCSUMMARYTEXT" > Summary_FloodMapMode.txt
+		echo "$DUCSUMMARYTEXT" > Summary_OscilloscopeMode.txt
+		echo "$DUCSUMMARYTEXT""$DUCSUMMARYERRORS" > Summary_TestMode1.txt
+		echo "$DUCSUMMARYTEXT""$DUCSUMMARYERRORS" > Summary_TestMode2.txt
 	else
 		echo "$DUCSUMMARYTEXT" > "$SUMMARYTEXT"
 	fi
@@ -148,10 +164,20 @@ do
 		DUCfoldername=DUC$j
 		mkdir $DUCfoldername
 		cd $DUCfoldername
+		# write summary text
 		if [[ $1 == "test1" || $1 == "test2" ]]
 		then
 			# add errors onto end
 			echo "$DBSUMMARYTEXT""$DBSUMMARYERRORS" > "$SUMMARYTEXT"
+		elif [[ $1 == "all" ]]
+		then
+			echo "$DBSUMMARYTEXT" > Summary_UserMode.txt 
+			echo "$DBSUMMARYTEXT" > Summary_TimeMode.txt
+			echo "$DBSUMMARYTEXT" > Summary_EnergyMode.txt
+			echo "$DBSUMMARYTEXT" > Summary_FloodMapMode.txt
+			echo "$DBSUMMARYTEXT" > Summary_OscilloscopeMode.txt
+			echo "$DBSUMMARYTEXT""$DBSUMMARYERRORS" > Summary_TestMode1.txt
+			echo "$DBSUMMARYTEXT""$DBSUMMARYERRORS" > Summary_TestMode2.txt
 		else
 			echo "$DBSUMMARYTEXT" > "$SUMMARYTEXT"
 		fi
@@ -183,9 +209,11 @@ do
 			elif  [[ $1 == "user" ]] 
 			then 
 				cp ../../../../FakeData/UserMode.txt ./
-			else
-				echo 'Invalid mode argument: "oscilloscope", "test1", "test2", "time", "energy", "floodmap", "user"'
-				exit 0
+			elif [[ $1 == "all" ]]
+			then
+				cp ../../../../FakeData/*.txt ./
+				echo "$TEST1TEXT" > TestMode1.txt
+				echo "$TEST2TEXT" > TestMode2.txt
 			fi 
 			cd ..
 	

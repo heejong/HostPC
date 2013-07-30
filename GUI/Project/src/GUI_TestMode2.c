@@ -161,77 +161,7 @@ int CVICALLBACK InitializeTestMode2 (int panel, int event, void *callbackData,
 			SetPanelAttribute (panel, ATTR_TITLE, title_string); 
 		
 			// populate instrument tree
-			GetNumListItems (panel, TESTMODE2_TREE, &num_items);
-			if(num_items==1) 
-			{
-				// need to create table
-				for(i=0; i<=sys_config.MB; i++)
-				{
-					//add MB as child
-					sprintf(item_label_MB, "MB%d", i);
-					strcpy(item_label, item_label_MB);	  // tag = MB0
-					idx_MB = InsertTreeItem (panel, TESTMODE2_TREE, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
-		
-					for(j=0; j<=sys_config.DUC; j++)	  // assumes same number of DUC into each MB
-					{
-						//add DUC as child
-						sprintf(item_label_DUC, "DUC%d", j);
-						strcat(item_label, item_label_DUC);   // tag = MB0DUC0
-						strcpy(item_label_root, item_label);
-						idx_DUC = InsertTreeItem (panel, TESTMODE2_TREE, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
-			
-						for(k=0; k<=sys_config.DB; k++)		 // assumes same number of DB into each DUC
-						{
-							//add DB as child
-							sprintf(item_label_DB, "DB%d", k); 
-							strcat(item_label, item_label_DB);   // tag = MB0DUC0DB0
-							idx_DB = InsertTreeItem (panel, TESTMODE2_TREE, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
-							strcpy(item_label,item_label_root);   // tag = MB0DUC0
-							if(k == current_location.DB)
-								SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DB, ATTR_SELECTED, 1);
-						}
-						strcpy(item_label,item_label_MB);   // tag = MB0
-						if(j != current_location.DUC)
-							SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DUC, ATTR_COLLAPSED, 1);
-			
-					}
-					strcpy(item_label,"");   // tag = ""
-					if(i != current_location.MB)
-						SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_MB, ATTR_COLLAPSED, 1);
-				}
-			} 
-			else 
-			{
-				// table already created, just need to show correct location
-				for(i=1; i<num_items; i++)
-				{
-					// collapse all
-					SetTreeItemAttribute (panel, TESTMODE2_TREE, i, ATTR_COLLAPSED, 1);	
-				}
-			
-				// need to properly expand columns
-				// scroll through each item and compare item name??
-				// get a hold of item handle somehow, perhaps better insertion scheme
-				// GetTreeItermFromTag()
-				if(current_location.MB != -1)
-				{
-					sprintf(item_label, "MB%d", current_location.MB);
-					GetTreeItemFromTag (panel, TESTMODE2_TREE, item_label, &idx_MB);
-					SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_MB, ATTR_COLLAPSED, 0);	
-				} 
-				if(current_location.DUC != -1)
-				{
-					sprintf(item_label, "MB%dDUC%d", current_location.MB, current_location.DUC);
-					GetTreeItemFromTag (panel, TESTMODE2_TREE, item_label, &idx_DUC);
-					SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DUC, ATTR_COLLAPSED, 0);	
-				} 
-				if(current_location.DB != -1)
-				{
-					sprintf(item_label, "MB%dDUC%dDB%d", current_location.MB, current_location.DUC, current_location.DB);
-					GetTreeItemFromTag (panel, TESTMODE2_TREE, item_label, &idx_DB);
-					SetTreeItemAttribute (panel, TESTMODE2_TREE, idx_DB, ATTR_SELECTED, 1);
-				} 
-			}
+			FillTreeControl( panel, TESTMODE2_TREE);
 			
 			//SetActiveCtrl(panel, TESTMODE2_TREE);
 			

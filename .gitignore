@@ -15,8 +15,8 @@ OpenPET.exe
 # Doxygen files
 GUI/Documentation/
 
-# Example REPORT file structure
-GUI/data_07162013/
+# Biggest Example REPORT file structure
+GUI/Example file structure/REPORT_data_07162013_all
 
 # LabWindows temporary files
-*~cvi*
+*~evi*

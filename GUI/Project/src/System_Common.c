@@ -152,11 +152,11 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node, int size)
 		{
 			// in real function, should read in MB profile
 			MB = InsertSystemNode(sys_config1, i, MB_profile);
-			for(j=0; j<7; j++)
+			for(j=0; j<8; j++)
 			{
 				// in real function, should read each DUC profile
 				DUC = InsertSystemNode(MB, j, DUC_profile);
-				for(k=0; k<7; k++)
+				for(k=0; k<8; k++)
 				{
 					// in real function, should read each DB profile
 					DB = InsertSystemNode(DUC, k, DB_profile);	
@@ -178,7 +178,7 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node, int size)
 		{
 			// in real function, should read each DUC profile
 			DUC = InsertSystemNode(sys_config1, i, DUC_profile);
-			for(k=0; k<7; k++)
+			for(k=0; k<8; k++)
 			{
 				// in real function, should read each DB profile
 				DB = InsertSystemNode(DUC, k, DB_profile);	

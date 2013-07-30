@@ -360,11 +360,11 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	if(current_location.mode == TEST1 || current_location.mode == TEST2)
 	{
 		// only need to read ERRORS in test modes 1 and 2
-		ReadSummaryEventsAndErrors("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013_medium\\", summary_events, summary_errors);
+		ReadSummaryEventsAndErrors("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013_all\\", summary_events, summary_errors);
 	}
 	else
 	{
-		ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
+		ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013_all\\", summary_events);
 	}
 	
 	/************* cycle through each control and initialize as needed ***************/

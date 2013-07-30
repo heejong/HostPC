@@ -207,7 +207,7 @@ int main (int argc, char *argv[])
 	sys_config.DUC=7;
 	sys_config.DB=7;
 	
-	OpenPETSystemCreateExample(sys_config1, 2);
+	OpenPETSystemCreateExample(sys_config1, 1);
 	system_size = SystemSize(sys_config1);
 	
 
