@@ -1,0 +1,16 @@
+# This file contains the summary information necessary for the GUI to 
+# display the DB navigation screen (EVENTS and/or ERRORS)
+
+! EVENTS
+0: 12341
+1: 14334
+2: 91342
+3: 13413
+T: 126977
+
+! ERRORS
+0: 42
+1: 31
+2: 21
+3: 56
+T: 141

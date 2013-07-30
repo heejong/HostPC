@@ -454,6 +454,10 @@ int SystemSize(OpenPETSystemNode *root_node);
 
 int ReadSummaryEvents(const char *listmodedata_filepath, int events[9]);
 
+int ReadSummaryEventsAndErrors(char *listmodedata_filepath, int events[9], int errors[9]);
+
+void DetermineFolderPath(char target_filepath[260], const char *root_filepath);
+
 #ifdef __cplusplus
     }
 #endif

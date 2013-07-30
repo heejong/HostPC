@@ -280,7 +280,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
 	OpenPETSystemNode *current_node;
-	int summary_events[9], events_number, errors_number;
+	int summary_events[9], summary_errors[9], events_number, errors_number;
 
 	// enable windows red x to terminate program
 	if(event == EVENT_CLOSE)
@@ -360,10 +360,12 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	if(current_location.mode == TEST1 || current_location.mode == TEST2)
 	{
 		// only need to read ERRORS in test modes 1 and 2
-		// ReadSummaryEventsAndErrors("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
+		ReadSummaryEventsAndErrors("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013_medium\\", summary_events, summary_errors);
 	}
 	else
+	{
 		ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
+	}
 	
 	/************* cycle through each control and initialize as needed ***************/
 	GetPanelAttribute (panel, ATTR_PANEL_FIRST_CTRL, &control_id);  // first control
@@ -388,7 +390,10 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		}
 		if( IsError(control_name) ) 
 		{
-			
+			// determine which ERRORS control it is and update with correct information
+			sscanf(control_name, "ERRORS_%d", &errors_number); 
+			sprintf(display_buffer, "%d", summary_errors[errors_number]);  // int to string
+			SetCtrlAttribute (panel, control_id, ATTR_CTRL_VAL, display_buffer);
 		}
 		
 		
@@ -776,25 +781,9 @@ int SystemSize(OpenPETSystemNode *root_node)
 		
 }
 
-int ReadSummaryEventsAndErrors(char *listmodedata_filepath, int events[9], int errors[9])
+int ReadSummaryEventsAndErrors(char *report_filepath, int events[9], int errors[9])
 {
 	// read the summary information from the REPORT file structure
-	// list mode data file is only used to determine location of REPORT structure
-	// REPORT structure is expected to be in same folder as list mode data file
-	// note the file path cannot be reliably determined from the file pointer,
-	// so the original string containing the filepath must be passed in
-	// events and errors arrays will be filled in with summary info
-	// returns 0 on success, -1 on failure
-	
-	return 0;
-	
-}
-
-int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])   
-{
-	// read the summary information from the REPORT file structure
-	// list mode data file is only used to determine location of REPORT structure
-	// REPORT structure is expected to be in same folder as list mode data file
 	// note the file path cannot be reliably determined from the file pointer,
 	// so the original string containing the filepath must be passed in
 	// events array will be filled in with summary info - first 8 spots for boards and 9th for total
@@ -802,213 +791,46 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 	
 	FILE *file_pointer;
 	char current_filepath[260];  // longest allowable filepath in Windows is 260 characters
-	char temp_string[10], buffer[100], board;
-	int test1, test2, c, event, i, board_value;
+	char heading[100], board;
+	int test1, test2, c, event, error, i, board_value, buffer[9], summary_value;
 
 	// initialization
-	strcpy(current_filepath,listmodedata_filepath);
 	for(i=0; i<9; i++)
 	{
-		events[i]=0;	
+		events[i]=0;
+		errors[i]=0;
+		buffer[i]=0;
 	}
 	
 	// determine correct file path
-	if(system_size == 1)
+	DetermineFolderPath(current_filepath, report_filepath);
+	
+	// add correct file name
+	switch(current_location.mode)
 	{
-		//large system -> root to MB
-		if(current_location.MB == -1)
-		{
-			// haven't chosen MB yet, so on MB screen
-			switch(current_location.mode)
-			{
-				case OSCILLOSCOPE:
-					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
-					break;
-				case TEST1:
-					strcat(current_filepath, "Summary_TestMode1.txt"); 
-					break;
-				case TEST2:
-					strcat(current_filepath, "Summary_TestMode2.txt");  
-					break;
-				case ENERGY:
-					strcat(current_filepath, "Summary_EnergyMode.txt");  
-					break;
-				case FLOODMAP:
-					strcat(current_filepath, "Summary_FloodMapMode.txt");  
-					break;
-				case TIME:
-					strcat(current_filepath, "Summary_TimeMode.txt"); 
-					break;
-				case USER:
-					strcat(current_filepath, "Summary_UserMode.txt"); 
-					break;
-				default:
-					return -1;
-			}
-		}
-		else if(current_location.DUC == -1)
-		{
-			// already chosen MB, so on DUC screen
-			sprintf(temp_string,"MB%d\\", current_location.MB);
-			strcat(current_filepath, temp_string);
-			switch(current_location.mode)
-			{
-				case OSCILLOSCOPE:
-					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
-					break;
-				case TEST1:
-					strcat(current_filepath, "Summary_TestMode1.txt"); 
-					break;
-				case TEST2:
-					strcat(current_filepath, "Summary_TestMode2.txt");  
-					break;
-				case ENERGY:
-					strcat(current_filepath, "Summary_EnergyMode.txt");  
-					break;
-				case FLOODMAP:
-					strcat(current_filepath, "Summary_FloodMapMode.txt");  
-					break;
-				case TIME:
-					strcat(current_filepath, "Summary_TimeMode.txt"); 
-					break;
-				case USER:
-					strcat(current_filepath, "Summary_UserMode.txt"); 
-					break;
-				default:
-					return -1;
-			}
-		}	
-		else if(current_location.DB == -1)
-		{
-			// already chosen MB & DUC, so on DB screen
-			sprintf(temp_string,"MB%d\\DUC%d\\", current_location.MB, current_location.DUC);
-			strcat(current_filepath, temp_string);
-			switch(current_location.mode)
-			{
-				case OSCILLOSCOPE:
-					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
-					break;
-				case TEST1:
-					strcat(current_filepath, "Summary_TestMode1.txt"); 
-					break;
-				case TEST2:
-					strcat(current_filepath, "Summary_TestMode2.txt");  
-					break;
-				case ENERGY:
-					strcat(current_filepath, "Summary_EnergyMode.txt");  
-					break;
-				case FLOODMAP:
-					strcat(current_filepath, "Summary_FloodMapMode.txt");  
-					break;
-				case TIME:
-					strcat(current_filepath, "Summary_TimeMode.txt"); 
-					break;
-				case USER:
-					strcat(current_filepath, "Summary_UserMode.txt"); 
-					break;
-				default:
-					return -1;
-			}
-		}
-	}
-	else if(system_size == 2)
-	{
-		// medium system -> root to DUC
-		if(current_location.DUC == -1)
-		{
-			// on DUC screen
-			switch(current_location.mode)
-			{
-				case OSCILLOSCOPE:
-					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
-					break;
-				case TEST1:
-					strcat(current_filepath, "Summary_TestMode1.txt"); 
-					break;
-				case TEST2:
-					strcat(current_filepath, "Summary_TestMode2.txt");  
-					break;
-				case ENERGY:
-					strcat(current_filepath, "Summary_EnergyMode.txt");  
-					break;
-				case FLOODMAP:
-					strcat(current_filepath, "Summary_FloodMapMode.txt");  
-					break;
-				case TIME:
-					strcat(current_filepath, "Summary_TimeMode.txt"); 
-					break;
-				case USER:
-					strcat(current_filepath, "Summary_UserMode.txt"); 
-					break;
-				default:
-					return -1;
-			}
-		}
-		else if(current_location.DB == -1)
-		{
-			// already chosen DUC, so on DB screen
-			sprintf(temp_string,"DUC%d\\", current_location.DUC);
-			strcat(current_filepath, temp_string);
-			switch(current_location.mode)
-			{
-				case OSCILLOSCOPE:
-					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
-					break;
-				case TEST1:
-					strcat(current_filepath, "Summary_TestMode1.txt"); 
-					break;
-				case TEST2:
-					strcat(current_filepath, "Summary_TestMode2.txt");  
-					break;
-				case ENERGY:
-					strcat(current_filepath, "Summary_EnergyMode.txt");  
-					break;
-				case FLOODMAP:
-					strcat(current_filepath, "Summary_FloodMapMode.txt");  
-					break;
-				case TIME:
-					strcat(current_filepath, "Summary_TimeMode.txt"); 
-					break;
-				case USER:
-					strcat(current_filepath, "Summary_UserMode.txt"); 
-					break;
-				default:
-					return -1;
-			}
-		}
-	}
-	else if(system_size == 3)
-	{
-		// small system -> root to DB
-		if(current_location.DB == -1)
-		{
-			switch(current_location.mode)
-			{
-				case OSCILLOSCOPE:
-					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
-					break;
-				case TEST1:
-					strcat(current_filepath, "Summary_TestMode1.txt"); 
-					break;
-				case TEST2:
-					strcat(current_filepath, "Summary_TestMode2.txt");  
-					break;
-				case ENERGY:
-					strcat(current_filepath, "Summary_EnergyMode.txt");  
-					break;
-				case FLOODMAP:
-					strcat(current_filepath, "Summary_FloodMapMode.txt");  
-					break;
-				case TIME:
-					strcat(current_filepath, "Summary_TimeMode.txt"); 
-					break;
-				case USER:
-					strcat(current_filepath, "Summary_UserMode.txt"); 
-					break;
-				default:
-					return -1;
-			}
-		}		
+		case OSCILLOSCOPE:
+			strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+			break;
+		case TEST1:
+			strcat(current_filepath, "Summary_TestMode1.txt"); 
+			break;
+		case TEST2:
+			strcat(current_filepath, "Summary_TestMode2.txt");  
+			break;
+		case ENERGY:
+			strcat(current_filepath, "Summary_EnergyMode.txt");  
+			break;
+		case FLOODMAP:
+			strcat(current_filepath, "Summary_FloodMapMode.txt");  
+			break;
+		case TIME:
+			strcat(current_filepath, "Summary_TimeMode.txt"); 
+			break;
+		case USER:
+			strcat(current_filepath, "Summary_UserMode.txt"); 
+			break;
+		default:
+			return -1;
 	}
 	
 	// perform actual file read
@@ -1019,29 +841,199 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 		// look for exclamation mark to denote EVENTS
 		if(c == '!') 
 		{
-			test1 = fscanf(file_pointer, " %s ", buffer);
+			test1 = fscanf(file_pointer, " %s ", heading);
 			board = '\0';
 			// read in summary information
 			while(board != 'T')
 			{
-				test2 = fscanf(file_pointer, "%c: %d\n", &board, &event);
+				test2 = fscanf(file_pointer, "%c: %d\n", &board, &summary_value);
 				if(board != 'T') 
 				{
-					// put event number in correct location of array
-					board_value = (int) (board - '0');	 // convert to ASCI
-					events[board_value] = event;
+					// put summary_value number in correct summary_value of array
+					board_value = (int) (board - '0');	 // convert from ASCII
+					buffer[board_value] = summary_value;
 				}
 				else 
 				{
 					// always put total in last position
-					events[8] = event;
+					buffer[8] = summary_value;
 				}
 			}
+			// place summary information in correct array
+			if( strcmp(heading, "EVENTS") == 0 )
+				memcpy(events, buffer, 9*sizeof(event));
+			else if( strcmp(heading, "ERRORS") == 0 )
+				memcpy(errors, buffer, 9*sizeof(error));
+			
 		}
 	}
 	
-
+	fclose(file_pointer);
+	
 	return 0;
 	
+}
+
+int ReadSummaryEvents(const char *report_filepath, int events[9])   
+{
+	// read the summary information from the REPORT file structure
+	// note the file path cannot be reliably determined from the file pointer,
+	// so the original string containing the filepath must be passed in
+	// events array will be filled in with summary info - first 8 spots for boards and 9th for total
+	// returns 0 on success, -1 on failure
 	
+	FILE *file_pointer;
+	char current_filepath[260];  // longest allowable filepath in Windows is 260 characters
+	char heading[100], board;
+	int test1, test2, c, event, i, board_value, buffer[9], summary_value;
+
+	// initialization
+	for(i=0; i<9; i++)
+	{
+		events[i]=0;
+		buffer[i]=0;
+	}
+	
+	// determine correct file path
+	DetermineFolderPath(current_filepath, report_filepath);
+	
+	// add correct file name
+	switch(current_location.mode)
+	{
+		case OSCILLOSCOPE:
+			strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+			break;
+		case TEST1:
+			strcat(current_filepath, "Summary_TestMode1.txt"); 
+			break;
+		case TEST2:
+			strcat(current_filepath, "Summary_TestMode2.txt");  
+			break;
+		case ENERGY:
+			strcat(current_filepath, "Summary_EnergyMode.txt");  
+			break;
+		case FLOODMAP:
+			strcat(current_filepath, "Summary_FloodMapMode.txt");  
+			break;
+		case TIME:
+			strcat(current_filepath, "Summary_TimeMode.txt"); 
+			break;
+		case USER:
+			strcat(current_filepath, "Summary_UserMode.txt"); 
+			break;
+		default:
+			return -1;
+	}
+	
+	// perform actual file read
+	file_pointer = fopen(current_filepath,"r");
+	// scan until end of file
+	while( (c = fgetc(file_pointer)) != EOF ) 
+	{
+		// look for exclamation mark to denote EVENTS
+		if(c == '!') 
+		{
+			test1 = fscanf(file_pointer, " %s ", heading);
+			board = '\0';
+			// read in summary information
+			while(board != 'T')
+			{
+				test2 = fscanf(file_pointer, "%c: %d\n", &board, &summary_value);
+				if(board != 'T') 
+				{
+					// put summary_value number in correct summary_value of array
+					board_value = (int) (board - '0');	 // convert from ASCII
+					buffer[board_value] = summary_value;
+				}
+				else 
+				{
+					// always put total in last position
+					buffer[8] = summary_value;
+				}
+			}
+			// place summary information in correct array
+			if( strcmp(heading, "EVENTS") == 0 )
+				memcpy(events, buffer, 9*sizeof(event));
+			
+		}
+	}
+	
+	fclose(file_pointer);
+	
+	return 0;
+	
+}
+
+
+void DetermineFolderPath(char target_filepath[260], const char *root_filepath)
+{
+	char temp_string[10];
+	
+	// initialization
+	strcpy(target_filepath,root_filepath);
+	
+	// determine correct file path
+	if(system_size == 1)
+	{
+		//large system -> root to MB
+		if(current_location.MB == -1)
+		{
+			// haven't chosen MB yet, so on MB screen
+		}
+		else if(current_location.DUC == -1)
+		{
+			// already chosen MB, so on DUC screen
+			sprintf(temp_string,"MB%d\\", current_location.MB);
+			strcat(target_filepath, temp_string);
+			
+		}	
+		else if(current_location.DB == -1)
+		{
+			// already chosen MB & DUC, so on DB screen
+			sprintf(temp_string,"MB%d\\DUC%d\\", current_location.MB, current_location.DUC);
+			strcat(target_filepath, temp_string);
+		}
+		else
+		{
+			// DB selected for final analysis screen
+			sprintf(temp_string,"MB%d\\DUC%d\\DB%d\\", current_location.MB, current_location.DUC, current_location.DB);
+			strcat(target_filepath, temp_string);
+		}
+	}
+	else if(system_size == 2)
+	{
+		// medium system -> root to DUC
+		if(current_location.DUC == -1)
+		{
+			// on DUC screen
+		}
+		else if(current_location.DB == -1)
+		{
+			// already chosen DUC, so on DB screen
+			sprintf(temp_string,"DUC%d\\", current_location.DUC);
+			strcat(target_filepath, temp_string);
+		}
+		else
+		{
+			// DB selected for final analysis screen
+			sprintf(temp_string,"DUC%d\\DB%d\\", current_location.DUC, current_location.DB);
+			strcat(target_filepath, temp_string);
+		}
+	}
+	else if(system_size == 3)
+	{
+		// small system -> root to DB
+		if(current_location.DB == -1)
+		{
+			// on DB screen
+		}		
+		else
+		{
+			// DB selected for final analysis screen
+			sprintf(temp_string,"DB%d\\", current_location.DB);
+			strcat(target_filepath, temp_string);
+		}
+	}
+	
+	return;
 }

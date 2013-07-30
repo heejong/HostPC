@@ -15,11 +15,11 @@ MBSUMMARYTEXT="# This file contains the summary information necessary for the GU
 # display the MB navigation screen (EVENTS and/or ERRORS)
 
 ! EVENTS
-0: 123412
-1: 151342
-2: 134112
-3: 112344
-T: 521210"
+0: 1234134
+1: 924542
+2: 1431234
+3: 1634532
+T: 5224442"
 
 MBSUMMARYERRORS="
 
