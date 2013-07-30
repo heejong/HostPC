@@ -195,7 +195,7 @@ int CVICALLBACK TestModeDUCTree (int panel, int control, int event,
 			
 			// update current_location so panel will initialize properly
 			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
-			strcpy(new_location.mode, current_location.mode);
+			new_location.mode = current_location.mode;
 			
 			if(system_size == 1)
 				// large system -> fill in MB, DUC, and DB board locations
@@ -237,7 +237,7 @@ int CVICALLBACK TestModeDUCTree (int panel, int control, int event,
 				StackPush(&panel_stack, panelHandle_testmode_db);
 				
 				HidePanel (panel);				
-				if(strcmp(new_location.mode,"Test Mode 1") == 0)
+				if(current_location.mode == TEST1)
 					DisplayPanel (panelHandle_testmode1);
 				else
 					DisplayPanel (panelHandle_testmode2);

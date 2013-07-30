@@ -1,0 +1,13 @@
+# This file contains the summary information necessary for the GUI to 
+# display the DUC navigation screen (EVENTS and/or ERRORS)
+
+! EVENTS
+0: 123412
+1: 151342
+2: 123213
+3: 451341
+4: 134134
+5: 314135
+6: 143155
+7: 324123
+T: 1791855

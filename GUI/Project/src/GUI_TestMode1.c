@@ -111,7 +111,30 @@ int CVICALLBACK InitializeTestMode1 (int panel, int event, void *callbackData,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			sprintf (title_string, "%s ", current_location.mode); 
+			switch(current_location.mode)
+			{
+				case OSCILLOSCOPE:
+					sprintf (title_string, "Oscilloscope Mode "); 
+					break;
+				case TEST1:
+					sprintf (title_string, "Test Mode 1 "); 
+					break;
+				case TEST2:
+					sprintf (title_string, "Test Mode 2 "); 
+					break;
+				case ENERGY:
+					sprintf (title_string, "Energy Mode "); 
+					break;
+				case FLOODMAP:
+					sprintf (title_string, "Flood Map Mode "); 
+					break;
+				case TIME:
+					sprintf (title_string, "Time Mode "); 
+					break;
+				case USER:
+					sprintf (title_string, "User Mode "); 
+					break;
+			} 
 			if(current_location.MB != -1) 
 			{
 				sprintf(temp_string, "- MB%d ", current_location.MB);
@@ -264,7 +287,7 @@ int CVICALLBACK TestMode1Tree (int panel, int control, int event,
 			
 			// update current_location so panel will initialize properly
 			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
-			strcpy(new_location.mode, current_location.mode);
+			new_location.mode = current_location.mode;
 			
 			for(i=0; i<32; i++)
 			{

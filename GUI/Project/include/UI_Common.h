@@ -73,6 +73,14 @@
 #define DUC_MAX 8
 #define DB_MAX 8
 		
+#define OSCILLOSCOPE 0
+#define TEST1 1
+#define TEST2 2
+#define ENERGY 3
+#define FLOODMAP 4
+#define TIME 5
+#define USER 6
+		
 //==============================================================================
 // Types
 
@@ -117,10 +125,10 @@ typedef struct OpenPETTree {
 	short int DB;
 	
 	/**
-	mode stores the current analysis mode as a string literal limited to {"Time Mode", "Energy Mode",
-	"Test Mode 1", "Test Mode 2", "Flood Map Mode", "User Mode"}.
+	mode stores the current analysis mode as a string literal limited to {OSCILLOSCOPEMODE=0 
+	TESTMODE1=1, TESTMODE2=2, ENERGYMODE=3,FLOODMAPMODE=4, TIMEMODE=5, USERMODE=6}.
 	*/
-	char mode[20]; 
+	short int mode; 
 } OpenPETTree;
 
 // used to keep window in the same location when changing between panels
@@ -409,6 +417,8 @@ int CheckButtonEventError(char control_name[]);
 void FillTreeControl(int panel, int control_id);
 
 int SystemSize(OpenPETSystemNode *root_node);
+
+int ReadSummaryEvents(const char *listmodedata_filepath, int events[9]);
 
 #ifdef __cplusplus
     }

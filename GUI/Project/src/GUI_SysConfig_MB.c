@@ -134,7 +134,7 @@ int CVICALLBACK EnergyModeMBTree (int panel, int control, int event,
 			
 			// update current_location so panel will initialize properly
 			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
-			strcpy(new_location.mode, current_location.mode);
+			new_location.mode = current_location.mode;
 			
 			for(i=0; i<32; i++)
 			{

@@ -7,7 +7,7 @@ REQUIRE IMMEDIATE ATTENTION:
 --- fixed improper function callback 6/21/13 ---
 # expects balanced number of boards (i.e. to make 12, 6 DB into each DUC not 8 DB into one and 4 DB into the other)
 ### check references to sys_config
-
+--- fixed with sys_config tree data structure 7/29/13 ---
 # in some modes (definitely test mode 1), double clicking on tree control DB location from MB panel hides all panels
 --- fixed missing call from test mode MB & DUC 7/10/13 ---
 # In system calibration, clicking on tree control makes it so back button returns to main screen not calibration screen

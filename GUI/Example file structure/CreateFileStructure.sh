@@ -14,7 +14,7 @@ rm -rf "REPORT_data_07162013"
 MBSUMMARYTEXT="# This file contains the summary information necessary for the GUI to 
 # display the MB navigation screen (EVENTS and/or ERRORS)
 
-! EVENTS (MB)
+! EVENTS
 0: 123412
 1: 151342
 2: 134112
@@ -23,7 +23,7 @@ T: 521210"
 
 MBSUMMARYERRORS="
 
-! ERRORS (MB)
+! ERRORS
 0: 8342
 1: 6131
 2: 3421
@@ -34,7 +34,7 @@ T: 25250"
 DUCSUMMARYTEXT="# This file contains the summary information necessary for the GUI to 
 # display the DUC navigation screen (EVENTS and/or ERRORS)
 
-! EVENTS (DUC)
+! EVENTS
 0: 123412
 1: 151342
 2: 123213
@@ -47,7 +47,7 @@ T: 1791855"
 
 DUCSUMMARYERRORS="
 
-! ERRORS (MB)
+! ERRORS
 0: 342
 1: 131
 2: 421
@@ -61,7 +61,7 @@ T: 2291"
 DBSUMMARYTEXT="# This file contains the summary information necessary for the GUI to 
 # display the DB navigation screen (EVENTS and/or ERRORS)
 
-! EVENTS (DB)
+! EVENTS
 0: 12341
 1: 14334
 2: 91342
@@ -74,7 +74,7 @@ T: 246977"
 
 DBSUMMARYERRORS="
 
-! ERRORS (MB)
+! ERRORS
 0: 42
 1: 31
 2: 21

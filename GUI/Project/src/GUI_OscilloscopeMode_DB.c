@@ -191,7 +191,7 @@ int CVICALLBACK OscilloscopeModeDBTree (int panel, int control, int event,
 			
 			// update current_location so panel will initialize properly
 			OpenPETTreeInit(&new_location);   // set to (-1, -1, -1, "NULL")
-			strcpy(new_location.mode, current_location.mode);
+			new_location.mode = current_location.mode;
 			
 			if(system_size == 1)
 				// large system -> fill in MB, DUC, and DB board locations

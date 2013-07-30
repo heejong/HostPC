@@ -117,7 +117,7 @@ int CVICALLBACK Main (int panel, int control, int event,
 			current_location.MB = -1;
 			current_location.DUC = -1;
 			current_location.DB = -1;
-			strcpy(current_location.mode, "NULL");
+			current_location.mode = -1;
 			break;
 	}
 	return 0;
@@ -142,7 +142,7 @@ int CVICALLBACK Back (int panel, int control, int event,
 			else if(current_location.MB != -1)
 				current_location.MB = -1;
 			else
-				strcpy(current_location.mode, "NULL");
+				current_location.mode = -1;
 			
 			break;
 	}
@@ -211,7 +211,7 @@ void OpenPETTreeInit(OpenPETTree *T)
 	T->MB=-1;
 	T->DUC=-1;
 	T->DB=-1;
-	strcpy(T->mode,"NULL");
+	T->mode=1;
 	return;
 }
 
@@ -280,6 +280,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
 	OpenPETSystemNode *current_node;
+	int summary_events[9];
 
 	// enable windows red x to terminate program
 	if(event == EVENT_CLOSE)
@@ -313,7 +314,30 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		return 0;
 		
 	/**************** specify title to show location in tree ******************/
-	sprintf (title_string, "%s ", current_location.mode); 
+	switch(current_location.mode)
+	{
+		case OSCILLOSCOPE:
+			sprintf (title_string, "Oscilloscope Mode "); 
+			break;
+		case TEST1:
+			sprintf (title_string, "Test Mode 1 "); 
+			break;
+		case TEST2:
+			sprintf (title_string, "Test Mode 2 "); 
+			break;
+		case ENERGY:
+			sprintf (title_string, "Energy Mode "); 
+			break;
+		case FLOODMAP:
+			sprintf (title_string, "Flood Map Mode "); 
+			break;
+		case TIME:
+			sprintf (title_string, "Time Mode "); 
+			break;
+		case USER:
+			sprintf (title_string, "User Mode "); 
+			break;
+	}
 	if(current_location.MB != -1) 
 	{
 		sprintf(temp_string, "- MB%d ", current_location.MB);
@@ -408,6 +432,10 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		
 	
 	}
+	
+	// read in summary information
+	// ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
+	
 	
 	return 0;
 }
@@ -685,3 +713,118 @@ int SystemSize(OpenPETSystemNode *root_node)
 		
 }
 
+int ReadSummaryEventsAndErrors(char *listmodedata_filepath, int events[9], int errors[9])
+{
+	// read the summary information from the REPORT file structure
+	// list mode data file is only used to determine location of REPORT structure
+	// REPORT structure is expected to be in same folder as list mode data file
+	// note the file path cannot be reliably determined from the file pointer,
+	// so the original string containing the filepath must be passed in
+	// events and errors arrays will be filled in with summary info
+	// returns 0 on success, -1 on failure
+	
+	return 0;
+	
+}
+
+int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])   
+{
+	// read the summary information from the REPORT file structure
+	// list mode data file is only used to determine location of REPORT structure
+	// REPORT structure is expected to be in same folder as list mode data file
+	// note the file path cannot be reliably determined from the file pointer,
+	// so the original string containing the filepath must be passed in
+	// events array will be filled in with summary info - first 8 spots for boards and 9th for total
+	// returns 0 on success, -1 on failure
+	
+	FILE *file_pointer;
+	char current_filepath[260];  // longest allowable filepath in Windows is 260 characters
+	char temp_string[10], buffer[100], board;
+	int test1, test2, c, event, i, board_value;
+	
+	strcpy(current_filepath,listmodedata_filepath);
+	// clear events array	
+	for(i=0; i<9; i++)
+	{
+		events[i]=0;	
+	}
+	
+	// determine correct data to return
+	if(system_size == 1)
+	{
+		//large system -> root to MB
+		if(current_location.MB == -1)
+		{
+			// haven't chosen MB yet, so on MB screen
+			
+			strcat(current_filepath, "Summary_EnergyMode.txt");
+		}
+		else if(current_location.DUC == -1)
+		{
+			// already chosen MB, so on DUC screen
+			sprintf(temp_string,"MB%d\\", current_location.MB);
+			strcat(current_filepath, temp_string);
+			strcat(current_filepath, "Summary_EnergyMode.txt");
+		}	
+		else if(current_location.DB == -1)
+		{
+			// already chosen MB & DUC, so on DB screen
+			
+		}
+	}
+	else if(system_size == 2)
+	{
+		// medium system -> root to DUC
+		if(current_location.DUC == -1)
+		{
+			// on DUC screen
+			
+		}
+		else if(current_location.DB == -1)
+		{
+			// already chosen DUC, so on DB screen
+			
+		}
+	}
+	else if(system_size == 3)
+	{
+		// small system -> root to DB
+		if(current_location.DB == -1)
+		{
+			
+		}		
+	}
+	
+	file_pointer = fopen(current_filepath,"r");
+	// scan until end of file
+	while( (c = fgetc(file_pointer)) != EOF ) 
+	{
+		// look for exclamation mark to denote EVENTS
+		if(c == '!') 
+		{
+			test1 = fscanf(file_pointer, " %s ", buffer);
+			board = '\0';
+			// read in summary information
+			while(board != 'T')
+			{
+				test2 = fscanf(file_pointer, "%c: %d\n", &board, &event);
+				if(board != 'T') 
+				{
+					// put event number in correct location of array
+					board_value = (int) (board - '0');	 // convert to ASCI
+					events[board_value] = event;
+				}
+				else 
+				{
+					// always put total in last position
+					events[8] = event;
+				}
+			}
+		}
+	}
+	
+
+	return 0;
+	
+	
+}

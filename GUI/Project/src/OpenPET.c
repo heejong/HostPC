@@ -207,7 +207,7 @@ int main (int argc, char *argv[])
 	sys_config.DUC=7;
 	sys_config.DB=7;
 	
-	OpenPETSystemCreateExample(sys_config1, 2);
+	OpenPETSystemCreateExample(sys_config1, 1);
 	system_size = SystemSize(sys_config1);
 	
 
@@ -641,7 +641,7 @@ int CVICALLBACK DisplayEnergyMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"Energy Mode");
+			current_location.mode = ENERGY;
 			if(system_size == 1)
 				DisplayPanel (panelHandle_emode_mb);
 			else if(system_size == 2)
@@ -689,7 +689,7 @@ int CVICALLBACK DisplayTestMode1 (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"Test Mode 1");
+			current_location.mode = TEST1;
 			if(system_size == 1)
 				DisplayPanel (panelHandle_testmode_mb);
 			else if(system_size == 2)
@@ -737,7 +737,7 @@ int CVICALLBACK DisplayTestMode2 (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"Test Mode 2");
+			current_location.mode = TEST2;
 			if(system_size == 1)
 				DisplayPanel (panelHandle_testmode_mb);
 			else if(system_size == 2)
@@ -785,7 +785,7 @@ int CVICALLBACK DisplayFloodMapMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"Flood Map Mode"); 
+			current_location.mode = FLOODMAP;
 			if(system_size == 1)
 				DisplayPanel (panelHandle_fmmode_mb);
 			else if(system_size == 2)
@@ -833,7 +833,7 @@ int CVICALLBACK DisplayTimeMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"Time Mode"); 
+			current_location.mode = TIME;
 			if(system_size == 1)
 				DisplayPanel (panelHandle_timemode_mb);
 			else if(system_size == 2)
@@ -881,7 +881,7 @@ int CVICALLBACK DisplayOscilloscopeMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"Oscilloscope Mode"); 
+			current_location.mode = OSCILLOSCOPE;
 			if(system_size == 1)
 				DisplayPanel (panelHandle_omode_mb);
 			else if(system_size == 2)
@@ -929,7 +929,7 @@ int CVICALLBACK DisplayUserMode (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			strcpy(current_location.mode,"User Mode"); 
+			current_location.mode = USER; 
 			if(system_size == 1)
 				DisplayPanel (panelHandle_usermode_mb);
 			else if(system_size == 2)
