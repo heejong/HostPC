@@ -434,7 +434,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 	}
 	
 	// read in summary information
-	// ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
+	ReadSummaryEvents("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\", summary_events);
 	
 	
 	return 0;
@@ -756,20 +756,92 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 		if(current_location.MB == -1)
 		{
 			// haven't chosen MB yet, so on MB screen
-			
-			strcat(current_filepath, "Summary_EnergyMode.txt");
+			switch(current_location.mode)
+			{
+				case OSCILLOSCOPE:
+					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+					break;
+				case TEST1:
+					strcat(current_filepath, "Summary_TestMode1.txt"); 
+					break;
+				case TEST2:
+					strcat(current_filepath, "Summary_TestMode2.txt");  
+					break;
+				case ENERGY:
+					strcat(current_filepath, "Summary_EnergyMode.txt");  
+					break;
+				case FLOODMAP:
+					strcat(current_filepath, "Summary_FloodMapMode.txt");  
+					break;
+				case TIME:
+					strcat(current_filepath, "Summary_TimeMode.txt"); 
+					break;
+				case USER:
+					strcat(current_filepath, "Summary_UserMode.txt"); 
+					break;
+				default:
+					return -1;
+			}
 		}
 		else if(current_location.DUC == -1)
 		{
 			// already chosen MB, so on DUC screen
 			sprintf(temp_string,"MB%d\\", current_location.MB);
 			strcat(current_filepath, temp_string);
-			strcat(current_filepath, "Summary_EnergyMode.txt");
+			switch(current_location.mode)
+			{
+				case OSCILLOSCOPE:
+					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+					break;
+				case TEST1:
+					strcat(current_filepath, "Summary_TestMode1.txt"); 
+					break;
+				case TEST2:
+					strcat(current_filepath, "Summary_TestMode2.txt");  
+					break;
+				case ENERGY:
+					strcat(current_filepath, "Summary_EnergyMode.txt");  
+					break;
+				case FLOODMAP:
+					strcat(current_filepath, "Summary_FloodMapMode.txt");  
+					break;
+				case TIME:
+					strcat(current_filepath, "Summary_TimeMode.txt"); 
+					break;
+				case USER:
+					strcat(current_filepath, "Summary_UserMode.txt"); 
+					break;
+			}
 		}	
 		else if(current_location.DB == -1)
 		{
 			// already chosen MB & DUC, so on DB screen
-			
+			sprintf(temp_string,"MB%d\\DUC%d\\", current_location.MB, current_location.DUC);
+			strcat(current_filepath, temp_string);
+			switch(current_location.mode)
+			{
+				case OSCILLOSCOPE:
+					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+					break;
+				case TEST1:
+					strcat(current_filepath, "Summary_TestMode1.txt"); 
+					break;
+				case TEST2:
+					strcat(current_filepath, "Summary_TestMode2.txt");  
+					break;
+				case ENERGY:
+					strcat(current_filepath, "Summary_EnergyMode.txt");  
+					break;
+				case FLOODMAP:
+					strcat(current_filepath, "Summary_FloodMapMode.txt");  
+					break;
+				case TIME:
+					strcat(current_filepath, "Summary_TimeMode.txt"); 
+					break;
+				case USER:
+					strcat(current_filepath, "Summary_UserMode.txt"); 
+					break;
+			}
 		}
 	}
 	else if(system_size == 2)
@@ -778,12 +850,60 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 		if(current_location.DUC == -1)
 		{
 			// on DUC screen
-			
+			switch(current_location.mode)
+			{
+				case OSCILLOSCOPE:
+					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+					break;
+				case TEST1:
+					strcat(current_filepath, "Summary_TestMode1.txt"); 
+					break;
+				case TEST2:
+					strcat(current_filepath, "Summary_TestMode2.txt");  
+					break;
+				case ENERGY:
+					strcat(current_filepath, "Summary_EnergyMode.txt");  
+					break;
+				case FLOODMAP:
+					strcat(current_filepath, "Summary_FloodMapMode.txt");  
+					break;
+				case TIME:
+					strcat(current_filepath, "Summary_TimeMode.txt"); 
+					break;
+				case USER:
+					strcat(current_filepath, "Summary_UserMode.txt"); 
+					break;
+			}
 		}
 		else if(current_location.DB == -1)
 		{
 			// already chosen DUC, so on DB screen
-			
+			sprintf(temp_string,"DUC%d\\", current_location.DUC);
+			strcat(current_filepath, temp_string);
+			switch(current_location.mode)
+			{
+				case OSCILLOSCOPE:
+					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+					break;
+				case TEST1:
+					strcat(current_filepath, "Summary_TestMode1.txt"); 
+					break;
+				case TEST2:
+					strcat(current_filepath, "Summary_TestMode2.txt");  
+					break;
+				case ENERGY:
+					strcat(current_filepath, "Summary_EnergyMode.txt");  
+					break;
+				case FLOODMAP:
+					strcat(current_filepath, "Summary_FloodMapMode.txt");  
+					break;
+				case TIME:
+					strcat(current_filepath, "Summary_TimeMode.txt"); 
+					break;
+				case USER:
+					strcat(current_filepath, "Summary_UserMode.txt"); 
+					break;
+			}
 		}
 	}
 	else if(system_size == 3)
@@ -791,7 +911,30 @@ int ReadSummaryEvents(const char *listmodedata_filepath, int events[9])
 		// small system -> root to DB
 		if(current_location.DB == -1)
 		{
-			
+			switch(current_location.mode)
+			{
+				case OSCILLOSCOPE:
+					strcat(current_filepath, "Summary_OscilloscopeMode.txt");  
+					break;
+				case TEST1:
+					strcat(current_filepath, "Summary_TestMode1.txt"); 
+					break;
+				case TEST2:
+					strcat(current_filepath, "Summary_TestMode2.txt");  
+					break;
+				case ENERGY:
+					strcat(current_filepath, "Summary_EnergyMode.txt");  
+					break;
+				case FLOODMAP:
+					strcat(current_filepath, "Summary_FloodMapMode.txt");  
+					break;
+				case TIME:
+					strcat(current_filepath, "Summary_TimeMode.txt"); 
+					break;
+				case USER:
+					strcat(current_filepath, "Summary_UserMode.txt"); 
+					break;
+			}
 		}		
 	}
 	
