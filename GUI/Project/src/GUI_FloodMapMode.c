@@ -106,6 +106,9 @@ int CVICALLBACK InitializeFloodMapMode (int panel, int event, void *callbackData
 	int num_items=1;
 	int current_boards[3], idx=0;
 	int notInitializedFlag=0; // 1 if panel needs to be initialized
+	
+	char filepath[260]; // max allowed by Windows OS
+	int *floodmap_array;
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
@@ -147,6 +150,11 @@ int CVICALLBACK InitializeFloodMapMode (int panel, int event, void *callbackData
 		
 			// populate instrument tree
 			FillTreeControl( panel, FMMODE_TREE);
+			
+			// read data file
+			DetermineFolderPath(filepath, "C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\");
+			strcat(filepath, "FloodMapMode_Block0.txt");
+			//ReadArrayFromFile(filepath, floodmap_array);
 			
 			//SetActiveCtrl(panel, FMMODE_TREE);
 			break;

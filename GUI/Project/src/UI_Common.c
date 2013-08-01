@@ -1038,10 +1038,12 @@ void DetermineFolderPath(char target_filepath[260], const char *root_filepath)
 	return;
 }
 
-void QuickDisplay(void)
+int ReadArrayFromFile(char *filename, int *data_array)
 {
-	FILE *fp;
-	int energy_array[256][256];
+	// read data from file and return in data_array
+	// return 0 on success, -1 on failure (can't open file, etc.)
+	FILE *file_pointer;
+	int temp_array[256];
 	int i, j, line_position;
 	char line_buffer[1500];
 	int items;
@@ -1049,17 +1051,18 @@ void QuickDisplay(void)
 	char* token;
 	int var;
 	
-	fp = fopen("C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\MB0\\DUC0\\DB0\\EnergyMode_Block0.txt","r");
+	file_pointer = fopen(filename,"r");
 	
 	i=0;
-	while(fgets(line_buffer,1500,fp) != NULL)
+	while(fgets(line_buffer,1500,file_pointer) != NULL)
 	{	
 		j=0;
 		token = strtok (line_buffer, seperators);
 		while (token != NULL)
 		{
 		    sscanf (token, "%d", &var);
-		    energy_array[i][j++] = var;
+		    //data_array[i][j++] = var;
+			// change to pointer arithmetic
 
 		    token = strtok (NULL, seperators);
 		}
@@ -1067,13 +1070,10 @@ void QuickDisplay(void)
 	
 	}
 	
-	fclose(fp);
-	
-	//PlotY (EMODE, ENERGYSPECTRUM, energy_array[0], 256, VAL_UNSIGNED_INTEGER, VAL_THIN_LINE, VAL_EMPTY_SQUARE,
-	//	   VAL_SOLID, 1, VAL_RED);
+	fclose(file_pointer);
 	
 	
-	return;	
+	return 0;	
 }
 
 

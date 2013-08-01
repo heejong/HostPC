@@ -16,7 +16,7 @@ OpenPET.exe
 GUI/Documentation/
 
 # Biggest Example REPORT file structure
-GUI/Example file structure/REPORT_data_07162013_all
+GUI/Example file structure/REPORT_data_07162013_*
 
 # LabWindows temporary files
 *~evi*
