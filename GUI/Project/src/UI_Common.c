@@ -1038,6 +1038,61 @@ void DetermineFolderPath(char target_filepath[260], const char *root_filepath)
 	return;
 }
 
+int DetermineArraySize(char *filename, int *rows, int *columns)
+{
+	// open file and determine array size
+	// return 0 on success, -1 on failure (can't open file, etc.)     
+	FILE *file_pointer;
+	char *line_buffer;
+	int line_flag=0;   // used to see if whole line captured
+	int line_length, i=0;
+	char *first_newline;
+	
+	line_length = 10000;  // starting guess
+	line_buffer = malloc(line_length*sizeof(char));
+	memset(line_buffer, '\n', line_length*sizeof(char));   // set all values to \n
+	
+	file_pointer = fopen(filename,"r");
+	
+	rows = 0;
+	columns = 0;
+	while(fgets(line_buffer,line_length,file_pointer) != NULL)
+	{	
+		// read first line
+		
+		// check that buffer captured whole line
+		while( ( first_newline = memchr(line_buffer, '\n', line_length*sizeof(char)) ) != NULL )
+		{
+			// did not find newline character -> need to extend buffer size
+			line_length = 2*linelength;
+			line_buffer = realloc(line_buffer, line_length*sizeof(char));
+			memset(line_buffer, '\n', line_length*sizeof(char));   // set all values to \n  
+			// need to re-call fgets
+			
+			
+		}
+		
+		token = strtok (line_buffer, seperators);
+		while (token != NULL)
+		{
+		    sscanf (token, "%d", &var);
+		    //data_array[i][j++] = var;
+			// change to pointer arithmetic
+
+		    token = strtok (NULL, seperators);
+		}
+		i++;
+	
+	}
+	
+	fclose(file_pointer);
+	
+	
+	return 0;
+	
+	
+}
+
 int ReadArrayFromFile(char *filename, int *data_array)
 {
 	// read data from file and return in data_array

@@ -460,6 +460,8 @@ void DetermineFolderPath(char target_filepath[260], const char *root_filepath);
 
 int ReadArrayFromFile(char *filename, int *data_array);
 
+int DetermineArraySize(char *filename, int *rows, int *columns);
+
 #ifdef __cplusplus
     }
 #endif
