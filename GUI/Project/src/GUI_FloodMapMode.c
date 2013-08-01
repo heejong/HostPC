@@ -154,8 +154,11 @@ int CVICALLBACK InitializeFloodMapMode (int panel, int event, void *callbackData
 			FillTreeControl( panel, FMMODE_TREE);
 			
 			// read data file
-			DetermineFolderPath(filepath, "C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013\\");
-			strcat(filepath, "FloodMapMode_Block0.txt");
+			DetermineFolderPath(filepath, "C:\\Documents and Settings\\OpenPET\\My Documents\\GitHub\\HostPC\\GUI\\Example file structure\\REPORT_data_07162013_floodmap\\");
+			sprintf(temp_string, "DB%d\\", 1); 
+			strcat(filepath, temp_string);  // will eventually cycle through each DB and display appropriate information
+			
+			strcat(filepath, "FloodMapMode_Block0.txt");  // will eventually cycle through each text file and dispay appropriate information
 			DetermineArraySize(filepath, &rows, &columns);
 			
 			//ReadArrayFromFile(filepath, floodmap_array);

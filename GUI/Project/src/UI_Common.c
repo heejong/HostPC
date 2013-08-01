@@ -996,7 +996,11 @@ void DetermineFolderPath(char target_filepath[260], const char *root_filepath)
 		else
 		{
 			// DB selected for final analysis screen
-			sprintf(temp_string,"MB%d\\DUC%d\\DB%d\\", current_location.MB, current_location.DUC, current_location.DB);
+			if(current_location.mode == FLOODMAP)
+				sprintf(temp_string,"MB%d\\DUC%d\\", current_location.MB, current_location.DUC); // flood map needs to display everything from DUC folder at once
+			else
+				sprintf(temp_string,"MB%d\\DUC%d\\DB%d\\", current_location.MB, current_location.DUC, current_location.DB);
+			
 			strcat(target_filepath, temp_string);
 		}
 	}
@@ -1016,7 +1020,11 @@ void DetermineFolderPath(char target_filepath[260], const char *root_filepath)
 		else
 		{
 			// DB selected for final analysis screen
-			sprintf(temp_string,"DUC%d\\DB%d\\", current_location.DUC, current_location.DB);
+			if(current_location.mode == FLOODMAP)
+				sprintf(temp_string,"MB%d\\DUC%d\\", current_location.MB, current_location.DUC); // flood map needs to display everything from DUC folder at once
+			else
+				sprintf(temp_string,"MB%d\\DUC%d\\DB%d\\", current_location.MB, current_location.DUC, current_location.DB);
+			
 			strcat(target_filepath, temp_string);
 		}
 	}
@@ -1030,7 +1038,11 @@ void DetermineFolderPath(char target_filepath[260], const char *root_filepath)
 		else
 		{
 			// DB selected for final analysis screen
-			sprintf(temp_string,"DB%d\\", current_location.DB);
+			if(current_location.mode == FLOODMAP)
+				sprintf(temp_string,"MB%d\\DUC%d\\", current_location.MB, current_location.DUC); // flood map needs to display everything from DUC folder at once
+			else
+				sprintf(temp_string,"MB%d\\DUC%d\\DB%d\\", current_location.MB, current_location.DUC, current_location.DB);
+			
 			strcat(target_filepath, temp_string);
 		}
 	}
@@ -1046,13 +1058,29 @@ int DetermineArraySize(char *filename, int *rows, int *columns)
 	char *line_buffer;
 	int line_flag=0;   // used to see if whole line captured
 	int line_length, i=0;
-	char *first_newline;
+	char *first_newline, c;
 	
+	
+	
+	file_pointer = fopen(filename,"r");
+	
+	
+	//C:\Documents and Settings\OpenPET\My Documents\GitHub\HostPC\GUI\Example file structure\REPORT_data_07162013_floodmap\MB1\DUC1\DB1
+	
+	// determine first line info - linelength in chars to properly allocate linebuffer
+	line_length=0;
+	while( (c=fgetc(file_pointer))!=EOF )
+	{
+	  if( c=='\n' )
+	    break;
+	  else
+	    line_length++;
+	} 
+	
+	/*
 	line_length = 10000;  // starting guess
 	line_buffer = malloc(line_length*sizeof(char));
 	memset(line_buffer, '\n', line_length*sizeof(char));   // set all values to \n
-	
-	file_pointer = fopen(filename,"r");
 	
 	rows = 0;
 	columns = 0;
@@ -1084,7 +1112,7 @@ int DetermineArraySize(char *filename, int *rows, int *columns)
 		i++;
 	
 	}
-	
+	*/
 	fclose(file_pointer);
 	
 	
