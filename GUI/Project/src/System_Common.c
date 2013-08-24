@@ -96,6 +96,13 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node)
 	unsigned short int MB_type_address = 0x1000;   // 0001 = MB
 	unsigned short int DUC_type_address = 0x2000;  // 0010 = DUC
 	unsigned short int DB_type_address = 0x3000;   // 0011 = DB
+	unsigned short int hardware_version_number = 1;
+	char hardware_version_description[DESCRIPTION_LIMIT] = {"None."};
+	unsigned short int firmware_version_number = 1;
+	char firmware_version_description[DESCRIPTION_LIMIT] = {"None."}; 
+	unsigned short int software_version_number = 1;
+	char software_version_description[DESCRIPTION_LIMIT] = {"None."}; 
+	unsigned short int node_integrity = 0;
 	
 	// to fill in offspring descriptors
 	unsigned char CUC_offspring_status = 0xC0;   // 1100 0000 = 2 boards attached
