@@ -205,7 +205,7 @@ int main (int argc, char *argv[])
 	sys_config.DUC=7;
 	sys_config.DB=7;
 	
-	OpenPETSystemRead(sys_config1);
+	OpenPETSystemCreateExample(sys_config1);
 	
 
     nullChk (InitCVIRTE (0, argv, 0));

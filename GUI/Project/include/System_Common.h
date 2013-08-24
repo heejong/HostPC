@@ -116,7 +116,9 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */);
 
 void OpenPETSystemWrite(FILE *output, OpenPETSystemNode *node); 
 	
-int OpenPETSystemNodeWrite(FILE *output, OpenPETSystemNode *node);	
+int OpenPETSystemNodeWrite(FILE *output, OpenPETSystemNode *node);
+
+void OpenPETSystemCreateExample(OpenPETSystemNode *root_node);
 
 #ifdef __cplusplus
     }

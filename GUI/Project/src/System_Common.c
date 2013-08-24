@@ -71,19 +71,46 @@ int OpenPETSystemNodeWrite(FILE *output, OpenPETSystemNode *node)
 
 int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */) 
 {
-	// this function will need to be rewritten to read from the USchild_node data stream
-	// once that data format has been specified
-	// should first determine if Small, Medium, or Large setup
-	// then, fill in appropriate look up table
+	// this function will need to be written to read from the USB data stream
+	// once that data format has been specified, and generate the proper
+	// system configuration as a tree of OpenPETSytemNodes
+
 	// return 0 if successful and -1 if it fails to open the stream, etc.
 	
-	// for now, simply read in dummy values
+	return 0;
+}
+
+void OpenPETSystemCreateExample(OpenPETSystemNode *root_node) 
+{
+	// This function is used just to generate an example tree data structure.
+	// From this function the example system configuration file can be created,
+	// but when the final GUI is complete, this function will not be necessary
 	NodeProfile profile;
 	NodeDescriptor node_descriptor;
-	OpenPETSystemNode *Mchild_node, *DUC, *Dchild_node;	
-	unsigned short int Mchild_node_status[8] = {1,1,0,0,0,0,0,0};
-	unsigned short int ones[8] = {1,1,1,1,1,1,1,1};
-	unsigned short int type_address[16] = {0};
+	OffspringDescriptor offspring_descriptor;
+	OpenPETSystemNode *MB, *DUC, *DB;
+
+	// to fill in node descriptors 
+	// for type address, just fill in absolute address with zeros but mark first 4 bits with type
+	unsigned short int CUC_type_address = 0x0000;  // 0000 = CUC
+	unsigned short int MB_type_address = 0x1000;   // 0001 = MB
+	unsigned short int DUC_type_address = 0x2000;  // 0010 = DUC
+	unsigned short int DB_type_address = 0x3000;   // 0011 = DB
+	
+	// to fill in offspring descriptors
+	unsigned char CUC_offspring_status = 0xC0;   // 1100 0000 = 2 boards attached
+	unsigned char CUC_offspring_enable = 0xC0;   // used for MB
+	unsigned short int CUC_offspring_type_address[8] = {0x1000, 0x1000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+	unsigned char MB_offspring_status = 0xFF;    // 1111 1111 = 8 boards attached
+	unsigned char MB_offspring_enable = 0xFF;    // used for DUC
+	unsigned short int MB_offspring_type_address[8] = {0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000};
+	unsigned char DUC_offspring_status = 0xFF;   // 1111 1111 = 8 boards attached
+	unsigned char DUC_offspring_enable = 0xFF;   // used for DB
+	unsigned short int DUC_offspring_type_address[8] = {0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000};
+	
+	
+	
+	
 	int i, j, k;
 	/*
 	memcpy(node_descriptor.type_address, type_address, sizeof(type_address));	
@@ -131,10 +158,9 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */)
 		}
 	}
 	
-	 */
-	return 0;
-	
-	
+	 
+	*/
+	return;
 }
 
 OpenPETSystemNode* CreateSystemNode(NodeProfile profile) 
