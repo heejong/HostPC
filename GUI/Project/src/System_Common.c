@@ -47,14 +47,14 @@ void OpenPETSystemWrite(FILE *output, OpenPETSystemNode *node)
 	
 	OpenPETSystemNodeWrite(output, node);
 	
-	OpenPETSystemWrite(output, node->child_node0);
-	OpenPETSystemWrite(output, node->child_node1);
-	OpenPETSystemWrite(output, node->child_node2);
-	OpenPETSystemWrite(output, node->child_node3);
-	OpenPETSystemWrite(output, node->child_node4);
-	OpenPETSystemWrite(output, node->child_node5);
-	OpenPETSystemWrite(output, node->child_node6);
-	OpenPETSystemWrite(output, node->child_node7);
+	OpenPETSystemWrite(output, node->child_nodes[0]);
+	OpenPETSystemWrite(output, node->child_nodes[1]);
+	OpenPETSystemWrite(output, node->child_nodes[2]);
+	OpenPETSystemWrite(output, node->child_nodes[3]);
+	OpenPETSystemWrite(output, node->child_nodes[4]);
+	OpenPETSystemWrite(output, node->child_nodes[5]);
+	OpenPETSystemWrite(output, node->child_nodes[6]);
+	OpenPETSystemWrite(output, node->child_nodes[7]);
 	
 }
 
@@ -121,8 +121,8 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node)
 	InitNodeProfileToExampleValues(&DB_profile);
 	
 	// fill in offspring descriptors
-	CUC_profile.offspring_descriptor.status = 0xC0;   // 1100 0000 = 2 boards attached
-	CUC_profile.offspring_descriptor.enable = 0xC0;   // used for MB
+	CUC_profile.offspring_descriptor.status = 0xF0;   // 1111 0000 = 4 boards attached
+	CUC_profile.offspring_descriptor.enable = 0xF0;   // used for MB
 	memcpy(CUC_profile.offspring_descriptor.type_address, CUC_offspring_type_address, sizeof(CUC_offspring_type_address));
 	MB_profile.offspring_descriptor.status = 0xFF;    // 1111 1111 = 8 boards attached
 	MB_profile.offspring_descriptor.enable = 0xFF;    // used for DUC
@@ -136,15 +136,10 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node)
 	// local variables
 	int i, j, k;
 
-	// initialize structures
-	
-		
-	
-	
 	//add nodes
 	sys_config1 = InsertSystemNode(sys_config1, 0, CUC_profile);
 	
-	for(i=0; i<2; i++)
+	for(i=0; i<4; i++)
 	{
 		// in real function, should read in MB profile
 		MB = InsertSystemNode(sys_config1, i, MB_profile);
@@ -173,14 +168,14 @@ OpenPETSystemNode* CreateSystemNode(NodeProfile profile)
 		exit(1);
 	}
 	new_node->profile = profile;
-	new_node->child_node0 = NULL;
-	new_node->child_node1 = NULL;
-	new_node->child_node2 = NULL;
-	new_node->child_node3 = NULL;
-	new_node->child_node4 = NULL;
-	new_node->child_node5 = NULL;
-	new_node->child_node6 = NULL;
-	new_node->child_node7 = NULL;
+	new_node->child_nodes[0] = NULL;
+	new_node->child_nodes[1] = NULL;
+	new_node->child_nodes[2] = NULL;
+	new_node->child_nodes[3] = NULL;
+	new_node->child_nodes[4] = NULL;
+	new_node->child_nodes[5] = NULL;
+	new_node->child_nodes[6] = NULL;
+	new_node->child_nodes[7] = NULL;
 	
 	return new_node;
 }
@@ -198,29 +193,29 @@ OpenPETSystemNode* InsertSystemNode( OpenPETSystemNode *root_node, unsigned shor
 		switch(position)
 		{
 			case 0:
-				root_node->child_node0 = CreateSystemNode(profile);
-				return root_node->child_node0;
+				root_node->child_nodes[0] = CreateSystemNode(profile);
+				return root_node->child_nodes[0];
 			case 1:
-				root_node->child_node1 = CreateSystemNode(profile);
-				return root_node->child_node1;
+				root_node->child_nodes[1] = CreateSystemNode(profile);
+				return root_node->child_nodes[1];
 			case 2:
-				root_node->child_node2 = CreateSystemNode(profile);
-				return root_node->child_node2;
+				root_node->child_nodes[2] = CreateSystemNode(profile);
+				return root_node->child_nodes[2];
 			case 3:
-				root_node->child_node3 = CreateSystemNode(profile);
-				return root_node->child_node3;
+				root_node->child_nodes[3] = CreateSystemNode(profile);
+				return root_node->child_nodes[3];
 			case 4:
-				root_node->child_node4 = CreateSystemNode(profile);
-				return root_node->child_node4;
+				root_node->child_nodes[4] = CreateSystemNode(profile);
+				return root_node->child_nodes[4];
 			case 5:
-				root_node->child_node5 = CreateSystemNode(profile);
-				return root_node->child_node5;
+				root_node->child_nodes[5] = CreateSystemNode(profile);
+				return root_node->child_nodes[5];
 			case 6:
-				root_node->child_node6 = CreateSystemNode(profile);
-				return root_node->child_node6;
+				root_node->child_nodes[6] = CreateSystemNode(profile);
+				return root_node->child_nodes[6];
 			case 7:
-				root_node->child_node7 = CreateSystemNode(profile);
-				return root_node->child_node7;
+				root_node->child_nodes[7] = CreateSystemNode(profile);
+				return root_node->child_nodes[7];
 			default:
 				fprintf(stderr, "Error: System nodes must be placed in position [0-7]. Illegal placement input to InsertSystemNode()");
 				exit(1);
@@ -236,14 +231,14 @@ void DisposeAllSystemNodes(OpenPETSystemNode *root_node)
 	// clean up all memory by recursively removing all system nodes
 	if(root_node != NULL)
 	{
-		DisposeAllSystemNodes( root_node->child_node0 );		
-		DisposeAllSystemNodes( root_node->child_node1 );
-		DisposeAllSystemNodes( root_node->child_node2 );
-		DisposeAllSystemNodes( root_node->child_node3 );
-		DisposeAllSystemNodes( root_node->child_node4 );
-		DisposeAllSystemNodes( root_node->child_node5 );
-		DisposeAllSystemNodes( root_node->child_node6 );
-		DisposeAllSystemNodes( root_node->child_node7 );
+		DisposeAllSystemNodes( root_node->child_nodes[0] );		
+		DisposeAllSystemNodes( root_node->child_nodes[1] );
+		DisposeAllSystemNodes( root_node->child_nodes[2] );
+		DisposeAllSystemNodes( root_node->child_nodes[3] );
+		DisposeAllSystemNodes( root_node->child_nodes[4] );
+		DisposeAllSystemNodes( root_node->child_nodes[5] );
+		DisposeAllSystemNodes( root_node->child_nodes[6] );
+		DisposeAllSystemNodes( root_node->child_nodes[7] );
 		
 		free( root_node );
 	}

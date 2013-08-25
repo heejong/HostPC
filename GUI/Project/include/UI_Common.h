@@ -406,6 +406,7 @@ int CheckButtonEventError(char control_name[]);
 //void RecallPanelAppearance(int panel, PanelAppearance *appearance);
 //Header CreateHeader(char filename[], char usercomments[], double duration, char datatype[]/*, double timewindow, unsigned short int sofwareversion, unsigned short int firmware version */);
 
+void FillTreeControl(int panel, int control_id);
 
 #ifdef __cplusplus
     }

@@ -59,6 +59,7 @@
 #include <userint.h>
 #include "UI_Common.h"
 #include "OpenPET.h" 
+#include "System_Common.h"
 //#include <libxml/xmlreader.h>
 
 //==============================================================================
@@ -80,6 +81,7 @@ Stack panel_stack;
 //PanelAppearance appearance; 
 OpenPETTree current_location; // used to show the currently specified location in the tree
 OpenPETTree sys_config;
+OpenPETSystemNode *sys_config1;
 
 
 //==============================================================================
@@ -338,75 +340,7 @@ int  CVICALLBACK PanelTreeInit(int panel, int event, void *callbackData,
 		/********************** initialze tree control *************************/
 		if(strcmp(control_name, "TREE") == 0)
 		{
-			GetNumListItems (panel, control_id, &num_items);
-			if(num_items==1) 
-			{
-				// need to create table
-				for(i=0; i<=sys_config.MB; i++)
-				{
-					//add MB as child
-					sprintf(item_label_MB, "MB%d", i);
-					strcpy(item_label, item_label_MB);	  // tag = MB0
-					idx_MB = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
-				
-					for(j=0; j<=sys_config.DUC; j++)	  // assumes same number of DUC into each MB
-					{
-						//add DUC as child
-						sprintf(item_label_DUC, "DUC%d", j);
-						strcat(item_label, item_label_DUC);   // tag = MB0DUC0
-						strcpy(item_label_root, item_label);
-						idx_DUC = InsertTreeItem (panel, control_id, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
-					
-						for(k=0; k<=sys_config.DB; k++)		 // assumes same number of DB into each DUC
-						{
-							//add DB as child
-							sprintf(item_label_DB, "DB%d", k); 
-							strcat(item_label, item_label_DB);   // tag = MB0DUC0DB0
-							idx_DB = InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
-							strcpy(item_label,item_label_root);   // tag = MB0DUC0
-							//if(k == current_location.DB)
-							//	 SetActiveTreeItem (panel, control_id, idx_DB, VAL_REPLACE_SELECTION_WITH_ITEM);
-						}
-						strcpy(item_label,item_label_MB);   // tag = MB0
-						if(j != current_location.DUC)
-							SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
-					
-					}
-					strcpy(item_label,"");   // tag = ""
-					if(i != current_location.MB)
-						SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
-				}
-			} 
-			else 
-			{
-				// tree already created, just need to show correct location
-				for(i=1; i<num_items; i++)
-				{
-					// collapse all
-					SetTreeItemAttribute (panel, control_id, i, ATTR_COLLAPSED, 1);	
-				}
-					
-				if(current_location.MB != -1)
-				{
-					sprintf(item_label, "MB%d", current_location.MB);
-					GetTreeItemFromTag (panel, control_id, item_label, &idx_MB);
-					SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 0);	
-				} 
-				if(current_location.DUC != -1)
-				{
-					sprintf(item_label, "MB%dDUC%d", current_location.MB, current_location.DUC);
-					GetTreeItemFromTag (panel, control_id, item_label, &idx_DUC);
-					SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 0);	
-				} 
-				/*if(current_location.DB != -1)
-				{
-					sprintf(item_label, "MB%d", current_location.MB);
-					GetTreeItemFromTag (panel, control_id, item_label, idx_MB);
-					SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 0);	
-				}*/ 
-				
-				
-			}
+			FillTreeControl(panel, control_id);
 		}
 		
 		/********** enable/disable buttons according to system configuration ************/
@@ -461,4 +395,116 @@ int CheckButtonEventError(char control_name[])
 	return 1; // true
 }
 
-// Tree control defined seperately for each panel
+void FillTreeControl(int panel, int control_id)
+{
+	int num_items, i, j, k, idx_MB, idx_DUC, idx_DB;
+	int CUC_children, MB_children, DUC_children;
+	unsigned short int MB_bit_mask=0, DUC_bit_mask=0,DB_bit_mask=0;  
+	char item_label_root[15], item_label[15],item_label_MB[5], item_label_DUC[5], item_label_DB[5];
+	OpenPETSystemNode *MB_node, *DUC_node, *DB_node, *current_node;
+	
+	
+	GetNumListItems(panel, control_id, &num_items);
+	if(num_items == 1) 
+	{
+		// need to create table
+		
+		// bit-wise AND boards connected and boards enabled to determine boards to display
+		CUC_children = sys_config1->profile.offspring_descriptor.status & sys_config1->profile.offspring_descriptor.enable; 
+		MB_bit_mask = 0x0080;  // 1000 0000
+		
+		for(i=0; i<8; i++)   
+		{
+			if(CUC_children & MB_bit_mask) // enters if statement for any nonzero value - will enter for 1000 0000 AND 0000 0001
+			{
+				// add MB as a child
+				sprintf(item_label_MB, "MB%d", i);
+				strcpy(item_label, item_label_MB);	  // tag = MB0
+				idx_MB = InsertTreeItem (panel, control_id, VAL_CHILD, 0, VAL_LAST, item_label_MB, item_label, 0, num_items++);
+				
+				// prepare this MB node to add DUC children
+				MB_node = sys_config1->child_nodes[i];
+				MB_children = MB_node->profile.offspring_descriptor.status & MB_node->profile.offspring_descriptor.enable; 
+				DUC_bit_mask = 0x0080;  // 1000 0000
+				
+				for(j=0; j<8; j++)	  
+				{
+					if(MB_children & DUC_bit_mask) 
+					{
+					 	//add DUC as child
+						sprintf(item_label_DUC, "DUC%d", j);
+						strcat(item_label, item_label_DUC);   // tag = MB0DUC0
+						strcpy(item_label_root, item_label);
+						idx_DUC = InsertTreeItem (panel, control_id, VAL_CHILD, idx_MB, VAL_LAST, item_label_DUC, item_label, 0, num_items++);
+						
+						// prepare this DUC node to add DB children
+						DUC_node = MB_node->child_nodes[i];
+						DUC_children = MB_node->profile.offspring_descriptor.status & MB_node->profile.offspring_descriptor.enable; 
+						DB_bit_mask = 0x0080;  // 1000 0000
+				
+						for(k=0; k<8; k++)		 
+						{
+							if(DUC_children & DB_bit_mask)
+							{
+								//add DB as child
+								sprintf(item_label_DB, "DB%d", k); 
+								strcat(item_label, item_label_DB);   // tag = MB0DUC0DB0
+								idx_DB = InsertTreeItem (panel, control_id, VAL_CHILD, idx_DUC, VAL_LAST, item_label_DB, item_label, 0, num_items++);
+								strcpy(item_label,item_label_root);   // tag = MB0DUC0
+							}
+							
+							// shift bit mask
+							DB_bit_mask = DB_bit_mask >> 1; 
+						}
+					}
+					
+					strcpy(item_label,item_label_MB);   // tag = MB0   (reset tag)
+					if(j != current_location.DUC)
+						SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 1);
+					
+					// shift bit mask
+					DUC_bit_mask = DUC_bit_mask >> 1; 
+				}
+				
+			}
+			
+			strcpy(item_label,"");   // tag = ""   (reset tag)
+			if(i != current_location.MB)
+				SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 1);
+					
+			// shift bit mask
+			MB_bit_mask = MB_bit_mask >> 1;   // 1000 0000 -> 0100 0000 -> ... -> 0000 0001 -> 0000 0000   
+		}
+	}
+	else 
+	{
+		// tree already created, just need to show correct location
+		for(i=1; i<num_items; i++)
+		{
+			// collapse all
+			SetTreeItemAttribute (panel, control_id, i, ATTR_COLLAPSED, 1);	
+		}
+			
+		if(current_location.MB != -1)
+		{
+			sprintf(item_label, "MB%d", current_location.MB);
+			GetTreeItemFromTag (panel, control_id, item_label, &idx_MB);
+			SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 0);	
+		} 
+		if(current_location.DUC != -1)
+		{
+			sprintf(item_label, "MB%dDUC%d", current_location.MB, current_location.DUC);
+			GetTreeItemFromTag (panel, control_id, item_label, &idx_DUC);
+			SetTreeItemAttribute (panel, control_id, idx_DUC, ATTR_COLLAPSED, 0);	
+		} 
+		/*if(current_location.DB != -1)
+		{
+			sprintf(item_label, "MB%d", current_location.MB);
+			GetTreeItemFromTag (panel, control_id, item_label, idx_MB);
+			SetTreeItemAttribute (panel, control_id, idx_MB, ATTR_COLLAPSED, 0);	
+		}*/ 
+		
+		
+	}
+	return;	
+}

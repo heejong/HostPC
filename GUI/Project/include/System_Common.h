@@ -57,17 +57,8 @@ typedef struct NodeProfile {
 } NodeProfile;
 
 typedef struct OpenPETSystemNode {
-	struct NodeProfile profile;
-	
-	struct OpenPETSystemNode *child_node0;
-	struct OpenPETSystemNode *child_node1;
-	struct OpenPETSystemNode *child_node2;
-	struct OpenPETSystemNode *child_node3;
-	struct OpenPETSystemNode *child_node4;
-	struct OpenPETSystemNode *child_node5;
-	struct OpenPETSystemNode *child_node6;
-	struct OpenPETSystemNode *child_node7;
-	
+	struct NodeProfile profile;   // information about this node
+	struct OpenPETSystemNode* child_nodes[8];	   // array of pointers to 8 possible child nodes
 } OpenPETSystemNode;
 
 
