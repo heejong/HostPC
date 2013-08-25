@@ -80,63 +80,70 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */)
 	return 0;
 }
 
+void InitNodeProfileToExampleValues(NodeProfile *profile)
+{
+	// only ysed to support OpenPETSystemCreateExample()
+	// completely useless for actual GUI
+	strcpy(profile->node_descriptor.hardware_version_description ,"Example");
+	profile->node_descriptor.hardware_version_number = 1;
+	strcpy(profile->node_descriptor.firmware_version_description ,"Example");
+	profile->node_descriptor.firmware_version_number = 1;
+	strcpy(profile->node_descriptor.software_version_description ,"Example");
+	profile->node_descriptor.software_version_number = 1;
+	profile->node_descriptor.node_integrity = 0;
+	return;
+}
+
 void OpenPETSystemCreateExample(OpenPETSystemNode *root_node) 
 {
 	// This function is used just to generate an example tree data structure.
 	// From this function the example system configuration file can be created,
 	// but when the final GUI is complete, this function will not be necessary
-	NodeProfile profile;
-	NodeDescriptor node_descriptor;
-	OffspringDescriptor offspring_descriptor;
+	
+	// node structures
+	NodeProfile CUC_profile, MB_profile, DUC_profile, DB_profile;
 	OpenPETSystemNode *MB, *DUC, *DB;
-
-	// to fill in node descriptors 
-	// for type address, just fill in absolute address with zeros but mark first 4 bits with type
-	unsigned short int CUC_type_address = 0x0000;  // 0000 = CUC
-	unsigned short int MB_type_address = 0x1000;   // 0001 = MB
-	unsigned short int DUC_type_address = 0x2000;  // 0010 = DUC
-	unsigned short int DB_type_address = 0x3000;   // 0011 = DB
-	unsigned short int hardware_version_number = 1;
-	char hardware_version_description[DESCRIPTION_LIMIT] = {"None."};
-	unsigned short int firmware_version_number = 1;
-	char firmware_version_description[DESCRIPTION_LIMIT] = {"None."}; 
-	unsigned short int software_version_number = 1;
-	char software_version_description[DESCRIPTION_LIMIT] = {"None."}; 
-	unsigned short int node_integrity = 0;
 	
-	// to fill in offspring descriptors
-	unsigned char CUC_offspring_status = 0xC0;   // 1100 0000 = 2 boards attached
-	unsigned char CUC_offspring_enable = 0xC0;   // used for MB
+	// type address arrays
 	unsigned short int CUC_offspring_type_address[8] = {0x1000, 0x1000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
-	unsigned char MB_offspring_status = 0xFF;    // 1111 1111 = 8 boards attached
-	unsigned char MB_offspring_enable = 0xFF;    // used for DUC
-	unsigned short int MB_offspring_type_address[8] = {0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000};
-	unsigned char DUC_offspring_status = 0xFF;   // 1111 1111 = 8 boards attached
-	unsigned char DUC_offspring_enable = 0xFF;   // used for DB
-	unsigned short int DUC_offspring_type_address[8] = {0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000};
-	
-	
-	
-	
-	int i, j, k;
-	/*
-	memcpy(node_descriptor.type_address, type_address, sizeof(type_address));	
-	node_descriptor.firmware_version = 1;
-	node_descriptor.software_version = 1;
-	node_descriptor.node_integrity = 1;
+	unsigned short int MB_offspring_type_address[8] = {0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000, 0x2000}; 
+	unsigned short int DUC_offspring_type_address[8] = {0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000, 0x3000};  
 
-	memcpy(profile.status, Mchild_node_status, sizeof(profile.status));
-	memcpy(profile.enable, ones, sizeof(ones));
-	memcpy(profile.type_address, type_address, sizeof(type_address));
+	// fill in node descriptors 
+	// for type address, just fill in absolute address with zeros but mark first 4 bits with type
+	CUC_profile.node_descriptor.type_address = 0x0000;  // 0000 = CUC
+	MB_profile.node_descriptor.type_address = 0x1000;   // 0001 = MB
+	DUC_profile.node_descriptor.type_address = 0x2000;  // 0010 = DUC
+	DB_profile.node_descriptor.type_address = 0x3000;   // 0011 = DB
+	InitNodeProfileToExampleValues(&CUC_profile);      
+	InitNodeProfileToExampleValues(&MB_profile);	    // just initialize to example values
+	InitNodeProfileToExampleValues(&DUC_profile);
+	InitNodeProfileToExampleValues(&DB_profile);
 	
+	// fill in offspring descriptors
+	CUC_profile.offspring_descriptor.status = 0xC0;   // 1100 0000 = 2 boards attached
+	CUC_profile.offspring_descriptor.enable = 0xC0;   // used for MB
+	memcpy(CUC_profile.offspring_descriptor.type_address, CUC_offspring_type_address, sizeof(CUC_offspring_type_address));
+	MB_profile.offspring_descriptor.status = 0xFF;    // 1111 1111 = 8 boards attached
+	MB_profile.offspring_descriptor.enable = 0xFF;    // used for DUC
+	memcpy(MB_profile.offspring_descriptor.type_address, MB_offspring_type_address, sizeof(MB_offspring_type_address));
+	DUC_profile.offspring_descriptor.status = 0xFF;   // 1111 1111 = 8 boards attached
+	DUC_profile.offspring_descriptor.enable = 0xFF;   // used for DB
+	memcpy(DUC_profile.offspring_descriptor.type_address, DUC_offspring_type_address, sizeof(DUC_offspring_type_address));  	
+	DB_profile.offspring_descriptor.status = 0x00;    // 0000 0000 = 0 boards attached
+	DB_profile.offspring_descriptor.enable = 0x00;    // no boards attached to DB
 	
-	profile.type_address[0]=0;
-	profile.type_address[1]=0;
-	profile.type_address[2]=0;
-	profile.type_address[3]=0;
+	// local variables
+	int i, j, k;
+
+	// initialize structures
+	
 		
+	
+	
 	//add nodes
-	sys_config1 = InsertSystemNode(sys_config1, 0, profile);
+	sys_config1 = InsertSystemNode(sys_config1, 0, CUC_profile);
+	/*
 	for(i=0; i<2; i++)
 	{
 		// in real function, should read in Mchild_node profile
@@ -165,7 +172,6 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node)
 		}
 	}
 	
-	 
 	*/
 	return;
 }

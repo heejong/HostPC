@@ -48,8 +48,8 @@ typedef struct OffspringDescriptor {
 } OffspringDescriptor;
 
 typedef struct NodeProfile {
-	struct NodeDescriptor node_config; 
-	struct OffspringDescriptor offspring_profile;
+	struct NodeDescriptor node_descriptor; 
+	struct OffspringDescriptor offspring_descriptor;
 	// struct HardwareDescriptor1;    i.e. ADC
 	// struct ApplicationSpecificDescriptor;  i.e. Energy Window
 	// struct UserDescriptor1;
@@ -117,6 +117,8 @@ int OpenPETSystemRead(OpenPETSystemNode *config /*, *data_stream */);
 void OpenPETSystemWrite(FILE *output, OpenPETSystemNode *node); 
 	
 int OpenPETSystemNodeWrite(FILE *output, OpenPETSystemNode *node);
+
+void InitNodeProfileToExampleValues(NodeProfile *profile);
 
 void OpenPETSystemCreateExample(OpenPETSystemNode *root_node);
 
