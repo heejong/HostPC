@@ -143,36 +143,24 @@ void OpenPETSystemCreateExample(OpenPETSystemNode *root_node)
 	
 	//add nodes
 	sys_config1 = InsertSystemNode(sys_config1, 0, CUC_profile);
-	/*
+	
 	for(i=0; i<2; i++)
 	{
-		// in real function, should read in Mchild_node profile
-		profile.type_address[0]=0;
-		profile.type_address[1]=0;
-		profile.type_address[2]=0;
-		profile.type_address[3]=1;
-		Mchild_node = InsertSystemNode(sys_config1, i, profile);
+		// in real function, should read in MB profile
+		MB = InsertSystemNode(sys_config1, i, MB_profile);
 		for(j=0; j<7; j++)
 		{
 			// in real function, should read each DUC profile
-			profile.type_address[0]=0;
-			profile.type_address[1]=0;
-			profile.type_address[2]=1;
-			profile.type_address[3]=0;
-			DUC = InsertSystemNode(Mchild_node, j, profile);
+			DUC = InsertSystemNode(MB, j, DUC_profile);
 			for(k=0; k<7; k++)
 			{
-				// in real function, should read each Dchild_node profile
-				profile.type_address[0]=0;
-				profile.type_address[1]=0;
-				profile.type_address[2]=1;
-				profile.type_address[3]=1;
-				Dchild_node = InsertSystemNode(DUC, k, profile);	
+				// in real function, should read each DB profile
+				DB = InsertSystemNode(DUC, k, DB_profile);	
 			}
 		}
 	}
 	
-	*/
+	
 	return;
 }
 
